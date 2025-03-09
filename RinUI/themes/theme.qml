@@ -8,6 +8,12 @@ Item { // 将 QtObject 改为 Item 以支持子元素
     property var currentTheme: null
 
     function setTheme(mode) {
+        if (typeof ThemeManager === "undefined") {
+            console.error("ThemeManager is not defined.")
+            currentTheme = Qt.createQmlObject("import '../themes'; Light {}", themeManager)
+            return
+        }
+
         ThemeManager.toggle_theme(mode)  // 切换主题于 Python 后端
 
         // 根据 mode 动态创建主题对象
