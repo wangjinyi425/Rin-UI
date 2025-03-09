@@ -15,20 +15,7 @@
 #
 # # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
 
-from PySide6.QtGui import QGuiApplication
-from PySide6.QtQml import QQmlApplicationEngine
+from RinUI.core.start import create_qml_app
 
-app = QGuiApplication([])
-engine = QQmlApplicationEngine()
-
-# 加载 QML 界面
-engine.load("RinUI/windows/FluentWindow.qml")
-
-# # 切换为暗色模式
-# theme_manager.set_theme("dark")
-
-if not engine.rootObjects():
-    exit(-1)
-
-app.exec()
-
+if __name__ == '__main__':
+    create_qml_app("./examples/gallery.qml")
