@@ -68,8 +68,9 @@ Learn more about RinUI themes in the [documentation](./docs/Themes.MD).
 
 ### Contributors
 Contributions are welcome! Please read the [contribution guidelines](./CONTRIBUTING.md) before submitting a pull request.
+
 Thanks to the great people who contributed to this project.
-[![Contributors](http://contrib.nn.ci/api?repo=RinLit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
+[![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
 
 ## 📜 License
 This project is licensed under the MIT License, you can learn more about it in the [license file](./LICENSE).

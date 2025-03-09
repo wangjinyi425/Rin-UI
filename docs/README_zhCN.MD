@@ -66,8 +66,10 @@ PySide6 & Qt Quick
 Fluent Design System
 Fluent UI System Icons
 ### 贡献者
-欢迎贡献！在提交拉取请求之前，请阅读 贡献指南。 感谢为本项目做出贡献的优秀开发者们。
+欢迎贡献！在提交拉取请求之前，请阅读贡献指南。 
 
+感谢为本项目做出贡献的优秀开发者们。
+[![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
 
 ## 📜 许可证
 本项目采用 MIT 许可证，你可以在 许可证文件 中了解更多信息。
