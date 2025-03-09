@@ -8,6 +8,7 @@ Base {
     id: root
     property bool checked: false  // Switch State
     property bool enabled: true  // Switch Enabled
+    property int paddingHr: 3  // Horizontal Padding
 
     property color handleColor: Theme.currentTheme.colors.controlBorderStrongColor
 
@@ -52,13 +53,16 @@ Base {
             width: 12
             height: 12
             anchors.verticalCenter: parent.verticalCenter
-            radius: 999
+            radius: height / 2
             color: handleColor
 
             // 坐标 / pos
-            x: root.checked ? parent.width - width - 4 : 4
+            x: root.checked ? parent.width - width - paddingHr : paddingHr
             Behavior on x { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
             Behavior on color { ColorAnimation { duration: 250; easing.type: Easing.OutQuart } }
+
+            // Behavior on width { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
+            // Behavior on height { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
         }
     }
 
@@ -74,31 +78,60 @@ Base {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+
+        property real pressX: 0  // 记录按下时的 X 坐标
+        onPressed: (mouse) => {
+            pressX = mouse.x
+        }
+
+        // 点击更改
         onClicked: {
             root.checked = !root.checked
             clicked()
         }
+
+        // 拖动判断结果
+        onReleased: {
+            root.checked = handle.x + handle.width / 2 > parent.width / 2  // 满足则为true
+            clicked()
+        }
+
+
+        // Handle跟随鼠标 / drag
+        onPositionChanged: (mouse) => {
+            if (pressed) {
+                let offset = mouse.x - pressX
+                let newX = root.checked ? parent.width - handle.width - paddingHr + offset  // X
+                                        : paddingHr + offset
+                newX = Math.max(paddingHr, Math.min(parent.width - handle.width - paddingHr, newX))  // max
+                handle.x = newX
+            }
+        }
     }
 
     // 状态变化
-    // states: [
-    //     State {
-    //         name: "pressed"
-    //         when: mouseArea.pressed
-    //         PropertyChanges {
-    //             target: root;
-    //             opacity: 0.7
-    //         }
-    //     },
-    //     State {
-    //         name: "hovered"
-    //         when: mouseArea.containsMouse
-    //         PropertyChanges {
-    //             target: root;
-    //             opacity: 0.9
-    //         }
-    //     }
-    // ]
+    states: [
+        State {
+            name: "pressed"
+            when: mouseArea.pressed
+            PropertyChanges {
+                target: handle;
+                root.paddingHr: 2
+                width: 17
+                height: 14
+            }
+        },
+        State {
+            name: "hovered"
+            when: mouseArea.containsMouse
+            PropertyChanges {
+                target: handle;
+                root.paddingHr: 2
+                width: 14
+                height: 14
+            }
+        }
+    ]
 
     // 动画
     Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
