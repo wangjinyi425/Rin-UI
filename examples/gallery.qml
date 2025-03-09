@@ -29,12 +29,13 @@ FluentWindow {
             text: "PushButton 按钮"
         }
 
-        Row {
+        Flow {
             spacing: 10
+            width: parent.width  // width
             // anchors.centerIn: parent
 
             PushButton {
-                // text: "Fluent 按钮"
+                id: btn_1
                 buttonType: "primary"
                 text: "切换主题"
                 onClicked: {
@@ -46,9 +47,13 @@ FluentWindow {
                 }
             }
             PushButton {
-                // text: "Fluent 按钮"
+                enabled: true
                 buttonType: "standard"
-                text: "Fluent Button"
+                text: "Push Button"
+            }
+            PushButton {
+                text: "Disabled"
+                enabled: false
             }
         }
 
@@ -56,7 +61,16 @@ FluentWindow {
             spacing: 10
 
             ToggleSwitch {
-
+                checked: true
+                onCheckedChanged: {
+                    if (checked) {
+                        btn_1.enabled = true
+                        console.log("Switch is on")
+                    } else {
+                        btn_1.enabled = false
+                        console.log("Switch is off")
+                    }
+                }
             }
         }
     }

@@ -13,13 +13,22 @@ Base {
     height: buttonText.height + 14
 
     // Border //
+    // 背景 / Background
     Rectangle {
         id: border
-        radius: Theme.currentTheme.appearance.buttonRadius  // 圆角半径
-        visible: true
+        anchors.fill: parent
+        radius: controlRadius
+        gradient: Gradient {
+            GradientStop { position: 0.91; color: backgroundColor.lighter(borderTransparency) }
+            GradientStop { position: 1; color: backgroundColor.darker(1.4) }
+        }
 
         Rectangle {
             id: background
+            anchors.fill: parent
+            anchors.margins: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
+            color: backgroundColor
+            radius: controlRadius
         }
     }
 

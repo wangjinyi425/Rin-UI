@@ -25,6 +25,7 @@ QtObject {
         property color textSelectedColor: "#ffffff"
 
         property color primaryColor: Colors.primaryColor
+        property color disabledColor: "#000000"
     }
 
     // Appearance //

@@ -16,12 +16,19 @@ Item {
 
     // 启用 MouseArea / Enable MouseArea
     property bool interactive: false
+    property bool enabled: true  // 是否启用
+
+    // Update
+    // 禁用状态
+    onEnabledChanged: updateStyle()
 
     // 主题切换 / Theme Switching
     Connections {
         target: Theme
         onCurrentThemeChanged: updateStyle()
     }
+
+    Component.onCompleted: updateStyle()
 
     function updateStyle() {
         backgroundColor = Theme.currentTheme.colors.controlColor
@@ -35,25 +42,6 @@ Item {
     Behavior on backgroundColor { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
     Behavior on textColor { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
     Behavior on borderColor { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
-
-    // 背景 / Background
-    Rectangle {
-        id: border
-        anchors.fill: parent
-        radius: controlRadius
-        gradient: Gradient {
-            GradientStop { position: 0.91; color: backgroundColor.lighter(borderTransparency) }
-            GradientStop { position: 1; color: backgroundColor.darker(1.4) }
-        }
-
-        Rectangle {
-            id: background
-            anchors.fill: parent
-            anchors.margins: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
-            color: backgroundColor
-            radius: controlRadius
-        }
-    }
 
     // 交互 / Interaction
     MouseArea {
