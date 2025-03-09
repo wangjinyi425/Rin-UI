@@ -1,0 +1,10 @@
+/.venv/
+/.idea/
+/.qtc_clangd/
+/RinUI.cflags
+/RinUI.config
+/RinUI.creator
+/RinUI.creator.user
+/RinUI.cxxflags
+/RinUI.files
+/RinUI.includes
