@@ -10,7 +10,7 @@ Base {
 
     // Size //
     width: buttonText.width + 96
-    height: buttonText.height + 14
+    height: buttonText.height + 12
 
     // Border //
     // 背景 / Background

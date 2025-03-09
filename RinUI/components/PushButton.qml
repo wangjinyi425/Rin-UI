@@ -62,7 +62,7 @@ ButtonBase {
             when: mouseArea.pressed
             PropertyChanges {
                 target: root;
-                opacity: 0.6
+                opacity: 0.5
             }
         },
         State {
@@ -70,7 +70,7 @@ ButtonBase {
             when: mouseArea.containsMouse
             PropertyChanges {
                 target: root;
-                opacity: 0.8
+                opacity: 0.77
             }
         }
     ]
