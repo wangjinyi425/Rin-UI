@@ -18,9 +18,9 @@ RinUI is a Fluent Design-like Qt Quick (QML) UI library based on PySide6， This
 ### Features
 - [x] Fluent Design Style Controls (still in development)
 - [x] Light and Dark Mode and Theme System
-- [] Development Documentation
-- [] Gallery Examples
-- [] ……
+- [ ] Development Documentation
+- [ ] Gallery Examples
+- [ ] ……
 
 ### Screenshots
 > Still in development……

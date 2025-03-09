@@ -18,9 +18,9 @@ RinUI 是一个类 Fluent Design 的 Qt Quick (QML) UI 库，基于 PySide6，�
 ### 特性
 - [x] Fluent Design 风格的控件 (仍在开发中)
 - [x] 深浅色模式和主题系统
-- [] 开发文档
-- [] Gallery 示例
-- [] ……
+- [ ] 开发文档
+- [ ] Gallery 示例
+- [ ] ……
 
 ### 截图展示
 > 还在开发……
