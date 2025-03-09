@@ -9,7 +9,10 @@ QtObject {
     property QtObject colors: QtObject {
         // Controls
         property color controlColor: Qt.rgba(255, 255, 255, 0.7)
+        property color controlSecondaryColor: Qt.rgba(0, 0, 0, 0.0241)
+
         property color controlBorderColor: Qt.rgba(0, 0, 0, 0.06)
+        property color controlBorderStrongColor: Qt.rgba(0, 0, 0, 0.6063)
         property color controlBorderAccentColor: Qt.rgba(255, 255, 255, 0.3)
 
         // Background
@@ -27,7 +30,9 @@ QtObject {
     // Appearance //
     property QtObject appearance: QtObject {
         property int buttonRadius: 7
-        property int borderWidth: 2
+        property int borderWidth: 1
+        property real borderFactor: 0.9
+        property real borderOnAccentFactor: 1.08
     }
 
     // Typography //

@@ -6,16 +6,28 @@ import "../components"
 Base {
     id: buttonBase
     property int borderWidth: Theme.currentTheme.appearance.borderWidth
+    property alias text: buttonText.text  // 文本内容
+
+    // Size //
+    width: buttonText.width + 96
+    height: buttonText.height + 14
 
     // Border //
     Rectangle {
         id: border
-        width: parent.width
-        height: parent.height
+        radius: Theme.currentTheme.appearance.buttonRadius  // 圆角半径
+        visible: true
+
+        Rectangle {
+            id: background
+        }
+    }
+
+    // Text //
+    TextLabel {
+        id: buttonText
+        labelType: "body"
         anchors.centerIn: parent
-        color: "transparent"  // 透明背景
-        border.color: root.borderColor
-        border.width: borderWidth  // 边框宽度
-        radius: Theme.currentTheme.appearance.buttonRadius * 1.1  // 圆角半径
+        color: root.textColor
     }
 }

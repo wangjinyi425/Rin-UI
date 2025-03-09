@@ -7,10 +7,6 @@ ButtonBase {
     id: root
     interactive: true  // 启用 MouseArea
     property string buttonType: "standard"  // primary, standard
-    property alias text: buttonText.text
-
-    width: buttonText.width + 96
-    height: buttonText.height + 12
 
     // 主题切换
     Connections {
@@ -25,18 +21,13 @@ ButtonBase {
             backgroundColor = Theme.currentTheme.colors.primaryColor
             textColor = Theme.currentTheme.colors.textOnAccentColor
             borderColor = Theme.currentTheme.colors.controlBorderAccentColor
+            borderTransparency = Theme.currentTheme.appearance.borderOnAccentFactor
         } else {
             backgroundColor = Theme.currentTheme.colors.controlColor
             textColor = Theme.currentTheme.colors.textColor
             borderColor = Theme.currentTheme.colors.controlBorderColor
+            borderTransparency = Theme.currentTheme.appearance.borderFactor
         }
-    }
-
-    TextLabel {
-        id: buttonText
-        labelType: "body"
-        anchors.centerIn: parent
-        color: root.textColor
     }
 
     MouseArea {
