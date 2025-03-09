@@ -1,0 +1,5 @@
+singleton Theme 1.0 theme.qml
+singleton Colors 1.0 colors.qml
+
+Light 1.0 light.qml
+Dark 1.0 dark.qml

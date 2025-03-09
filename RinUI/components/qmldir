@@ -1,0 +1,7 @@
+module RinUI.Components
+
+Base 1.0 Base.qml
+ButtonBase 1.0 ButtonBase.qml
+PushButton 1.0 PushButton.qml
+TextLabel 1.0 TextLabel.qml
+singleton Theme 1.0 ../themes/theme.qml

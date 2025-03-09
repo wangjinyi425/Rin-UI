@@ -1,0 +1,7 @@
+module RinUI
+
+singleton Theme 1.0 themes/theme.qml
+
+PushButton 1.0 components/PushButton.qml
+TextLabel 1.0 TextLabel.qml
+FluentWindow 1.0 windows/FluentWindow.qml
