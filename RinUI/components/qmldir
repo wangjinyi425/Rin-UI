@@ -2,8 +2,15 @@ module RinUI.Components
 
 Base 1.0 Base.qml
 ButtonBase 1.0 ButtonBase.qml
+Shadow 1.0 Shadow.qml
+
+TextLabel 1.0 TextLabel.qml
+Tooltip 1.0 Tooltip.qml
+
 PushButton 1.0 PushButton.qml
 ToggleSwitch 1.0 ToggleSwitch.qml
-TextLabel 1.0 TextLabel.qml
+
+ScrollViewer 1.0 ScrollViewer.qml
+RinScrollBar 1.0 RinScrollBar.qml
 
 singleton Theme 1.0 ../themes/theme.qml

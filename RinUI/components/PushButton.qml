@@ -21,6 +21,7 @@ ButtonBase {
             }
         } else {
             root.opacity = 1.0
+            // Enabled
             if (buttonType === "primary") {
                 backgroundColor = Theme.currentTheme.colors.primaryColor
                 textColor = Theme.currentTheme.colors.textOnAccentColor
@@ -34,46 +35,6 @@ ButtonBase {
             }
         }
     }
-
-    MouseArea {
-        id: mouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        onClicked: {
-            if (!root.enabled) {
-                mouse.accepted = true  // 忽略鼠标点击事件
-                return
-            }
-            root.clicked()
-        }
-    }
-
-    // 状态变化
-    states: [
-        State {
-        name: "disabled"
-            when: !enabled
-            PropertyChanges {  // 禁用时禁止改变属性
-                target: root;
-            }
-        },
-        State {
-            name: "pressed"
-            when: mouseArea.pressed
-            PropertyChanges {
-                target: root;
-                opacity: 0.5
-            }
-        },
-        State {
-            name: "hovered"
-            when: mouseArea.containsMouse
-            PropertyChanges {
-                target: root;
-                opacity: 0.77
-            }
-        }
-    ]
 
     // 动画
     Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }

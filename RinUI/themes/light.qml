@@ -10,6 +10,8 @@ QtObject {
         // Controls
         property color controlColor: Qt.rgba(255, 255, 255, 0.7)
         property color controlSecondaryColor: Qt.rgba(0, 0, 0, 0.0241)
+        property color controlTertiaryColor: Qt.rgba(0, 0, 0, 0.0578)
+        property color controlQuaternaryColor: Qt.rgba(0, 0, 0, 0.0924)
 
         property color controlBorderColor: Qt.rgba(0, 0, 0, 0.06)
         property color controlBorderStrongColor: Qt.rgba(0, 0, 0, 0.6063)
@@ -17,6 +19,7 @@ QtObject {
 
         // Background
         property color backgroundColor: "#F0F4F9"
+        property color backgroundAcrylicColor: "#FCFCFC"
 
         // Text
         property color textColor: "#1b1b1b"
@@ -34,6 +37,22 @@ QtObject {
         property int borderWidth: 1
         property real borderFactor: 0.9
         property real borderOnAccentFactor: 1.08
+    }
+
+    // Shadows //
+    property var shadows: {
+        "dialog": {
+            "color": Qt.rgba(0, 0, 0, 0.37),  // 模糊颜色
+            "blur": 64  // 模糊半径
+        },
+        "tooltip": {
+            "color": Qt.rgba(0, 0, 0, 0.14),
+            "blur": 8
+        },
+        "cardRest": {
+            "color": Qt.rgba(0, 0, 0, 0.04),
+            "blur": 4
+        },
     }
 
     // Typography //

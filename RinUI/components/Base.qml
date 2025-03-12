@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import "../themes"
 
 Item {
-    id: base
+    id: root
     implicitWidth: 100
     implicitHeight: 40
 
@@ -11,12 +11,16 @@ Item {
     property color backgroundColor: Theme.currentTheme.colors.controlColor
     property color borderColor: Theme.currentTheme.colors.controlBorderColor
     property color textColor: Theme.currentTheme.colors.textColor
+
     property real borderTransparency: Theme.currentTheme.appearance.borderFactor
     property real controlRadius: Theme.currentTheme.appearance.buttonRadius
 
+    property bool hovered: false  // 悬停
+    property bool pressed: false  // 按下
+    property bool enabled: true  // 是否启用
+
     // 启用 MouseArea / Enable MouseArea
     property bool interactive: false
-    property bool enabled: true  // 是否启用
 
     // Update
     // 禁用状态
@@ -49,8 +53,50 @@ Item {
         visible: interactive
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: base.clicked()
+
+        // hover状态 / Hover State
+        onEntered: root.hovered = true
+        onExited: root.hovered = false
+
+        // 按下状态 / Pressed State
+        onPressed: root.pressed = true
+        onReleased: root.pressed = false
+
+        onClicked: {
+            if (!root.enabled) {
+                mouse.accepted = true  // 忽略鼠标点击事件
+                return
+            }
+            root.clicked()
+        }
     }
+
+    // 状态变化
+    states: [
+        State {
+        name: "disabled"
+            when: !enabled
+            PropertyChanges {  // 禁用时禁止改变属性
+                target: root;
+            }
+        },
+        State {
+            name: "pressed"
+            when: mouseArea.pressed
+            PropertyChanges {
+                target: root;
+                opacity: 0.65
+            }
+        },
+        State {
+            name: "hovered"
+            when: mouseArea.containsMouse
+            PropertyChanges {
+                target: root;
+                opacity: 0.875
+            }
+        }
+    ]
 
     signal clicked()
 }

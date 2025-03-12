@@ -36,7 +36,7 @@ Base {
 
     // 背景 / Background
     Rectangle {
-        id: switchBackground
+        id: background
         anchors.fill: parent
         width: root.width
         height: root.height
@@ -58,11 +58,8 @@ Base {
 
             // 坐标 / pos
             x: root.checked ? parent.width - width - paddingHr : paddingHr
-            Behavior on x { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
+            Behavior on x { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
             Behavior on color { ColorAnimation { duration: 250; easing.type: Easing.OutQuart } }
-
-            // Behavior on width { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
-            // Behavior on height { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
         }
     }
 
@@ -78,6 +75,7 @@ Base {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        preventStealing: true  // 修复被父控件拦截事件从而无法拖动
 
         property real pressX: 0  // 记录按下时的 X 坐标
         onPressed: (mouse) => {
@@ -103,7 +101,11 @@ Base {
                 let offset = mouse.x - pressX
                 let newX = root.checked ? parent.width - handle.width - paddingHr + offset  // X
                                         : paddingHr + offset
-                newX = Math.max(paddingHr, Math.min(parent.width - handle.width - paddingHr, newX))  // max
+                if (root.checked) {
+                    newX = Math.max(0, Math.min(parent.width - handle.width - paddingHr, newX))
+                } else {
+                    newX = Math.max(paddingHr, Math.min(parent.width - handle.width, newX))
+                }
                 handle.x = newX
             }
         }
@@ -112,7 +114,7 @@ Base {
     // 状态变化
     states: [
         State {
-            name: "pressed"
+            name: "pressedSwitch"
             when: mouseArea.pressed
             PropertyChanges {
                 target: handle;
@@ -120,15 +122,23 @@ Base {
                 width: 17
                 height: 14
             }
+            PropertyChanges {
+                target: background
+                opacity: 0.8
+            }
         },
         State {
-            name: "hovered"
+            name: "hoveredSwitch"
             when: mouseArea.containsMouse
             PropertyChanges {
                 target: handle;
                 root.paddingHr: 2
                 width: 14
                 height: 14
+            }
+            PropertyChanges {
+                target: background
+                opacity: 0.9
             }
         }
     ]

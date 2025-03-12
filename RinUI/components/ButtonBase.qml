@@ -18,6 +18,7 @@ Base {
         id: border
         anchors.fill: parent
         radius: controlRadius
+        layer.enabled: true  // 单独渲染
         gradient: Gradient {
             GradientStop { position: 0.91; color: backgroundColor.lighter(borderTransparency) }
             GradientStop { position: 1; color: backgroundColor.darker(1.4) }
