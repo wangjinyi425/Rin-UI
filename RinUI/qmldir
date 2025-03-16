@@ -3,11 +3,19 @@ module RinUI
 singleton Theme 1.0 themes/theme.qml
 
 Shadow 1.0 components/Shadow.qml
-PushButton 1.0 components/PushButton.qml
+Button 1.0 components/Button.qml
+ComboBox 1.0 components/ComboBox.qml
 ToggleSwitch 1.0 components/ToggleSwitch.qml
 TextLabel 1.0 components/TextLabel.qml
 ScrollViewer 1.0 components/ScrollViewer.qml
 RinScrollBar 1.0 components/RinScrollBar.qml
 Tooltip 1.0 components/Tooltip.qml
+IconWidget 1.0 components/IconWidget.qml
+Slider 1.0 components/Slider.qml
+ProgressBar 1.0 components/ProgressBar.qml
+
+ContextMenu 1.0 components/ContextMenu.qml
 
 FluentWindow 1.0 windows/FluentWindow.qml
+CtrlBtn 1.0 windows/CtrlBtn.qml
+ContentFrame 1.0 windows/ContentFrame.qml

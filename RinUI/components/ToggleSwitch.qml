@@ -7,7 +7,6 @@ import "../components"
 Base {
     id: root
     property bool checked: false  // Switch State
-    property bool enabled: true  // Switch Enabled
     property int paddingHr: 3  // Horizontal Padding
 
     property color handleColor: Theme.currentTheme.colors.controlBorderStrongColor
@@ -15,19 +14,39 @@ Base {
     // 监听点击
     onCheckedChanged: updateStyle()
 
-    function updateStyle() {
-        if (checked) {
-            // checked style
-            backgroundColor = Theme.currentTheme.colors.primaryColor
-            textColor = Theme.currentTheme.colors.textOnAccentColor
-            borderColor = Theme.currentTheme.colors.primaryColor
-            handleColor = Theme.currentTheme.colors.textOnAccentColor
+    // 主题切换 / Theme Switching
+    Connections {
+        target: Theme
+        onCurrentThemeChanged: updateStyle()
+    }
 
+    function updateStyle() {
+        if (!root.enabled) {
+            if (checked) {
+                root.opacity = 0.2169
+                backgroundColor = Theme.currentTheme.colors.disabledColor
+                borderColor = Theme.currentTheme.colors.disabledColor
+                handleColor = Theme.currentTheme.colors.textOnAccentColor
+            } else {
+                root.opacity = 0.4
+                backgroundColor = Theme.currentTheme.colors.controlSecondaryColor
+                handleColor = Theme.currentTheme.colors.controlBorderStrongColor
+            }
         } else {
-            backgroundColor = Theme.currentTheme.colors.controlSecondaryColor
-            textColor = Theme.currentTheme.colors.textColor
-            borderColor = Theme.currentTheme.colors.controlBorderStrongColor
-            handleColor = Theme.currentTheme.colors.controlBorderStrongColor
+            root.opacity = 1
+            if (checked) {
+                // checked style
+                backgroundColor = Theme.currentTheme.colors.primaryColor
+                textColor = Theme.currentTheme.colors.textOnAccentColor
+                borderColor = Theme.currentTheme.colors.primaryColor
+                handleColor = Theme.currentTheme.colors.textOnAccentColor
+
+            } else {
+                backgroundColor = Theme.currentTheme.colors.controlSecondaryColor
+                textColor = Theme.currentTheme.colors.textColor
+                borderColor = Theme.currentTheme.colors.controlBorderStrongColor
+                handleColor = Theme.currentTheme.colors.controlBorderStrongColor
+            }
         }
     }
 
@@ -46,21 +65,21 @@ Base {
         // 边框 / Border
         border.color: borderColor // 我是Rinlit，v我50，请我吃kfc
         border.width: Theme.currentTheme.appearance.borderWidth
+    }
 
-        // 小圆点 / Handle()
-        Rectangle {
-            id: handle
-            width: 12
-            height: 12
-            anchors.verticalCenter: parent.verticalCenter
-            radius: height / 2
-            color: handleColor
+    // 小圆点 / Handle()
+    Rectangle {
+        id: handle
+        width: 12
+        height: 12
+        anchors.verticalCenter: background.verticalCenter
+        radius: height / 2
+        color: handleColor
 
-            // 坐标 / pos
-            x: root.checked ? parent.width - width - paddingHr : paddingHr
-            Behavior on x { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
-            Behavior on color { ColorAnimation { duration: 250; easing.type: Easing.OutQuart } }
-        }
+        // 坐标 / pos
+        x: root.checked ? background.width - width - paddingHr : paddingHr
+        Behavior on x { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
+        Behavior on color { ColorAnimation { duration: 250; easing.type: Easing.OutQuart } }
     }
 
     // TextLabel {
@@ -75,6 +94,7 @@ Base {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        visible: enabled
         preventStealing: true  // 修复被父控件拦截事件从而无法拖动
 
         property real pressX: 0  // 记录按下时的 X 坐标
@@ -84,12 +104,18 @@ Base {
 
         // 点击更改
         onClicked: {
+            if (!root.enabled) {
+                return
+            }
             root.checked = !root.checked
             clicked()
         }
 
         // 拖动判断结果
         onReleased: {
+            if (!root.enabled) {
+                return
+            }
             root.checked = handle.x + handle.width / 2 > parent.width / 2  // 满足则为true
             clicked()
         }
@@ -113,6 +139,14 @@ Base {
 
     // 状态变化
     states: [
+        State {
+            name: "disabledSwitch"
+            when: !root.enabled
+            PropertyChanges {
+                target: background
+                opacity: 0.2169
+            }
+        },
         State {
             name: "pressedSwitch"
             when: mouseArea.pressed
@@ -139,6 +173,14 @@ Base {
             PropertyChanges {
                 target: background
                 opacity: 0.9
+            }
+        },
+        State {
+            name: "nr"
+            when: true
+            PropertyChanges {
+                target: root;
+                paddingHr: 3
             }
         }
     ]

@@ -9,8 +9,8 @@ Base {
     property alias text: buttonText.text  // 文本内容
 
     // Size //
-    width: buttonText.width + 96
-    height: buttonText.height + 12
+    implicitWidth : buttonText.width + 96
+    implicitHeight: buttonText.height + 12
 
     // Border //
     // 背景 / Background

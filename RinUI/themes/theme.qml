@@ -2,11 +2,21 @@ pragma Singleton
 import QtQuick 2.15
 import "../themes"
 
-Item { // 将 QtObject 改为 Item 以支持子元素
+Item {
     id: themeManager
 
     property var currentTheme: null
 
+    // 初始化时设置默认主题
+    Component.onCompleted: {
+        if (typeof ThemeManager === "undefined") {
+            currentTheme = Qt.createQmlObject("import '../themes'; Light {}", themeManager)
+        } else {
+            setTheme(ThemeManager.get_theme())
+        }
+    }
+
+    // 切换主题
     function setTheme(mode) {
         if (typeof ThemeManager === "undefined") {
             console.error("ThemeManager is not defined.")
@@ -14,11 +24,16 @@ Item { // 将 QtObject 改为 Item 以支持子元素
             return
         }
 
-        ThemeManager.toggle_theme(mode)  // 切换主题于 Python 后端
+        // 调用 Python 后端的 ThemeManager 切换主题
+        ThemeManager.toggle_theme(mode)
 
         // 根据 mode 动态创建主题对象
-        var themeName = ThemeManager.get_theme_name(mode)
+        var themeName = ThemeManager.get_theme_name()
+        load_qml(themeName)
 
+    }
+
+    function load_qml(themeName) {
         if (themeName) {
             var themeObject = Qt.createQmlObject("import '../themes'; " + themeName + " {}", themeManager)
             if (themeObject) {
@@ -28,11 +43,15 @@ Item { // 将 QtObject 改为 Item 以支持子元素
                 console.error("Failed to create theme object for mode:", mode)
             }
         } else {
-            console.error("Invalid theme mode:", mode)  // invalid
+            console.error("Invalid theme mode:", mode)
         }
     }
 
-    Component.onCompleted: {
-        setTheme("light") // 初始化默认主题
+    // 监听系统主题变化
+    Connections {
+        target: ThemeManager
+        function onThemeChanged(theme) {
+            load_qml(theme)
+        }
     }
 }

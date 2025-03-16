@@ -1,2 +1,5 @@
 FluentWindowBase 1.0 FluentWindowBase.qml
 FluentWindow 1.0 FluentWindow.qml
+TitleBar 1.0 TitleBar.qml
+ContentFrame 1.0 ContentFrame.qml
+CtrlBtn 1.0 CtrlBtn.qml

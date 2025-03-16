@@ -1,0 +1,106 @@
+import QtQuick 2.12
+import QtQuick.Controls 2.3
+import QtQuick.Window 2.3
+import "../themes"
+import "../components"
+import "../windows"
+
+Item {
+    property int titleBarHeight: Theme.currentTheme.appearance.dialogTitleBarHeight
+    property alias title: titleLabel.text
+
+    height: titleBarHeight
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    // clip: true
+
+    property var window: null
+    function toggleMaximized(mode) {
+        if(mode===0){
+            if (window.visibility === Window.Maximized) {
+                window.showNormal();
+            } else {
+                window.showMaximized();
+            }
+        }else if(mode===1){
+            window.showMinimized()
+        }else if(mode===2){
+            window.close()
+        }else if(mode===4){
+            return window.visibility
+        }
+        return 0;
+
+    }
+
+    Rectangle{
+        id:rectBk
+        anchors.fill: parent
+        color: "transparent"
+
+        MouseArea {
+            anchors.fill: parent
+            anchors.margins: Utils.windowDragArea
+            propagateComposedEvents: true
+            acceptedButtons: Qt.LeftButton
+            property point clickPos: "0,0"
+            onPressed: {
+                clickPos = Qt.point(mouse.x, mouse.y)
+            }
+            onDoubleClicked: {
+                toggleMaximized(0)
+            }
+            onPositionChanged: {
+                //鼠标偏移量
+                var delta = Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
+
+                window.setX(window.x+delta.x)
+                window.setY(window.y+delta.y)
+            }
+        }
+    }
+
+    // 窗口按钮 / Window Controls
+    Row{
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        spacing: 0
+        CtrlBtn {
+            mode: 1
+        }
+        CtrlBtn {
+            mode: 0
+            icon: (toggleMaximized(4) === Window.Maximized)? "\ueb95" : "\ue1aa"
+
+        }
+        CtrlBtn {
+            mode: 2
+        }
+    }
+
+    // 窗口标题 / Window Title
+    Row {
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 16
+        spacing: 16
+
+        //图标
+        IconWidget {
+            size: 16
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        //标题
+        TextLabel {
+            id: titleLabel
+            anchors.verticalCenter:  parent.verticalCenter
+
+            labelType: "caption"
+            text: qsTr("Fluent TitleBar")
+        }
+    }
+}

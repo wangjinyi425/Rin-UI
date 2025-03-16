@@ -1,4 +1,4 @@
-from RinUI.core.start import create_qml_app
+from RinUI.core.launcher import create_qml_app
 
 
 if __name__ == '__main__':

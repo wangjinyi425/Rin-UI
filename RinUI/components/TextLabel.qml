@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import "../themes"
 
 Text {
-    property string labelType: "title"  // display, titleLarge, title, subtitle, body, bodyLarge, caption
+    property string labelType: ""  // display, titleLarge, title, subtitle, body, bodyLarge, caption
     id: label
 
     color: Theme.currentTheme.colors.textColor

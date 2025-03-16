@@ -8,27 +8,47 @@ QtObject {
     // Colors //
     property QtObject colors: QtObject {
         // Controls
-        property color controlColor: Qt.rgba(255, 255, 255, 0.065)
-        property color controlSecondaryColor: Qt.rgba(255, 255, 255, 0.1)
-        property color controlTertiaryColor: Qt.rgba(255, 255, 255, 0.0419)
-        property color controlQuaternaryColor: Qt.rgba(255, 255, 255, 0.0698)
+        property color controlColor: Qt.alpha("#ffffff", 0.065)
+        property color controlSecondaryColor: Qt.alpha("#ffffff", 0.1)
+        property color controlTertiaryColor: Qt.alpha("#ffffff", 0.0419)
+        property color controlQuaternaryColor: Qt.alpha("#ffffff", 0.0698)
 
-        property color controlBorderColor: Qt.rgba(255, 255, 255, 0.09)
-        property color controlBorderStrongColor: Qt.rgba(255, 255, 255, 0.6047)
-        property color controlBorderAccentColor: Qt.rgba(255, 255, 255, 0.08)
+        property color controlBorderColor: Qt.alpha("#ffffff", 0.09)
+        property color controlBorderStrongColor: Qt.alpha("#ffffff", 0.6047)
+        property color controlBorderAccentColor: Qt.alpha("#ffffff", 0.08)
 
         // Background
         property color backgroundColor: "#202020"
-        property color backgroundAcrylicColor: "#2C2C2C"
+        property color windowBorderColor: Qt.alpha("#757575", 0.0698)
+        property color backgroundAcrylicColor: "#2c2c2c"
+        property color subtleColor: "transparent"
+        property color subtleSecondaryColor: Qt.alpha("#ffffff", 0.0605)
+        property color subtleTertiaryColor: Qt.alpha("#ffffff", 0.0419)
+        property color captionCloseColor: systemCirticalColor
+        property color captionCloseTextColor: "#ffffff"
 
         // Text
         property color textColor: "#ffffff"
-        property color textAccentColor: Qt.color(Colors.primaryColor).lighter(1.2)
+        property color textSecondaryColor: Qt.alpha("#ffffff", 0.6047)
+        property color textAccentColor: primaryColor
         property color textOnAccentColor: "#000000"
         property color textSelectedColor: "#000000"
 
-        property color primaryColor: Qt.color(Colors.primaryColor).lighter(1.2)
+        property color primaryColor: Qt.color(Utils.primaryColor).lighter(1.6).darker(1.2)
         property color disabledColor: "#ffffff"
+
+        // System Colors
+        property color systemAttentionColor: "#005fb7"
+        property color systemSuccessColor: "#0f7b0f"
+        property color systemCautionColor: "#9d5d00"
+        property color systemCirticalColor: "#c42b1c"
+        property color systemNeutralColor: "#8d8d8d"
+
+        property color systemAttentionBackgroundColor: Qt.alpha("#f6f6f6", 0.1)
+        property color systemSuccessBackgroundColor: "#dff6dd"
+        property color systemCautionBackgroundColor: "#fff4ce"
+        property color systemCirticalBackgroundColor: "#fde7e9"
+        property color systemNeutralBackgroundColor: Qt.alpha("#000000", 0.0241)
     }
 
     // Appearance //
@@ -37,27 +57,41 @@ QtObject {
         property int borderWidth: 1
         property real borderFactor: 1.2
         property real borderOnAccentFactor: 1.08
+
+        property int dialogTitleBarHeight: 32
+        property int windowTitleBarHeight: 48
+        property int windowRadius: 7
+        property int windowButtonWidth: 46
     }
 
     // Shadows //
     property var shadows: {
         "dialog": {
             "color": Qt.rgba(0, 0, 0, 0.37),  // 模糊颜色
-            "blur": 64  // 模糊半径
+            "blur": 64,  // 模糊度
+            "offsetY": 32
         },
         "tooltip": {
-            "color": Qt.rgba(0, 0, 0, 0.26),
-            "blur": 8
+            "color": Qt.alpha("#000000", 0.14),
+            "blur": 8,
+            "offsetY": 4
         },
         "cardRest": {
             "color": Qt.rgba(0, 0, 0, 0.04),
-            "blur": 4
+            "blur": 4,
+            "offsetY": 2
+        },
+        "flyout": {
+            "color": Qt.alpha("#000000", 0.14),
+            "blur": 16,
+            "offsetY": 8
         },
     }
 
     // Typography //
     property QtObject typography: QtObject {
         property string fontFamily: "Microsoft YaHei"
+        property string fontIcon: "FluentSystemIcons-Regular.ttf"  // 字体图标路径 / font icon (put it in the "assets/fonts" folder)
         // Font Sizes
         property int displaySize: 68
         property int titleLargeSize: 40

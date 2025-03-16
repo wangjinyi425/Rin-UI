@@ -11,12 +11,16 @@ FluentWindow {
 
 
     // Area
-    ScrollViewer {
-        width: parent.width
-        height: parent.height - 60
-        anchors.fill: parent
-        padding: 10
-
+    // ScrollViewer {
+    //     width: parent.width
+    //     height: parent.height - 60
+    //     anchors.fill: parent
+    //     padding: 10
+    //
+    //
+    // }
+    ContentFrame {
+        id: contentArea
         Column {
             spacing: 10
             width: parent.width
@@ -34,31 +38,35 @@ FluentWindow {
 
             TextLabel {
                 labelType: "bodyLarge"
-                text: "PushButton 按钮"
+                text: "Button 按钮"
+            }
+
+            IconWidget {
+                size: 48
             }
 
             Flow {
                 spacing: 10
                 width: window.width  // width
 
-                PushButton {
+                Button {
                     id: btn_1
                     buttonType: "primary"
                     text: "切换主题"
                     onClicked: {
                         if (Theme.currentTheme.name === "light") {
-                            Theme.setTheme("dark")
+                            Theme.setTheme("Dark")
                         } else {
-                            Theme.setTheme("light")
+                            Theme.setTheme("Light")
                         }
                     }
                 }
-                PushButton {
+                Button {
                     enabled: true
                     buttonType: "standard"
                     text: "Push Button"
                 }
-                PushButton {
+                Button {
                     id: btn_2
                     enabled: true
                     buttonType: "standard"
@@ -72,10 +80,15 @@ FluentWindow {
                     }
 
                 }
-                PushButton {
+                Button {
                     text: "Disabled"
                     enabled: false
                 }
+            }
+
+            TextLabel {
+                labelType: "bodyLarge"
+                text: "Switch 按钮"
             }
 
             Row {
@@ -86,13 +99,39 @@ FluentWindow {
                     onCheckedChanged: {
                         if (checked) {
                             btn_1.enabled = true
+                            switch_1.enabled = true
                             console.log("Switch is on")
                         } else {
                             btn_1.enabled = false
+                            switch_1.enabled = false
                             console.log("Switch is off")
                         }
                     }
                 }
+                ToggleSwitch {
+                    id: switch_1
+                    checked: true
+                }
+            }
+
+            TextLabel {
+                labelType: "bodyLarge"
+                text: "ComboBox 下拉"
+            }
+
+            Row {
+                spacing: 10
+
+                ComboBox {
+                    model: ["Item 1", "Item 2", "Item 3"]
+                }
+                ComboBox {
+                    headerText: "With header"
+                    model: ["Item 1", "Item 2", "Item 3"]
+                }
+            }
+            Slider {
+
             }
         }
     }

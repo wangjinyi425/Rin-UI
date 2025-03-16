@@ -15,9 +15,6 @@ ToolTip {
     property color textColor: Theme.currentTheme.colors.textColor
     property real controlRadius: Theme.currentTheme.appearance.buttonRadius
 
-    // 动画属性
-    opacity: 0  // 初始透明度设置为0
-
     function updateStyle() {
         backgroundColor = Theme.currentTheme.colors.backgroundAcrylicColor
         borderColor = Theme.currentTheme.colors.controlBorderColor
@@ -33,31 +30,6 @@ ToolTip {
 
     Component.onCompleted: updateStyle()
 
-    // 显示动画
-    NumberAnimation {
-        id: showAnimation
-        target: tooltip
-        property: "opacity"
-        from: 0
-        to: 1
-        duration: 300
-        easing.type: Easing.OutQuart
-    }
-
-    // 显示定时器
-    Timer {
-        id: hideTimer
-        interval: tooltip.timeout
-        onTriggered: tooltip.opacity = 0  // 结束显示时设置透明度为0
-    }
-
-    // 触发显示
-    onVisibleChanged: {
-        if (visible) {
-            showAnimation.start()
-            hideTimer.restart()
-        }
-    }
 
     // 颜色动画 / Color Animation
     Behavior on backgroundColor { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
@@ -84,5 +56,31 @@ ToolTip {
         color: backgroundColor
         border.color: borderColor
         Shadow {style: "tooltip"}
+    }
+
+    // 动画 / Animation //
+    enter: Transition {
+        ParallelAnimation {
+            NumberAnimation {
+                target: tooltip
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 250
+                easing.type: Easing.InOutQuart
+            }
+        }
+    }
+    exit: Transition {
+        ParallelAnimation {
+            NumberAnimation {
+                target: tooltip
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: 300
+                easing.type: Easing.InOutQuart
+            }
+        }
     }
 }

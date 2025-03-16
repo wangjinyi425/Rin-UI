@@ -20,7 +20,7 @@ Item {
     property bool enabled: true  // 是否启用
 
     // 启用 MouseArea / Enable MouseArea
-    property bool interactive: false
+    property bool interactive: true
 
     // Update
     // 禁用状态
@@ -29,7 +29,9 @@ Item {
     // 主题切换 / Theme Switching
     Connections {
         target: Theme
-        onCurrentThemeChanged: updateStyle()
+        function onCurrentThemeChanged() {
+            updateStyle()
+        }
     }
 
     Component.onCompleted: updateStyle()
