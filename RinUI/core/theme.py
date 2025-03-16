@@ -48,6 +48,15 @@ class ThemeManager(QObject):
     DWMWCP_ROUND = 2
     DWMWCP_ROUNDSMALL = 3  # 小圆角
 
+    def clean_up(self):
+        """
+        清理资源并停止主题监听。
+        """
+        if self.listener is not None:
+            self.listener.stop()
+            self.listener.wait()  # 等待线程结束
+            print("Theme listener stopped.")
+
     def __init__(self):
         super().__init__()
         self.theme_dict = {
@@ -85,6 +94,7 @@ class ThemeManager(QObject):
         self.hwnd = int(window.winId())
         print(f"Window handle set: {self.hwnd}")
 
+    @Slot(str)
     def apply_backdrop_effect(self, effect_type):
         """
         应用背景效果

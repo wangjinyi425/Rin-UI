@@ -21,6 +21,7 @@ FluentWindow {
     // }
     ContentFrame {
         id: contentArea
+
         Column {
             spacing: 10
             width: parent.width
@@ -43,6 +44,7 @@ FluentWindow {
 
             IconWidget {
                 size: 48
+                icon: "\ueb95"
             }
 
             Flow {
@@ -67,6 +69,16 @@ FluentWindow {
                     text: "Push Button"
                 }
                 Button {
+                    enabled: true
+                    buttonType: "standard"
+                    icon: "\uf103"
+                    text: "hello!"
+                }
+                ToolButton {
+                    enabled: true
+                    icon: "\uf103"
+                }
+                Button {
                     id: btn_2
                     enabled: true
                     buttonType: "standard"
@@ -83,6 +95,11 @@ FluentWindow {
                 Button {
                     text: "Disabled"
                     enabled: false
+                }
+                Button {
+                    enabled: true
+                    compact: true
+                    text: "Push Button"
                 }
             }
 
@@ -123,11 +140,20 @@ FluentWindow {
                 spacing: 10
 
                 ComboBox {
+                    property var data: ["mica", "acrylic", "tabbed", "none"]
+                    model: ["Mica", "Acrylic", "Tabbed", "None"]
+                    currentIndex: 0
+                    onCurrentIndexChanged: {
+                        console.log("Current index changed to " + currentIndex)
+                        Theme.setBackdropEffect(data[currentIndex])
+                    }
+                }
+                ComboBox {
                     model: ["Item 1", "Item 2", "Item 3"]
                 }
                 ComboBox {
                     headerText: "With header"
-                    model: ["Item 1", "Item 2", "Item 3"]
+                    model: ["Item 1", "Item 2", "Item 3", "Item 3", "Item 3", "Item 3", "Item 3"]
                 }
             }
             Slider {

@@ -91,6 +91,7 @@ Item {
         //图标
         IconWidget {
             size: 16
+            icon: "\uf12a"
             anchors.verticalCenter: parent.verticalCenter
         }
 

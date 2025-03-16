@@ -4,6 +4,7 @@ singleton Theme 1.0 themes/theme.qml
 
 Shadow 1.0 components/Shadow.qml
 Button 1.0 components/Button.qml
+ToolButton 1.0 components/ToolButton.qml
 ComboBox 1.0 components/ComboBox.qml
 ToggleSwitch 1.0 components/ToggleSwitch.qml
 TextLabel 1.0 components/TextLabel.qml

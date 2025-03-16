@@ -16,6 +16,14 @@ Item {
         }
     }
 
+    function setBackdropEffect(effect) {
+        if (typeof ThemeManager === "undefined") {
+            console.error("ThemeManager is not defined.")
+            return -1
+        }
+        ThemeManager.apply_backdrop_effect(effect)
+    }
+
     // 切换主题
     function setTheme(mode) {
         if (typeof ThemeManager === "undefined") {

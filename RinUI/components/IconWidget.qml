@@ -2,7 +2,7 @@ import QtQuick 2.15
 import "../themes"
 
 Item {
-    property string icon: "\uf103"
+    property string icon: ""  // eg. "\uf103"
     property alias color: textLabel.color
     property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
     property int size: 12
@@ -18,6 +18,8 @@ Item {
             easing.type: Easing.OutQuart
         }
     }
+
+    visible: icon!== ""
 
     FontLoader {
         id: iconFont

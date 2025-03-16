@@ -1,20 +1,20 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "../themes"
+import "../components"
 import "../windows"
 
 // 内容层 / Content Area
-Item {
+ScrollView {
     id: contentArea
     property int titleBarHeight: Theme.currentTheme.appearance.windowTitleBarHeight
     property bool borderVisible: false
 
-    width: parent.width
-    height: parent.height - titleBarHeight
-    anchors.bottom: parent.bottom
-    anchors.left: parent.left
-    anchors.right: parent.right
+    anchors.fill: parent
     anchors.margins: 8
+    anchors.topMargin: titleBarHeight
+
+    contentWidth: contentArea.width  // 内容宽度 / Content width
 
     Component.onCompleted: {
         if (borderVisible) {

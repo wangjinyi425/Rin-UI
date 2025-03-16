@@ -10,8 +10,11 @@ Tooltip 1.0 Tooltip.qml
 ContextMenu 1.0 ContextMenu.qml
 Slider 1.0 Slider.qml
 ProgressBar 1.0 ProgressBar.qml
+ScrollBar 1.0 ScrollBar.qml
+ScrollView 1.0 ScrollView.qml
 
-PushButton 1.0 PushButton.qml
+Button 1.0 Button.qml
+ToolButton 1.0 ToolButton.qml
 ToggleSwitch 1.0 ToggleSwitch.qml
 Indicator 1.0 Indicator.qml
 

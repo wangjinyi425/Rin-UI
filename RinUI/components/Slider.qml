@@ -24,7 +24,6 @@ Slider {
         width: parent.width
         height: trackHeight
         radius: controlRadius
-        anchors.verticalCenter: parent.verticalCenter
         color: outlineColor
 
         // 进度指示

@@ -45,9 +45,9 @@ Item {
     }
 
     // 颜色动画 / Color Animation
-    Behavior on backgroundColor { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
-    Behavior on textColor { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
-    Behavior on borderColor { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
+    Behavior on backgroundColor { ColorAnimation { duration: 200; easing.type: Easing.OutQuart } }
+    Behavior on textColor { ColorAnimation { duration: 200; easing.type: Easing.OutQuart } }
+    Behavior on borderColor { ColorAnimation { duration: 200; easing.type: Easing.OutQuart } }
 
     // 交互 / Interaction
     MouseArea {

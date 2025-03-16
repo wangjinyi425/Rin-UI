@@ -12,6 +12,7 @@ QtObject {
         property color controlSecondaryColor: Qt.alpha("#000000", 0.0241)
         property color controlTertiaryColor: Qt.alpha("#000000", 0.0578)
         property color controlQuaternaryColor: Qt.alpha("#000000", 0.0924)
+        property color controlStrongColor: Qt.alpha("#000000", 0.4458)
 
         property color controlBorderColor: Qt.alpha("#000000", 0.06)
         property color controlBorderStrongColor: Qt.alpha("#000000", 0.6063)
@@ -62,6 +63,10 @@ QtObject {
         property int windowTitleBarHeight: 48
         property int windowRadius: 7
         property int windowButtonWidth: 46
+
+        property int scrollBarMinWidth: 2
+        property int scrollBarWidth: 6
+        property int scrollBarPadding: 3
     }
 
     // Shadows //
@@ -92,6 +97,7 @@ QtObject {
     property QtObject typography: QtObject {
         property string fontFamily: "Microsoft YaHei"
         property string fontIcon: "FluentSystemIcons-Regular.ttf"  // 字体图标路径 / font icon (put it in the "assets/fonts" folder)
+        property string fontIconDict: "FluentSystemIcons-Regular.json"  // 字体图标字典路径 / font icon dictionary (put it in the "assets/fonts" folder)
         // Font Sizes
         property int displaySize: 68
         property int titleLargeSize: 40

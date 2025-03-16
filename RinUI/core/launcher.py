@@ -29,6 +29,7 @@ def create_qml_app(qml_path: str = "main.qml"):
     # 设置主题管理器
     theme_manager = ThemeManager()
     engine.rootContext().setContextProperty("ThemeManager", theme_manager)
+    app.aboutToQuit.connect(theme_manager.clean_up)  # 退出时清理主题管理器
 
     engine.load(qml_path)
     if not engine.rootObjects():

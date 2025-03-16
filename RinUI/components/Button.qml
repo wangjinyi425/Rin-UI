@@ -6,7 +6,8 @@ import "../components"
 ButtonBase {
     id: root
     interactive: true  // 启用 MouseArea
-    property string buttonType: "standard"  // primary, standard
+    property string buttonType: "standard"  // primary, standard, transparent
+
 
     function updateStyle() {
         // 禁用状态
@@ -15,6 +16,8 @@ ButtonBase {
             if (buttonType === "primary") {
                 root.opacity = 0.2169
                 backgroundColor = Theme.currentTheme.colors.disabledColor
+            } else if (buttonType === "transparent") {
+                root.opacity = 0.3614
             } else {
                 root.opacity = 0.4
                 backgroundColor = Theme.currentTheme.colors.controlColor
@@ -27,6 +30,10 @@ ButtonBase {
                 textColor = Theme.currentTheme.colors.textOnAccentColor
                 borderColor = Theme.currentTheme.colors.controlBorderAccentColor
                 borderTransparency = Theme.currentTheme.appearance.borderOnAccentFactor
+            } else if (buttonType === "transparent") {
+                backgroundColor = "transparent"
+                textColor = Theme.currentTheme.colors.textColor
+                borderColor = "transparent"
             } else {
                 backgroundColor = Theme.currentTheme.colors.controlColor
                 textColor = Theme.currentTheme.colors.textColor

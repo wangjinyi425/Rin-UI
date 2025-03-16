@@ -10,6 +10,7 @@ ComboBox {
     // 属性 / Properties
     property real borderFactor: Theme.currentTheme.appearance.borderFactor
     property real controlRadius: Theme.currentTheme.appearance.buttonRadius
+    property alias maxHeight: menu.maxHeight
     property string headerText: ""
 
     implicitWidth: contentItem.implicitWidth + 77
@@ -33,6 +34,8 @@ ComboBox {
             anchors.margins: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
             color: Theme.currentTheme.colors.controlColor
             radius: controlRadius
+
+            Behavior on color { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
         }
     }
 
@@ -58,6 +61,7 @@ ComboBox {
 
     // 弹出菜单 / Menu //
     popup: ContextMenu {
+        id: menu
         width: root.width
         model: root.model
         currentIndex: root.currentIndex
@@ -68,6 +72,7 @@ ComboBox {
     }
 
     // 动画
+    Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
     Behavior on implicitWidth { NumberAnimation { duration: 100; easing.type: Easing.InOutQuart } }
 
 

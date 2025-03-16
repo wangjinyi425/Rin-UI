@@ -1,20 +1,24 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "../themes"
+import "../components"
 
 
 Popup {
     id: contextMenu
-    implicitWidth: 100
-    implicitHeight: Math.min(listView.contentHeight + 6, 200)
-    height: implicitHeight  // 保持隐式绑定
-    closePolicy: Popup.CloseOnPressOutside
 
     // 选中信号 / Signal //
     signal itemSelected(int index)
 
     property alias model: listView.model
     property alias currentIndex: listView.currentIndex
+    property int maxHeight: 166  // 最大高度
+
+    implicitWidth: 100
+    implicitHeight: Math.min(listView.contentHeight + 6, maxHeight)
+    y: Math.round((parent.height - height) / 2)
+    height: implicitHeight  // 保持隐式绑定
+    closePolicy: Popup.CloseOnPressOutside
 
     // 内容 / ListView //
     contentItem: ListView {
@@ -25,6 +29,13 @@ Popup {
         anchors.topMargin: 2
         anchors.bottomMargin: 2
 
+        // 垂直滚动条 / Vertical ScrollBar //
+        ScrollBar.vertical: ScrollBar {
+            id: scrollBar
+            policy: ScrollBar.AsNeeded
+        }
+
+        // 选择器 / Selection //
         delegate: ItemDelegate {
             width: listView.width
             height: text.implicitHeight + 21  // 自适应
@@ -98,7 +109,9 @@ Popup {
         }
     }
 
-    // 动画 / Animation //
+    // 按钮 / Button //
+
+
     enter: Transition {
         ParallelAnimation {
             NumberAnimation {
@@ -118,12 +131,24 @@ Popup {
                 easing.type: Easing.InOutCubic
             }
             NumberAnimation {
+                target: scrollBar
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 1000
+                easing.type: Easing.InOutCubic
+            }
+            NumberAnimation {
                 target: contextMenu
                 property: "height"
                 from: 46
                 to: contextMenu.implicitHeight
                 duration: 450
                 easing.type: Easing.OutQuint
+                onRunningChanged: {
+                    console.log("Transition finished");
+                    scrollBar.visible = true;
+                }
             }
         }
     }
@@ -138,13 +163,5 @@ Popup {
                 easing.type: Easing.InOutQuart
             }
         }
-    }
-
-    // 动态调整位置以对齐选中项
-    onOpened: {
-        var selectedItem = comboBox.view.contentItem.children[comboBox.currentIndex];
-        var selectedItemPosition = selectedItem.mapToGlobal(Qt.point(0, 0));  // 获取选中项的位置
-        var targetY = selectedItemPosition.y;
-        contextMenu.y = targetY;
     }
 }
