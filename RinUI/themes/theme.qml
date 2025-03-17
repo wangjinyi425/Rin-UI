@@ -24,6 +24,14 @@ Item {
         ThemeManager.apply_backdrop_effect(effect)
     }
 
+    function getBackdropEffect() {
+        if (typeof ThemeManager === "undefined") {
+            console.error("ThemeManager is not defined.")
+            return -1
+        }
+        return ThemeManager.get_backdrop_effect()
+    }
+
     // 切换主题
     function setTheme(mode) {
         if (typeof ThemeManager === "undefined") {
@@ -60,6 +68,9 @@ Item {
         target: ThemeManager
         function onThemeChanged(theme) {
             load_qml(theme)
+        }
+        function onBackdropChanged(effect) {
+            Utils.backdropEnabled = effect !== "none";
         }
     }
 }

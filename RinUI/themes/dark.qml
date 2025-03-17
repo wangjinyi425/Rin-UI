@@ -3,7 +3,7 @@ import QtQuick 2.15
 import "../themes"
 
 QtObject {
-    property string name: "dark"
+    property string name: "Dark"
 
     // Colors //
     property QtObject colors: QtObject {

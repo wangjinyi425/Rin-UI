@@ -3,7 +3,7 @@ import QtQuick 2.15
 import "../themes"
 
 QtObject {
-    property string name: "light"
+    property string name: "Light"
 
     // Colors //
     property QtObject colors: QtObject {
@@ -19,7 +19,7 @@ QtObject {
         property color controlBorderAccentColor: Qt.alpha("#000000", 0.3)
 
         // Background
-        property color backgroundColor: "#F0F4F9"
+        property color backgroundColor: "#F3F3F3"
         property color windowBorderColor: Qt.alpha("#757575", 0.0924)
         property color backgroundAcrylicColor: "#F9F9F9"
         property color subtleColor: "transparent"

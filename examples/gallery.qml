@@ -56,7 +56,7 @@ FluentWindow {
                     buttonType: "primary"
                     text: "切换主题"
                     onClicked: {
-                        if (Theme.currentTheme.name === "light") {
+                        if (Theme.currentTheme.name === "Light") {
                             Theme.setTheme("Dark")
                         } else {
                             Theme.setTheme("Light")
@@ -149,7 +149,8 @@ FluentWindow {
                     }
                 }
                 ComboBox {
-                    model: ["Item 1", "Item 2", "Item 3"]
+                    editable: true
+                    model: ["Editable", "Item 1", "Item 2", "Item 3"]
                 }
                 ComboBox {
                     headerText: "With header"

@@ -50,7 +50,7 @@ Window {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: "transparent"//Theme.currentTheme.colors.backgroundColor
+        color: Utils.backdropEnabled ? "transparent" : Theme.currentTheme.colors.backgroundColor
         border.color: Theme.currentTheme.colors.windowBorderColor
         layer.enabled: true  // 启用透明渲染
         border.width: 1
@@ -68,7 +68,7 @@ Window {
 
         Behavior on color {
             ColorAnimation {
-                duration: 250
+                duration: Utils.backdropEnabled ? 0 : 350
                 easing.type: Easing.OutQuart
             }
         }
