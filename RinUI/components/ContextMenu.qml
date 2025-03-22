@@ -16,7 +16,7 @@ Popup {
 
     implicitWidth: 100
     implicitHeight: Math.min(listView.contentHeight + 6, maxHeight)
-    y: Math.round((parent.height - height) / 2)
+    // y: Math.round((parent.height - height) / 2)
     height: implicitHeight  // 保持隐式绑定
     closePolicy: Popup.CloseOnPressOutside
 
@@ -83,15 +83,6 @@ Popup {
                 contextMenu.close()
             }
         }
-
-        // 通过状态绑定同步 animHeight 和实际 height
-        states: State {
-            when: contextMenu.opened
-            PropertyChanges {
-                target: contextMenu
-                height: contextMenu.implicitHeight
-            }
-        }
     }
 
     // 背景 / Background //
@@ -112,6 +103,7 @@ Popup {
     // 按钮 / Button //
 
 
+    Behavior on y { NumberAnimation { duration: 200; easing.type:Easing.InOutQuart } }
     enter: Transition {
         ParallelAnimation {
             NumberAnimation {

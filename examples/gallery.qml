@@ -101,6 +101,12 @@ FluentWindow {
                     compact: true
                     text: "Push Button"
                 }
+                Button {
+                    enabled: true
+                    buttonType: "transparent"
+                    compact: true
+                    text: "Transparent Button"
+                }
             }
 
             TextLabel {
@@ -142,23 +148,28 @@ FluentWindow {
                 ComboBox {
                     property var data: ["mica", "acrylic", "tabbed", "none"]
                     model: ["Mica", "Acrylic", "Tabbed", "None"]
-                    currentIndex: 0
+                    currentIndex: data.indexOf(Theme.getBackdropEffect())
                     onCurrentIndexChanged: {
-                        console.log("Current index changed to " + currentIndex)
                         Theme.setBackdropEffect(data[currentIndex])
                     }
                 }
-                ComboBox {
-                    editable: true
-                    model: ["Editable", "Item 1", "Item 2", "Item 3"]
-                }
+                // ComboBox {
+                //     editable: true
+                //     model: ["Editable", "Item 1", "Item 2", "Item 3"]
+                // }
                 ComboBox {
                     headerText: "With header"
                     model: ["Item 1", "Item 2", "Item 3", "Item 3", "Item 3", "Item 3", "Item 3"]
                 }
             }
             Slider {
-
+            }
+            Slider {
+                orientation: Qt.Vertical  // vertical
+                from: 0
+                to: 100
+                stepSize: 10  // step size
+                snapMode: Slider.SnapAlways  // snap to tick
             }
         }
     }

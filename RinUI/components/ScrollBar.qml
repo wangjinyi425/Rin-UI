@@ -106,6 +106,7 @@ ScrollBar {
         id: background
         radius: 5
         color: Theme.currentTheme.colors.backgroundAcrylicColor
+        opacity: 0
         visible: scrollBar.size < 1.0
 
         states: [

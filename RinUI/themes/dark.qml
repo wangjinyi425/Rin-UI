@@ -67,6 +67,8 @@ QtObject {
         property int scrollBarMinWidth: 2
         property int scrollBarWidth: 6
         property int scrollBarPadding: 3
+
+        property int sliderHandleSize: 20
     }
 
     // Shadows //

@@ -3,91 +3,134 @@ import QtQuick.Controls 2.15
 import "../themes"
 import "../components"
 
+// thanks JerryQAQ
+
 Slider {
     id: root
-    // 主题属性
-    property real controlRadius: Theme.currentTheme.appearance.controlRadius
-    property color trackColor: Theme.currentTheme.colors.controlColor.darker(1.1)
-    property color progressColor: Theme.currentTheme.colors.primaryColor
-
     // 尺寸属性
-    property real handleSize: 24  // 手柄基础尺寸
+    property real handleSize: Theme.currentTheme.appearance.sliderHandleSize  // 手柄基础尺寸
     property real borderWidth: 3   // 边框宽度
     property real trackHeight: 4
-
-    // 颜色属性
-    property color outlineColor: Qt.rgba(129/255, 130/255, 133/255, 1)
     property color primaryColor: Theme.currentTheme.colors.primaryColor
 
-    // 轨道背景
-    background: Rectangle {
-        width: parent.width
-        height: trackHeight
-        radius: controlRadius
-        color: outlineColor
+    // 自适应高度和宽度
+    implicitHeight: orientation === Qt.Horizontal ? 32 : 150
+    implicitWidth: orientation === Qt.Horizontal ? 150 : 32
 
-        // 进度指示
+
+    // Background / 背景 //
+    background: Rectangle {
+        anchors.centerIn: parent
+        width: root.orientation === Qt.Horizontal ? parent.width - 2 : trackHeight
+        height: root.orientation === Qt.Horizontal ? trackHeight : parent.height - 2
+        radius: 99
+        clip: true
+        color: Theme.currentTheme.colors.controlStrongColor
+
+        // track
         Rectangle {
-            width: root.visualPosition * parent.width
-            height: parent.height
-            radius: controlRadius
-            color: primaryColor
+            width: root.orientation === Qt.Horizontal ? root.visualPosition * parent.width : trackHeight
+            height: root.orientation === Qt.Horizontal ? trackHeight : (1 - root.visualPosition) * parent.height
+            anchors.bottom: root.orientation === Qt.Vertical ? parent.bottom : undefined
+            radius: 99
+            color: Theme.currentTheme.colors.primaryColor
+
             Behavior on width {
                 NumberAnimation {
-                    duration: Theme.currentTheme.animation.durationMedium
+                    duration: Utils.animationSpeedFaster
+                    easing.type: Easing.OutCubic
+                }
+            }
+            Behavior on height {
+                NumberAnimation {
+                    duration: Utils.animationSpeedFaster
                     easing.type: Easing.OutCubic
                 }
             }
         }
     }
 
-    // 手柄组件
+
+    // 手柄 / Handle //
     handle: Item {
         id: handle
-        x: root.visualPosition * (parent.width - handleSize)
-        y: (parent.height - handleSize) / 2
-        width: 20
-        height: 20
+        property bool hovered: false
+        width: handleSize + 2
+        height: handleSize + 2
 
-        // 轮廓层 (129,130,133)
+        // 动态调整手柄位置：根据 orientation 切换 x/y 轴逻辑
+        x: root.orientation === Qt.Horizontal
+           ? root.visualPosition * (parent.width - width)  // 横向：x 受 visualPosition 控制
+           : (parent.width - width) / 2  // 竖向
+        y: root.orientation === Qt.Vertical
+           ? (root.visualPosition) * (parent.height - height)  // 竖向：y 受 visualPosition 控制
+           : (parent.height - height) / 2  // 横向
+
+        // MouseArea
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            acceptedButtons: Qt.NoButton
+            onEntered: handle.hovered = true
+            onExited: handle.hovered = false
+        }
+
+        // border
         Rectangle {
             anchors.fill: parent
             radius: width / 2
-            color: outlineColor
+            color: Theme.currentTheme.colors.controlQuaternaryColor
         }
 
-        // 白色中间层
+        // 白色border
         Rectangle {
             anchors.centerIn: parent
-            width: handleSize - 4  // 留出2px轮廓
-            height: width
+            width: handleSize
+            height: handleSize
             radius: width / 2
             color: "white"
         }
 
-        // 主色核心 (80%大小)
+        // dot 主题色圆点
         Rectangle {
+            id: dot
             anchors.centerIn: parent
-            width: handleSize * 0.3
-            height: handleSize * 0.3  // 保持内层椭圆比例
+            width: handleSize * 0.6
+            height: handleSize * 0.6
             radius: width / 2
-            color: root.pressed ? Qt.darker(progressColor, 1.2) :
-                   root.hovered ? Qt.lighter(progressColor, 1.1) : progressColor
 
+            // 悬停
+            scale: root.pressed ? 0.83 :
+                handle.hovered ? 1.16 : 1.0
+            color: root.pressed ? Qt.alpha(Theme.currentTheme.colors.primaryColor, 0.8) :
+                handle.hovered ? Qt.alpha(Theme.currentTheme.colors.primaryColor, 0.9) : Theme.currentTheme.colors.primaryColor
+
+            // 动画
             Behavior on color {
                 ColorAnimation { duration: 150 }
             }
+            Behavior on scale {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.OutBack
+                }
+            }
         }
 
-        // 悬停动画
-        scale: root.hovered ? 1.15 : 1.0
-        Behavior on scale {
+        Behavior on x {
             NumberAnimation {
-                duration: 200
-                easing.type: Easing.OutBack
+                duration: Utils.animationSpeedFaster
+                easing.type: Easing.OutCubic
+            }
+        }
+        Behavior on y {
+            NumberAnimation {
+                duration: Utils.animationSpeedFaster
+                easing.type: Easing.OutCubic
             }
         }
     }
+
 
     // 状态管理
     states: [

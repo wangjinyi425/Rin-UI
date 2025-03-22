@@ -12,6 +12,7 @@ Item {
         if (typeof ThemeManager === "undefined") {
             currentTheme = Qt.createQmlObject("import '../themes'; Light {}", themeManager)
         } else {
+            Utils.primaryColor = getThemeColor()
             setTheme(ThemeManager.get_theme())
         }
     }
@@ -32,6 +33,14 @@ Item {
         return ThemeManager.get_backdrop_effect()
     }
 
+    function getThemeColor() {
+        if (typeof ThemeManager === "undefined") {
+            console.error("ThemeManager is not defined.")
+            return -1
+        }
+        return ThemeManager.get_theme_color()
+    }
+
     // 切换主题
     function setTheme(mode) {
         if (typeof ThemeManager === "undefined") {
@@ -46,7 +55,7 @@ Item {
         // 根据 mode 动态创建主题对象
         var themeName = ThemeManager.get_theme_name()
         load_qml(themeName)
-
+        return 0;
     }
 
     function load_qml(themeName) {

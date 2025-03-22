@@ -7,7 +7,9 @@ DEFAULT_CONFIG = {
     "theme": {
         "current_theme": "Light",
         "follow_system": True
-    }
+    },
+    "theme_color": "#605ed2",
+    "backdrop_effect": "mica"
 }
 
 

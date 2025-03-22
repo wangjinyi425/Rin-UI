@@ -68,8 +68,7 @@ Window {
 
         Behavior on color {
             ColorAnimation {
-                duration: Utils.backdropEnabled ? 0 : 350
-                easing.type: Easing.OutQuart
+                duration: Utils.backdropEnabled ? 0 : 150
             }
         }
     }

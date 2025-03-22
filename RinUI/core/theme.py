@@ -61,6 +61,8 @@ class ThemeManager(QObject):
         清理资源并停止主题监听。
         """
         if self.listener is not None:
+            self.config.save_config()
+            print("Save config.")
             self.listener.stop()
             self.listener.wait()  # 等待线程结束
             print("Theme listener stopped.")
@@ -122,6 +124,7 @@ class ThemeManager(QObject):
             ctypes.sizeof(ctypes.c_int)
         )
 
+        self.config["backdrop_effect"] = effect_type
         print(f"Applied \"{effect_type.strip().capitalize()}\" effect")
 
     def apply_window_effects(self):  # 启用圆角阴影
@@ -167,6 +170,7 @@ class ThemeManager(QObject):
         if self.current_theme != theme:
             print(f"Switching to '{theme}' theme")
             self.current_theme = theme
+            self.config["theme"]["current_theme"] = theme
             self._update_window_theme()
             self.themeChanged.emit(theme)
 
@@ -174,7 +178,6 @@ class ThemeManager(QObject):
     def get_theme(self):
         if self.follow_system_color_mode:
             self.current_theme = "Dark" if darkdetect.isDark() else "Light"
-        print("ddd")
         return self.current_theme
 
     @Slot(result=str)
@@ -183,20 +186,36 @@ class ThemeManager(QObject):
         return self.current_theme
 
     @Slot(str)
+    def receive(self, message):
+        print(message)
+
+    @Slot(result=str)
     def get_backdrop_effect(self):
         """获取当前背景效果"""
-        if sys.platform != "win32" or not self.hwnd:
-            return "none"
+        return self.config["backdrop_effect"]
+        # if sys.platform != "win32" or not self.hwnd:
+        #     return "none"
+        #
+        # effect_type = ctypes.c_int()
+        # result = ctypes.windll.dwmapi.DwmGetWindowAttribute(
+        #     self.hwnd,
+        #     self.DWMWA_SYSTEMBACKDROP_TYPE,
+        #     ctypes.byref(effect_type),
+        #     ctypes.sizeof(effect_type)
+        # )
+        #
+        # if result != 0:  # 获取失败时返回 "none"
+        #     return "none"
+        #
+        # return ACCENT_STATES.get(effect_type.value, "none")
 
-        effect_type = ctypes.c_int()
-        result = ctypes.windll.dwmapi.DwmGetWindowAttribute(
-            self.hwnd,
-            self.DWMWA_SYSTEMBACKDROP_TYPE,
-            ctypes.byref(effect_type),
-            ctypes.sizeof(effect_type)
-        )
+    @Slot(result=str)
+    def get_theme_color(self):
+        """获取当前主题颜色"""
+        return self.config["theme_color"]
 
-        if result != 0:  # 获取失败时返回 "none"
-            return "none"
-
-        return ACCENT_STATES.get(effect_type.value, "none")
+    @Slot(result=str)
+    def set_theme_color(self, color):
+        """设置当前主题颜色"""
+        self.config["theme_color"] = color
+        self.config.save_config()

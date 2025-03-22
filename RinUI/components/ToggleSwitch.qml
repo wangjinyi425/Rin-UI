@@ -7,7 +7,7 @@ import "../components"
 Base {
     id: root
     property bool checked: false  // Switch State
-    property int paddingHr: 3  // Horizontal Padding
+    property int paddingHr: 4  // Horizontal Padding
 
     property color handleColor: Theme.currentTheme.colors.controlBorderStrongColor
 
@@ -152,7 +152,6 @@ Base {
             when: mouseArea.pressed
             PropertyChanges {
                 target: handle;
-                root.paddingHr: 2
                 width: 17
                 height: 14
             }
@@ -160,13 +159,16 @@ Base {
                 target: background
                 opacity: 0.8
             }
+            PropertyChanges {
+                target: root;
+                paddingHr: 3
+            }
         },
         State {
             name: "hoveredSwitch"
             when: mouseArea.containsMouse
             PropertyChanges {
                 target: handle;
-                root.paddingHr: 2
                 width: 14
                 height: 14
             }
@@ -174,13 +176,17 @@ Base {
                 target: background
                 opacity: 0.9
             }
+            PropertyChanges {
+                target: root;
+                paddingHr: 3
+            }
         },
         State {
             name: "nr"
             when: true
             PropertyChanges {
                 target: root;
-                paddingHr: 3
+                paddingHr: 4
             }
         }
     ]

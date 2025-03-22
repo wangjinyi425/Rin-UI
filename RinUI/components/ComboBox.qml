@@ -66,9 +66,7 @@ ComboBox {
         model: root.model
         currentIndex: root.currentIndex
 
-        onItemSelected: {
-            root.currentIndex = index
-        }
+        onItemSelected: root.currentIndex = index
     }
 
     // 动画

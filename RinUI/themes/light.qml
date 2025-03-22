@@ -67,12 +67,14 @@ QtObject {
         property int scrollBarMinWidth: 2
         property int scrollBarWidth: 6
         property int scrollBarPadding: 3
+
+        property int sliderHandleSize: 20
     }
 
     // Shadows //
     property var shadows: {
         "dialog": {
-            "color": Qt.rgba(0, 0, 0, 0.37),  // 模糊颜色
+            "color": Qt.alpha("#000000", 0.37),  // 模糊颜色
             "blur": 64,  // 模糊度
             "offsetY": 32
         },
@@ -82,7 +84,7 @@ QtObject {
             "offsetY": 4
         },
         "cardRest": {
-            "color": Qt.rgba(0, 0, 0, 0.04),
+            "color": Qt.alpha("#000000", 0.04),
             "blur": 4,
             "offsetY": 2
         },

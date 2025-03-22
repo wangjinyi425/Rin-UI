@@ -45,15 +45,12 @@ Item {
             propagateComposedEvents: true
             acceptedButtons: Qt.LeftButton
             property point clickPos: "0,0"
-            onPressed: {
-                clickPos = Qt.point(mouse.x, mouse.y)
-            }
-            onDoubleClicked: {
-                toggleMaximized(0)
-            }
-            onPositionChanged: {
+
+            onPressed: clickPos = Qt.point(mouse.x, mouse.y)
+            onDoubleClicked: toggleMaximized(0)
+            onPositionChanged: (mouse) => {
                 //鼠标偏移量
-                var delta = Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
+                let delta = Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
 
                 window.setX(window.x+delta.x)
                 window.setY(window.y+delta.y)

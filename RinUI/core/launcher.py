@@ -40,7 +40,7 @@ def create_qml_app(qml_path: str = "main.qml"):
     # 启用 DWM 效果（仅限 Windows）
     if sys.platform == "win32":
         theme_manager.set_window(root_window)
-        theme_manager.apply_backdrop_effect("mica")
+        theme_manager.apply_backdrop_effect(theme_manager.get_backdrop_effect())
         theme_manager.apply_window_effects()
 
         # test_window = TestWindow(theme_manager)
