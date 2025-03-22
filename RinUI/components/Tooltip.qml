@@ -6,7 +6,7 @@ import "../components"
 
 ToolTip {
     id: tooltip
-    timeout: 5000  // 显示时长
+    timeout: -1  // 显示时长
     text: "Tooltip"
 
     // 公共属性 / Common Properties

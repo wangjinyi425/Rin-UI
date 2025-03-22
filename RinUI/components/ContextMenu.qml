@@ -16,7 +16,7 @@ Popup {
 
     implicitWidth: 100
     implicitHeight: Math.min(listView.contentHeight + 6, maxHeight)
-    y: Math.round((parent.height - height) / 2)
+    y: (parent.height - contextMenu.height) / 2
     height: implicitHeight  // 保持隐式绑定
     closePolicy: Popup.CloseOnPressOutside
 
@@ -74,7 +74,7 @@ Popup {
                     visible: highlighted
                 }
 
-                Behavior on color { ColorAnimation { duration: 200; easing.type:Easing.InOutQuart } }
+                Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type:Easing.InOutQuart } }
             }
 
             onClicked: {
@@ -103,7 +103,8 @@ Popup {
     // 按钮 / Button //
 
 
-    Behavior on y { NumberAnimation { duration: 200; easing.type:Easing.InOutQuart } }
+    Behavior on y { NumberAnimation { duration: Utils.animationSpeed; easing.type:Easing.InOutQuart } }
+
     enter: Transition {
         ParallelAnimation {
             NumberAnimation {
@@ -135,7 +136,7 @@ Popup {
                 property: "height"
                 from: 46
                 to: contextMenu.implicitHeight
-                duration: 450
+                duration: Utils.animationSpeedMiddle
                 easing.type: Easing.OutQuint
                 onRunningChanged: {
                     console.log("Transition finished");

@@ -10,8 +10,10 @@ Slider {
     // 尺寸属性
     property real handleSize: Theme.currentTheme.appearance.sliderHandleSize  // 手柄基础尺寸
     property real borderWidth: 3   // 边框宽度
+    property int ticksPadding: 4  // 刻度线间距
     property real trackHeight: 4
     property bool showTooltip: true
+    property bool tickmarksEnabled: false
     property color primaryColor: Theme.currentTheme.colors.primaryColor
 
     // 自适应高度和宽度
@@ -22,10 +24,9 @@ Slider {
     // Background / 背景 //
     background: Rectangle {
         anchors.centerIn: parent
-        width: root.orientation === Qt.Horizontal ? parent.width - 2 : trackHeight
-        height: root.orientation === Qt.Horizontal ? trackHeight : parent.height - 2
+        width: root.orientation === Qt.Horizontal ? parent.width - handle.width : trackHeight
+        height: root.orientation === Qt.Horizontal ? trackHeight : parent.height - handle.width
         radius: 99
-        clip: true
         color: Theme.currentTheme.colors.controlStrongColor
 
         Behavior on color {
@@ -35,7 +36,7 @@ Slider {
             }
         }
 
-        // track
+        // 进度条
         Rectangle {
             width: root.orientation === Qt.Horizontal ? root.visualPosition * parent.width : trackHeight
             height: root.orientation === Qt.Horizontal ? trackHeight : (1 - root.visualPosition) * parent.height
@@ -61,6 +62,25 @@ Slider {
                     easing.type: Easing.OutCubic
                 }
             }
+        }
+
+        // 刻度线 / Repeater //
+         Repeater {
+             model: (to - from) / stepSize + 1
+
+             delegate: Column {
+                x: root.orientation === Qt.Horizontal ? index * parent.width / (to - from) * stepSize - width / 2 : ticksPadding + trackHeight
+                y: root.orientation === Qt.Vertical ? index * parent.height / (to - from) * stepSize - height / 2 : ticksPadding + trackHeight
+                spacing: 2
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: root.orientation === Qt.Horizontal ? 1 : 4
+                    height: root.orientation === Qt.Horizontal ? 4 : 1
+                    color: Theme.currentTheme.colors.controlStrongColor
+
+                    visible: root.tickmarksEnabled && index !== 0 && index !== ((to - from) / stepSize)
+                }
+             }
         }
     }
 

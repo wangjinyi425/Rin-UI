@@ -34,6 +34,7 @@ FluentWindow {
 
             TextLabel {
                 labelType: "body"
+                color:Theme.currentTheme.colors.primaryColor
                 text: "测试测试"
             }
 
@@ -173,6 +174,7 @@ FluentWindow {
                 to: 100
                 stepSize: 10  // step size
                 snapMode: Slider.SnapAlways  // snap to tick
+                tickmarksEnabled: true // show tickmarks on qt6 ww
             }
         }
     }
