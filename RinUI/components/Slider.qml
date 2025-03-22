@@ -11,6 +11,7 @@ Slider {
     property real handleSize: Theme.currentTheme.appearance.sliderHandleSize  // 手柄基础尺寸
     property real borderWidth: 3   // 边框宽度
     property real trackHeight: 4
+    property bool showTooltip: true
     property color primaryColor: Theme.currentTheme.colors.primaryColor
 
     // 自适应高度和宽度
@@ -27,6 +28,13 @@ Slider {
         clip: true
         color: Theme.currentTheme.colors.controlStrongColor
 
+        Behavior on color {
+            ColorAnimation {
+                duration: Utils.appearanceSpeed
+                easing.type: Easing.OutQuart
+            }
+        }
+
         // track
         Rectangle {
             width: root.orientation === Qt.Horizontal ? root.visualPosition * parent.width : trackHeight
@@ -39,6 +47,12 @@ Slider {
                 NumberAnimation {
                     duration: Utils.animationSpeedFaster
                     easing.type: Easing.OutCubic
+                }
+            }
+            Behavior on color {
+                ColorAnimation {
+                    duration: Utils.appearanceSpeed
+                    easing.type: Easing.OutQuart
                 }
             }
             Behavior on height {
@@ -66,6 +80,13 @@ Slider {
            ? (root.visualPosition) * (parent.height - height)  // 竖向：y 受 visualPosition 控制
            : (parent.height - height) / 2  // 横向
 
+
+        Tooltip {
+            text: root.value.toString()
+            visible: root.showTooltip ? (handle.hovered || root.pressed)  : false
+            delay: 150
+        }
+
         // MouseArea
         MouseArea {
             anchors.fill: parent
@@ -82,21 +103,29 @@ Slider {
             color: Theme.currentTheme.colors.controlQuaternaryColor
         }
 
-        // 白色border
+        // border middle(?)
         Rectangle {
             anchors.centerIn: parent
             width: handleSize
             height: handleSize
             radius: width / 2
-            color: "white"
+            color: Theme.currentTheme.colors.controlSolidColor
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: Utils.appearanceSpeed
+                    easing.type: Easing.OutQuart
+                }
+            }
         }
 
         // dot 主题色圆点
         Rectangle {
             id: dot
             anchors.centerIn: parent
-            width: handleSize * 0.6
-            height: handleSize * 0.6
+            // 取偶数
+            width: Math.round(handleSize * 0.55) & ~1
+            height: Math.round(handleSize * 0.55) & ~1
             radius: width / 2
 
             // 悬停
@@ -107,11 +136,14 @@ Slider {
 
             // 动画
             Behavior on color {
-                ColorAnimation { duration: 150 }
+                ColorAnimation {
+                    duration: Utils.appearanceSpeed
+                    easing.type: Easing.OutCubic
+                }
             }
             Behavior on scale {
                 NumberAnimation {
-                    duration: 200
+                    duration: Utils.animationSpeed
                     easing.type: Easing.OutBack
                 }
             }

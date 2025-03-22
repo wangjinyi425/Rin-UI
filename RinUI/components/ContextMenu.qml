@@ -16,7 +16,7 @@ Popup {
 
     implicitWidth: 100
     implicitHeight: Math.min(listView.contentHeight + 6, maxHeight)
-    // y: Math.round((parent.height - height) / 2)
+    y: Math.round((parent.height - height) / 2)
     height: implicitHeight  // 保持隐式绑定
     closePolicy: Popup.CloseOnPressOutside
 

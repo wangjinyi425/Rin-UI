@@ -52,6 +52,13 @@ ScrollBar {
             }
             radius: 9999
             visible: scrollBar.size < 1.0
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: Utils.appearanceSpeed
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
 
         states: [

@@ -163,6 +163,9 @@ FluentWindow {
                 }
             }
             Slider {
+                from: 0
+                to: 100
+                stepSize: 1
             }
             Slider {
                 orientation: Qt.Vertical  // vertical

@@ -18,6 +18,8 @@ QtObject {
         property color controlBorderStrongColor: Qt.alpha("#000000", 0.6063)
         property color controlBorderAccentColor: Qt.alpha("#000000", 0.3)
 
+        property color controlSolidColor: "#ffffff"
+
         // Background
         property color backgroundColor: "#F3F3F3"
         property color windowBorderColor: Qt.alpha("#757575", 0.0924)

@@ -10,31 +10,24 @@ Text {
     // 主题切换动画 / Color Animation
     Behavior on color {
         ColorAnimation {
-            duration: 250
+            duration: Utils.appearanceSpeed
             easing.type: Easing.OutQuart
         }
     }
 
-    Component.onCompleted: {
-        if (labelType === "display") {
-            label.font.pixelSize = Theme.currentTheme.typography.displaySize
-            label.font.bold = true
-        } else if (labelType === "titleLarge") {
-            label.font.pixelSize = Theme.currentTheme.typography.titleLargeSize
-            label.font.bold = true
-        } else if (labelType === "title") {
-            label.font.pixelSize = Theme.currentTheme.typography.titleSize
-            label.font.bold = true
-        } else if (labelType === "subtitle") {
-            label.font.pixelSize = Theme.currentTheme.typography.subtitleSize
-            label.font.bold = true
-        } else if (labelType === "body") {
-            label.font.pixelSize = Theme.currentTheme.typography.bodySize
-        } else if (labelType === "bodyLarge") {
-            label.font.pixelSize = Theme.currentTheme.typography.bodyLargeSize
-            label.font.bold = true
-        } else if (labelType === "caption") {
-            label.font.pixelSize = Theme.currentTheme.typography.captionSize
+    // 动态绑定
+    font.pixelSize: {
+        switch (labelType) {
+            case "display": return Theme.currentTheme.typography.displaySize;
+            case "titleLarge": return Theme.currentTheme.typography.titleLargeSize;
+            case "title": return Theme.currentTheme.typography.titleSize;
+            case "subtitle": return Theme.currentTheme.typography.subtitleSize;
+            case "body": return Theme.currentTheme.typography.bodySize;
+            case "bodyLarge": return Theme.currentTheme.typography.bodyLargeSize;
+            case "caption": return Theme.currentTheme.typography.captionSize;
+            default: return Theme.currentTheme.typography.bodySize;
         }
     }
+
+    font.bold: labelType === "display" || labelType === "titleLarge" || labelType === "title" || labelType === "bodyLarge"
 }
