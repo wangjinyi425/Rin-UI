@@ -17,7 +17,8 @@ ProgressBar 1.0 components/ProgressBar.qml
 HyperlinkButton 1.0 components/HyperlinkButton.qml
 
 ContextMenu 1.0 components/ContextMenu.qml
+Frame 1.0 components/Frame.qml
 
 FluentWindow 1.0 windows/FluentWindow.qml
 CtrlBtn 1.0 windows/CtrlBtn.qml
-ContentFrame 1.0 windows/ContentFrame.qml
+FluentPage 1.0 windows/FluentPage.qml

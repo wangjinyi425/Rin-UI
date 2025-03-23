@@ -6,8 +6,6 @@ Text {
     property string labelType: ""  // display, titleLarge, title, subtitle, body, bodyLarge, caption
     id: label
 
-    antialiasing: false
-    renderType: Text.NativeTextRendering
     color: Theme.currentTheme.colors.textColor
 
     // 主题切换动画 / Color Animation

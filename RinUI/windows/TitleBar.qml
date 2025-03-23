@@ -8,12 +8,14 @@ import "../windows"
 Item {
     property int titleBarHeight: Theme.currentTheme.appearance.dialogTitleBarHeight
     property alias title: titleLabel.text
+    property alias backgroundColor: rectBk.color
 
     height: titleBarHeight
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
-    // clip: true
+    clip: true
+    z: 999
 
     property var window: null
     function toggleMaximized(mode) {

@@ -1,10 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 2.15
 import "../themes"
 import "../windows"
 import "../components"
 
-Window {
+ApplicationWindow {
     id: baseWindow
     visible: true
     width: 800
@@ -12,11 +13,12 @@ Window {
     minimumWidth: 400
     minimumHeight: 300
     flags: Qt.FramelessWindowHint | Qt.Window
-
     color: "transparent"
 
+    // 直接添加子项
+    default property alias content: contentArea.children
 
-     // 最大化样式
+    // 最大化样式
     onVisibilityChanged: {
         if (baseWindow.visibility === Window.Maximized) {
             background.radius = 0
@@ -24,6 +26,55 @@ Window {
         } else {
             background.radius = Theme.currentTheme.appearance.windowRadius
             background.border.width = 1
+        }
+    }
+
+    // 布局
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: Utils.windowDragArea
+        spacing: 0
+
+        // 顶部边距
+        Item {
+            Layout.preferredHeight: titleBar.height
+            Layout.fillWidth: true
+        }
+
+        // 主体内容区域
+        Item {
+            id: contentArea
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+    }
+
+    // 标题栏
+    TitleBar {
+        id: titleBar
+        window: baseWindow
+        title: baseWindow.title
+        Layout.fillWidth: true
+        height: Theme.currentTheme.appearance.windowTitleBarHeight
+    }
+
+    // 背景样式
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        color: Utils.backdropEnabled ? "transparent" : Theme.currentTheme.colors.backgroundColor
+        border.color: Theme.currentTheme.colors.windowBorderColor
+        layer.enabled: true  // 启用透明渲染
+        border.width: 1
+        radius: Theme.currentTheme.appearance.windowRadius
+        clip: true
+
+        Shadow {}
+
+        Behavior on color {
+            ColorAnimation {
+                duration: Utils.backdropEnabled ? 0 : 150
+            }
         }
     }
 
@@ -45,35 +96,6 @@ Window {
         acceptedButtons: Qt.NoButton
     }
 
-
-    // 主体 / 忠诚！
-    Rectangle {
-        id: background
-        anchors.fill: parent
-        color: Utils.backdropEnabled ? "transparent" : Theme.currentTheme.colors.backgroundColor
-        border.color: Theme.currentTheme.colors.windowBorderColor
-        layer.enabled: true  // 启用透明渲染
-        border.width: 1
-        radius: Theme.currentTheme.appearance.windowRadius
-        clip: true
-
-        TitleBar {
-            id: titleBar
-            window: baseWindow
-            title: baseWindow.title
-            height: Theme.currentTheme.appearance.windowTitleBarHeight
-        }
-
-        Shadow {}
-
-        Behavior on color {
-            ColorAnimation {
-                duration: Utils.backdropEnabled ? 0 : 150
-            }
-        }
-    }
-
-
     DragHandler {
         id: resizeHandler
         grabPermissions: TapHandler.TakeOverForbidden
@@ -82,11 +104,11 @@ Window {
             const p = resizeHandler.centroid.position
             const b = Utils.windowDragArea + 10
             let e = 0;
-            if (p.x < b) { e |= Qt.LeftEdge }
-            if (p.x >= width - b) { e |= Qt.RightEdge }
-            if (p.y < b) { e |= Qt.TopEdge }
-            if (p.y >= height - b) { e |= Qt.BottomEdge }
-            baseWindow.startSystemResize(e);
+            if (p.x < b) e |= Qt.LeftEdge
+            if (p.x >= width - b) e |= Qt.RightEdge
+            if (p.y < b) e |= Qt.TopEdge
+            if (p.y >= height - b) e |= Qt.BottomEdge
+            baseWindow.startSystemResize(e)
         }
     }
 }

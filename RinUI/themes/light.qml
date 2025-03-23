@@ -20,6 +20,11 @@ QtObject {
 
         property color controlSolidColor: "#ffffff"
 
+        // Card
+        property color cardColor: Qt.alpha("#ffffff", 0.7)
+        property color cardSecondaryColor: Qt.alpha("#ffffff", 0.5)
+        property color cardTertiaryColor: Qt.alpha("#ffffff", 1)
+
         // Background
         property color backgroundColor: "#F3F3F3"
         property color windowBorderColor: Qt.alpha("#757575", 0.0924)
@@ -60,6 +65,7 @@ QtObject {
         property int borderWidth: 1
         property real borderFactor: 0.9
         property real borderOnAccentFactor: 1.08
+        property int cardRadius: 3
 
         property int dialogTitleBarHeight: 32
         property int windowTitleBarHeight: 48
