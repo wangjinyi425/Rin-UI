@@ -13,7 +13,7 @@
 
 ## 📄 Introduction
 
-RinUI is a Fluent Design-like Qt Quick (QML) UI library based on PySide6， This allows QML components to communicate with Python, such as the theme system. This UI library provides some high-quality Fluent style controls that can be used in your QML applications.
+RinUI is a Fluent Design-like Qt Quick (QML) UI library based on PySide6, This allows QML components to communicate with Python, such as the theme system. This UI library provides some high-quality Fluent style controls that can be used in your QML applications.
 
 ### Features
 - [x] Fluent Design Style Controls (still in development)
