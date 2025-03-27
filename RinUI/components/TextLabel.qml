@@ -7,6 +7,7 @@ Text {
     id: label
 
     color: Theme.currentTheme.colors.textColor
+    wrapMode: Text.WordWrap
 
     // 主题切换动画 / Color Animation
     Behavior on color {
@@ -30,5 +31,5 @@ Text {
         }
     }
 
-    font.bold: labelType === "display" || labelType === "titleLarge" || labelType === "title" || labelType === "bodyLarge"
+    font.bold: labelType === "display" || labelType === "titleLarge" || labelType === "title" || labelType === "subtitle" || labelType === "bodyLarge"
 }

@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
+import Qt5Compat.GraphicalEffects  // 图形库
 import "../themes"
 import "../components"
 import "../windows"
@@ -9,25 +10,29 @@ import "../windows"
 Page {
     id: fluentPage
     default property alias content: container.data
+    property alias contentHeader: headerContainer.data
+    property alias customHeader: headerRow.data
+    property int wrapperWidth: 1000
+    horizontalPadding: 56
 
 
     // 头部 / Header //
     header: Item {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+        height: fluentPage.title !== "" ? 36 + 44 : 0
 
-        anchors.leftMargin: 24
-        anchors.rightMargin: 24
-        // anchors.topMargin: 8
-        height: 36
+        Item {
+            id: headerRow
+            width: Math.min(fluentPage.width - fluentPage.horizontalPadding * 2, fluentPage.wrapperWidth)  // 限制最大宽度
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: parent.height
 
-        TextLabel {
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            labelType: "title"
-            text: "Gallery"
-            visible: fluentPage.title !== ""  // 标题
+            TextLabel {
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                labelType: "title"
+                text: fluentPage.title
+                visible: fluentPage.title !== ""  // 标题
+            }
         }
     }
 
@@ -38,16 +43,44 @@ Page {
         anchors.fill: parent
         clip: true
         ScrollBar.vertical: ScrollBar {}
-        contentHeight: container.height
+        contentHeight: container.height + 18
+
+        layer.enabled: true
+        layer.effect: OpacityMask{
+            maskSource: Rectangle{
+                width: fluentPage.width
+                height: fluentPage.height
+                radius: Theme.currentTheme.appearance.windowRadius
+
+                Rectangle {
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    width: parent.width - Theme.currentTheme.appearance.windowRadius
+                    height: Theme.currentTheme.appearance.windowRadius
+                }
+            }
+        }
+
+
+        Item {
+            id: headerContainer
+            width: fluentPage.width
+        }
 
         ColumnLayout {
             id: container
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: 24
-            anchors.rightMargin: 24
+            anchors.top: headerContainer.bottom
+            anchors.topMargin: 18
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: Math.min(fluentPage.width - fluentPage.horizontalPadding * 2, fluentPage.wrapperWidth)  // 24 + 24 的边距
+            spacing: 14
+
+            // anchors.left: parent.left
+            // anchors.right: parent.right
+            // anchors.leftMargin: 24
+            // anchors.rightMargin: 24
         }
     }
 
-    anchors.fill: parent
+    // anchors.fill: parent
 }

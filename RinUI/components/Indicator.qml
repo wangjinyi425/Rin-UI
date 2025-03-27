@@ -5,8 +5,11 @@ import "../themes"
 
 Rectangle {
     id: indicator
-    width: 3
-    height: 16
+
+    property int currentItemHeight: 38
+
+    implicitWidth: 3
+    implicitHeight: currentItemHeight - 23
     radius: 10
     color: Theme.currentTheme.colors.primaryColor
 

@@ -6,9 +6,14 @@ import "../components"
 import "../windows"
 
 Item {
+    id: root
     property int titleBarHeight: Theme.currentTheme.appearance.dialogTitleBarHeight
     property alias title: titleLabel.text
+    property alias icon: iconLabel.icon
     property alias backgroundColor: rectBk.color
+
+    // 自定义属性
+    property bool titleEnabled: true
 
     height: titleBarHeight
     anchors.top: parent.top
@@ -48,7 +53,7 @@ Item {
             acceptedButtons: Qt.LeftButton
             property point clickPos: "0,0"
 
-            onPressed: clickPos = Qt.point(mouse.x, mouse.y)
+            onPressed: clickPos = Qt.point(mouseX, mouseY)
             onDoubleClicked: toggleMaximized(0)
             onPositionChanged: (mouse) => {
                 //鼠标偏移量
@@ -81,16 +86,19 @@ Item {
 
     // 窗口标题 / Window Title
     Row {
+        id: titleRow
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.leftMargin: 16
         spacing: 16
+        visible: root.titleEnabled
 
         //图标
         IconWidget {
+            id: iconLabel
             size: 16
-            icon: "\uf12a"
+            // icon: "\uf12a"
             anchors.verticalCenter: parent.verticalCenter
         }
 
@@ -103,4 +111,10 @@ Item {
             text: qsTr("Fluent TitleBar")
         }
     }
+
+    // MouseArea {
+    //     width: root.height
+    //     height: root.height
+    //     // z: 1
+    // }
 }

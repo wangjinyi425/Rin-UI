@@ -38,7 +38,7 @@ Popup {
         // 选择器 / Selection //
         delegate: ItemDelegate {
             width: listView.width
-            height: text.implicitHeight + 21  // 自适应
+            height: text.implicitHeight + 20  // 自适应
             highlighted: ListView.isCurrentItem  // 当前项高亮
 
             background: Rectangle {
@@ -47,7 +47,6 @@ Popup {
                 anchors.leftMargin: 5
                 anchors.rightMargin: 5
                 anchors.topMargin: 3
-                anchors.bottomMargin: 3
                 radius: Theme.currentTheme.appearance.buttonRadius / 2
                 color: pressed
                     ? Theme.currentTheme.colors.subtleTertiaryColor
@@ -71,6 +70,7 @@ Popup {
 
                 // 选择指示器
                 Indicator {
+                    currentItemHeight: listView.currentItem.height
                     visible: highlighted
                 }
 

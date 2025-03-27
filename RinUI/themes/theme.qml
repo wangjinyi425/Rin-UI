@@ -60,7 +60,8 @@ Item {
 
     function load_qml(themeName) {
         if (themeName) {
-            var themeObject = Qt.createQmlObject("import '../themes'; " + themeName + " {}", themeManager)
+            let themeObject = Qt.createQmlObject("import '../themes'; " + themeName + " {}", themeManager)
+            let mode = ThemeManager.get_theme()
             if (themeObject) {
                 currentTheme = themeObject
                 console.log("Switched to", mode, "mode")

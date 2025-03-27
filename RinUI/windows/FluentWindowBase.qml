@@ -8,12 +8,20 @@ import "../components"
 ApplicationWindow {
     id: baseWindow
     visible: true
+    title: qsTr("Fluent Window Base")
     width: 800
     height: 600
     minimumWidth: 400
     minimumHeight: 300
-    flags: Qt.FramelessWindowHint | Qt.Window
+
+    flags: Qt.FramelessWindowHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint
     color: "transparent"
+
+    // 自定义属性
+    property var icon: "../assets/img/default_app_icon.png"  // 图标
+    property alias titleEnabled: titleBar.titleEnabled
+    property int titleBarHeight: Theme.currentTheme.appearance.windowTitleBarHeight
+
 
     // 直接添加子项
     default property alias content: contentArea.children
@@ -32,7 +40,10 @@ ApplicationWindow {
     // 布局
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: Utils.windowDragArea
+        // anchors.topMargin: Utils.windowDragArea
+        anchors.bottomMargin: Utils.windowDragArea
+        anchors.leftMargin: Utils.windowDragArea
+        anchors.rightMargin: Utils.windowDragArea
         spacing: 0
 
         // 顶部边距
@@ -53,9 +64,10 @@ ApplicationWindow {
     TitleBar {
         id: titleBar
         window: baseWindow
+        icon: baseWindow.icon
         title: baseWindow.title
         Layout.fillWidth: true
-        height: Theme.currentTheme.appearance.windowTitleBarHeight
+        height: baseWindow.titleBarHeight
     }
 
     // 背景样式
@@ -67,6 +79,7 @@ ApplicationWindow {
         layer.enabled: true  // 启用透明渲染
         border.width: 1
         radius: Theme.currentTheme.appearance.windowRadius
+        z: -1
         clip: true
 
         Shadow {}
@@ -83,6 +96,7 @@ ApplicationWindow {
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
+        z: -1
         cursorShape: {
             const p = Qt.point(mouseX, mouseY)
             const b = Utils.windowDragArea
@@ -110,5 +124,10 @@ ApplicationWindow {
             if (p.y >= height - b) e |= Qt.BottomEdge
             baseWindow.startSystemResize(e)
         }
+    }
+
+    // icon
+    Component.onCompleted: {
+        baseWindow.setIcon("../assets/img/default_app_icon.png")
     }
 }

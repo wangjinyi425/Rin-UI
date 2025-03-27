@@ -8,6 +8,7 @@ Base {
     property int borderWidth: Theme.currentTheme.appearance.borderWidth
     property alias text: buttonText.text  // 文本内容
     property alias icon: iconWidget.icon  // 图标 eg."\u1145"
+    property alias iconSize: iconWidget.size  // 图标大小
     property bool compact: false  // 紧凑模式
     property bool underline: root.underline // 下划线
 

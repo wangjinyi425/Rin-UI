@@ -24,6 +24,7 @@ QtObject {
         property color cardColor: Qt.alpha("#ffffff", 0.0512)
         property color cardSecondaryColor: Qt.alpha("#ffffff", 0.0326)
         property color cardTertiaryColor: Qt.alpha("#ffffff", 0.0698)
+        property color cardBorderColor: Qt.alpha("#000000", 0.1)
 
         // Background
         property color backgroundColor: "#202020"
@@ -34,6 +35,9 @@ QtObject {
         property color subtleTertiaryColor: Qt.alpha("#ffffff", 0.0419)
         property color captionCloseColor: systemCirticalColor
         property color captionCloseTextColor: "#ffffff"
+
+        // Layer
+        property color layerColor: Qt.alpha("#3A3A3A", 0.3)
 
         // Text
         property color textColor: "#ffffff"
