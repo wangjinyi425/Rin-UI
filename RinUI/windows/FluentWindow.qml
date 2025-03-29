@@ -38,6 +38,7 @@ FluentWindowBase {
             windowTitle: window.title
             windowIcon: window.icon
             stackView: stackView
+            z: 999
             Layout.fillHeight: true
         }
 

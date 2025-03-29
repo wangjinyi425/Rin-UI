@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
-import "../RinUI"
+import RinUI
 
 FluentWindow {
     id: window
@@ -20,6 +20,16 @@ FluentWindow {
         navItems.append({
             title: "Basic Input",
             page: Qt.resolvedUrl("pages/BasicInput.qml"),
+            icon: null
+        });
+        navItems.append({
+            title: "Status & Info",
+            page: Qt.resolvedUrl("pages/StatusAndInfo.qml"),
+            icon: null
+        });
+        navItems.append({
+            title: "Error Interface Test",
+            page: Qt.resolvedUrl("unexist/page"),
             icon: null
         });
     }

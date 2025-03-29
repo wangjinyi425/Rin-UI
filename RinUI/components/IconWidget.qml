@@ -1,9 +1,10 @@
 import QtQuick 2.15
+import "../components"
 import "../themes"
 
 Item {
     property string icon: ""  // 可以是字体图标（如 "\uf103"）或图片路径（如 "icons/image.png"）
-    property alias color: textLabel.color
+    property alias color: text.color
     property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
     property int size: 12
 
@@ -31,8 +32,9 @@ Item {
 
     Component.onCompleted: console.log("Font Source:", iconFont.name, "Status:", iconFont.status)
 
-    TextLabel {
-        id: textLabel
+    Text {
+        id: text
+        anchors.centerIn: parent
         text: isFontIcon ? icon : ""  // 仅当 `icon` 是单字符时显示
         font.family: iconFont.name
         font.pixelSize: size

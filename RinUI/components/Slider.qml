@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Controls.Basic 2.15
 import "../themes"
 import "../components"
 
@@ -15,6 +15,9 @@ Slider {
     property bool showTooltip: true
     property bool tickmarksEnabled: false
     property color primaryColor: Theme.currentTheme.colors.primaryColor
+
+    // auto enable snap
+    snapMode: Slider.SnapAlways
 
     // 自适应高度和宽度
     implicitHeight: orientation === Qt.Horizontal ? 32 : 150

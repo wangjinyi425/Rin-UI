@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 import Qt5Compat.GraphicalEffects  // 图形库
-import "../../RinUI"
+import RinUI
 
 FluentPage {
     // title: "test"
@@ -43,17 +43,22 @@ FluentPage {
             }
             spacing: 8
 
-            TextLabel {
+            Text {
                 color: "#fff"
-                labelType: "bodyLarge"
+                typography: Typography.BodyLarge
                 text: qsTr("A Fluent Design-like UI library for Qt Quick")
             }
 
-            TextLabel {
+            Text {
                 color: "#fff"
-                labelType: "titleLarge"
+                typography: Typography.TitleLarge
                 text: qsTr("RinUI Gallery")
             }
         }
+    }
+
+    Frame {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 500
     }
 }

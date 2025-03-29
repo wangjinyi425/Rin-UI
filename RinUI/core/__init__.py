@@ -1,2 +1,2 @@
 from .theme import ThemeManager
-from .launcher import create_qml_app
+from .launcher import QmlApplication

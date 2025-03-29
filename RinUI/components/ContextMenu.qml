@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Controls.Basic 2.15
 import "../themes"
 import "../components"
 
@@ -54,7 +54,7 @@ Popup {
                         ? Theme.currentTheme.colors.subtleSecondaryColor
                         : Theme.currentTheme.colors.subtleColor
 
-                TextLabel {
+                Text {
                     id: text
                     anchors.fill: parent
                     anchors.leftMargin: 11
@@ -63,7 +63,7 @@ Popup {
                     anchors.bottomMargin: 8
                     verticalAlignment: Text.AlignVCenter
 
-                    labelType: "body"
+                    typography: Typography.Body
                     wrapMode: Text.Wrap
                     text: modelData
                 }

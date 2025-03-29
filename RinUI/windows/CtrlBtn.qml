@@ -11,6 +11,14 @@ Base {
     property int mode: 0  //0:max 1:min 2:close
     property alias icon: icon.icon
 
+    // tooltip
+    Tooltip {
+        parent: parent
+        delay: 500
+        visible: mouseArea.containsMouse
+        text: mode === 0 ? qsTr("Maximize") : mode === 1 ? qsTr("Minimize") : mode === 2 ? qsTr("Close") : qsTr("Unknown")
+    }
+
     //关闭 最大化 最小化按钮
     function toggleControl(mode) {
         if (mode === 0) {

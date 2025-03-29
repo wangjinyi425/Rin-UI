@@ -48,6 +48,7 @@ Item {
 
         MouseArea {
             anchors.fill: parent
+            anchors.leftMargin: 48
             anchors.margins: Utils.windowDragArea
             propagateComposedEvents: true
             acceptedButtons: Qt.LeftButton
@@ -103,11 +104,11 @@ Item {
         }
 
         //标题
-        TextLabel {
+        Text {
             id: titleLabel
             anchors.verticalCenter:  parent.verticalCenter
 
-            labelType: "caption"
+            typography: Typography.Caption
             text: qsTr("Fluent TitleBar")
         }
     }

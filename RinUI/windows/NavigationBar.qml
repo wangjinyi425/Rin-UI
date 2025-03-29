@@ -24,7 +24,6 @@ Item {
         anchors.left: parent.left
         anchors.bottom: parent.top
         height: titleBarHeight
-        anchors.leftMargin: 4
         spacing: 16
         visible: navigationBar.titleBarEnabled
 
@@ -35,27 +34,34 @@ Item {
         // 返回按钮
         ToolButton {
             anchors.verticalCenter: parent.verticalCenter
-            buttonType: "transparent"
-            icon: "\uf15b"
-            iconSize: 14
+            icon.name: "\uf15b"
             onClicked: stackView.safePop()
+            width: 40
+            height: 40
             // enabled: navigationBar.lastIndex.length > 0
+
+            Tooltip {
+                parent: parent
+                delay: 500
+                visible: parent.hovered
+                text: qsTr("Back")
+            }
         }
 
         //图标
         IconWidget {
             id: iconLabel
             size: 16
-            // icon: "\uf12a"
+            icon: "\uf12a"
             anchors.verticalCenter: parent.verticalCenter
         }
 
         //标题
-        TextLabel {
+        Text {
             id: titleLabel
             anchors.verticalCenter:  parent.verticalCenter
 
-            labelType: "caption"
+            typography: Typography.Caption
             // text: title
         }
     }
@@ -107,10 +113,10 @@ Item {
                         icon: ! model.icon ? "\ue8a1" : model.icon
                     }
 
-                    TextLabel {
+                    Text {
                         id: text
                         anchors.verticalCenter: parent.verticalCenter
-                        labelType: "body"
+                        typography: Typography.Body
                         text: model.title
                     }
                 }
@@ -143,13 +149,10 @@ Item {
                 Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type:Easing.InOutQuart } }
             }
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    navigationBar.lastIndex.push(listView.currentIndex)
-                    listView.currentIndex = index
-                    navigationBar.currentIndex = index
-                }
+            onClicked: {
+                navigationBar.lastIndex.push(listView.currentIndex)
+                listView.currentIndex = index
+                navigationBar.currentIndex = index
             }
         }
     }

@@ -4,7 +4,7 @@ Base 1.0 Base.qml
 ButtonBase 1.0 ButtonBase.qml
 Shadow 1.0 Shadow.qml
 
-TextLabel 1.0 TextLabel.qml
+Text 1.0 Text.qml
 IconWidget 1.0 IconWidget.qml
 Tooltip 1.0 Tooltip.qml
 ContextMenu 1.0 ContextMenu.qml
@@ -15,8 +15,10 @@ ScrollView 1.0 ScrollView.qml
 
 Button 1.0 Button.qml
 HyperlinkButton 1.0 HyperlinkButton.qml
+Hyperlink 1.0 Hyperlink.qml
 ToolButton 1.0 ToolButton.qml
 ToggleSwitch 1.0 ToggleSwitch.qml
 Indicator 1.0 Indicator.qml
 
 singleton Theme 1.0 ../themes/theme.qml
+singleton Typography 1.0 Typography.qml

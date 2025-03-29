@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Controls.Basic 2.15
 import "../themes"
 import "../components"
 
@@ -50,12 +50,13 @@ ComboBox {
     }
 
     // Text //
-    contentItem: TextLabel {
+    contentItem: Text {
         id: text
-        labelType: "body"
-        anchors.verticalCenter: parent.verticalCenter  // 垂直居中
+        typography: Typography.Body
         anchors.left: parent.left
         anchors.leftMargin: 11  // 左边距为 11
+        verticalAlignment: Text.AlignVCenter
+        height: parent.height
         text: root.displayText
     }
 

@@ -1,7 +1,9 @@
 pragma Singleton
 import QtQuick 2.15
+import "../themes"
 
 QtObject {
+    property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
     property color primaryColor: "#605ed2" // 默认主题色
     property int windowDragArea: 5 // 窗口可拖动范围 (px)
 

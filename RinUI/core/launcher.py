@@ -1,3 +1,4 @@
+import os
 import sys
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
 from PySide6.QtQml import QQmlApplicationEngine
@@ -18,37 +19,52 @@ class TestWindow(QWidget):
         self.resize(400, 300)
 
 
-def create_qml_app(qml_path: str = "main.qml"):
-    """
-    创建基于 RinUI 的 QML 应用程序。
-    :param qml_path: str, QML 文件路径
-    """
-    app = QApplication([])
-    engine = QQmlApplicationEngine()
+class QmlApplication:
+    def __init__(self, qml_path: str = "main.qml"):
+        """
+        创建基于 RinUI 的 QML 应用程序。
+        :param qml_path: str, QML 文件路径
+        """
+        self.app = QApplication([])
+        self.engine = QQmlApplicationEngine()
+        self.theme_manager = ThemeManager()
+        self.qml_path = qml_path
 
-    # 设置主题管理器
-    theme_manager = ThemeManager()
-    engine.rootContext().setContextProperty("ThemeManager", theme_manager)
-    app.aboutToQuit.connect(theme_manager.clean_up)  # 退出时清理主题管理器
+        # Rin UI setup
+        ui_module_path = os.path.abspath("../../RinUI")
+        self.engine.addImportPath(ui_module_path)
 
-    engine.load(qml_path)
-    if not engine.rootObjects():
-        sys.exit(-1)
+        self._setup_application()
 
-    root_window = engine.rootObjects()[0]
+    def _setup_application(self):
+        """
+        Setup
+        """
+        self.engine.rootContext().setContextProperty("ThemeManager", self.theme_manager)
+        self.app.aboutToQuit.connect(self.theme_manager.clean_up)  # clean up theme mgr when exit
+        self.engine.load(self.qml_path)
 
-    # 启用 DWM 效果（仅限 Windows）
-    if sys.platform == "win32":
-        theme_manager.set_window(root_window)
-        theme_manager.apply_backdrop_effect(theme_manager.get_backdrop_effect())
-        theme_manager.apply_window_effects()
+        if not self.engine.rootObjects():
+            sys.exit(-1)
 
-        # test_window = TestWindow(theme_manager)
-        #
-        # test_window.show()
+        self.root_window = self.engine.rootObjects()[0]
 
-    app.exec()  # 启动应用程序
+        if sys.platform == "win32":
+            self._apply_windows_effects()
+
+    def _apply_windows_effects(self):
+        """应用 Windows DWM 效果"""
+        self.theme_manager.set_window(self.root_window)
+        self.theme_manager.apply_backdrop_effect(self.theme_manager.get_backdrop_effect())
+        self.theme_manager.apply_window_effects()
+
+    def run(self):
+        """
+        Run the application
+        """
+        sys.exit(self.app.exec())
 
 
 if __name__ == "__main__":
-    create_qml_app("../../examples/gallery.qml")
+    app = QmlApplication("../../examples/gallery.qml")
+    app.run()

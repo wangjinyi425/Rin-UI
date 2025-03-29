@@ -7,14 +7,14 @@ Button 1.0 components/Button.qml
 ToolButton 1.0 components/ToolButton.qml
 ComboBox 1.0 components/ComboBox.qml
 ToggleSwitch 1.0 components/ToggleSwitch.qml
-TextLabel 1.0 components/TextLabel.qml
+Text 1.0 components/Text.qml
 ScrollViewer 1.0 components/ScrollViewer.qml
 RinScrollBar 1.0 components/RinScrollBar.qml
 Tooltip 1.0 components/Tooltip.qml
 IconWidget 1.0 components/IconWidget.qml
 Slider 1.0 components/Slider.qml
 ProgressBar 1.0 components/ProgressBar.qml
-HyperlinkButton 1.0 components/HyperlinkButton.qml
+Hyperlink 1.0 components/Hyperlink.qml
 
 ContextMenu 1.0 components/ContextMenu.qml
 Frame 1.0 components/Frame.qml
@@ -23,3 +23,5 @@ FluentWindow 1.0 windows/FluentWindow.qml
 CtrlBtn 1.0 windows/CtrlBtn.qml
 FluentPage 1.0 windows/FluentPage.qml
 NavigationBar 1.0 windows/NavigationBar.qml
+
+singleton Typography 1.0 components/Typography.qml

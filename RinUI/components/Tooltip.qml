@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Controls.Basic 2.15
 import QtQuick.Shapes 1.15
 import "../themes"
 import "../components"
@@ -11,13 +11,13 @@ ToolTip {
 
     // 公共属性 / Common Properties
     property color backgroundColor: Theme.currentTheme.colors.backgroundAcrylicColor
-    property color borderColor: Theme.currentTheme.colors.controlBorderColor
+    property color borderColor: Theme.currentTheme.colors.cardBorderColor
     property color textColor: Theme.currentTheme.colors.textColor
     property real controlRadius: Theme.currentTheme.appearance.buttonRadius
 
     function updateStyle() {
         backgroundColor = Theme.currentTheme.colors.backgroundAcrylicColor
-        borderColor = Theme.currentTheme.colors.controlBorderColor
+        borderColor = Theme.currentTheme.colors.cardBorderColor
         textColor = Theme.currentTheme.colors.textColor
         controlRadius = Theme.currentTheme.appearance.buttonRadius
     }
@@ -25,7 +25,9 @@ ToolTip {
     // 主题切换 / Theme Switching
     Connections {
         target: Theme
-        onCurrentThemeChanged: updateStyle()
+        function onCurrentThemeChanged() {
+            updateStyle()
+        }
     }
 
     Component.onCompleted: updateStyle()
@@ -38,10 +40,10 @@ ToolTip {
 
     property string tipText: text  // 传递 tip 文字
 
-    contentItem: TextLabel {
+    contentItem: Text {
         id: tooltipText
         anchors.centerIn: background
-        labelType: "caption"
+        typography: Typography.Caption
         text: tipText
     }
 

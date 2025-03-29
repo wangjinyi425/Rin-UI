@@ -73,32 +73,7 @@ Item {
         }
     }
 
-    // 状态变化
-    states: [
-        State {
-        name: "disabled"
-            when: !enabled
-            PropertyChanges {  // 禁用时禁止改变属性
-                target: root;
-            }
-        },
-        State {
-            name: "pressed"
-            when: mouseArea.pressed
-            PropertyChanges {
-                target: root;
-                opacity: 0.65
-            }
-        },
-        State {
-            name: "hovered"
-            when: mouseArea.containsMouse
-            PropertyChanges {
-                target: root;
-                opacity: 0.875
-            }
-        }
-    ]
+
 
     signal clicked()
 }

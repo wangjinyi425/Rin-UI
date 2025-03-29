@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
-import "../../RinUI"
+import RinUI
 
 FluentPage {
     id: errorPage
@@ -15,18 +15,18 @@ FluentPage {
         height: 64
     }
 
-    TextLabel {
+    Text {
         Layout.alignment: Qt.AlignHCenter
-        labelType: "subtitle"
+        typography: Typography.Subtitle
         text: qsTr("Sorry, something went wrong!")
     }
 
-    TextLabel {
+    Text {
         Layout.preferredWidth: parent.width * 0.8
         Layout.alignment: Qt.AlignHCenter
         horizontalAlignment: Text.AlignHCenter
         wrapMode: Text.WordWrap
-        labelType: "body"
+        typography: Typography.Body
         text: page + qsTr(" load failed! \n\n Because of ") + errorMessage + qsTr("\nPlease try again later.")
     }
 
@@ -39,7 +39,7 @@ FluentPage {
         Layout.alignment: Qt.AlignHCenter
         id: retryButton
         text: qsTr("Retry")
-        buttonType: "primary"
+        // buttonType: "primary"
         onClicked: {
             // 重新加载 Home 页
             checkPage(errorPage.page)

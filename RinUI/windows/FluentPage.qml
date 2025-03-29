@@ -12,6 +12,7 @@ Page {
     default property alias content: container.data
     property alias contentHeader: headerContainer.data
     property alias customHeader: headerRow.data
+    property int radius: Theme.currentTheme.appearance.windowRadius
     property int wrapperWidth: 1000
     horizontalPadding: 56
 
@@ -26,10 +27,10 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.height
 
-            TextLabel {
+            Text {
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
-                labelType: "title"
+                typography: Typography.Title
                 text: fluentPage.title
                 visible: fluentPage.title !== ""  // 标题
             }
@@ -43,14 +44,14 @@ Page {
         anchors.fill: parent
         clip: true
         ScrollBar.vertical: ScrollBar {}
-        contentHeight: container.height + 18
+        contentHeight: container.height + 18 + headerContainer.height
 
         layer.enabled: true
         layer.effect: OpacityMask{
             maskSource: Rectangle{
                 width: fluentPage.width
                 height: fluentPage.height
-                radius: Theme.currentTheme.appearance.windowRadius
+                radius: fluentPage.radius
 
                 Rectangle {
                     anchors.right: parent.right
@@ -62,7 +63,7 @@ Page {
         }
 
 
-        Item {
+        Row {
             id: headerContainer
             width: fluentPage.width
         }

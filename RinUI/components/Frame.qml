@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Controls.Basic 2.15
 import "../themes"
 import "../components"
 
@@ -11,6 +11,10 @@ Frame {
     property bool hover: false
 
     clip: true
+    // leftPadding: 0
+    // rightPadding: 0
+    // topPadding: 0
+    // bottomPadding: 0
 
     background: Rectangle {
         id: background
