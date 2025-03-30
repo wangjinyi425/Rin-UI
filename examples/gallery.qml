@@ -32,6 +32,11 @@ FluentWindow {
             page: Qt.resolvedUrl("unexist/page"),
             icon: null
         });
+        navItems.append({
+            title: "Settings",
+            page: Qt.resolvedUrl("pages/Settings.qml"),
+            icon: null
+        });
     }
 
 

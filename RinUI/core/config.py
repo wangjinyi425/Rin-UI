@@ -5,8 +5,7 @@ PATH = "../RinUI/config"
 DEFAULT_CONFIG = {
     "language": "zh_CN",
     "theme": {
-        "current_theme": "Light",
-        "follow_system": True
+        "current_theme": "Auto",
     },
     "theme_color": "#605ed2",
     "backdrop_effect": "mica"

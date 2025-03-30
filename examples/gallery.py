@@ -1,14 +1,19 @@
-from RinUI.core.launcher import QmlApplication
+import sys
+
+from PySide6.QtWidgets import QApplication
+
+from RinUI.core.launcher import RinUIWindow, TestWindow
 
 
-class Gallery(QmlApplication):
+class Gallery(RinUIWindow):
     def __init__(self):
         super().__init__("gallery.qml")
 
 
 if __name__ == '__main__':
-    app = Gallery()
-    app.run()
+    app = QApplication(sys.argv)
+    gallery = Gallery()
+    app.exec()
     # app = QGuiApplication([])
 
     # 创建 QML 引擎

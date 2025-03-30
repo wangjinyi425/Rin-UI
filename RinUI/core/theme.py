@@ -1,13 +1,12 @@
 import ctypes
 import time
 
-from PySide6.QtCore import QObject, Signal, Slot, QTimer, QThread
+from PySide6.QtCore import QObject, Signal, Slot, QThread
 from .config import DEFAULT_CONFIG, ConfigCenter, PATH
 import sys
-import darkdetect  # 用于检测系统主题
+import darkdetect
 
-
-def check_darkdetect_support():  # 支持 darkdetect
+def check_darkdetect_support():
     return sys.platform == "win32" and sys.getwindowsversion().major >= 10
 
 
@@ -32,8 +31,8 @@ class ThemeListener(QThread):
             if current_theme != last_theme:
                 last_theme = current_theme
                 self.themeChanged.emit(current_theme)
-                print(f"主题切换：{current_theme}")
-            time.sleep(1)  # 每秒检测一次，避免 CPU 占用过高
+                print(f"Theme changed: {current_theme}")
+            time.sleep(1)
 
     def stop(self):
         self.terminate()
@@ -43,7 +42,7 @@ class ThemeManager(QObject):
     themeChanged = Signal(str)
     backdropChanged = Signal(str)
 
-    # DWM 常量
+    # DWM 常量保持不变
     DWMWA_USE_IMMERSIVE_DARK_MODE = 20
     DWMWA_WINDOW_CORNER_PREFERENCE = 33
     DWMWA_NCRENDERING_POLICY = 2
@@ -52,15 +51,15 @@ class ThemeManager(QObject):
 
     # 圆角
     DWMWCP_DEFAULT = 0
-    DWMWCP_DONOTROUND = 1  # 无圆角
+    DWMWCP_DONOTROUND = 1
     DWMWCP_ROUND = 2
-    DWMWCP_ROUNDSMALL = 3  # 小圆角
+    DWMWCP_ROUNDSMALL = 3
 
     def clean_up(self):
         """
         清理资源并停止主题监听。
         """
-        if self.listener is not None:
+        if self.listener:
             self.config.save_config()
             print("Save config.")
             self.listener.stop()
@@ -75,8 +74,7 @@ class ThemeManager(QObject):
         }
 
         self.listener = None  # 监听线程
-        self.current_theme = None
-        self.follow_system_color_mode = False
+        self.current_theme = DEFAULT_CONFIG["theme"]["current_theme"]  # 当前主题
         self.is_darkdetect_supported = check_darkdetect_support()
 
         self.config = ConfigCenter(PATH, "rin_ui.json")  # 配置中心
@@ -84,7 +82,6 @@ class ThemeManager(QObject):
 
         try:
             self.current_theme = self.config["theme"]["current_theme"]
-            self.follow_system_color_mode = self.config["theme"]["follow_system"]
         except Exception as e:
             print(f"Failed to load config because of {e}, using default config")
 
@@ -97,12 +94,20 @@ class ThemeManager(QObject):
             print("darkdetect not supported on this platform")
             return
         self.listener = ThemeListener()
-        self.listener.themeChanged.connect(self.toggle_theme)
+        self.listener.themeChanged.connect(self._handle_system_theme)
         self.listener.start()
 
     def set_window(self, window):  # 绑定窗口句柄
         self.hwnd = int(window.winId())
         print(f"Window handle set: {self.hwnd}")
+
+    def _handle_system_theme(self, system_theme):
+        if self.current_theme == "Auto":
+            self._update_window_theme()
+            self.themeChanged.emit(self._actual_theme())
+        else:
+            # 保持当前背景效果不变
+            self._update_window_theme()
 
     @Slot(str)
     def apply_backdrop_effect(self, effect_type):
@@ -155,30 +160,35 @@ class ThemeManager(QObject):
     def _update_window_theme(self):  # 更新窗口的颜色模式
         if sys.platform != "win32" or not self.hwnd:
             return
-
-        dark_mode = ctypes.c_int(self.theme_dict[self.current_theme])
+        actual_theme = self._actual_theme()
         ctypes.windll.dwmapi.DwmSetWindowAttribute(
             self.hwnd,
             self.DWMWA_USE_IMMERSIVE_DARK_MODE,
-            ctypes.byref(dark_mode),
-            ctypes.sizeof(dark_mode)
+            ctypes.byref(ctypes.c_int(self.theme_dict[actual_theme])),
+            ctypes.sizeof(ctypes.c_int)
         )
-        print(f"Updated window theme to {self.current_theme}")
+        print(f"Window theme updated to {actual_theme}")
+
+    def _actual_theme(self):
+        """实际应用的主题"""
+        if self.current_theme == "Auto":
+            return darkdetect.theme() if self.is_darkdetect_supported else "Light"
+        return self.current_theme
 
     @Slot(str)
     def toggle_theme(self, theme: str):  # 切换主题
+        if theme not in ["Auto", "Light", "Dark"]:  # 三状态
+            return
         if self.current_theme != theme:
             print(f"Switching to '{theme}' theme")
             self.current_theme = theme
             self.config["theme"]["current_theme"] = theme
             self._update_window_theme()
-            self.themeChanged.emit(theme)
+            self.themeChanged.emit(self._actual_theme())
 
     @Slot(result=str)
     def get_theme(self):
-        if self.follow_system_color_mode:
-            self.current_theme = "Dark" if darkdetect.isDark() else "Light"
-        return self.current_theme
+        return self._actual_theme()
 
     @Slot(result=str)
     def get_theme_name(self):

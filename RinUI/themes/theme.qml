@@ -13,7 +13,7 @@ Item {
             currentTheme = Qt.createQmlObject("import '../themes'; Light {}", themeManager)
         } else {
             Utils.primaryColor = getThemeColor()
-            setTheme(ThemeManager.get_theme())
+            setTheme(ThemeManager.get_theme_name())  // 关键修复
         }
     }
 
@@ -41,6 +41,14 @@ Item {
         return ThemeManager.get_theme_color()
     }
 
+    function getTheme() {
+        if (typeof ThemeManager === "undefined") {
+            console.error("ThemeManager is not defined.")
+            return -1
+        }
+        return ThemeManager.get_theme_name()
+    }
+
     // 切换主题
     function setTheme(mode) {
         if (typeof ThemeManager === "undefined") {
@@ -49,11 +57,15 @@ Item {
             return
         }
 
-        // 调用 Python 后端的 ThemeManager 切换主题
+        // Call Python backend to toggle theme
         ThemeManager.toggle_theme(mode)
 
-        // 根据 mode 动态创建主题对象
+        // Get the actual theme name
         var themeName = ThemeManager.get_theme_name()
+        if (themeName === "Auto") {
+            // Get the actual theme applied (Light or Dark)
+            themeName = ThemeManager.get_theme()
+        }
         load_qml(themeName)
         return 0;
     }
