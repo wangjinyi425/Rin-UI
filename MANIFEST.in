@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+recursive-include RinUI/assets *
+recursive-include RinUI/components *
+recursive-include RinUI/themes *
+recursive-include RinUI/windows *
+recursive-include RinUI *

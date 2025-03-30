@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RinUI"
+version = "0.0.1"
+authors = [
+    { name = "RinLit", email = "lintu233_qwq@icloud.com" }
+]
+description = "A Fluent Design-like UI library for Qt Quick (QML) based on PySide6"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "PySide6",
+    "darkdetect"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[tool.setuptools]
+packages = ["RinUI"]
+include-package-data = true
