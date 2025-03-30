@@ -58,14 +58,33 @@ FluentPage {
                 spacing: 4
                 Button {
                     text: "Button"
-                    icon.name: "\uf114"
+                    icon.name: "ic_fluent_alert_20_regular"
                     enabled: disableSwitch.checked
+
+                    Tooltip {
+                        text: "icon.name: \"ic_fluent_alert_20_regular\""
+                        visible: parent.hovered
+                    }
+                }
+                Button {
+                    text: "Button"
+                    icon.name: Qt.resolvedUrl("../assets/banner.png")
+                    enabled: disableSwitch.checked
+
+                    Tooltip {
+                        text: "icon.name: Qt.resolvedUrl(\"../assets/banner.png\")"
+                        visible: parent.hovered
+                    }
                 }
                 Button {
                     highlighted: true
-                    icon.name: "\uf114"
+                    icon.name: "ic_fluent_alert_20_regular"
                     text: "Button On Accent"
                     enabled: disableSwitch.checked
+                    Tooltip {
+                        text: "icon.name: \"ic_fluent_alert_20_regular\""
+                        visible: parent.hovered
+                    }
                 }
             }
             Text {
@@ -82,6 +101,7 @@ FluentPage {
                 Button {
                     highlighted: true
                     flat: true
+                    icon.name: "ic_fluent_alert_20_regular"
                     text: "Button On Accent"
                     enabled: disableSwitch.checked
                 }
@@ -111,6 +131,33 @@ FluentPage {
                 spacing: 4
                 ComboBox {
                     model: ["Option 1", "Option 2", "Option 3", "Option 4"]
+                }
+            }
+        }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+
+        Text {
+            typography: Typography.Subtitle
+            text: qsTr("TextField")
+        }
+        Text {
+            width: parent.width
+            typography: Typography.Body
+            text: qsTr("Use a TextField to let a user enter simple text input in your app.")
+        }
+
+        Frame {
+            width: parent.width
+
+            Row {
+                width: parent.width
+                spacing: 4
+                TextField {
+                    placeholderText: "A simple TextField."
                 }
             }
         }

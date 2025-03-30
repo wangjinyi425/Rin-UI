@@ -19,6 +19,7 @@ Hyperlink 1.0 Hyperlink.qml
 ToolButton 1.0 ToolButton.qml
 ToggleSwitch 1.0 ToggleSwitch.qml
 Indicator 1.0 Indicator.qml
+TextField 1.0 TextField.qml
 
 singleton Theme 1.0 ../themes/theme.qml
 singleton Typography 1.0 Typography.qml

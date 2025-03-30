@@ -117,7 +117,7 @@ FluentWindowBase {
                 popEnter : Transition {
                     SequentialAnimation {
                         PauseAnimation {  // 延时 200ms
-                            duration: animationSpeed
+                            duration: Utils.animationSpeed
                         }
                         PropertyAnimation {
                             property: "opacity"
@@ -135,8 +135,8 @@ FluentWindowBase {
                     console.log("Popping Page; Depth:", stackView.depth, navigationBar.lastIndex)
                     if (stackView.depth > 2) {
                         stackView.pop()
-                        navigationBar.currentIndex = navigationBar.lastIndex[stackView.depth - 2]
-                        navigationBar.lastIndex.pop()
+                        navigationBar.currentIndex = navigationBar.lastIndex.get(stackView.depth - 2).index
+                        navigationBar.lastIndex.remove(stackView.depth - 2)
                     } else {
                         console.log("Can't pop: only root page left")
                     }
@@ -170,9 +170,9 @@ FluentWindowBase {
         }
 
     // 页面确认
-    function checkPage(page) {
+    function checkPage(page, reload) {
         // 重复检测
-        if (String(stackView.currentItem.objectName) === String(page)) {
+        if (String(stackView.currentItem.objectName) === String(page) && !reload) {
             console.log("Page already loaded:", page)
             return
         }

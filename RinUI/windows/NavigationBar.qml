@@ -17,7 +17,7 @@ Item {
     property alias windowTitle: titleLabel.text
     property alias windowIcon: iconLabel.icon
     property var stackView: parent.stackView
-    property var lastIndex: []  // 记录的索引
+    property ListModel lastIndex: ListModel {}  // 记录的索引
 
     Row {
         id: title
@@ -38,7 +38,7 @@ Item {
             onClicked: stackView.safePop()
             width: 40
             height: 40
-            // enabled: navigationBar.lastIndex.length > 0
+            enabled: navigationBar.lastIndex.count > 0
 
             Tooltip {
                 parent: parent
@@ -150,9 +150,14 @@ Item {
             }
 
             onClicked: {
-                navigationBar.lastIndex.push(listView.currentIndex)
+                if (currentIndex === index) {
+                    return
+                }
+
+                navigationBar.lastIndex.append({ index: listView.currentIndex })
                 listView.currentIndex = index
                 navigationBar.currentIndex = index
+                console.log(navigationBar.lastIndex)
             }
         }
     }

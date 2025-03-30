@@ -15,9 +15,11 @@ IconWidget 1.0 components/IconWidget.qml
 Slider 1.0 components/Slider.qml
 ProgressBar 1.0 components/ProgressBar.qml
 Hyperlink 1.0 components/Hyperlink.qml
+TextField 1.0 components/TextField.qml
 
 ContextMenu 1.0 components/ContextMenu.qml
 Frame 1.0 components/Frame.qml
+SettingCard 1.0 components/SettingCard.qml
 
 FluentWindow 1.0 windows/FluentWindow.qml
 CtrlBtn 1.0 windows/CtrlBtn.qml

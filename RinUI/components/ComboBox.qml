@@ -82,6 +82,7 @@ ComboBox {
             when: !enabled
             PropertyChanges {  // 禁用时禁止改变属性
                 target: root;
+                opacity: 0.4
             }
         },
         State {

@@ -41,7 +41,7 @@ Item {
         borderColor = Theme.currentTheme.colors.controlBorderColor
         textColor = Theme.currentTheme.colors.textColor
         controlRadius = Theme.currentTheme.appearance.buttonRadius
-        borderTransparency = Theme.currentTheme.appearance.borderTransparency
+        // borderTransparency = Theme.currentTheme.appearance.borderTransparency
     }
 
     // 颜色动画 / Color Animation

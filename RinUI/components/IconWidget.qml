@@ -8,7 +8,7 @@ Item {
     property string icon: ""  // 可以是字体图标（如 "\uf103"）或图片路径（如 "icons/image.png"）
     property alias color: text.color
     property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
-    property int size: 12
+    property int size: 16
 
     // 计算是否是字体图标
     property bool isFontIcon: icon.length === 1  // 判断是否为单字符（字体图标通常是单个字符）

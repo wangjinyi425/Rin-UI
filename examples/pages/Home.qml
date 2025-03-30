@@ -56,9 +56,4 @@ FluentPage {
             }
         }
     }
-
-    Frame {
-        Layout.fillWidth: true
-        Layout.preferredHeight: 500
-    }
 }
