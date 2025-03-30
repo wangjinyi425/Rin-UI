@@ -15,17 +15,17 @@ FluentWindow {
         navItems.append({
             title: "Home",
             page: Qt.resolvedUrl("pages/Home.qml"),
-            icon: null
+            icon: "ic_fluent_home_20_regular"
         });
         navItems.append({
             title: "Basic Input",
             page: Qt.resolvedUrl("pages/BasicInput.qml"),
-            icon: null
+            icon: "ic_fluent_checkbox_checked_20_regular"
         });
         navItems.append({
             title: "Status & Info",
             page: Qt.resolvedUrl("pages/StatusAndInfo.qml"),
-            icon: null
+            icon: "ic_fluent_chat_20_regular"
         });
         navItems.append({
             title: "Error Interface Test",
@@ -35,7 +35,7 @@ FluentWindow {
         navItems.append({
             title: "Settings",
             page: Qt.resolvedUrl("pages/Settings.qml"),
-            icon: null
+            icon: "ic_fluent_settings_20_regular"
         });
     }
 
