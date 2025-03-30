@@ -13,7 +13,7 @@ Item {
             currentTheme = Qt.createQmlObject("import '../themes'; Light {}", themeManager)
         } else {
             Utils.primaryColor = getThemeColor()
-            setTheme(ThemeManager.get_theme_name())  // 关键修复
+            setTheme(ThemeManager.get_theme_name())
         }
     }
 

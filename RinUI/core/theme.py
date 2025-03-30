@@ -41,6 +41,8 @@ class ThemeListener(QThread):
 class ThemeManager(QObject):
     themeChanged = Signal(str)
     backdropChanged = Signal(str)
+    windows = []  # 窗口句柄们（
+    _instance = None
 
     # DWM 常量保持不变
     DWMWA_USE_IMMERSIVE_DARK_MODE = 20
@@ -66,7 +68,20 @@ class ThemeManager(QObject):
             self.listener.wait()  # 等待线程结束
             print("Theme listener stopped.")
 
+    def __new__(cls, *args, **kwargs):
+        """
+        单例管理，共享主题状态
+        :param args:
+        :param kwargs:
+        """
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
     def __init__(self):
+        if hasattr(self, "_initialized") and self._initialized:
+            return
+        self._initialized = True
         super().__init__()
         self.theme_dict = {
             "Light": 0,
@@ -85,7 +100,7 @@ class ThemeManager(QObject):
         except Exception as e:
             print(f"Failed to load config because of {e}, using default config")
 
-        self.hwnd = None  # 窗口句柄
+        # self.hwnd = None  # 窗口句柄
 
         self.start_listener()
 
@@ -98,8 +113,9 @@ class ThemeManager(QObject):
         self.listener.start()
 
     def set_window(self, window):  # 绑定窗口句柄
-        self.hwnd = int(window.winId())
-        print(f"Window handle set: {self.hwnd}")
+        hwnd = int(window.winId())
+        self.windows.append(hwnd)
+        print(f"Window handle set: {hwnd}")
 
     def _handle_system_theme(self, system_theme):
         if self.current_theme == "Auto":
@@ -116,57 +132,60 @@ class ThemeManager(QObject):
         :param effect_type: str, 背景效果类型（acrylic, mica, tabbed, none）
         """
         self._update_window_theme()
-        if sys.platform != "win32" or not self.hwnd:
+        if sys.platform != "win32" or not self.windows:
             return -2  # 非 windows或未绑定窗口
         self.backdropChanged.emit(effect_type)
 
         accent_state = ACCENT_STATES.get(effect_type, 0)
 
-        ctypes.windll.dwmapi.DwmSetWindowAttribute(
-            self.hwnd,
-            self.DWMWA_SYSTEMBACKDROP_TYPE,
-            ctypes.byref(ctypes.c_int(accent_state)),
-            ctypes.sizeof(ctypes.c_int)
-        )
+        for hwnd in self.windows:
+            ctypes.windll.dwmapi.DwmSetWindowAttribute(
+                hwnd,
+                self.DWMWA_SYSTEMBACKDROP_TYPE,
+                ctypes.byref(ctypes.c_int(accent_state)),
+                ctypes.sizeof(ctypes.c_int)
+            )
 
         self.config["backdrop_effect"] = effect_type
         print(f"Applied \"{effect_type.strip().capitalize()}\" effect")
 
     def apply_window_effects(self):  # 启用圆角阴影
-        if sys.platform != "win32" or not self.hwnd:
+        if sys.platform != "win32" or not self.windows:
             return
 
         dwm = ctypes.windll.dwmapi
 
         # 启用非客户端渲染策略（让窗口边框具备阴影）
         ncrp = ctypes.c_int(self.DWMNCRENDERINGPOLICY_ENABLED)
-        dwm.DwmSetWindowAttribute(
-            self.hwnd,
-            self.DWMWA_NCRENDERING_POLICY,
-            ctypes.byref(ncrp),
-            ctypes.sizeof(ncrp)
-        )
+        for hwnd in self.windows:
+            dwm.DwmSetWindowAttribute(
+                hwnd,
+                self.DWMWA_NCRENDERING_POLICY,
+                ctypes.byref(ncrp),
+                ctypes.sizeof(ncrp)
+            )
 
-        # 启用圆角效果
-        corner_preference = ctypes.c_int(self.DWMWCP_ROUND)
-        dwm.DwmSetWindowAttribute(
-            self.hwnd,
-            self.DWMWA_WINDOW_CORNER_PREFERENCE,
-            ctypes.byref(corner_preference),
-            ctypes.sizeof(corner_preference)
-        )
+            # 启用圆角效果
+            corner_preference = ctypes.c_int(self.DWMWCP_ROUND)
+            dwm.DwmSetWindowAttribute(
+                hwnd,
+                self.DWMWA_WINDOW_CORNER_PREFERENCE,
+                ctypes.byref(corner_preference),
+                ctypes.sizeof(corner_preference)
+            )
         print("Enabled Rounded and Shadows")
 
     def _update_window_theme(self):  # 更新窗口的颜色模式
-        if sys.platform != "win32" or not self.hwnd:
+        if sys.platform != "win32" or not self.windows:
             return
         actual_theme = self._actual_theme()
-        ctypes.windll.dwmapi.DwmSetWindowAttribute(
-            self.hwnd,
-            self.DWMWA_USE_IMMERSIVE_DARK_MODE,
-            ctypes.byref(ctypes.c_int(self.theme_dict[actual_theme])),
-            ctypes.sizeof(ctypes.c_int)
-        )
+        for hwnd in self.windows:
+            ctypes.windll.dwmapi.DwmSetWindowAttribute(
+                hwnd,
+                self.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                ctypes.byref(ctypes.c_int(self.theme_dict[actual_theme])),
+                ctypes.sizeof(ctypes.c_int)
+            )
         print(f"Window theme updated to {actual_theme}")
 
     def _actual_theme(self):

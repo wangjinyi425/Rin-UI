@@ -22,11 +22,22 @@ class TestWindow(QWidget):
 
 
 class RinUIWindow:
-    def __init__(self, qml_path: str = "main.qml"):
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):  # 单例模式管理
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self, qml_path: str = "test.qml"):
         """
         创建基于 RinUI 的 QML 应用程序。
         :param qml_path: str, QML 文件路径
         """
+        if hasattr(self, "_initialized") and self._initialized:
+            return
+        self._initialized = True
+
         self.engine = QQmlApplicationEngine()
         self.theme_manager = ThemeManager()
         self.qml_path = qml_path
@@ -41,13 +52,14 @@ class RinUIWindow:
     def _setup_application(self):
         """Setup"""
         # RInUI 模块
-        ui_module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))  # 修复路径错误
-        print(f"UI Module Path: {ui_module_path}")
+        rinui_path = os.path.abspath(os.path.dirname(__file__))  # RinUI/core 目录
+        rinui_import_path = os.path.abspath(os.path.join(rinui_path, "../../"))  # RinUI 目录
+        print(f"UI Module Path: {rinui_import_path}")
 
-        if os.path.exists(ui_module_path):
-            self.engine.addImportPath(ui_module_path)
+        if os.path.exists(rinui_import_path):
+            self.engine.addImportPath(rinui_import_path)
         else:
-            raise FileNotFoundError(f"Cannot find RinUI module: {ui_module_path}")
+            raise FileNotFoundError(f"Cannot find RinUI module: {rinui_import_path}")
 
         # 主题管理器
 

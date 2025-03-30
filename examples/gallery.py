@@ -1,8 +1,8 @@
 import sys
-
 from PySide6.QtWidgets import QApplication
 
-from RinUI.core.launcher import RinUIWindow, TestWindow
+import RinUI
+from RinUI import RinUIWindow
 
 
 class Gallery(RinUIWindow):
@@ -11,6 +11,7 @@ class Gallery(RinUIWindow):
 
 
 if __name__ == '__main__':
+    print(RinUI.__file__)
     app = QApplication(sys.argv)
     gallery = Gallery()
     app.exec()

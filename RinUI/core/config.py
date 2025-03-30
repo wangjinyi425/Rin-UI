@@ -1,7 +1,9 @@
 import os
 import json
 
-PATH = "../RinUI/config"
+
+BASE_DIR = os.path.abspath(os.getcwd())
+PATH = os.path.join(BASE_DIR, "RinUI/config")
 DEFAULT_CONFIG = {
     "language": "zh_CN",
     "theme": {
@@ -21,7 +23,7 @@ class ConfigCenter:
 
     def load_config(self, default_config):
         if default_config is None:
-            print('Warning: \"default_config\" is None, use empty config instead.')
+            print('Warning: "default_config" is None, use empty config instead.')
             default_config = {}
         # 如果文件存在，加载配置
         if os.path.exists(self.full_path):
@@ -51,11 +53,11 @@ class ConfigCenter:
 
     def save_config(self):
         try:
+            # 确保配置文件目录存在
+            if not os.path.exists(self.path):
+                os.makedirs(self.path)
             with open(self.full_path, 'w', encoding='utf-8') as f:
                 json.dump(self.config, f, ensure_ascii=False, indent=4)
-        except FileNotFoundError:
-            os.makedirs(self.path)
-            self.save_config()
         except Exception as e:
             print(f'Error: {e}')
 

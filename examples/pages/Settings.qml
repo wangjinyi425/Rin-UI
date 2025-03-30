@@ -17,7 +17,7 @@ FluentPage {
         Layout.fillWidth: true
         title: qsTr("App Theme")
         description: qsTr("Select which app theme to display")
-        icon: "ic_fluent_square_hint_sparkles_20_regular"
+        icon: "ic_fluent_paint_brush_20_regular"
 
         content: ComboBox {
             property var data: ["Light", "Dark", "Auto"]
