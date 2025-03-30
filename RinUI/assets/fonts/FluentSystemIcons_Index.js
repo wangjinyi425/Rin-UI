@@ -1,4 +1,4 @@
-{
+var FluentIcons = {
   "ic_fluent_access_time_24_regular": 61697,
   "ic_fluent_accessibility_16_regular": 61698,
   "ic_fluent_accessibility_20_regular": 61699,

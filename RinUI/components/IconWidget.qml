@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import "../components"
 import "../themes"
+import "../assets/fonts/FluentSystemIcons_Index.js" as Icons
+
 
 Item {
     property string icon: ""  // 可以是字体图标（如 "\uf103"）或图片路径（如 "icons/image.png"）
@@ -35,10 +37,10 @@ Item {
     Text {
         id: text
         anchors.centerIn: parent
-        text: isFontIcon ? icon : ""  // 仅当 `icon` 是单字符时显示
+        // text: isFontIcon ? icon : ""  // 仅当 `icon` 是单字符时显示
+        text: isFontIcon ? icon : String.fromCharCode(Icons.FluentIcons[icon])  // 显示 FluentSystemIcons 字体图标
         font.family: iconFont.name
         font.pixelSize: size
-        visible: isFontIcon  // 仅当 `icon` 是字体图标时可见
     }
 
     Image {
