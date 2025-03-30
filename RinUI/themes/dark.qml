@@ -111,7 +111,6 @@ QtObject {
     property QtObject typography: QtObject {
         property string fontFamily: "Microsoft YaHei"
         property string fontIcon: "FluentSystemIcons-Regular.ttf"  // 字体图标路径 / font icon (put it in the "assets/fonts" folder)
-        property string fontIconDict: "FluentSystemIcons-Regular.json"
         // Font Sizes
         property int displaySize: 68
         property int titleLargeSize: 40
