@@ -40,11 +40,16 @@ class RinUIWindow:
 
     def _setup_application(self):
         """Setup"""
-        ui_module_path = os.path.abspath("../../RinUI")
-        try:
+        # RInUI 模块
+        ui_module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))  # 修复路径错误
+        print(f"UI Module Path: {ui_module_path}")
+
+        if os.path.exists(ui_module_path):
             self.engine.addImportPath(ui_module_path)
-        except Exception as e:
-            print(f"Cannot Load RinUI module: {e}")
+        else:
+            raise FileNotFoundError(f"Cannot find RinUI module: {ui_module_path}")
+
+        # 主题管理器
 
         self.engine.rootContext().setContextProperty("ThemeManager", self.theme_manager)
         try:
@@ -52,8 +57,10 @@ class RinUIWindow:
         except Exception as e:
             print(f"Cannot Load QML file: {e}")
 
-        # if not self.engine.rootObjects():
-        #     raise RuntimeError(f"Error loading QML file: {self.qml_path}")
+        if not self.engine.rootObjects():
+            raise RuntimeError(f"Error loading QML file: {self.qml_path}")
+
+        # 窗口设置
 
         self.root_window = self.engine.rootObjects()[0]
 
