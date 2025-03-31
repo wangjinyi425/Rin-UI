@@ -27,14 +27,14 @@ RinUI is a Fluent Design-like Qt Quick (QML) UI library based on PySide6, This a
 
 ## 🪄 Usage
 
-You can install RinUI via pip:  #may be not
+You can install RinUI via pip: (coming soon, but now you can install via test-pypi)
 ```bash
 pip install RinUI
 ```
 
 Import RinUI in your QML file:
 ```qmllang
-import "./RinUI"
+import RinUI
 ```
 
 You also can view the demo in the source code, like this:
@@ -74,6 +74,7 @@ Thanks to the great people who contributed to this project.
 
 ## 📜 License
 This project is licensed under the MIT License, you can learn more about it in the [license file](./LICENSE).
+
 Copyright © 2025 RinLit
 
 ##
