@@ -7,6 +7,7 @@ Item {
     z: 9999
 
     required property Item control
+    property real radius: Theme.currentTheme.appearance.buttonRadius
 
     visible: control.activeFocus  && (control.focusReason === Qt.TabFocusReason || control.focusReason === Qt.BacktabFocusReason)
 
@@ -16,13 +17,13 @@ Item {
         color: "transparent"
         border.width: 2
         border.color: Theme.currentTheme.colors.focusBorderOuter
-        radius: Theme.currentTheme.appearance.buttonRadius
+        radius: root.radius
 
         // inner
         Rectangle {
             anchors.fill: parent
             anchors.margins: parent.border.width
-            radius: Theme.currentTheme.appearance.buttonRadius
+            radius: root.radius
             color: "transparent"
             border.color: Theme.currentTheme.colors.focusBorderInner
         }

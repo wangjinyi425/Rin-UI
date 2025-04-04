@@ -15,10 +15,6 @@ Button {
         control: parent
     }
 
-    Keys.onReturnPressed: {
-        console.log("Return Pressed")
-    }
-
     background: Rectangle {
         id: border
         anchors.fill: parent

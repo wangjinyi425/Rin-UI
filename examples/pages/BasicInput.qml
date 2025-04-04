@@ -28,7 +28,7 @@ FluentPage {
                 Text {
                     text: "Enable Button"
                 },
-                ToggleSwitch {
+                Switch {
                     id: disableSwitch
                     checked: true
                 }
@@ -172,24 +172,38 @@ FluentPage {
 
         Text {
             typography: Typography.Subtitle
-            text: qsTr("ToggleSwitch")
+            text: qsTr("Switch")
         }
         Text {
             width: parent.width
             typography: Typography.Body
-            text: qsTr("Use ToggleSwitch controls to present users with exactly 2 mutually exclusive options.")
+            text: qsTr("Use Switch controls to present users with exactly 2 mutually exclusive options.")
         }
 
-        Frame {
+        ControlShowcase {
             width: parent.width
+            height: 100
 
             Row {
                 width: parent.width
                 spacing: 4
-                ToggleSwitch {
-
+                Switch {
+                    enabled: disableSwitch_2.checked
+                }
+                Switch {
+                    enabled: disableSwitch_2.checked
                 }
             }
+
+            showcase: [
+                Text {
+                    text: "Enable Button"
+                },
+                Switch {
+                    id: disableSwitch_2
+                    checked: true
+                }
+            ]
         }
     }
 

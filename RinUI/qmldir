@@ -6,7 +6,7 @@ Shadow 1.0 components/Shadow.qml
 Button 1.0 components/Button.qml
 ToolButton 1.0 components/ToolButton.qml
 ComboBox 1.0 components/ComboBox.qml
-ToggleSwitch 1.0 components/ToggleSwitch.qml
+Switch 1.0 components/Switch.qml
 Text 1.0 components/Text.qml
 ScrollViewer 1.0 components/ScrollViewer.qml
 RinScrollBar 1.0 components/RinScrollBar.qml
