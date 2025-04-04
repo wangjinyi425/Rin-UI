@@ -13,12 +13,17 @@ QtObject {
         property color controlTertiaryColor: Qt.alpha("#000000", 0.0578)
         property color controlQuaternaryColor: Qt.alpha("#000000", 0.0924)
         property color controlStrongColor: Qt.alpha("#000000", 0.4458)
+        property color controlInputActiveColor: "#ffffff"
 
         property color controlBorderColor: Qt.alpha("#000000", 0.06)
         property color controlBorderStrongColor: Qt.alpha("#000000", 0.6063)
         property color controlBorderAccentColor: Qt.alpha("#000000", 0.3)
+        property color textControlBorderColor: Qt.alpha("#000000", 0.45)
+        property color textControlBorderFocusedColor: Utils.primaryColor
 
         property color controlSolidColor: "#ffffff"
+        property color focusBorderOuter: Qt.alpha("#000000", 0.8956)
+        property color focusBorderInner: "#ffffff"
 
         // Card
         property color cardColor: Qt.alpha("#ffffff", 0.7)
@@ -65,7 +70,7 @@ QtObject {
 
     // Appearance //
     property QtObject appearance: QtObject {
-        property int buttonRadius: 7
+        property int buttonRadius: 6
         property int borderWidth: 1
         property real borderFactor: 0.9
         property real borderOnAccentFactor: 1.08

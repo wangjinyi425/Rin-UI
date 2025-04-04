@@ -16,6 +16,11 @@ Slider {
     property bool tickmarksEnabled: false
     property color primaryColor: Theme.currentTheme.colors.primaryColor
 
+    // accessibility
+    FocusIndicator {
+        control: parent
+    }
+
     // auto enable snap
     snapMode: Slider.SnapAlways
 
@@ -107,7 +112,7 @@ Slider {
         Tooltip {
             text: root.value.toString()
             visible: root.showTooltip ? (handle.hovered || root.pressed)  : false
-            delay: 150
+            delay: 50
         }
 
         // MouseArea

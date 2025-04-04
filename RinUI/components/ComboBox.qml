@@ -16,6 +16,18 @@ ComboBox {
     implicitWidth: contentItem.implicitWidth + 77
     implicitHeight: contentItem.implicitHeight + 12
 
+    // accessibility
+    FocusIndicator {
+        Indicator {
+            id: focusIndicator
+            anchors.left: parent.left
+            anchors.leftMargin: 2
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        anchors.margins: -1
+        control: parent
+    }
+
 
     // 背景 / Background //
     background: Rectangle {

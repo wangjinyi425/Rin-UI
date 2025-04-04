@@ -159,6 +159,9 @@ FluentPage {
                 TextField {
                     placeholderText: "A simple TextField."
                 }
+                TextField {
+                    placeholderText: "A simple TextField."
+                }
             }
         }
     }

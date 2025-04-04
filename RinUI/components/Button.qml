@@ -10,6 +10,15 @@ Button {
         highlighted ? Theme.currentTheme.colors.primaryColor : Theme.currentTheme.colors.controlColor
     // default property alias icon.source: icon.source
 
+    // accessibility
+    FocusIndicator {
+        control: parent
+    }
+
+    Keys.onReturnPressed: {
+        console.log("Return Pressed")
+    }
+
     background: Rectangle {
         id: border
         anchors.fill: parent
@@ -50,7 +59,8 @@ Button {
             id: iconWidget
             size: icon ? text.font.pixelSize * 1.25 : 0
             icon: root.icon.name ? root.icon.name : root.icon.source
-            color: highlighted ? flat ? Theme.currentTheme.colors.textAccentColor :
+            color: highlighted ? flat ?
+                enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
                 Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
         }
         Text {

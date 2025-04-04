@@ -24,6 +24,7 @@ Popup {
     contentItem: ListView {
         id: listView
         clip: true
+        focus: true
         spacing: 0
         anchors.fill: parent  // 清除边距
         anchors.topMargin: 2
@@ -41,13 +42,19 @@ Popup {
             height: text.implicitHeight + 20  // 自适应
             highlighted: ListView.isCurrentItem  // 当前项高亮
 
+            // accessibility
+            FocusIndicator {
+                control: parent
+                visible: ListView.isCurrentItem
+            }
+
             background: Rectangle {
                 id: itemBg
                 anchors.fill: parent
                 anchors.leftMargin: 5
                 anchors.rightMargin: 5
                 anchors.topMargin: 3
-                radius: Theme.currentTheme.appearance.buttonRadius / 2
+                radius: Theme.currentTheme.appearance.buttonRadius
                 color: pressed
                     ? Theme.currentTheme.colors.subtleTertiaryColor
                     : (highlighted || hovered)
@@ -89,7 +96,7 @@ Popup {
     background: Rectangle {
         id: background
         anchors.fill: parent
-        radius: controlRadius
+        radius: Theme.currentTheme.appearance.windowRadius
         color: Theme.currentTheme.colors.backgroundAcrylicColor
         border.color: Theme.currentTheme.colors.controlBorderColor
 

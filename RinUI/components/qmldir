@@ -3,6 +3,7 @@ module RinUI.Components
 Base 1.0 Base.qml
 ButtonBase 1.0 ButtonBase.qml
 Shadow 1.0 Shadow.qml
+FocusIndicator 1.0 FocusIndicator.qml
 
 Text 1.0 Text.qml
 IconWidget 1.0 IconWidget.qml

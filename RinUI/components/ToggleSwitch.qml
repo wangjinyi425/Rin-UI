@@ -20,6 +20,11 @@ Base {
         onCurrentThemeChanged: updateStyle()
     }
 
+    // accessibility
+    FocusIndicator {
+        control: parent
+    }
+
     function updateStyle() {
         if (!root.enabled) {
             if (checked) {
