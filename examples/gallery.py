@@ -1,4 +1,6 @@
 import sys
+
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 
 import RinUI
@@ -13,6 +15,7 @@ class Gallery(RinUIWindow):
 if __name__ == '__main__':
     print(RinUI.__file__)
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("../RinUI/assets/img/default_app_icon.png"))
     gallery = Gallery()
     app.exec()
     # app = QGuiApplication([])

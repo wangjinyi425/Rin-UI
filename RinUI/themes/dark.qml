@@ -38,7 +38,7 @@ QtObject {
         property color subtleColor: "transparent"
         property color subtleSecondaryColor: Qt.alpha("#ffffff", 0.0605)
         property color subtleTertiaryColor: Qt.alpha("#ffffff", 0.0419)
-        property color captionCloseColor: systemCirticalColor
+        property color captionCloseColor: systemCriticalColor
         property color captionCloseTextColor: "#ffffff"
 
         // Layer
@@ -58,7 +58,7 @@ QtObject {
         property color systemAttentionColor: "#005fb7"
         property color systemSuccessColor: "#0f7b0f"
         property color systemCautionColor: "#9d5d00"
-        property color systemCirticalColor: "#c42b1c"
+        property color systemCriticalColor: "#c42b1c"
         property color systemNeutralColor: "#8d8d8d"
 
         property color systemAttentionBackgroundColor: Qt.alpha("#f6f6f6", 0.1)

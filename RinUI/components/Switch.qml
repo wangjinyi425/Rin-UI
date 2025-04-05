@@ -12,8 +12,8 @@ Switch {
 
     property color backgroundColor: Theme.currentTheme.colors.controlSecondaryColor
     property color backgroundActiveColor: Theme.currentTheme.colors.primaryColor
-    property string checkedText: "On"
-    property string uncheckedText: "Off"
+    property string checkedText: qsTr("On")
+    property string uncheckedText: qsTr("Off")
 
     // accessibility
     FocusIndicator {

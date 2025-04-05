@@ -125,9 +125,4 @@ ApplicationWindow {
             baseWindow.startSystemResize(e)
         }
     }
-
-    // icon
-    Component.onCompleted: {
-        baseWindow.setIcon("../assets/img/default_app_icon.png")
-    }
 }

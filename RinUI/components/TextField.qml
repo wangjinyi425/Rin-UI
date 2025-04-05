@@ -7,6 +7,7 @@ TextField {
     id: root
 
     property real borderFactor: Theme.currentTheme.appearance.borderFactor
+    property color primaryColor: Theme.currentTheme.colors.primaryColor
     selectByMouse: true
 
     // 背景 / Background //
@@ -37,7 +38,7 @@ TextField {
             anchors.bottom: parent.bottom
             radius: 999
             height: root.activeFocus ? Theme.currentTheme.appearance.borderWidth * 2 : Theme.currentTheme.appearance.borderWidth
-            color: root.activeFocus ? Theme.currentTheme.colors.primaryColor : Theme.currentTheme.colors.textControlBorderColor
+            color: root.activeFocus ? primaryColor : Theme.currentTheme.colors.textControlBorderColor
 
             Behavior on color { ColorAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
             Behavior on height { NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }

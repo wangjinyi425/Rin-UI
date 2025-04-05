@@ -13,6 +13,7 @@ Popup {
     property alias model: listView.model
     property alias currentIndex: listView.currentIndex
     property int maxHeight: 166  // 最大高度
+    property string textRole: ""
 
     implicitWidth: 100
     implicitHeight: Math.min(listView.contentHeight + 6, maxHeight)
@@ -35,6 +36,7 @@ Popup {
             id: scrollBar
             policy: ScrollBar.AsNeeded
         }
+        model: control.popup.visible ? control.delegateModel : null
 
         // 选择器 / Selection //
         delegate: ItemDelegate {
@@ -72,7 +74,7 @@ Popup {
 
                     typography: Typography.Body
                     wrapMode: Text.Wrap
-                    text: modelData
+                    text: model[contextMenu.parent.textRole]
                 }
 
                 // 选择指示器

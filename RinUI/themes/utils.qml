@@ -12,4 +12,5 @@ QtObject {
     property int animationSpeedFaster: 120 // 动画速度 (ms)
     property int appearanceSpeed: 175 // 界面切换速度 (ms)
     property int animationSpeedMiddle: 450 // 动画速度 (ms)
+    property int progressBarAnimationSpeed: 1550 // 进度条动画速度 (ms)
 }

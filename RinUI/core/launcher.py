@@ -37,12 +37,14 @@ class RinUIWindow:
         if hasattr(self, "_initialized") and self._initialized:
             return
         self._initialized = True
+        print("✨ RinUIWindow Initializing")
 
         self.engine = QQmlApplicationEngine()
         self.theme_manager = ThemeManager()
         self.qml_path = qml_path
 
         self._setup_application()
+        self.print_startup_info()
 
         # 退出清理
         app_instance = QCoreApplication.instance()
@@ -84,6 +86,16 @@ class RinUIWindow:
         self.theme_manager.set_window(self.root_window)
         self.theme_manager.apply_backdrop_effect(self.theme_manager.get_backdrop_effect())
         self.theme_manager.apply_window_effects()
+
+    def print_startup_info(self):
+        border = "=" * 40
+        print(f"\n{border}")
+        print("✨ RinUIWindow Loaded Successfully!")
+        print(f"QML File Path: {self.qml_path}")
+        print(f"Current Theme: {self.theme_manager.current_theme}")
+        print(f"Backdrop Effect: {self.theme_manager.get_backdrop_effect()}")
+        print(f"OS: {sys.platform}")
+        print(border + "\n")
 
 
 if __name__ == "__main__":
