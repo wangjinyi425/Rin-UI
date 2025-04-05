@@ -2,6 +2,7 @@ import sys
 
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
+from datetime import datetime
 
 import RinUI
 from RinUI import RinUIWindow
@@ -10,6 +11,7 @@ from RinUI import RinUIWindow
 class Gallery(RinUIWindow):
     def __init__(self):
         super().__init__("gallery.qml")
+        self.setProperty("title", f"RinUI Gallery {datetime.now().year}")  # 前后端交互示例
 
 
 if __name__ == '__main__':

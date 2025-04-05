@@ -28,6 +28,11 @@ FluentWindow {
             icon: "ic_fluent_chat_20_regular"
         });
         navItems.append({
+            title: "Text & Typography",
+            page: Qt.resolvedUrl("pages/Text.qml"),
+            icon: "ic_fluent_text_font_20_regular"
+        });
+        navItems.append({
             title: "Error Interface Test",
             page: Qt.resolvedUrl("unexist/page"),
             icon: null

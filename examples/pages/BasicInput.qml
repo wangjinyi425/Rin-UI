@@ -142,36 +142,6 @@ FluentPage {
 
         Text {
             typography: Typography.Subtitle
-            text: qsTr("TextField")
-        }
-        Text {
-            width: parent.width
-            typography: Typography.Body
-            text: qsTr("Use a TextField to let a user enter simple text input in your app.")
-        }
-
-        Frame {
-            width: parent.width
-
-            Row {
-                width: parent.width
-                spacing: 4
-                TextField {
-                    placeholderText: "A simple TextField."
-                }
-                TextField {
-                    placeholderText: "A simple TextField."
-                }
-            }
-        }
-    }
-
-    Column {
-        Layout.fillWidth: true
-        spacing: 4
-
-        Text {
-            typography: Typography.Subtitle
             text: qsTr("Switch")
         }
         Text {

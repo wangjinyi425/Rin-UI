@@ -87,6 +87,14 @@ class RinUIWindow:
         self.theme_manager.apply_backdrop_effect(self.theme_manager.get_backdrop_effect())
         self.theme_manager.apply_window_effects()
 
+    def __getattr__(self, name):
+        """获取 QML 窗口属性"""
+        try:
+            root = object.__getattribute__(self, "root_window")
+            return getattr(root, name)
+        except AttributeError:
+            raise AttributeError(f"\"RinUIWindow\" object has no attribute '{name}'")
+
     def print_startup_info(self):
         border = "=" * 40
         print(f"\n{border}")
