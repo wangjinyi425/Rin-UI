@@ -8,8 +8,7 @@ FluentPage {
     spacing: 3
 
     Text {
-        typography: Typography.Body
-        font.bold: true
+        typography: Typography.BodyStrong
         text: "Appearances"
     }
 

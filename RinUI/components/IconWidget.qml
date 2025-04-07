@@ -1,17 +1,22 @@
 import QtQuick 2.15
 import "../components"
 import "../themes"
-import "../assets/fonts/FluentSystemIcons_Index.js" as Icons
+import "../assets/fonts/FluentSystemIcons-Index.js" as Icons
 
 
 Item {
-    property string icon: ""  // 可以是字体图标（如 "\uf103"）或图片路径（如 "icons/image.png"）
+    id: root
+    property string icon: ""  // 字体图标（如 "\uf103"）
+    property string source: ""  // 图片路径（如 "icons/image.png"）
     property alias color: text.color
-    property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
+    // property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
+    property string fontSource: Qt.resolvedUrl("../assets/fonts/FluentSystemIcons-Resizable.ttf")  // 字体图标路径
+
     property int size: 16
 
     // 计算是否是字体图标
-    property bool isFontIcon: icon.length === 1  // 判断是否为单字符（字体图标通常是单个字符）
+    property bool isUnicode: icon.length === 1  // 判断是否为单字符（字体图标通常是单个字符）
+    property bool isFontIcon: source === ""  // 判断是否为字体图标
 
     // 匹配尺寸
     implicitWidth: size
@@ -25,8 +30,6 @@ Item {
         }
     }
 
-    visible: icon !== ""
-
     FontLoader {
         id: iconFont
         source: fontSource
@@ -38,7 +41,7 @@ Item {
         id: text
         anchors.centerIn: parent
         // text: isFontIcon ? icon : ""  // 仅当 `icon` 是单字符时显示
-        text: isFontIcon ? icon : String.fromCharCode(Icons.FluentIcons[icon])  // 显示 FluentSystemIcons 字体图标
+        text: isUnicode ? icon : String.fromCharCode(Icons.FluentIcons[icon])  // 显示 FluentSystemIcons 字体图标
         font.family: iconFont.name
         font.pixelSize: size
     }
@@ -46,10 +49,9 @@ Item {
     Image {
         id: iconImage
         anchors.centerIn: parent
-        source: isFontIcon ? "" : icon  // 仅当 `icon` 不是字体图标时加载图片
+        source: root.source  // 仅当 `icon` 不是字体图标时加载图片
         width: size
         height: size
         fillMode: Image.PreserveAspectFit  // 适配图片大小
-        visible: !isFontIcon  // 仅当 `icon` 是图片路径时可见
     }
 }

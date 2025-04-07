@@ -9,12 +9,13 @@ FluentWindowBase {
     visible: true
     title: qsTr("Hello World")
 
-    Text {
-        id: helloWorld
-        text: Theme.currentTheme.name
-    }
+    Flow {
+        Text {
+            id: helloWorld
+            text: Theme.currentTheme.name
+        }
 
-    ComboBox {
+        ComboBox {
             property var data: ["Light", "Dark", "Auto"]
             model: ["Light", "Dark", "Use system setting"]
             currentIndex: data.indexOf(Theme.getTheme())
@@ -22,4 +23,38 @@ FluentWindowBase {
                 Theme.setTheme(data[currentIndex])
             }
         }
+        Button {
+            text: qsTr("Click me")
+            onClicked: {
+                floatLayer.infoBarCreate({
+                    title: "Hello World",
+                    text: "This is a test.",
+                    severity: Severity.Warning,
+                    position: Position.TopLeft,
+                })
+            }
+        }
+        Button {
+            text: qsTr("Click me")
+            onClicked: {
+                floatLayer.infoBarCreate({
+                    title: "Hello World",
+                    text: "This is a test.",
+                    severity: Severity.Info,
+                    position: Position.Top,
+                })
+            }
+        }
+        Button {
+            text: qsTr("Click me")
+            onClicked: {
+                floatLayer.infoBarCreate({
+                    title: "Hello World",
+                    text: "This is a test.",
+                    severity: Severity.Success,
+                    position: Position.TopRight,
+                })
+            }
+        }
+    }
 }

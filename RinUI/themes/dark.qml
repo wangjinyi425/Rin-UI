@@ -38,7 +38,7 @@ QtObject {
         property color subtleColor: "transparent"
         property color subtleSecondaryColor: Qt.alpha("#ffffff", 0.0605)
         property color subtleTertiaryColor: Qt.alpha("#ffffff", 0.0419)
-        property color captionCloseColor: systemCriticalColor
+        property color captionCloseColor: "#c42b1c"
         property color captionCloseTextColor: "#ffffff"
 
         // Layer
@@ -55,17 +55,17 @@ QtObject {
         property color disabledColor: "#ffffff"
 
         // System Colors
-        property color systemAttentionColor: "#005fb7"
-        property color systemSuccessColor: "#0f7b0f"
-        property color systemCautionColor: "#9d5d00"
-        property color systemCriticalColor: "#c42b1c"
-        property color systemNeutralColor: "#8d8d8d"
+        property color systemAttentionColor: primaryColor
+        property color systemSuccessColor: "#6ccb5f"
+        property color systemCautionColor: "#fce100"
+        property color systemCriticalColor: "#ff99a4"
+        property color systemNeutralColor: "#9f9f9f"
 
-        property color systemAttentionBackgroundColor: Qt.alpha("#f6f6f6", 0.1)
-        property color systemSuccessBackgroundColor: "#dff6dd"
-        property color systemCautionBackgroundColor: "#fff4ce"
-        property color systemCirticalBackgroundColor: "#fde7e9"
-        property color systemNeutralBackgroundColor: Qt.alpha("#000000", 0.0241)
+        property color systemAttentionBackgroundColor: "#2e2e2e"
+        property color systemSuccessBackgroundColor: "#393d1b"
+        property color systemCautionBackgroundColor: "#433519"
+        property color systemCriticalBackgroundColor: "#442726"
+        property color systemNeutralBackgroundColor: "#333333"
     }
 
     // Appearance //
@@ -115,7 +115,7 @@ QtObject {
     // Typography //
     property QtObject typography: QtObject {
         property string fontFamily: "Microsoft YaHei"
-        property string fontIcon: "FluentSystemIcons-Regular.ttf"  // 字体图标路径 / font icon (put it in the "assets/fonts" folder)
+        // property string fontIcon: "FluentSystemIcons-Resizeable.ttf"  // 字体图标路径 / font icon (put it in the "assets/fonts" folder)
         // Font Sizes
         property int displaySize: 68
         property int titleLargeSize: 40
@@ -123,6 +123,7 @@ QtObject {
         property int subtitleSize: 20
         property int bodyLargeSize: 18
         property int bodySize: 14
+        property int bodyStrongSize: 14
         property int captionSize: 12
     }
 }

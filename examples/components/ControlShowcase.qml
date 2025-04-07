@@ -34,7 +34,7 @@ Frame {
             radius: Theme.currentTheme.appearance.cardRadius
             color: Theme.currentTheme.colors.backgroundAcrylicColor
             border.width: Theme.currentTheme.appearance.borderWidth
-            border.color: Qt.alpha(Theme.currentTheme.colors.controlQuaternaryColor, 0.0578)
+            border.color: Theme.currentTheme.colors.cardBorderColor
 
             Column {
                 id: showcaseContainer

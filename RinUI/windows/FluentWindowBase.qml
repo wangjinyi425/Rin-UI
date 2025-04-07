@@ -25,6 +25,7 @@ ApplicationWindow {
 
     // 直接添加子项
     default property alias content: contentArea.children
+    property alias floatLayer: floatLayer
 
     // 最大化样式
     onVisibilityChanged: {
@@ -35,6 +36,12 @@ ApplicationWindow {
             background.radius = Theme.currentTheme.appearance.windowRadius
             background.border.width = 1
         }
+    }
+
+    FloatLayer {
+        id: floatLayer
+        anchors.topMargin: titleBarHeight
+        z: 998
     }
 
     // 布局

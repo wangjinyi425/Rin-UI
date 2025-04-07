@@ -21,6 +21,11 @@ ToolButton 1.0 ToolButton.qml
 Switch 1.0 Switch.qml
 Indicator 1.0 Indicator.qml
 TextField 1.0 TextField.qml
+InfoBar 1.0 InfoBar.qml
 
 singleton Theme 1.0 ../themes/theme.qml
-singleton Typography 1.0 Typography.qml
+singleton Typography 1.0 ../utils/Typography.qml
+singleton Severity 1.0 ../utils/Severity.qml
+singleton Position 1.0 ../utils/Position.qml
+
+FloatLayer 1.0 ../utils/FloatLayer.qml

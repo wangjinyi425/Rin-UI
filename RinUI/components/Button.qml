@@ -16,6 +16,10 @@ Button {
         control: parent
     }
 
+    padding: 6
+    topPadding: 5
+    bottomPadding: 7
+
     background: Rectangle {
         id: border
         anchors.fill: parent
@@ -51,19 +55,19 @@ Button {
 
     contentItem: Row {
         anchors.centerIn: parent
+        width: parent.width
         spacing: 8
         IconWidget {
             id: iconWidget
-            size: icon ? text.font.pixelSize * 1.25 : 0
-            icon: root.icon.name ? root.icon.name : root.icon.source
+            size: icon || source ? text.font.pixelSize * 1.25 : 0  // 图标大小 / Icon Size
+            icon: root.icon.name
+            source: root.icon.source
             color: highlighted ? flat ?
                 enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
                 Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
         }
         Text {
             id: text
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 1
             typography: Typography.Body
             text: root.text
             color: highlighted ? flat ? Theme.currentTheme.colors.textAccentColor :

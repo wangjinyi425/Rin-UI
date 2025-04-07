@@ -56,7 +56,7 @@ ComboBox {
         anchors.right: parent.right
         anchors.rightMargin: 11  // 右边距
         anchors.verticalCenter: parent.verticalCenter
-        icon: "\uf2a2"
+        icon: "ic_fluent_chevron_down_20_regular"
         size: 16
         color: Theme.currentTheme.colors.textSecondaryColor
     }

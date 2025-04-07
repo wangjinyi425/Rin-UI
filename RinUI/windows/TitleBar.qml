@@ -9,7 +9,7 @@ Item {
     id: root
     property int titleBarHeight: Theme.currentTheme.appearance.dialogTitleBarHeight
     property alias title: titleLabel.text
-    property alias icon: iconLabel.icon
+    property alias icon: iconLabel.source
     property alias backgroundColor: rectBk.color
 
     // 自定义属性
@@ -77,7 +77,7 @@ Item {
         }
         CtrlBtn {
             mode: 0
-            icon: (toggleMaximized(4) === Window.Maximized)? "\ueb95" : "\ue1aa"
+            // icon: (toggleMaximized(4) === Window.Maximized)? "\ueb95" : "\ue1aa"
 
         }
         CtrlBtn {

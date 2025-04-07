@@ -15,7 +15,7 @@ Item {
     property alias currentIndex: listView.currentIndex
     property bool titleBarEnabled: true
     property alias windowTitle: titleLabel.text
-    property alias windowIcon: iconLabel.icon
+    property alias windowIcon: iconLabel.source
     property var stackView: parent.stackView
     property ListModel lastIndex: ListModel {}  // 记录的索引
 
@@ -34,7 +34,7 @@ Item {
         // 返回按钮
         ToolButton {
             anchors.verticalCenter: parent.verticalCenter
-            icon.name: "\uf15b"
+            icon.name: "ic_fluent_arrow_left_20_regular"
             onClicked: stackView.safePop()
             width: 40
             height: 40
@@ -110,7 +110,8 @@ Item {
                         id: icon
                         anchors.verticalCenter: parent.verticalCenter
                         size: 16
-                        icon: ! model.icon ? "\ue8a1" : model.icon
+                        icon: ! model.icon ? "ic_fluent_circle_20_regular" :
+                            model.icon
                     }
 
                     Text {

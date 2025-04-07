@@ -10,6 +10,7 @@ QtObject {
         Title,
         Subtitle,
         Body,
+        BodyStrong,
         BodyLarge,
         Caption
     }

@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "../themes"
+import "../utils"
 
 Text {
     id: label
@@ -24,6 +25,7 @@ Text {
             case Typography.Title: return Theme.currentTheme.typography.titleSize;
             case Typography.Subtitle: return Theme.currentTheme.typography.subtitleSize;
             case Typography.Body: return Theme.currentTheme.typography.bodySize;
+            case Typography.BodyStrong: return Theme.currentTheme.typography.bodyStrongSize;
             case Typography.BodyLarge: return Theme.currentTheme.typography.bodyLargeSize;
             case Typography.Caption: return Theme.currentTheme.typography.captionSize;
             default: return Theme.currentTheme.typography.bodySize;
@@ -34,5 +36,6 @@ Text {
                typography === Typography.TitleLarge ||
                typography === Typography.Title ||
                typography === Typography.Subtitle ||
-               typography === Typography.BodyLarge
+               typography === Typography.BodyLarge ||
+               typography === Typography.BodyStrong
 }

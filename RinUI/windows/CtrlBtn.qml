@@ -52,8 +52,31 @@ Base {
     // 按钮图标
     IconWidget {
         id: icon
-        icon: mode === 0 ? "\ue1aa" : mode === 1 ? "\uebd0" : mode === 2 ? "\uf369" : "○"
-        size: 16
+        // icon: {
+        //     switch (mode) {
+        //         case 1: // 最大化
+        //             return "ic_fluent_dismiss_square_multiple_20_regular"
+        //         case 0:  // 最小化
+        //             return window.visibility === Window.Minimized ?
+        //                 "ic_fluent_square_multiple_20_regular" :
+        //                 "ic_fluent_square_20_regular"
+        //         case 2:  // close
+        //             return "ic_fluent_dismiss_20_regular"
+        //         default:
+        //             return "ic_fluent_square_multiple_20_regular"
+        //     }
+        // }
+        icon: mode === 0 ?
+                window.visibility === Window.Maximized ?
+                    "ic_fluent_square_multiple_20_regular" :
+                    "ic_fluent_square_20_regular" :
+            mode === 1 ?
+                "ic_fluent_subtract_20_regular" :
+            mode === 2 ?
+                "ic_fluent_dismiss_20_regular"
+            :
+                "ic_fluent_circle_20_regular"
+        size: mode === 0 ? 14 : 16
         anchors.centerIn: parent
     }
 

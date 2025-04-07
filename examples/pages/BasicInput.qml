@@ -67,12 +67,12 @@ FluentPage {
                     }
                 }
                 Button {
-                    text: "Button"
-                    icon.name: Qt.resolvedUrl("../assets/banner.png")
+                    text: "Buttcon"
+                    icon.source: Qt.resolvedUrl("../assets/banner.png")
                     enabled: disableSwitch.checked
 
                     Tooltip {
-                        text: "icon.name: Qt.resolvedUrl(\"../assets/banner.png\")"
+                        text: "icon.source: Qt.resolvedUrl(\"../assets/banner.png\")"
                         visible: parent.hovered
                     }
                 }
