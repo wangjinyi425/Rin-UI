@@ -23,21 +23,40 @@ FluentWindowBase {
                 Theme.setTheme(data[currentIndex])
             }
         }
+
+        Dialog {
+            id: dialog
+            title: "Dialog"
+            modal: true
+            Text {
+                text: "我喜欢你"
+            }
+            onAccepted: {
+                console.log("Accepted")
+            }
+            onRejected: {
+                console.log("Rejected")
+            }
+            standardButtons: Dialog.Ok | Dialog.Cancel
+        }
+
         Button {
             text: qsTr("Click me")
+            width: 200
             onClicked: {
-                floatLayer.infoBarCreate({
+                dialog.open()
+                floatLayer.createInfoBar({
                     title: "Hello World",
                     text: "This is a test.",
                     severity: Severity.Warning,
-                    position: Position.TopLeft,
+                    position: Position.BottomLeft,
                 })
             }
         }
         Button {
             text: qsTr("Click me")
             onClicked: {
-                floatLayer.infoBarCreate({
+                floatLayer.createInfoBar({
                     title: "Hello World",
                     text: "This is a test.",
                     severity: Severity.Info,
@@ -48,7 +67,7 @@ FluentWindowBase {
         Button {
             text: qsTr("Click me")
             onClicked: {
-                floatLayer.infoBarCreate({
+                floatLayer.createInfoBar({
                     title: "Hello World",
                     text: "This is a test.",
                     severity: Severity.Success,

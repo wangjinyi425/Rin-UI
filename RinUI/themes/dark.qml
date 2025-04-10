@@ -35,6 +35,8 @@ QtObject {
         property color backgroundColor: "#202020"
         property color windowBorderColor: Qt.alpha("#757575", 0.0698)
         property color backgroundAcrylicColor: "#2c2c2c"
+        property color backgroundSmokeColor: Qt.alpha("#000000", 0.3)
+
         property color subtleColor: "transparent"
         property color subtleSecondaryColor: Qt.alpha("#ffffff", 0.0605)
         property color subtleTertiaryColor: Qt.alpha("#ffffff", 0.0419)

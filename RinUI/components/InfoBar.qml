@@ -126,7 +126,7 @@ Frame {
 
             Item {
                 width: parent.width
-                height: bodyText.wrap ? 16 : 0
+                height: bodyText.wrap && custom.children.length > 0 ? 16 : 0
             }
             Row {
                 id: custom

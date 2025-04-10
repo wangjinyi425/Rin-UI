@@ -52,6 +52,7 @@ Item {
         source: root.source  // 仅当 `icon` 不是字体图标时加载图片
         width: size
         height: size
+        mipmap: true
         fillMode: Image.PreserveAspectFit  // 适配图片大小
     }
 }

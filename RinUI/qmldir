@@ -25,6 +25,7 @@ SettingCard 1.0 components/SettingCard.qml
 
 FluentWindow 1.0 windows/FluentWindow.qml
 FluentWindowBase 1.0 windows/FluentWindowBase.qml
+Dialog 1.0 windows/Dialog.qml
 CtrlBtn 1.0 windows/CtrlBtn.qml
 FluentPage 1.0 windows/FluentPage.qml
 NavigationBar 1.0 windows/NavigationBar.qml

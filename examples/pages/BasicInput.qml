@@ -67,7 +67,7 @@ FluentPage {
                     }
                 }
                 Button {
-                    text: "Buttcon"
+                    text: "Button"
                     icon.source: Qt.resolvedUrl("../assets/banner.png")
                     enabled: disableSwitch.checked
 

@@ -135,6 +135,7 @@ FluentPage {
                     }
                 }
                 Row {
+                    spacing: 6
                     Button {
                         text: qsTr("Popup!")
                         highlighted: true

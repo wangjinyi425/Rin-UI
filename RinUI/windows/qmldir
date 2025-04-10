@@ -1,3 +1,5 @@
+module RinUI.windows
+
 FluentWindowBase 1.0 FluentWindowBase.qml
 FluentWindow 1.0 FluentWindow.qml
 TitleBar 1.0 TitleBar.qml
@@ -5,3 +7,6 @@ FluentPage 1.0 FluentPage.qml
 NavigationBar 1.0 NavigationBar.qml
 CtrlBtn 1.0 CtrlBtn.qml
 ErrorPage 1.0 ErrorPage.qml
+
+Dialog 1.0 Dialog.qml
+DialogButtonBox 1.0 DialogButtonBox.qml

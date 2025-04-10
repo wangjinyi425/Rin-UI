@@ -35,6 +35,8 @@ QtObject {
         property color backgroundColor: "#F3F3F3"
         property color windowBorderColor: Qt.alpha("#757575", 0.0924)
         property color backgroundAcrylicColor: "#F9F9F9"
+        property color backgroundSmokeColor: Qt.alpha("#000000", 0.3)
+
         property color subtleColor: "transparent"
         property color subtleSecondaryColor: Qt.alpha("#000000", 0.0373)
         property color subtleTertiaryColor: Qt.alpha("#000000", 0.0241)
@@ -91,7 +93,7 @@ QtObject {
     // Shadows //
     property var shadows: {
         "dialog": {
-            "color": Qt.alpha("#000000", 0.37),  // 模糊颜色
+            "color": Qt.alpha("#000000", 0.19),  // 模糊颜色
             "blur": 64,  // 模糊度
             "offsetY": 32
         },

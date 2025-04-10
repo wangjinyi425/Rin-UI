@@ -23,9 +23,14 @@ FluentWindow {
             icon: "ic_fluent_checkbox_checked_20_regular"
         });
         navItems.append({
+            title: "Dialogs & Flyouts",
+            page: Qt.resolvedUrl("pages/DialogsAndFlyouts.qml"),
+            icon: "ic_fluent_chat_20_regular"
+        });
+        navItems.append({
             title: "Status & Info",
             page: Qt.resolvedUrl("pages/StatusAndInfo.qml"),
-            icon: "ic_fluent_chat_20_regular"
+            icon: "ic_fluent_chat_multiple_minus_20_regular"
         });
         navItems.append({
             title: "Text & Typography",

@@ -53,25 +53,31 @@ Button {
         opacity: flat && !hovered ? 0 : 1
     }
 
-    contentItem: Row {
-        anchors.centerIn: parent
-        width: parent.width
-        spacing: 8
-        IconWidget {
-            id: iconWidget
-            size: icon || source ? text.font.pixelSize * 1.25 : 0  // 图标大小 / Icon Size
-            icon: root.icon.name
-            source: root.icon.source
-            color: highlighted ? flat ?
-                enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
-                Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
-        }
-        Text {
-            id: text
-            typography: Typography.Body
-            text: root.text
-            color: highlighted ? flat ? Theme.currentTheme.colors.textAccentColor :
-                Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
+    implicitWidth: Math.max(iconWidget.width + text.width + 24, 88)
+    implicitHeight: Math.max(text.height + 12, 32)
+
+    contentItem: Item {
+        anchors.fill: parent
+
+        Row {
+            spacing: 8
+            anchors.centerIn: parent
+            IconWidget {
+                id: iconWidget
+                size: icon || source ? text.font.pixelSize * 1.25 : 0  // 图标大小 / Icon Size
+                icon: root.icon.name
+                source: root.icon.source
+                color: highlighted ? flat ?
+                    enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
+                    Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
+            }
+            Text {
+                id: text
+                typography: Typography.Body
+                text: root.text
+                color: highlighted ? flat ? Theme.currentTheme.colors.textAccentColor :
+                    Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
+            }
         }
     }
 

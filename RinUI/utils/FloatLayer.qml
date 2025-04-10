@@ -64,8 +64,8 @@ Item {
     Component {
         id: infoBarComponent
         InfoBar {
-            title: "Title"
-            text: "Text"
+            // title: "Title"
+            // text: "Text"
             severity: Severity.Info
             timeout: 1500
             Layout.fillWidth: true

@@ -14,6 +14,15 @@ Item {
 
     // 自定义属性
     property bool titleEnabled: true
+    property alias iconEnabled: iconLabel.visible
+    property bool minimizeEnabled: true
+    property bool maximizeEnabled: true
+    property bool closeEnabled: true
+
+    property alias minimizeVisible: minimizeBtn.visible
+    property alias maximizeVisible: maximizeBtn.visible
+    property alias closeVisible: closeBtn.visible
+
 
     height: titleBarHeight
     anchors.top: parent.top
@@ -22,23 +31,15 @@ Item {
     clip: true
     z: 999
 
-    property var window: null
-    function toggleMaximized(mode) {
-        if(mode===0){
-            if (window.visibility === Window.Maximized) {
-                window.showNormal();
-            } else {
-                window.showMaximized();
-            }
-        }else if(mode===1){
-            window.showMinimized()
-        }else if(mode===2){
-            window.close()
-        }else if(mode===4){
-            return window.visibility
-        }
-        return 0;
+    implicitWidth: 200
 
+    property var window: null
+    function toggleMaximized() {
+        if (window.visibility === Window.Maximized) {
+            window.showNormal();
+        } else {
+            window.showMaximized();
+        }
     }
 
     Rectangle{
@@ -55,8 +56,13 @@ Item {
             property point clickPos: "0,0"
 
             onPressed: clickPos = Qt.point(mouseX, mouseY)
-            onDoubleClicked: toggleMaximized(0)
+            onDoubleClicked: toggleMaximized()
             onPositionChanged: (mouse) => {
+                if (window.isMaximized || window.isFullScreen || window.visibility === Window.Maximized) {
+                    window.showNormal()
+                    return
+                }
+
                 //鼠标偏移量
                 let delta = Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
 
@@ -73,15 +79,20 @@ Item {
         anchors.bottom: parent.bottom
         spacing: 0
         CtrlBtn {
+            id: minimizeBtn
             mode: 1
+            enabled: root.minimizeEnabled
         }
         CtrlBtn {
+            id: maximizeBtn
             mode: 0
-            // icon: (toggleMaximized(4) === Window.Maximized)? "\ueb95" : "\ue1aa"
+            enabled: root.maximizeEnabled
 
         }
         CtrlBtn {
+            id: closeBtn
             mode: 2
+            enabled: root.closeEnabled
         }
     }
 
@@ -112,10 +123,4 @@ Item {
             text: qsTr("Fluent TitleBar")
         }
     }
-
-    // MouseArea {
-    //     width: root.height
-    //     height: root.height
-    //     // z: 1
-    // }
 }
