@@ -17,7 +17,7 @@ Dialog {
     padding: 24
     topPadding: 24
     bottomPadding: 24
-    implicitWidth: Math.min(implicitContentWidth + 48, Utils.dialogMaximumWidth)
+    implicitWidth: Math.max(Utils.dialogMinimumWidth, Math.min(implicitContentWidth + 48, Utils.dialogMaximumWidth))
 
     contentItem: ColumnLayout {
         spacing: 12

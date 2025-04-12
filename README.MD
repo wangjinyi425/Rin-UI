@@ -13,23 +13,40 @@
 
 ## 📄 Introduction
 
-RinUI is a Fluent Design-like Qt Quick (QML) UI library based on PySide6, This allows QML components to communicate with Python, such as the theme system. This UI library provides some high-quality Fluent style controls that can be used in your QML applications.
+RinUI is a UI library similar to Fluent Design for Qt Quick (QML), RinUI will provide high-quality components and practical functions. 
+With simple configuration, you can quickly develop elegant UI interfaces in the Fluent style.
 
 ### Features
-- [x] Fluent Design Style Controls (still in development)
-- [x] Light and Dark Mode and Theme System
-- [ ] Development Documentation
-- [ ] Gallery Examples
-- [ ] ……
+* Elegant Fluent Design controls (WIP)
+* Dark and light mode, automatic switching
+* Compatible with original QML control names
+* Multi-language support (WIP)
+* Theme system (WIP)
+* Development documentation, [preview](https://ui.rinlit.cn/) now. (WIP)
 
 ### Screenshots
-> Still in development……
+![Screenshot 1](/docs/img/shot_1.png)
+
+<details style="text-align: center">
+<summary>More screenshots...</summary>
+
+![img.png](/docs/img/img.png)
+![img_1.png](/docs/img/img_1.png)
+![img_2.png](/docs/img/img_2.png)
+![img_3.png](/docs/img/img_3.png)
+</details>
 
 ## 🪄 Usage
 
 You can install RinUI via pip: (coming soon, but now you can install via test-pypi)
 ```bash
-pip install RinUI
+pip install RinUI  # if RinUI in pypi
+
+# ↓ Test PyPI
+pip install PySide6 darkdetect  
+# There is no Release for these two packages in TestPypi. When RinUI is released to PyPi, this step can be omitted.
+pip install -i https://test.pypi.org/simple/ RinUI --no-deps
+```
 ```
 
 Import RinUI in your QML file:
@@ -49,16 +66,7 @@ You also can move the RinUI folder to anywhere in your project's directory.
 > The documentation is still in progress!!
 > You can view the source code to learn more about the components and themes at the moment.
 
-<details>
-<summary>How To Use?</summary>
-
-### Components
-Learn more about RinUI components in the [documentation](./docs/Components.MD).
-
-### Themes
-Learn more about RinUI themes in the [documentation](./docs/Themes.MD).
-
-</details>
+Now you can learn more about RinUI components and themes in [the online documentation](https://ui.rinlit.cn/).
 
 ## 🙌 Acknowledgements
 ### Resources
@@ -73,7 +81,7 @@ Thanks to the great people who contributed to this project.
 [![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
 
 ## 📜 License
-This project is licensed under the MIT License, you can learn more about it in the [license file](./LICENSE).
+This project is licensed under the **MIT** License, you can learn more about it in the [license file](./LICENSE).
 
 Copyright © 2025 RinLit
 

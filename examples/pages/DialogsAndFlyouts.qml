@@ -47,7 +47,7 @@ FluentPage {
 
         Text {
             typography: Typography.BodyStrong
-                text: "A basic content dialog with content."
+                text: "A dialog with basic content."
         }
         Frame {
             width: parent.width
@@ -59,6 +59,26 @@ FluentPage {
                 }
                 Text {
                     id: cuteText
+                    verticalAlignment: Qt.AlignVCenter
+                    text: qsTr("← Nyaa~ Click this Button ~UwU~")
+                }
+            }
+        }
+
+        Text {
+            typography: Typography.BodyStrong
+                text: "A dialog with custom content."
+        }
+        Frame {
+            width: parent.width
+            Row {
+                spacing: 8
+                Button {
+                    text: qsTr("Show Dialog")
+                    onClicked: basicDialog.open()
+                }
+                Text {
+                    id: cuteText2
                     verticalAlignment: Qt.AlignVCenter
                     text: qsTr("← Nyaa~ Click this Button ~UwU~")
                 }

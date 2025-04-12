@@ -109,7 +109,7 @@ Item {
                     IconWidget {
                         id: icon
                         anchors.verticalCenter: parent.verticalCenter
-                        size: 16
+                        size: 18
                         icon: ! model.icon ? "ic_fluent_circle_20_regular" :
                             model.icon
                     }

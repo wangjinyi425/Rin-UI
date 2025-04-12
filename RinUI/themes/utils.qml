@@ -7,6 +7,7 @@ QtObject {
     property color primaryColor: "#605ed2" // 默认主题色
     property int windowDragArea: 5 // 窗口可拖动范围 (px)
     property int dialogMaximumWidth: 600 // 对话框最大宽度 (px)
+    property int dialogMinimumWidth: 320 // 对话框最小宽度 (px)
 
     property bool backdropEnabled: false // 是否启用背景特效
     property int animationSpeed: 250 // 动画速度 (ms)
