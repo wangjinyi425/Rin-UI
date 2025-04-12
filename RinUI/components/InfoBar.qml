@@ -11,7 +11,7 @@ Frame {
     property int severity: Severity.Info
     property alias customContent: custom.data
     property int timeout: -1
-    property int position: null
+    property int position: 0
     property bool isDynamic: false  // 动态创建
     property bool closeable: true  // 显示关闭按钮
     property real startPosX: {
