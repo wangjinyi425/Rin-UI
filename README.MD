@@ -47,7 +47,6 @@ pip install PySide6 darkdetect
 # There is no Release for these two packages in TestPypi. When RinUI is released to PyPi, this step can be omitted.
 pip install -i https://test.pypi.org/simple/ RinUI --no-deps
 ```
-```
 
 Import RinUI in your QML file:
 ```qmllang
