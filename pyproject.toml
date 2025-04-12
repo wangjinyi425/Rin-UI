@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "RinUI"
-version = "0.0.1"
+version = "0.0.6"
 authors = [
     { name = "RinLit", email = "lintu233_qwq@icloud.com" }
 ]
@@ -31,7 +31,8 @@ RinUI = [
     "assets/**/*",
     "components/**/*",
     "themes/**/*",
-    "windows/**/*"
+    "windows/**/*",
+    "utils/**/*"
 ]
 
 [tool.setuptools.data-files]

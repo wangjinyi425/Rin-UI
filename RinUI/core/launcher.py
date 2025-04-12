@@ -7,6 +7,13 @@ from PySide6.QtQml import QQmlApplicationEngine
 from .theme import ThemeManager
 
 
+def resource_path(relative_path):
+    """兼容 PyInstaller 打包和开发环境的路径"""
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.abspath(relative_path)
+
+
 class TestWindow(QWidget):
     def __init__(self, theme_manager):
         super().__init__()
@@ -41,7 +48,7 @@ class RinUIWindow:
 
         self.engine = QQmlApplicationEngine()
         self.theme_manager = ThemeManager()
-        self.qml_path = qml_path
+        self.qml_path = resource_path(qml_path)
 
         self._setup_application()
         self.print_startup_info()
@@ -55,7 +62,7 @@ class RinUIWindow:
         """Setup"""
         # RInUI 模块
         rinui_path = os.path.abspath(os.path.dirname(__file__))  # RinUI/core 目录
-        rinui_import_path = os.path.abspath(os.path.join(rinui_path, "../../"))  # RinUI 目录
+        rinui_import_path = resource_path(os.path.join(rinui_path, "../../"))  # 使用 resource_path 处理路径
         print(f"UI Module Path: {rinui_import_path}")
 
         if os.path.exists(rinui_import_path):

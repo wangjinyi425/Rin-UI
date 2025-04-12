@@ -1,6 +1,6 @@
 import os
 import json
-
+import sys
 
 BASE_DIR = os.path.abspath(os.getcwd())
 PATH = os.path.join(BASE_DIR, "RinUI/config")
