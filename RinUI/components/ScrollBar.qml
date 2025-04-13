@@ -23,6 +23,7 @@ ScrollBar {
 
     verticalPadding : vertical ? 15 : 3
     horizontalPadding : horizontal ? 15 : 3
+    enabled: size < 1.0
 
 
     // 内容 / Content //

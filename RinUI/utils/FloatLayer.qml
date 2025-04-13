@@ -65,8 +65,6 @@ Item {
         InfoBar {
             // title: "Title"
             // text: "Text"
-            severity: Severity.Info
-            timeout: 1500
             Layout.fillWidth: true
         }
     }
@@ -75,13 +73,14 @@ Item {
     // Functions / 方法 //
     function createInfoBar( options = {} ){
         try{
-            const { title, text, severity, timeout, position } = options;
+            const { title, text, severity, timeout, position, closeable } = options;
             var infoContainer = infoBarComponent.createObject(determinePosition(position), {
-                title,
-                text,
-                severity,
-                position,
-                timeout
+                title: title || "",
+                text: text || "",
+                severity: severity ?? Severity.Info,
+                position: position || Position.Top,
+                timeout: timeout ?? 1500,
+                closeable: closeable ?? true
             });
 
             // return infoContainer;
