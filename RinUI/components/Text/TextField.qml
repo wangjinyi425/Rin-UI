@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls.Basic 2.15
-import "../themes"
+import "../../themes"
 
 TextField {
     id: root

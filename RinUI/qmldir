@@ -3,21 +3,34 @@ module RinUI
 singleton Theme 1.0 themes/theme.qml
 
 Shadow 1.0 components/Shadow.qml
-Button 1.0 components/Button.qml
-ToolButton 1.0 components/ToolButton.qml
-ComboBox 1.0 components/ComboBox.qml
-Switch 1.0 components/Switch.qml
-Text 1.0 components/Text.qml
+
+# Basic Input
+Button 1.0 components/BasicInput/Button.qml
+ToolButton 1.0 components/BasicInput/ToolButton.qml
+ComboBox 1.0 components/BasicInput/ComboBox.qml
+Switch 1.0 components/BasicInput/Switch.qml
+Hyperlink 1.0 components/BasicInput/Hyperlink.qml
+RadioButton 1.0 components/BasicInput/RadioButton.qml
+CheckBox 1.0 components/BasicInput/CheckBox.qml
+Slider 1.0 components/BasicInput/Slider.qml
+
+
+# Text
+Text 1.0 components/Text/Text.qml
+TextField 1.0 components/Text/TextField.qml
+
+
+# Status & Info
+InfoBar 1.0 components/StatusAndInfo/InfoBar.qml
+ProgressBar 1.0 components/StatusAndInfo/ProgressBar.qml
+Tooltip 1.0 components/StatusAndInfo/Tooltip.qml
+
+
 ScrollViewer 1.0 components/ScrollViewer.qml
 RinScrollBar 1.0 components/RinScrollBar.qml
-Tooltip 1.0 components/Tooltip.qml
-IconWidget 1.0 components/IconWidget.qml
-Slider 1.0 components/Slider.qml
-ProgressBar 1.0 components/ProgressBar.qml
-Hyperlink 1.0 components/Hyperlink.qml
-TextField 1.0 components/TextField.qml
 
-InfoBar 1.0 components/InfoBar.qml
+IconWidget 1.0 components/IconWidget.qml
+
 
 ContextMenu 1.0 components/ContextMenu.qml
 Frame 1.0 components/Frame.qml

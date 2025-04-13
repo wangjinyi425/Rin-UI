@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
-import "../themes"
-import "../utils"
+import "../../themes"
+import "../../utils"
 
 Text {
     id: label

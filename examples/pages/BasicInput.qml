@@ -142,6 +142,42 @@ FluentPage {
 
         Text {
             typography: Typography.Subtitle
+            text: qsTr("Radio Button")
+        }
+        Text {
+            width: parent.width
+            typography: Typography.Body
+            text: qsTr("Use RadioButtons to let a user choose between mutually exclusive, "+
+            "related options. Generally contained within a RadioButtons group control.")
+        }
+
+        Frame {
+            width: parent.width
+
+            Column {
+                spacing: 4
+                RadioButton {
+                    text: "Option 1"
+                }
+                RadioButton {
+                    text: "Option 2"
+                }
+                RadioButton {
+                    text: "Option 3"
+                }
+                RadioButton {
+                    text: "Option 4"
+                }
+            }
+        }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+
+        Text {
+            typography: Typography.Subtitle
             text: qsTr("Switch")
         }
         Text {

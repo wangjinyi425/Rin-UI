@@ -29,7 +29,6 @@ ApplicationWindow {
 
     // 最大化样式
     onVisibilityChanged: {
-        flags: Qt.FramelessWindowHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint
         if (baseWindow.visibility === Window.Maximized) {
             background.radius = 0
             background.border.width = 0

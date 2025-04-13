@@ -1,27 +1,41 @@
 module RinUI.Components
 
 Base 1.0 Base.qml
-ButtonBase 1.0 ButtonBase.qml
 Shadow 1.0 Shadow.qml
 FocusIndicator 1.0 FocusIndicator.qml
 
-Text 1.0 Text.qml
+
 IconWidget 1.0 IconWidget.qml
-Tooltip 1.0 Tooltip.qml
+
 ContextMenu 1.0 ContextMenu.qml
-Slider 1.0 Slider.qml
-ProgressBar 1.0 ProgressBar.qml
+
+
 ScrollBar 1.0 ScrollBar.qml
 ScrollView 1.0 ScrollView.qml
 
-Button 1.0 Button.qml
-HyperlinkButton 1.0 HyperlinkButton.qml
-Hyperlink 1.0 Hyperlink.qml
-ToolButton 1.0 ToolButton.qml
-Switch 1.0 Switch.qml
+# Basic Input
+Button 1.0 BasicInput/Button.qml
+HyperlinkButton 1.0 BasicInput/HyperlinkButton.qml
+Slider 1.0 BasicInput/Slider.qml
+Hyperlink 1.0 BasicInput/Hyperlink.qml
+ToolButton 1.0 BasicInput/ToolButton.qml
+Switch 1.0 BasicInput/Switch.qml
+RadioButton 1.0 BasicInput/RadioButton.qml
+
+# Status & Info
+InfoBar 1.0 StatusAndInfo/InfoBar.qml
+ProgressBar 1.0 StatusAndInfo/ProgressBar.qml
+Tooltip 1.0 StatusAndInfo/Tooltip.qml
+
+
+# Text
+TextField 1.0 Text/TextField.qml
+Text 1.0 Text/Text.qml
+
+
 Indicator 1.0 Indicator.qml
-TextField 1.0 TextField.qml
-InfoBar 1.0 InfoBar.qml
+
+
 
 singleton Theme 1.0 ../themes/theme.qml
 singleton Typography 1.0 ../utils/Typography.qml

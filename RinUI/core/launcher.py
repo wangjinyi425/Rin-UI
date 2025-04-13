@@ -85,14 +85,15 @@ class RinUIWindow:
 
         self.root_window = self.engine.rootObjects()[0]
 
-        if sys.platform == "win32":
-            self._apply_windows_effects()
+        self._apply_windows_effects()
 
     def _apply_windows_effects(self):
         """应用 Windows DWM 效果"""
         self.theme_manager.set_window(self.root_window)
-        self.theme_manager.apply_backdrop_effect(self.theme_manager.get_backdrop_effect())
-        self.theme_manager.apply_window_effects()
+        if sys.platform == "win32":
+            # enable_native_window_behavior(self.root_window)
+            self.theme_manager.apply_backdrop_effect(self.theme_manager.get_backdrop_effect())
+            self.theme_manager.apply_window_effects()
 
     def __getattr__(self, name):
         """获取 QML 窗口属性"""
