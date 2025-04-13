@@ -6,7 +6,7 @@ import "../themes"
 
 Item {
     id: navigationBar
-    implicitWidth: collapsed ? 50 : 250
+    implicitWidth: collapsed ? 40 : navigationBarWidth
     height: parent.height
 
     property bool collapsed: false
@@ -15,15 +15,17 @@ Item {
     }
     property alias currentIndex: listView.currentIndex
     property bool titleBarEnabled: true
+    property int navigationBarWidth: 280
     property alias windowTitle: titleLabel.text
     property alias windowIcon: iconLabel.source
     property var stackView: parent.stackView
     property ListModel lastIndex: ListModel {}  // 记录的索引
 
+    // 展开收缩动画 //
     Behavior on implicitWidth {
         NumberAnimation {
-            duration: Utils.animationSpeedMiddle
-            easing.type: Easing.InOutQuint
+            duration: Utils.animationSpeed
+            easing.type: Easing.OutQuint
         }
     }
 
@@ -34,10 +36,6 @@ Item {
         height: titleBarHeight
         spacing: 16
         visible: navigationBar.titleBarEnabled
-
-        Component.onCompleted: {
-            console.log(titleBarHeight)
-        }
 
         // 返回按钮
         ToolButton {
@@ -77,33 +75,29 @@ Item {
     // 收起切换按钮
     ToolButton {
         id: collapseButton
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 16
-        anchors.rightMargin: 10
-        width: 30
-        height: 30
-        icon.name: collapsed ? "ic_fluent_chevron_right_20_regular" : "ic_fluent_chevron_left_20_regular"
-        
+        width: 40
+        height: 38
+        // icon.name: collapsed ? "ic_fluent_chevron_right_20_regular" : "ic_fluent_chevron_left_20_regular"
+        icon.name: "ic_fluent_navigation_20_regular"
+        size: 19
+
         onClicked: {
             collapsed = !collapsed
         }
-        
+
         Tooltip {
             parent: parent
             delay: 500
-            visible: parent.hovered
-            text: collapsed ? qsTr("Expand") : qsTr("Collapse")
+            visible: parent.hovered && !parent.pressed
+            text: collapsed ? qsTr("Open Navigation") : qsTr("Close Navigation")
       }
     }
 
     ListView {
         id: listView
         clip: true
-        spacing: 4  // 增加项目间距
         anchors.fill: parent
-        anchors.topMargin: 10
-        anchors.bottomMargin: 60  // 为收起按钮留出空间
+        anchors.topMargin: 40
         model: navModel
         currentIndex: -1
 
@@ -135,14 +129,14 @@ Item {
                     spacing: 16
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: 16
+                    anchors.leftMargin: 11
                     anchors.topMargin: 6
                     anchors.bottomMargin: 8
 
                     IconWidget {
                         id: icon
                         anchors.verticalCenter: parent.verticalCenter
-                        size: 18
+                        size: 19
                         icon: !model.icon ? "ic_fluent_circle_20_regular" : model.icon
                     }
 
@@ -151,23 +145,21 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         typography: Typography.Body
                         text: model.title
-                        width: navigationBar.collapsed ? 0 : implicitWidth
                         clip: true
                         opacity: navigationBar.collapsed ? 0 : 1
                         wrapMode: Text.NoWrap
                         horizontalAlignment: Text.AlignLeft
-                        
-                        Behavior on width {
+
+                        Behavior on x {
                             NumberAnimation {
-                                duration: Utils.animationSpeedMiddle
+                                duration: Utils.appearanceSpeed
                                 easing.type: Easing.InOutQuint
                             }
                         }
                         
                         Behavior on opacity {
                             NumberAnimation {
-                                duration: Utils.animationSpeedMiddle
-                                easing.type: Easing.InOutQuint
+                                duration: Utils.appearanceSpeed
                             }
                         }
                     }
@@ -216,7 +208,7 @@ Item {
                 navigationBar.lastIndex.append({ index: listView.currentIndex })
                 listView.currentIndex = index
                 navigationBar.currentIndex = index
-                console.log(navigationBar.lastIndex)
+                // console.log(navigationBar.lastIndex)
             }
         }
     }

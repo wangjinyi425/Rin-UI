@@ -1,9 +1,12 @@
 pragma Singleton
 import QtQuick 2.15
 import "../themes"
+import "../utils"
 
 QtObject {
-    property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
+    property string iconFontFamily: FontIconLoader.name
+    property string fontSource: Qt.resolvedUrl("../assets/fonts/FluentSystemIcons-Resizable.ttf")  // 字体图标路径
+
     property color primaryColor: "#605ed2" // 默认主题色
     property int windowDragArea: 5 // 窗口可拖动范围 (px)
     property int dialogMaximumWidth: 600 // 对话框最大宽度 (px)

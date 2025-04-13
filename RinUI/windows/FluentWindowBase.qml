@@ -29,6 +29,7 @@ ApplicationWindow {
 
     // 最大化样式
     onVisibilityChanged: {
+        flags: Qt.FramelessWindowHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint
         if (baseWindow.visibility === Window.Maximized) {
             background.radius = 0
             background.border.width = 0
@@ -102,7 +103,7 @@ ApplicationWindow {
     //改变鼠标形状
     MouseArea {
         anchors.fill: parent
-        hoverEnabled: true
+        hoverEnabled: baseWindow.visibility !== Window.Maximized
         z: -1
         cursorShape: {
             const p = Qt.point(mouseX, mouseY)
@@ -121,7 +122,7 @@ ApplicationWindow {
         id: resizeHandler
         grabPermissions: TapHandler.TakeOverForbidden
         target: null
-        onActiveChanged: if (active) {
+        onActiveChanged: if (active && baseWindow.visibility !== Window.Maximized) {
             const p = resizeHandler.centroid.position
             const b = Utils.windowDragArea + 10
             let e = 0;

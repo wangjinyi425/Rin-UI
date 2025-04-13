@@ -1,6 +1,25 @@
 import os
 import json
-import sys
+import platform
+
+
+def is_win11():
+    if platform.system() == 'Windows':
+        if platform.release() == '10' and int(platform.version().split('.')[2]) >= 22000:
+            return True
+    return False
+
+
+def is_win10():
+    if platform.system() == 'Windows':
+        if platform.release() == '10' and int(platform.version().split('.')[2]) >= 19045:
+            return True
+    return False
+
+
+def is_windows():
+    return platform.system() == 'Windows'
+
 
 BASE_DIR = os.path.abspath(os.getcwd())
 PATH = os.path.join(BASE_DIR, "RinUI/config")
@@ -10,7 +29,7 @@ DEFAULT_CONFIG = {
         "current_theme": "Auto",
     },
     "theme_color": "#605ed2",
-    "backdrop_effect": "mica"
+    "backdrop_effect": "mica" if is_win11() else "acrylic" if is_win10() else "none",
 }
 
 

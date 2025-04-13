@@ -24,10 +24,6 @@ ScrollBar {
     verticalPadding : vertical ? 15 : 3
     horizontalPadding : horizontal ? 15 : 3
 
-    Component.onCompleted: {
-        console.log("ScrollBar.onCompleted")
-        console.log(parent)
-    }
 
     // 内容 / Content //
     contentItem: Item {

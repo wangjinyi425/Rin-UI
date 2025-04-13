@@ -148,7 +148,6 @@ Popup {
                 duration: Utils.animationSpeedMiddle
                 easing.type: Easing.OutQuint
                 onRunningChanged: {
-                    console.log("Transition finished");
                     scrollBar.visible = true;
                 }
             }

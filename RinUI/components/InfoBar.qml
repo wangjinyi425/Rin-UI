@@ -62,7 +62,7 @@ Frame {
     Timer {
         id: autoCloseTimer
         interval: timeout
-        running: true
+        running: timeout >= 0
         repeat: false
         onTriggered: {
             // infoBar.visible = false

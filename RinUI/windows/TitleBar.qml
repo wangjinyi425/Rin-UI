@@ -55,12 +55,18 @@ Item {
             acceptedButtons: Qt.LeftButton
             property point clickPos: "0,0"
 
-            onPressed: clickPos = Qt.point(mouseX, mouseY)
+            onPressed: {
+                clickPos = Qt.point(mouseX, mouseY)
+                Theme.sendDragWindowEvent()
+            }
             onDoubleClicked: toggleMaximized()
             onPositionChanged: (mouse) => {
                 if (window.isMaximized || window.isFullScreen || window.visibility === Window.Maximized) {
-                    window.showNormal()
                     return
+                }
+
+                if (Qt.platform.os !== "windows" || Qt.platform.os !== "winrt") {
+                    return  // 在win环境使用原生方法拖拽
                 }
 
                 //鼠标偏移量

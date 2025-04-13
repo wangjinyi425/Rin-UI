@@ -8,7 +8,6 @@ Item {
     id: floatLayer
     anchors.fill: parent
     anchors.margins: margins
-    parent: parent.overlay  // overlay
     property int margins: 32
     property int spacing: 12
 

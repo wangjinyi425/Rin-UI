@@ -1,3 +1,4 @@
+import platform
 import sys
 
 from PySide6.QtGui import QIcon

@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Controls
 import "../themes"
 import "../utils"
 
@@ -7,16 +7,17 @@ Text {
     id: label
     property int typography: Typography.Body
 
-    color: Theme.currentTheme.colors.textColor
+    color: targetColor
+    property color targetColor: Theme.currentTheme.colors.textColor  // 目标颜色，用于切换动画
     wrapMode: Text.WordWrap
 
-    // 主题切换动画
-    Behavior on color {
-        ColorAnimation {
-            duration: Utils.appearanceSpeed
-            easing.type: Easing.OutQuart
-        }
-    }
+    // 主题切换动画  TODO: 会坠机
+    // Behavior on color {
+    //     ColorAnimation {
+    //         duration: Utils.appearanceSpeed
+    //         easing.type: Easing.OutQuart
+    //     }
+    // }
 
     font.pixelSize: {
         switch (typography) {

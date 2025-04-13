@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import "../components"
 import "../themes"
+import "../utils"
 import "../assets/fonts/FluentSystemIcons-Index.js" as Icons
 
 
@@ -10,7 +11,7 @@ Item {
     property string source: ""  // 图片路径（如 "icons/image.png"）
     property alias color: text.color
     // property string fontSource: Qt.resolvedUrl("../assets/fonts/" + Theme.currentTheme.typography.fontIcon)
-    property string fontSource: Qt.resolvedUrl("../assets/fonts/FluentSystemIcons-Resizable.ttf")  // 字体图标路径
+    // property string fontSource: Qt.resolvedUrl("../assets/fonts/FluentSystemIcons-Resizable.ttf")  // 字体图标路径
 
     property int size: 16
 
@@ -30,19 +31,12 @@ Item {
         }
     }
 
-    FontLoader {
-        id: iconFont
-        source: fontSource
-    }
-
-    Component.onCompleted: console.log("Font Source:", iconFont.name, "Status:", iconFont.status)
-
     Text {
         id: text
         anchors.centerIn: parent
         // text: isFontIcon ? icon : ""  // 仅当 `icon` 是单字符时显示
         text: isUnicode ? icon : String.fromCharCode(Icons.FluentIcons[icon])  // 显示 FluentSystemIcons 字体图标
-        font.family: iconFont.name
+        font.family: Utils.iconFontFamily
         font.pixelSize: size
     }
 

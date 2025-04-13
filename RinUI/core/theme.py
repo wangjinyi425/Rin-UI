@@ -1,13 +1,28 @@
 import ctypes
+import platform
 import time
 
+import win32con
+import win32gui
 from PySide6.QtCore import QObject, Signal, Slot, QThread
-from .config import DEFAULT_CONFIG, ConfigCenter, PATH
+from win32api import SendMessage
+
+from .config import DEFAULT_CONFIG, ConfigCenter, PATH, is_win10, is_windows, is_win11
 import sys
 import darkdetect
 
+
 def check_darkdetect_support():
-    return sys.platform == "win32" and sys.getwindowsversion().major >= 10
+    system = platform.system()
+    if system == "Darwin":
+        mac_ver = platform.mac_ver()[0]
+        major, minor, *_ = map(int, mac_ver.split("."))
+        return (major == 10 and minor >= 14) or major > 10
+
+    elif system == "Windows":
+        return platform.release() >= "10"
+    else:
+        return False
 
 
 ACCENT_STATES = {
@@ -15,6 +30,13 @@ ACCENT_STATES = {
     "mica": 2,
     "tabbed": 4,
     "none": 0
+}
+
+ACCENT_SUPPORT = {
+    "acrylic": is_win10(),
+    "mica": is_win11(),
+    "tabbed": is_windows(),
+    "none": True
 }
 
 
@@ -132,11 +154,15 @@ class ThemeManager(QObject):
         :param effect_type: str, 背景效果类型（acrylic, mica, tabbed, none）
         """
         self._update_window_theme()
-        if sys.platform != "win32" or not self.windows:
+        if not is_windows() or not self.windows:
+            print(f"Cannot apply effect \"{effect_type}\" on this platform")
             return -2  # 非 windows或未绑定窗口
         self.backdropChanged.emit(effect_type)
 
         accent_state = ACCENT_STATES.get(effect_type, 0)
+        if not ACCENT_SUPPORT.get(effect_type, False):
+            print(f"Effect \"{effect_type}\" not supported on this platform")
+            return -1  # 效果不支持
 
         for hwnd in self.windows:
             ctypes.windll.dwmapi.DwmSetWindowAttribute(
@@ -148,6 +174,7 @@ class ThemeManager(QObject):
 
         self.config["backdrop_effect"] = effect_type
         print(f"Applied \"{effect_type.strip().capitalize()}\" effect")
+        return 0  # 成功
 
     def apply_window_effects(self):  # 启用圆角阴影
         if sys.platform != "win32" or not self.windows:
@@ -222,21 +249,6 @@ class ThemeManager(QObject):
     def get_backdrop_effect(self):
         """获取当前背景效果"""
         return self.config["backdrop_effect"]
-        # if sys.platform != "win32" or not self.hwnd:
-        #     return "none"
-        #
-        # effect_type = ctypes.c_int()
-        # result = ctypes.windll.dwmapi.DwmGetWindowAttribute(
-        #     self.hwnd,
-        #     self.DWMWA_SYSTEMBACKDROP_TYPE,
-        #     ctypes.byref(effect_type),
-        #     ctypes.sizeof(effect_type)
-        # )
-        #
-        # if result != 0:  # 获取失败时返回 "none"
-        #     return "none"
-        #
-        # return ACCENT_STATES.get(effect_type.value, "none")
 
     @Slot(result=str)
     def get_theme_color(self):
@@ -248,3 +260,11 @@ class ThemeManager(QObject):
         """设置当前主题颜色"""
         self.config["theme_color"] = color
         self.config.save_config()
+
+    @Slot(result=str)
+    def dragWindowEvent(self):
+        """ Move the window """
+        win32gui.ReleaseCapture()
+        for hwnd in self.windows:
+            SendMessage(hwnd, win32con.WM_SYSCOMMAND,
+                        win32con.SC_MOVE + win32con.HTCAPTION, 0)
