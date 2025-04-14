@@ -226,6 +226,17 @@ FluentPage {
                 }
             ]
         }
+
+        Text {
+            text: qsTr("A 3-state CheckBox.")
+        }
+        Frame {
+            width: parent.width
+            CheckBox {
+                tristate: true
+                text: qsTr("Three-state CheckBox")
+            }
+        }
     }
 
     Column {

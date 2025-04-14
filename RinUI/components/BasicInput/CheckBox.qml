@@ -31,10 +31,10 @@ CheckBox {
         x: root.leftPadding
         y: parent.height / 2 - height / 2
         radius: Theme.currentTheme.appearance.buttonRadius
-        color: checked ? primaryColor :
+        color: checkState !== Qt.Unchecked ? primaryColor :
             hovered ? Theme.currentTheme.colors.controlTertiaryColor : backgroundColor
         // 边框 / Border
-        border.color: checked ? "transparent" : Theme.currentTheme.colors.controlBorderStrongColor
+        border.color: checkState !== Qt.Unchecked ? "transparent" : Theme.currentTheme.colors.controlBorderStrongColor
         border.width: Theme.currentTheme.appearance.borderWidth
 
         Behavior on color { ColorAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuart } }
@@ -46,7 +46,7 @@ CheckBox {
             anchors.verticalCenter: background.verticalCenter
             anchors.left: background.left
             anchors.leftMargin: 4
-            width: checked ? 12 : 0
+            width: checkState !== Qt.Unchecked ? 12 : 0
             height: 12
             clip: true
             color: "transparent"
@@ -55,7 +55,9 @@ CheckBox {
 
             IconWidget {
                 id: indicator
-                icon: "ic_fluent_checkmark_20_filled"
+                icon: checkState !== Qt.PartiallyChecked
+                    ? "ic_fluent_checkmark_20_filled" :
+                    "ic_fluent_subtract_20_regular"
                 size: 12
                 color: Theme.currentTheme.colors.textOnAccentColor
 
