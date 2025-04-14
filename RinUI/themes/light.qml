@@ -72,11 +72,11 @@ QtObject {
 
     // Appearance //
     property QtObject appearance: QtObject {
-        property int buttonRadius: 6
+        property int buttonRadius: 5
         property int borderWidth: 1
         property real borderFactor: 0.9
         property real borderOnAccentFactor: 1.08
-        property int cardRadius: 3
+        property int smallRadius: 3
 
         property int dialogTitleBarHeight: 32
         property int windowTitleBarHeight: 48

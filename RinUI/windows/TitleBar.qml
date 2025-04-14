@@ -57,7 +57,7 @@ Item {
 
             onPressed: {
                 clickPos = Qt.point(mouseX, mouseY)
-                Theme.sendDragWindowEvent()
+                Theme.sendDragWindowEvent(window)
             }
             onDoubleClicked: toggleMaximized()
             onPositionChanged: (mouse) => {
@@ -65,7 +65,7 @@ Item {
                     return
                 }
 
-                if (Qt.platform.os !== "windows" || Qt.platform.os !== "winrt") {
+                if ((Qt.platform.os !== "windows" || Qt.platform.os !== "winrt") && Theme.isThemeMgrInitialized()) {
                     return  // 在win环境使用原生方法拖拽
                 }
 

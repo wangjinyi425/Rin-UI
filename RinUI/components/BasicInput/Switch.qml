@@ -11,7 +11,7 @@ Switch {
     height: 20
 
     property color backgroundColor: Theme.currentTheme.colors.controlSecondaryColor
-    property color backgroundActiveColor: Theme.currentTheme.colors.primaryColor
+    property color primaryColor: Theme.currentTheme.colors.primaryColor
     property string checkedText: qsTr("On")
     property string uncheckedText: qsTr("Off")
 
@@ -27,7 +27,7 @@ Switch {
         width: 40
         height: 20
         radius: height / 2
-        color: checked ? backgroundActiveColor :
+        color: checked ? primaryColor :
             hovered ? Theme.currentTheme.colors.controlTertiaryColor : backgroundColor
 
         // 边框 / Border
@@ -76,6 +76,7 @@ Switch {
             PropertyChanges {
                 target: root
                 opacity: 0.2169
+                primaryColor: Theme.currentTheme.colors.disabledColor
             }
         },
         State {

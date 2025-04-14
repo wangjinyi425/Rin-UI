@@ -1,11 +1,9 @@
 import ctypes
+import os
 import platform
 import time
 
-import win32con
-import win32gui
 from PySide6.QtCore import QObject, Signal, Slot, QThread
-from win32api import SendMessage
 
 from .config import DEFAULT_CONFIG, ConfigCenter, PATH, is_win10, is_windows, is_win11
 import sys
@@ -261,10 +259,29 @@ class ThemeManager(QObject):
         self.config["theme_color"] = color
         self.config.save_config()
 
-    @Slot(result=str)
-    def dragWindowEvent(self):
-        """ Move the window """
-        win32gui.ReleaseCapture()
-        for hwnd in self.windows:
-            SendMessage(hwnd, win32con.WM_SYSCOMMAND,
-                        win32con.SC_MOVE + win32con.HTCAPTION, 0)
+    @Slot(QObject, result=int)
+    def getWindowId(self, window):
+        """获取窗口的句柄"""
+        print(f"GetWindowId: {window.winId()}")
+        return int(window.winId())
+
+    @Slot(int)
+    def dragWindowEvent(self, hwnd):
+        """ 在Windows 用原生方法拖动"""
+        if not is_windows() or hwnd not in self.windows:
+            print(
+                f"Use Qt method to drag window on: {platform.system()}"
+                if not is_windows() else f"Invalid window handle: {hwnd}"
+            )
+            return
+
+        import win32con
+        from win32gui import ReleaseCapture
+        from win32api import SendMessage
+
+        ReleaseCapture()
+        SendMessage(
+            hwnd,
+            win32con.WM_SYSCOMMAND,
+            win32con.SC_MOVE | win32con.HTCAPTION, 0
+        )

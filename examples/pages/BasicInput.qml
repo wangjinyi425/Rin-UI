@@ -151,24 +151,80 @@ FluentPage {
             "related options. Generally contained within a RadioButtons group control.")
         }
 
-        Frame {
+        ControlShowcase {
             width: parent.width
 
             Column {
                 spacing: 4
                 RadioButton {
                     text: "Option 1"
+                    enabled: disableSwitch_4.checked
                 }
                 RadioButton {
                     text: "Option 2"
+                    enabled: disableSwitch_4.checked
                 }
                 RadioButton {
                     text: "Option 3"
-                }
-                RadioButton {
-                    text: "Option 4"
+                    enabled: disableSwitch_4.checked
                 }
             }
+
+            showcase: [
+                Text {
+                    text: "Enable Radio Buttons"
+                },
+                Switch {
+                    id: disableSwitch_4
+                    checked: true
+                }
+            ]
+        }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+
+        Text {
+            typography: Typography.Subtitle
+            text: qsTr("CheckBox")
+        }
+        Text {
+            width: parent.width
+            typography: Typography.Body
+            text: qsTr("CheckBox controls let the user select a combination of binary options."+
+             "In contrast, RadioButton controls allow the user to select from mutually exclusive options.")
+        }
+
+        ControlShowcase {
+            width: parent.width
+
+            Column {
+                spacing: 4
+                CheckBox {
+                    text: "Option 1"
+                    enabled: disableSwitch_3.checked
+                }
+                CheckBox {
+                    text: "Option 2"
+                    enabled: disableSwitch_3.checked
+                }
+                CheckBox {
+                    text: "Option 3"
+                    enabled: disableSwitch_3.checked
+                }
+            }
+
+            showcase: [
+                Text {
+                    text: "Enable Check Boxes"
+                },
+                Switch {
+                    id: disableSwitch_3
+                    checked: true
+                }
+            ]
         }
     }
 
@@ -203,7 +259,7 @@ FluentPage {
 
             showcase: [
                 Text {
-                    text: "Enable Button"
+                    text: "Enable Switch"
                 },
                 Switch {
                     id: disableSwitch_2

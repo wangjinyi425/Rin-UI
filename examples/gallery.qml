@@ -9,6 +9,8 @@ FluentWindow {
     title: qsTr("Gallery")
     width: 1200
     height: 700
+    minimumWidth: 400
+    minimumHeight: 400
 
     // 加载页面
     Component.onCompleted: {

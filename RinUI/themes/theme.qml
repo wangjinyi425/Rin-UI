@@ -17,24 +17,28 @@ Item {
         }
     }
 
+    function isThemeMgrInitialized() {
+        return typeof ThemeManager!== "undefined"
+    }
+
     function setBackdropEffect(effect) {
-        if (typeof ThemeManager === "undefined") {
+        if (!isThemeMgrInitialized()) {
             console.error("ThemeManager is not defined.")
             return -1
         }
         ThemeManager.apply_backdrop_effect(effect)
     }
 
-    function sendDragWindowEvent() {
-        if (typeof ThemeManager === "undefined") {
+    function sendDragWindowEvent(window) {
+        if (!isThemeMgrInitialized()) {
             console.error("ThemeManager is not defined.")
             return -1
         }
-        ThemeManager.dragWindowEvent()
+        ThemeManager.dragWindowEvent(ThemeManager.getWindowId(window))
     }
 
     function getBackdropEffect() {
-        if (typeof ThemeManager === "undefined") {
+        if (!isThemeMgrInitialized()) {
             console.error("ThemeManager is not defined.")
             return -1
         }
@@ -42,7 +46,7 @@ Item {
     }
 
     function getThemeColor() {
-        if (typeof ThemeManager === "undefined") {
+        if (!isThemeMgrInitialized()) {
             console.error("ThemeManager is not defined.")
             return -1
         }
@@ -50,7 +54,7 @@ Item {
     }
 
     function getTheme() {
-        if (typeof ThemeManager === "undefined") {
+        if (!isThemeMgrInitialized()) {
             console.error("ThemeManager is not defined.")
             return -1
         }
@@ -59,7 +63,7 @@ Item {
 
     // 切换主题
     function setTheme(mode) {
-        if (typeof ThemeManager === "undefined") {
+        if (!isThemeMgrInitialized()) {
             console.error("ThemeManager is not defined.")
             currentTheme = Qt.createQmlObject("import '../themes'; Light {}", themeManager)
             return

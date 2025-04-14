@@ -15,6 +15,6 @@ if __name__ == '__main__':
     """
     print(RinUI.__file__, RinUI.PATH)
     app = QApplication(sys.argv)
-    # gallery = Gallery()
-    test = RinUI.RinUIWindow("test.qml")
+    gallery = Gallery()
+    test = RinUI.RinUIWindow("test2.qml")
     app.exec()

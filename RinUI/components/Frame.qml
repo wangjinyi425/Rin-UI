@@ -21,7 +21,7 @@ Frame {
     background: Rectangle {
         id: background
         anchors.fill: parent
-        radius: Theme.currentTheme.appearance.cardRadius
+        radius: Theme.currentTheme.appearance.smallRadius
         color: root.color
         border.width: Theme.currentTheme.appearance.borderWidth
         border.color: borderColor

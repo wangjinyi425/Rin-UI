@@ -4,7 +4,7 @@ import "../../themes"
 import "../../components"
 
 
-RadioButton {
+CheckBox {
     id: root
     property color backgroundColor: Theme.currentTheme.colors.controlSecondaryColor
     property color primaryColor: Theme.currentTheme.colors.primaryColor
@@ -30,8 +30,7 @@ RadioButton {
         height: 20
         x: root.leftPadding
         y: parent.height / 2 - height / 2
-
-        radius: width / 2
+        radius: Theme.currentTheme.appearance.buttonRadius
         color: checked ? primaryColor :
             hovered ? Theme.currentTheme.colors.controlTertiaryColor : backgroundColor
         // 边框 / Border
@@ -43,22 +42,25 @@ RadioButton {
 
         // 指示器 / Indicator //
         Rectangle {
-            id: indicator
-            anchors.centerIn: parent
-            width: background.width / 2
-            height: background.height / 2
-            scale: enabled ?
-                checked ? pressed ? 0.8 : hovered ? 1.25 : 1   // checked
-                    : pressed ? 1 : 0  // unchecked
-                : checked ? 1 : 0  // disabled
-
+            id: mask
             anchors.verticalCenter: background.verticalCenter
-            radius: height / 2
-            color: checked ? Theme.currentTheme.colors.textOnAccentColor : pressed ? Theme.currentTheme.colors.textOnAccentColor : "transparent"
-            // color: Theme.currentTheme.colors.textOnAccentColor
+            anchors.left: background.left
+            anchors.leftMargin: 4
+            width: checked ? 12 : 0
+            height: 12
+            clip: true
+            color: "transparent"
 
-            Behavior on color { ColorAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuart } }
-            Behavior on scale { NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
+            Behavior on width { NumberAnimation { duration: Utils.animationSpeedMiddle; easing.type: Easing.OutQuint } }
+
+            IconWidget {
+                id: indicator
+                icon: "ic_fluent_checkmark_20_filled"
+                size: 12
+                color: Theme.currentTheme.colors.textOnAccentColor
+
+                Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type: Easing.OutQuart } }
+            }
         }
     }
 

@@ -31,7 +31,7 @@ Frame {
             id: right
             width: 200
             Layout.fillHeight: true
-            radius: Theme.currentTheme.appearance.cardRadius
+            radius: Theme.currentTheme.appearance.smallRadius
             color: Theme.currentTheme.colors.backgroundAcrylicColor
             border.width: Theme.currentTheme.appearance.borderWidth
             border.color: Theme.currentTheme.colors.cardBorderColor
