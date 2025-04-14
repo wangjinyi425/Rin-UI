@@ -17,10 +17,11 @@ FluentWindowBase {
 
     // 外观 / Appearance //
     property bool appLayerEnabled: true  // 应用层背景
+    property alias navExpandWidth: navigationBar.expandWidth  // 导航栏宽度
+    property alias navMinimumExpandWidth: navigationBar.minimumExpandWidth  // 导航栏保持展开时窗口的最小宽度
 
-
-    property alias navItems: navigationBar.navModel
-    property alias navCurrentIndex: navigationBar.currentIndex
+    property alias navItems: navigationBar.navModel  // 导航栏item
+    property alias navCurrentIndex: navigationBar.currentIndex  // 默认索引项
     property int lastIndex: 0  // 上个页面索引
     property var pageCache: ({})
 
@@ -33,10 +34,18 @@ FluentWindowBase {
         id: rowLayout
         anchors.fill: parent
 
+        Connections {
+            target: window
+            function onWidthChanged() {
+                navigationBar.collapsed = window.width < window.navMinimumExpandWidth
+            }
+        }
+
         NavigationBar {
             id: navigationBar
             windowTitle: window.title
             windowIcon: window.icon
+            windowWidth: window.width
             stackView: stackView
             z: 999
             Layout.fillHeight: true

@@ -6,7 +6,7 @@ import "../themes"
 
 Item {
     id: navigationBar
-    implicitWidth: collapsed ? 40 : navigationBarWidth
+    // implicitWidth: collapsed ? 40 : expandWidth
     height: parent.height
 
     property bool collapsed: false
@@ -15,17 +15,55 @@ Item {
     }
     property alias currentIndex: listView.currentIndex
     property bool titleBarEnabled: true
-    property int navigationBarWidth: 280
+    property int expandWidth: 280
+    property int minimumExpandWidth: 900
+
     property alias windowTitle: titleLabel.text
     property alias windowIcon: iconLabel.source
+    property int windowWidth: minimumExpandWidth
     property var stackView: parent.stackView
     property ListModel lastIndex: ListModel {}  // 记录的索引
 
+    function isNotOverMinimumWidth() {
+        return windowWidth < minimumExpandWidth;
+    }
+
     // 展开收缩动画 //
+    width: collapsed ? 40 : expandWidth
+    implicitWidth: isNotOverMinimumWidth() ? 40 : collapsed ? 40 : expandWidth
+
+    Behavior on width {
+        NumberAnimation {
+            duration: Utils.animationSpeed
+            easing.type: Easing.OutQuint
+        }
+    }
     Behavior on implicitWidth {
         NumberAnimation {
             duration: Utils.animationSpeed
             easing.type: Easing.OutQuint
+        }
+    }
+
+    Rectangle {
+        id: background
+        anchors.fill: parent
+        anchors.margins: -5
+        anchors.topMargin: -title.height
+        radius: Theme.currentTheme.appearance.windowRadius
+        color: Theme.currentTheme.colors.backgroundAcrylicColor
+        border.color: Theme.currentTheme.colors.flyoutBorderColor
+        z: -1
+        visible: isNotOverMinimumWidth() && !collapsed ? 1 : 0
+
+        Behavior on visible {
+            NumberAnimation {
+                duration: collapsed ? Utils.animationSpeed / 2 : 50
+            }
+        }
+
+        Shadow {
+            style: "flyout"
         }
     }
 
@@ -156,7 +194,7 @@ Item {
                                 easing.type: Easing.InOutQuint
                             }
                         }
-                        
+
                         Behavior on opacity {
                             NumberAnimation {
                                 duration: Utils.appearanceSpeed

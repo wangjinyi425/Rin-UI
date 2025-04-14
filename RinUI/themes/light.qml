@@ -20,6 +20,7 @@ QtObject {
         property color controlBorderAccentColor: Qt.alpha("#000000", 0.3)
         property color textControlBorderColor: Qt.alpha("#000000", 0.45)
         property color textControlBorderFocusedColor: Utils.primaryColor
+        property color flyoutBorderColor: Qt.alpha("#000000", 0.0578)
 
         property color controlSolidColor: "#ffffff"
         property color focusBorderOuter: Qt.alpha("#000000", 0.8956)
@@ -109,7 +110,7 @@ QtObject {
         },
         "flyout": {
             "color": Qt.alpha("#000000", 0.14),
-            "blur": 16,
+            "blur": 24,
             "offsetY": 8
         },
     }
