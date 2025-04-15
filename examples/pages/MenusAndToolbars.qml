@@ -64,13 +64,15 @@ FluentPage {
         Frame {
             width: parent.width
             Button {
+                flat: true
+                icon.name: "ic_fluent_filter_add_20_filled"
                 text: qsTr("Filter")
                 onClicked: menu_checkable.open()
                 Menu {
                     id: menu_checkable
                     MenuItem {
                         // icon.name: "ic_fluent_clipboard_brush_20_regular"
-                        text: "By Nameddddddddddddddd"
+                        text: "By Name"
                         checkable: true
                         checked: true
                     }
