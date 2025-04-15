@@ -26,6 +26,13 @@ ProgressBar 1.0 components/StatusAndInfo/ProgressBar.qml
 Tooltip 1.0 components/StatusAndInfo/Tooltip.qml
 
 
+# Menus & Toolbars
+Menu 1.0 components/MenusAndToolbars/Menu.qml
+MenuItem 1.0 components/MenusAndToolbars/MenuItem.qml
+MenuSeparator 1.0 components/MenusAndToolbars/MenuSeparator.qml
+MenuBar 1.0 components/MenusAndToolbars/MenuBar.qml
+
+
 ScrollViewer 1.0 components/ScrollViewer.qml
 RinScrollBar 1.0 components/RinScrollBar.qml
 

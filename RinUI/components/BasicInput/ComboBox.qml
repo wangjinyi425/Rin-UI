@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls.Basic 2.15
+import Qt5Compat.GraphicalEffects
 import "../../themes"
 import "../../components"
 
@@ -31,24 +32,38 @@ ComboBox {
 
     // 背景 / Background //
     background: Rectangle {
-        id: border
+        id: background
         anchors.fill: parent
-        radius: controlRadius
-        layer.enabled: true  // 单独渲染
-        gradient: Gradient {
-            GradientStop { position: 0.91; color: Theme.currentTheme.colors.controlColor.lighter(borderFactor) }
-            GradientStop { position: 1; color: Theme.currentTheme.colors.controlColor.darker(1.4) }
+        color: Theme.currentTheme.colors.controlColor
+        radius: Theme.currentTheme.appearance.buttonRadius
+
+        border.width: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
+        border.color: Theme.currentTheme.colors.controlBorderColor
+
+        // 裁切
+        layer.enabled: true
+        layer.smooth: true
+        layer.effect: OpacityMask {
+            maskSource: Rectangle {
+                width: background.width
+                height: background.height
+                radius: background.radius
+            }
         }
 
+        // 底部border
         Rectangle {
-            id: background
-            anchors.fill: parent
-            anchors.margins: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
-            color: Theme.currentTheme.colors.controlColor
-            radius: controlRadius
+            id: indicator
+            width: parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            height: Theme.currentTheme.appearance.borderWidth
 
-            Behavior on color { ColorAnimation { duration: 150; easing.type: Easing.OutQuart } }
+            color: Theme.currentTheme.colors.controlBottomBorderColor
         }
+
+        Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type: Easing.OutQuart } }
+        opacity: flat && !hovered ? 0 : 1
     }
 
     // 指示器 / Indicator //

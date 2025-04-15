@@ -16,6 +16,8 @@ QtObject {
         property color controlInputActiveColor: "#ffffff"
 
         property color controlBorderColor: Qt.alpha("#000000", 0.06)
+        property color controlBottomBorderColor: Qt.alpha("#000000", 0.16)
+        property color controlAccentBottomBorderColor: Qt.alpha("#000000", 0.4)
         property color controlBorderStrongColor: Qt.alpha("#000000", 0.6063)
         property color controlBorderAccentColor: Qt.alpha("#000000", 0.3)
         property color textControlBorderColor: Qt.alpha("#000000", 0.45)
@@ -23,6 +25,8 @@ QtObject {
         property color flyoutBorderColor: Qt.alpha("#000000", 0.0578)
 
         property color controlSolidColor: "#ffffff"
+        property color dividerBorderColor: Qt.alpha("#000000", 0.0803)
+        // Accessibility
         property color focusBorderOuter: Qt.alpha("#000000", 0.8956)
         property color focusBorderInner: "#ffffff"
 

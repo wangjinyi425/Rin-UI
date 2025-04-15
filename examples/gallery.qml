@@ -9,7 +9,7 @@ FluentWindow {
     title: qsTr("Gallery")
     width: 1200
     height: 700
-    minimumWidth: 400
+    minimumWidth: 550
     minimumHeight: 400
 
     // 加载页面
@@ -28,6 +28,11 @@ FluentWindow {
             title: "Dialogs & Flyouts",
             page: Qt.resolvedUrl("pages/DialogsAndFlyouts.qml"),
             icon: "ic_fluent_chat_20_regular"
+        });
+        navItems.append({
+            title: "Menus & Toolbars",
+            page: Qt.resolvedUrl("pages/MenusAndToolbars.qml"),
+            icon: "ic_fluent_save_20_regular"
         });
         navItems.append({
             title: "Status & Info",
