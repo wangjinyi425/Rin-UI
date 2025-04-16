@@ -9,7 +9,6 @@ ComboBox {
     id: root
 
     // 属性 / Properties
-    property real borderFactor: Theme.currentTheme.appearance.borderFactor
     property real controlRadius: Theme.currentTheme.appearance.buttonRadius
     property alias maxHeight: menu.maxHeight
     property string headerText: ""
@@ -120,15 +119,20 @@ ComboBox {
             when: pressed
             PropertyChanges {
                 target: root;
-                opacity: 0.65
+                opacity: 0.7
+            }
+            PropertyChanges {
+                target: background;
+                color: Theme.currentTheme.colors.controlTertiaryColor
             }
         },
         State {
             name: "hovered"
             when: hovered
             PropertyChanges {
-                target: root;
-                opacity: 0.875
+                target: background;
+                opacity: 1
+                color: Theme.currentTheme.colors.controlSecondaryColor
             }
         }
     ]

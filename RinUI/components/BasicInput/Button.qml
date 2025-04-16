@@ -30,7 +30,7 @@ Button {
         border.width: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
         border.color: flat ? "transparent" :
             enabled ? highlighted ? primaryColor : Theme.currentTheme.colors.controlBorderColor :
-            Theme.currentTheme.colors.controlBorderColor
+            highlighted ? Theme.currentTheme.colors.disabledColor : Theme.currentTheme.colors.controlBorderColor
 
         // 裁切
         layer.enabled: true
@@ -103,10 +103,6 @@ Button {
                 backgroundColor: highlighted ? Theme.currentTheme.colors.disabledColor : Theme.currentTheme.colors.controlColor
             }
             PropertyChanges {
-                target: border
-                visible: !flat
-            }
-            PropertyChanges {
                 target: text
                 color: flat ? Theme.currentTheme.colors.disabledColor : text.color
             }
@@ -116,7 +112,8 @@ Button {
             when: pressed
             PropertyChanges {
                 target: root;
-                opacity: 0.65
+                opacity: !highlighted && !flat ? 0.7 : 0.65
+                backgroundColor:  !highlighted && !flat ? Theme.currentTheme.colors.controlTertiaryColor : backgroundColor
             }
         },
         State {
@@ -124,7 +121,8 @@ Button {
             when: hovered
             PropertyChanges {
                 target: root;
-                opacity: 0.875
+                opacity: !highlighted && !flat ? 1 : 0.875
+                backgroundColor: !highlighted && !flat? Theme.currentTheme.colors.controlSecondaryColor : backgroundColor
             }
         }
     ]
