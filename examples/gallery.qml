@@ -13,48 +13,48 @@ FluentWindow {
     minimumHeight: 400
 
     // 加载页面
-    Component.onCompleted: {
-        navItems.append({
+    navigationItems: [
+        {
             title: "Home",
             page: Qt.resolvedUrl("pages/Home.qml"),
-            icon: "ic_fluent_home_20_regular"
-        });
-        navItems.append({
+            icon: "ic_fluent_home_20_regular",
+        },
+        {
             title: "Basic Input",
             page: Qt.resolvedUrl("pages/BasicInput.qml"),
             icon: "ic_fluent_checkbox_checked_20_regular"
-        });
-        navItems.append({
+        },
+        {
             title: "Dialogs & Flyouts",
             page: Qt.resolvedUrl("pages/DialogsAndFlyouts.qml"),
             icon: "ic_fluent_chat_20_regular"
-        });
-        navItems.append({
+        },
+        {
             title: "Menus & Toolbars",
             page: Qt.resolvedUrl("pages/MenusAndToolbars.qml"),
             icon: "ic_fluent_save_20_regular"
-        });
-        navItems.append({
+        },
+        {
             title: "Status & Info",
             page: Qt.resolvedUrl("pages/StatusAndInfo.qml"),
             icon: "ic_fluent_chat_multiple_minus_20_regular"
-        });
-        navItems.append({
+        },
+        {
             title: "Text & Typography",
             page: Qt.resolvedUrl("pages/Text.qml"),
             icon: "ic_fluent_text_font_20_regular"
-        });
-        navItems.append({
+        },
+        {
             title: "Error Interface Test",
             page: Qt.resolvedUrl("unexist/page"),
-            icon: null
-        });
-        navItems.append({
+            icon: "ic_fluent_document_error_20_regular"
+        },
+        {
             title: "Settings",
             page: Qt.resolvedUrl("pages/Settings.qml"),
             icon: "ic_fluent_settings_20_regular"
-        });
-    }
+        }
+    ]
 
 
     // FluentPage {

@@ -32,6 +32,10 @@ MenuItem 1.0 components/MenusAndToolbars/MenuItem.qml
 MenuSeparator 1.0 components/MenusAndToolbars/MenuSeparator.qml
 MenuBar 1.0 components/MenusAndToolbars/MenuBar.qml
 
+# Navigation
+NavigationBar 1.0 components/Navigation/NavigationBar.qml
+NavigationItem 1.0 components/Navigation/NavigationItem.qml
+
 
 ScrollViewer 1.0 components/ScrollViewer.qml
 RinScrollBar 1.0 components/RinScrollBar.qml
@@ -48,7 +52,6 @@ FluentWindowBase 1.0 windows/FluentWindowBase.qml
 Dialog 1.0 windows/Dialog.qml
 CtrlBtn 1.0 windows/CtrlBtn.qml
 FluentPage 1.0 windows/FluentPage.qml
-NavigationBar 1.0 windows/NavigationBar.qml
 
 singleton Typography 1.0 utils/Typography.qml
 singleton Severity 1.0 utils/Severity.qml

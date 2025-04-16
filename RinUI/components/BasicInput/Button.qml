@@ -11,6 +11,7 @@ Button {
     property color backgroundColor: flat ? Theme.currentTheme.colors.subtleSecondaryColor :
         highlighted ? primaryColor : Theme.currentTheme.colors.controlColor
     // default property alias icon.source: icon.source
+    property bool hoverable: true  // 是否可悬停
 
     // accessibility
     FocusIndicator {
@@ -58,7 +59,7 @@ Button {
         }
 
         Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type: Easing.OutQuart } }
-        opacity: flat && !hovered ? 0 : 1
+        opacity: flat && !hovered || !hoverable ? 0 : 1
     }
 
     implicitWidth: Math.max(iconWidget.width + text.width + 24, 88)
@@ -76,7 +77,7 @@ Button {
                 icon: root.icon.name
                 source: root.icon.source
                 y: 1
-                color: highlighted ? flat ?
+                color: icon.color ? icon.color : highlighted ? flat ?
                     enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
                     Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
             }
@@ -118,7 +119,7 @@ Button {
         },
         State {
             name: "hovered"
-            when: hovered
+            when: hovered && hoverable
             PropertyChanges {
                 target: root;
                 opacity: !highlighted && !flat ? 1 : 0.875
