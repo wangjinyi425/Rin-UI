@@ -191,8 +191,6 @@ FluentWindowBase {
                 // }
 
 
-
-
                 Component.onCompleted: {
                     if (navigationItems.length > 0 && navigationBar.currentIndex === -1) {
                         navigationBar.currentIndex = navCurrentIndex

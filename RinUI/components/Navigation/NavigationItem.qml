@@ -117,6 +117,7 @@ Item {
         onClicked: {
             if (itemData.page && currentPage) {
                 navigationItems.subItemIndex = -1
+                navigationBar.lastIndex.append({ index: navigationBar.currentIndex })
                 navigationBar.currentIndex = index
                 currentPage.safePush(Qt.resolvedUrl(itemData.page))
             }
