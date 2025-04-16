@@ -14,7 +14,7 @@ Item {
 
     property bool collapsed: true  // 是否折叠
 
-    height: 40 + (!collapsed ? subItemsColumn.height : 0)
+    height: 40 + (!collapsed && subItem ? subItemsColumn.height : 0)
     width: parent ? parent.width : 200
 
     Button {
