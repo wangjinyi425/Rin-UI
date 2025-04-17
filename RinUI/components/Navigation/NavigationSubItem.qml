@@ -106,10 +106,15 @@ ItemDelegate {
     }
 
     onClicked: {
-        if (itemData.page && currentPage) {
-            navigationBar.lastIndex.append({ index: navigationBar.currentIndex })
+        if (itemData.page && currentPage && !root.highlighted) {
+            // 记录上一次的索引
+            navigationBar.lastIndex.append({
+                index: navigationBar.currentIndex, subIndex: navigationBar.currentSubIndex
+            })
+
             navigationBar.currentIndex = parentIndex
             navigationItems.subItemIndex = index
+            navigationBar.currentSubIndex = index
             currentPage.safePush(Qt.resolvedUrl(itemData.page))
         }
     }

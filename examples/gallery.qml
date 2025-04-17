@@ -50,6 +50,24 @@ FluentWindow {
             icon: "ic_fluent_document_error_20_regular"
         },
         {
+            title: "1 Level Menu",
+            page: Qt.resolvedUrl("pages/喵.qml"),
+            icon: "ic_fluent_document_20_regular",
+            subItems: [
+                { title: "2 Level Menu1", page: Qt.resolvedUrl("pages/Error1.qml"), icon: "ic_fluent_document_20_regular" },
+                { title: "2 Level Menu2", page: Qt.resolvedUrl("pages/Error2.qml"), icon: "ic_fluent_document_20_regular" }
+            ]
+        },
+        {
+            title: "1 Level Menu",
+            page: Qt.resolvedUrl("pages/喵.qml"),
+            icon: "ic_fluent_document_20_regular",
+            subItems: [
+                { title: "2 Level Menu1", page: Qt.resolvedUrl("pages/Error1.qml"), icon: "ic_fluent_document_20_regular" },
+                { title: "2 Level Menu2", page: Qt.resolvedUrl("pages/Error2.qml"), icon: "ic_fluent_document_20_regular" }
+            ]
+        },
+        {
             title: "Settings",
             page: Qt.resolvedUrl("pages/Settings.qml"),
             icon: "ic_fluent_settings_20_regular"

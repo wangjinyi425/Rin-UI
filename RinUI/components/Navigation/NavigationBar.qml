@@ -14,6 +14,7 @@ Item {
         // {title: "Title", page: "path/to/page.qml", icon: undefined}
     ]
     property int currentIndex: -1
+    property int currentSubIndex: -1
     property bool titleBarEnabled: true
     property int expandWidth: 280
     property int minimumExpandWidth: 900
@@ -155,8 +156,18 @@ Item {
                     Connections {
                         target: navigationBar
                         function onCurrentIndexChanged() {
-                            item.subItemIndex = -1
+                            if (currentIndex !== item.itemIndex) {
+                                currentSubIndex = -1
+                                item.subItemIndex = -1
+                            }
                         }
+
+                        function onCurrentSubIndexChanged() {
+                            if (currentIndex === item.itemIndex) {
+                                item.subItemIndex = currentSubIndex
+                            }
+                        }
+
                         function onCollapsedChanged() {
                             item.collapsed = navigationBar.collapsed
                         }

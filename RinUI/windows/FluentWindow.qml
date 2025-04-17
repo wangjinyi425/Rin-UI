@@ -145,6 +145,7 @@ FluentWindowBase {
                     if (stackView.depth > 2) {
                         stackView.pop()
                         navigationBar.currentIndex = navigationBar.lastIndex.get(stackView.depth - 2).index
+                        navigationBar.currentSubIndex = navigationBar.lastIndex.get(stackView.depth - 2).subIndex
                         navigationBar.lastIndex.remove(stackView.depth - 2)
                     } else {
                         console.log("Can't pop: only root page left")

@@ -115,11 +115,16 @@ Item {
         }
 
         onClicked: {
-            if (itemData.page && currentPage) {
+            if (itemData.page && currentPage && !navigationItems.highlighted) {
+
+                // 记录上一次的索引
+                navigationBar.lastIndex.append({
+                    index: navigationBar.currentIndex, subIndex: navigationBar.currentSubIndex
+                })
+
                 navigationItems.subItemIndex = -1
-                navigationBar.lastIndex.append({ index: navigationBar.currentIndex })
                 navigationBar.currentIndex = index
-                currentPage.safePush(Qt.resolvedUrl(itemData.page))
+                currentPage.safePush(Qt.resolvedUrl(itemData.page), true)
             }
             if (subItem ) {
                 collapsed = !collapsed
