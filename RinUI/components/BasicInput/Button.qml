@@ -12,10 +12,12 @@ Button {
         highlighted ? primaryColor : Theme.currentTheme.colors.controlColor
     // default property alias icon.source: icon.source
     property bool hoverable: true  // 是否可悬停
+    property bool accessibliityIndicator: true  // 是否显示辅助提示
 
     // accessibility
     FocusIndicator {
         control: parent
+        opacity: accessibliityIndicator
     }
 
     padding: 6

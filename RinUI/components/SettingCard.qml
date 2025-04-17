@@ -11,6 +11,8 @@ Frame {
     // property alias showcase: showcaseContainer.data
     property string title: "Title"
     property alias icon: icon.icon
+    property alias source: icon.source
+    property alias iconSize: icon.size
     property string description: "A description of the setting"
 
     leftPadding: 15
@@ -32,7 +34,6 @@ Frame {
             IconWidget {
                 id: icon
                 size: 20
-                icon: "ic_fluent_settings_20_regular"
             }
             ColumnLayout {
                 Layout.fillWidth: true

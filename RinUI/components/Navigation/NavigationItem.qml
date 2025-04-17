@@ -26,7 +26,14 @@ Item {
         anchors.bottomMargin: 2
         clip: true
         flat: true
+        accessibliityIndicator: false
         background.opacity: navigationItems.highlighted ? 1 : hovered ? 1 : 0
+
+        // accessibility
+        FocusIndicator {
+            control: parent
+            anchors.margins: 2
+        }
 
         Row {
             id: left
@@ -102,6 +109,12 @@ Item {
             hoverable: false
             size: 14
             icon.name: "ic_fluent_chevron_down_20_filled"
+            accessibliityIndicator: false
+
+            FocusIndicator {
+                control: parent
+                anchors.margins: 2
+            }
 
             transform: Rotation {
                 angle: collapsed ? 0 : 180 ; origin.x: 37/2; origin.y: 37/2
