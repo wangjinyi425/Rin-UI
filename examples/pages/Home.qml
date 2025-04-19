@@ -3,11 +3,15 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 import Qt5Compat.GraphicalEffects  // 图形库
 import RinUI
+import "../assets"
+import "../components"
 
 FluentPage {
     // title: "test"
     horizontalPadding: 0
+    wrapperWidth: width - 42*2
 
+    // Banner / 横幅 //
     contentHeader: Item {
         width: parent.width
         height: Math.max(window.height * 0.35, 200)
@@ -39,7 +43,7 @@ FluentPage {
                 top: parent.top
                 left: parent.left
                 leftMargin: 56
-                topMargin: 24
+                topMargin: 38
             }
             spacing: 8
 
@@ -53,6 +57,49 @@ FluentPage {
                 color: "#fff"
                 typography: Typography.TitleLarge
                 text: qsTr("RinUI Gallery")
+            }
+        }
+    }
+
+    // Content / 内容 //
+    Column {
+        spacing: 8
+        Text {
+            typography: Typography.Subtitle
+            text: "Recently added samples"
+        }
+
+        Grid {
+            Layout.fillWidth: true
+            columns: Math.floor(width / (360 + 6)) // 自动算列数
+            rowSpacing: 12
+            columnSpacing: 12
+            layoutDirection: GridLayout.LeftToRight
+
+            Repeater {
+                model: ItemData.recentlyAddedItems
+                delegate: ControlClip { }
+            }
+        }
+    }
+
+    Column {
+        spacing: 8
+        Text {
+            typography: Typography.Subtitle
+            text: "Recently updated samples"
+        }
+
+        Grid {
+            Layout.fillWidth: true
+            columns: Math.floor(width / (360 + 6)) // 自动算列数
+            rowSpacing: 12
+            columnSpacing: 12
+            layoutDirection: GridLayout.LeftToRight
+
+            Repeater {
+                model: ItemData.recentlyUpdatedItems
+                delegate: ControlClip { }
             }
         }
     }

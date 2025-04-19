@@ -68,8 +68,14 @@ MenuItem {
                 text: root.text
                 wrapMode: Text.NoWrap
             }
-            Item {
-                width: 16
+            Text {
+                id: shortcutText
+                typography: Typography.Caption
+                text: root.action ? root.action.shortcut : ""
+                wrapMode: Text.NoWrap
+                color: Theme.currentTheme.colors.textSecondaryColor
+                anchors.verticalCenter: parent.verticalCenter
+                visible: text
             }
         }
     }

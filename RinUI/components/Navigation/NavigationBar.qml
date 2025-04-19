@@ -13,8 +13,8 @@ Item {
     property var navigationItems: [
         // {title: "Title", page: "path/to/page.qml", icon: undefined}
     ]
-    property int currentIndex: -1
-    property int currentSubIndex: -1
+
+    // property int currentSubIndex: -1
     property bool titleBarEnabled: true
     property int expandWidth: 280
     property int minimumExpandWidth: 900
@@ -23,7 +23,9 @@ Item {
     property alias windowIcon: iconLabel.source
     property int windowWidth: minimumExpandWidth
     property var stackView: parent.stackView
-    property ListModel lastIndex: ListModel {}  // 记录的索引
+
+    property string currentPage: ""  // 当前页面的URL
+    property var lastPages: []  // 历史页面的URL栈
 
     function isNotOverMinimumWidth() {
         return windowWidth < minimumExpandWidth;
@@ -78,12 +80,13 @@ Item {
 
         // 返回按钮
         ToolButton {
+            flat: true
             anchors.verticalCenter: parent.verticalCenter
             icon.name: "ic_fluent_arrow_left_20_regular"
             onClicked: stackView.safePop()
             width: 40
             height: 40
-            enabled: navigationBar.lastIndex.count > 0
+            enabled: lastPages.length > 1
 
             Tooltip {
                 parent: parent
@@ -114,6 +117,7 @@ Item {
     // 收起切换按钮
     ToolButton {
         id: collapseButton
+        flat: true
         width: 40
         height: 38
         // icon.name: collapsed ? "ic_fluent_chevron_right_20_regular" : "ic_fluent_chevron_left_20_regular"
@@ -155,20 +159,10 @@ Item {
                     // 子菜单重置
                     Connections {
                         target: navigationBar
-                        function onCurrentIndexChanged() {
-                            if (currentIndex !== item.itemIndex) {
-                                currentSubIndex = -1
-                                item.subItemIndex = -1
-                            }
-                        }
-
-                        function onCurrentSubIndexChanged() {
-                            if (currentIndex === item.itemIndex) {
-                                item.subItemIndex = currentSubIndex
-                            }
-                        }
-
                         function onCollapsedChanged() {
+                            if (!navigationBar.collapsed) {
+                                return
+                            }
                             item.collapsed = navigationBar.collapsed
                         }
                     }

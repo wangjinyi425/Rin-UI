@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
+import "./assets/"
 import RinUI
 
 FluentWindow {
@@ -12,7 +13,14 @@ FluentWindow {
     minimumWidth: 550
     minimumHeight: 400
 
-    // 加载页面
+    // 从 ItemData 获取控件数据
+    function generateSubItems(type) {
+        return ItemData.getItemsByType(type).map(item => ({
+            title: item.title,
+            page: item.page,
+        }));
+    }
+
     navigationItems: [
         {
             title: "Home",
@@ -20,52 +28,45 @@ FluentWindow {
             icon: "ic_fluent_home_20_regular",
         },
         {
+            title: "All Samples",
+            page: Qt.resolvedUrl("pages/AllSamples.qml"),
+            icon: "ic_fluent_apps_list_20_regular"
+
+        },
+        {
             title: "Basic Input",
             page: Qt.resolvedUrl("pages/BasicInput.qml"),
-            icon: "ic_fluent_checkbox_checked_20_regular"
+            icon: "ic_fluent_checkbox_checked_20_regular",
+            subItems: generateSubItems("basicInput")
         },
         {
             title: "Dialogs & Flyouts",
             page: Qt.resolvedUrl("pages/DialogsAndFlyouts.qml"),
-            icon: "ic_fluent_chat_20_regular"
+            icon: "ic_fluent_chat_20_regular",
+            subItems: generateSubItems("dialogs&flyouts")
         },
         {
             title: "Menus & Toolbars",
             page: Qt.resolvedUrl("pages/MenusAndToolbars.qml"),
-            icon: "ic_fluent_save_20_regular"
+            icon: "ic_fluent_save_20_regular",
+            subItems: generateSubItems("menus&toolbars")
         },
         {
             title: "Status & Info",
             page: Qt.resolvedUrl("pages/StatusAndInfo.qml"),
-            icon: "ic_fluent_chat_multiple_minus_20_regular"
+            icon: "ic_fluent_chat_multiple_minus_20_regular",
+            subItems: generateSubItems("status&info")
         },
         {
             title: "Text & Typography",
             page: Qt.resolvedUrl("pages/Text.qml"),
-            icon: "ic_fluent_text_font_20_regular"
+            icon: "ic_fluent_text_font_20_regular",
+            subItems: generateSubItems("text")
         },
         {
             title: "Error Interface Test",
             page: Qt.resolvedUrl("unexist/page"),
             icon: "ic_fluent_document_error_20_regular"
-        },
-        {
-            title: "1 Level Menu",
-            page: Qt.resolvedUrl("pages/喵.qml"),
-            icon: "ic_fluent_document_20_regular",
-            subItems: [
-                { title: "2 Level Menu1", page: Qt.resolvedUrl("pages/Error1.qml"), icon: "ic_fluent_document_20_regular" },
-                { title: "2 Level Menu2", page: Qt.resolvedUrl("pages/Error2.qml"), icon: "ic_fluent_document_20_regular" }
-            ]
-        },
-        {
-            title: "1 Level Menu",
-            page: Qt.resolvedUrl("pages/喵.qml"),
-            icon: "ic_fluent_document_20_regular",
-            subItems: [
-                { title: "2 Level Menu1", page: Qt.resolvedUrl("pages/Error1.qml"), icon: "ic_fluent_document_20_regular" },
-                { title: "2 Level Menu2", page: Qt.resolvedUrl("pages/Error2.qml"), icon: "ic_fluent_document_20_regular" }
-            ]
         },
         {
             title: "Settings",

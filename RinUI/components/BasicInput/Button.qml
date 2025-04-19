@@ -64,7 +64,7 @@ Button {
         opacity: flat && !hovered || !hoverable ? 0 : 1
     }
 
-    implicitWidth: Math.max(iconWidget.width + text.width + 24, 88)
+    implicitWidth: Math.max(iconWidget.width + text.width + 26, 32)
     implicitHeight: Math.max(text.height + 12, 32)
 
     contentItem: Item {

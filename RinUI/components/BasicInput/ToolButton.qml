@@ -4,17 +4,27 @@ import "../../components"
 
 Button {
     id: toolBtn
-    flat: true
+    // flat: true
     property alias size: iconWidget.size
+    // width: height * 1
 
-    contentItem: IconWidget {
-        id: iconWidget
+    contentItem: Item {
         width: parent.width
         height: parent.height
-        size: 14
-        icon: toolBtn.icon.name ? toolBtn.icon.name : toolBtn.text
-        color: icon.color ? icon.color : highlighted ? flat ?
-            enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
-            Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
+        Text {
+            anchors.centerIn: parent
+            id: btnText
+            text: toolBtn.text
+        }
+        IconWidget {
+            id: iconWidget
+            width: parent.width
+            height: parent.height
+            size: 16
+            icon: toolBtn.icon.name ? toolBtn.icon.name : toolBtn.text
+            color: icon.color ? icon.color : highlighted ? flat ?
+                enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
+                Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
+        }
     }
 }

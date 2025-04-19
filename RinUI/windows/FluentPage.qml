@@ -12,27 +12,36 @@ Page {
     default property alias content: container.data
     property alias contentHeader: headerContainer.data
     property alias customHeader: headerRow.data
+    property alias extraHeaderItems: extraHeaderRow.data
     property int radius: Theme.currentTheme.appearance.windowRadius
     property int wrapperWidth: 1000
     horizontalPadding: 56
+    StackView.onRemoved: destroy()
 
 
     // 头部 / Header //
     header: Item {
         height: fluentPage.title !== "" ? 36 + 44 : 0
 
-        Item {
+        RowLayout {
             id: headerRow
             width: Math.min(fluentPage.width - fluentPage.horizontalPadding * 2, fluentPage.wrapperWidth)  // 限制最大宽度
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.height
 
             Text {
-                anchors.left: parent.left
-                anchors.bottom: parent.bottom
+                // anchors.left: parent.left
+                // anchors.bottom: parent.bottom
+                Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
                 typography: Typography.Title
                 text: fluentPage.title
                 visible: fluentPage.title !== ""  // 标题
+            }
+
+            Row {
+                id: extraHeaderRow
+                spacing: 4
+                Layout.alignment: Qt.AlignRight | Qt.AlignBottom
             }
         }
     }

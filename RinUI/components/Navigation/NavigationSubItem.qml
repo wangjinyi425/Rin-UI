@@ -9,8 +9,17 @@ ItemDelegate {
     property var itemData
     property int parentIndex: -1
     property var currentPage
-    highlighted: navigationItems.subItemIndex === index
+    highlighted: String(navigationBar.currentPage) === String(itemData.page)
+
     height: 40
+
+    focusPolicy: collapsed ? Qt.NoFocus : Qt.StrongFocus  // to get keyboard focus
+
+    // accessibility
+    FocusIndicator {
+        control: parent
+        anchors.margins: 2
+    }
 
     width: parent ? parent.width : 200
 
@@ -79,7 +88,7 @@ ItemDelegate {
             id: indicator
             y: root.height / 2 - indicator.height / 2 -2
             currentItemHeight: root.height
-            opacity: navigationItems.subItemIndex === index ? 1 : 0
+            opacity: highlighted ? 1 : 0
             width: 3
 
             Behavior on y {
@@ -106,15 +115,10 @@ ItemDelegate {
     }
 
     onClicked: {
-        if (itemData.page && currentPage && !root.highlighted) {
+        if (itemData.page && currentPage && !root.highlighted && !collapsed) {
             // 记录上一次的索引
-            navigationBar.lastIndex.append({
-                index: navigationBar.currentIndex, subIndex: navigationBar.currentSubIndex
-            })
-
-            navigationBar.currentIndex = parentIndex
-            navigationItems.subItemIndex = index
-            navigationBar.currentSubIndex = index
+            // navigationBar.lastPages.push(currentPage)  // 记录当前页面
+            // navigationBar.currentPage = itemData.page
             currentPage.safePush(Qt.resolvedUrl(itemData.page))
         }
     }

@@ -93,10 +93,11 @@ ComboBox {
         model: root.model
         currentIndex: root.currentIndex
 
-        onItemSelected: handleItemSelected(index)
         function handleItemSelected(index) {
             root.currentIndex = index
+            return true
         }
+        onItemSelected: handleItemSelected(index)
     }
 
     // 动画

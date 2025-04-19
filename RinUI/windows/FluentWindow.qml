@@ -21,9 +21,8 @@ FluentWindowBase {
     property alias navMinimumExpandWidth: navigationBar.minimumExpandWidth  // 导航栏保持展开时窗口的最小宽度
 
     property alias navigationItems: navigationBar.navigationItems  // 导航栏item
-    property int navCurrentIndex: 0  // 默认索引项
-    property int lastIndex: 0  // 上个页面索引
-    property var pageCache: ({})
+    property string defaultPage: ""  // 默认索引项
+    property var lastPages: []  // 上个页面索引
 
     // 本来想做成这样的，突然发现fluent的动画好像不是这样的（）
     // property int pushEnterFromY: navigationBar.lastIndex > window.navCurrentIndex ? height : -height
@@ -141,12 +140,11 @@ FluentWindowBase {
                 initialItem: Item {}
 
                 function safePop() {
-                    console.log("Popping Page; Depth:", stackView.depth, navigationBar.lastIndex)
-                    if (stackView.depth > 2) {
+                    console.log("Popping Page; Depth:", stackView.depth, navigationBar.lastPages)
+                    if (navigationBar.lastPages.length > 1) {
+                        navigationBar.currentPage = navigationBar.lastPages.pop()  // Retrieve and remove the last page
+                        navigationBar.lastPages = navigationBar.lastPages  // refresh
                         stackView.pop()
-                        navigationBar.currentIndex = navigationBar.lastIndex.get(stackView.depth - 2).index
-                        navigationBar.currentSubIndex = navigationBar.lastIndex.get(stackView.depth - 2).subIndex
-                        navigationBar.lastIndex.remove(stackView.depth - 2)
                     } else {
                         console.log("Can't pop: only root page left")
                     }
@@ -155,16 +153,20 @@ FluentWindowBase {
                 // 页面确认
                 function safePush(page, reload) {
                     // 重复检测
-                    if (String(stackView.currentItem.objectName) === String(page) && !reload) {
+                    if (navigationBar.currentPage === page && !reload) {
                         console.log("Page already loaded:", page)
                         return
                     }
 
                     let component = Qt.createComponent(page)  // 页面转控件
 
+                    navigationBar.lastPages.push(navigationBar.currentPage)  // 记录当前页面
+                    navigationBar.lastPages = navigationBar.lastPages  // refresh
+                    navigationBar.currentPage = page.toString()
+
                     if (component.status === Component.Ready) {
-                         console.log("Depth:", stackView.depth)
-                        stackView.push(page, {objectName: page})
+                        console.log("Depth:", stackView.depth)
+                        stackView.push(component)
 
 
                     } else if (component.status === Component.Error) {
@@ -172,7 +174,6 @@ FluentWindowBase {
                         stackView.push("ErrorPage.qml", {
                             errorMessage: component.errorString(),  // 传参
                             page: page,
-                            objectName: page
                         })
                     }
                 }
@@ -193,9 +194,12 @@ FluentWindowBase {
 
 
                 Component.onCompleted: {
-                    if (navigationItems.length > 0 && navigationBar.currentIndex === -1) {
-                        navigationBar.currentIndex = navCurrentIndex
-                        safePush(navigationItems[0].page, false)  // 推送页面
+                    if (navigationItems.length > 0) {
+                        if (defaultPage !== "") {
+                            safePush(defaultPage, false)
+                        } else {
+                            safePush(navigationItems[0].page, false)  // 推送默认页面
+                        }  // 推送页面
                     }
                 }
             }

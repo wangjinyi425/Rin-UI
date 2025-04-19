@@ -33,6 +33,8 @@ Text {
         }
     }
 
+    font.family: Theme.currentTheme.typography.fontFamily
+
     font.bold: typography === Typography.Display ||
                typography === Typography.TitleLarge ||
                typography === Typography.Title ||

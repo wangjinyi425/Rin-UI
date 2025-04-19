@@ -14,12 +14,14 @@ Popup {
     property alias currentIndex: listView.currentIndex
     property int maxHeight: 166  // 最大高度
     property string textRole: ""
+    property bool keyboardNavigation: false
 
     implicitWidth: 100
     implicitHeight: Math.min(listView.contentHeight + 6, maxHeight)
     y: (parent.height - contextMenu.height) / 2
     height: implicitHeight  // 保持隐式绑定
     closePolicy: Popup.CloseOnPressOutside
+    focus: true
 
     // 内容 / ListView //
     contentItem: ListView {
@@ -40,15 +42,11 @@ Popup {
 
         // 选择器 / Selection //
         delegate: ItemDelegate {
+            id: delegate
             width: listView.width
             height: text.implicitHeight + 20  // 自适应
             highlighted: ListView.isCurrentItem  // 当前项高亮
-
-            // accessibility
-            FocusIndicator {
-                control: parent
-                visible: ListView.isCurrentItem
-            }
+            focusPolicy: Qt.StrongFocus
 
             background: Rectangle {
                 id: itemBg
@@ -83,7 +81,23 @@ Popup {
                     visible: highlighted
                 }
 
+                // accessibility
+                FocusIndicator {
+                    control: parent
+                    visible: highlighted && keyboardNavigation
+                }
+
                 Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type:Easing.InOutQuart } }
+            }
+
+            Keys.onUpPressed: {
+                contextMenu.keyboardNavigation = true
+                listView.decrementCurrentIndex()
+            }
+
+            Keys.onDownPressed: {
+                contextMenu.keyboardNavigation = true
+                listView.incrementCurrentIndex()
             }
 
             onClicked: {

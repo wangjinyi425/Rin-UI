@@ -6,12 +6,19 @@ import "../../components"
 Item {
     id: navigationItems
     property var itemData
-    property int subItemIndex: -1
     readonly property bool subItem: itemData.subItems && itemData.subItems.length > 0
-    readonly property int itemIndex: index
     property var currentPage
-    property bool highlighted: navigationBar.currentIndex === index && (subItemIndex === -1 || collapsed)
+    property bool highlighted: String(navigationBar.currentPage) === String(itemData.page) || (collapsed && subItemHighlighted)
 
+    property bool subItemHighlighted: {
+        if (!subItem) return false;
+        for (let i = 0; i < itemData.subItems.length; i++) {
+            if (String(itemData.subItems[i].page) === String(navigationBar.currentPage)) {
+                return true;
+            }
+        }
+        return false;
+    }
     property bool collapsed: true  // 是否折叠
 
     height: 40 + (!collapsed && subItem ? subItemsColumn.height : 0)
@@ -102,6 +109,7 @@ Item {
         // 展开按钮
         ToolButton {
             id: expandBtn
+            focusPolicy: Qt.NoFocus
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             width: parent.height
@@ -129,17 +137,12 @@ Item {
 
         onClicked: {
             if (itemData.page && currentPage && !navigationItems.highlighted) {
-
                 // 记录上一次的索引
-                navigationBar.lastIndex.append({
-                    index: navigationBar.currentIndex, subIndex: navigationBar.currentSubIndex
-                })
-
-                navigationItems.subItemIndex = -1
-                navigationBar.currentIndex = index
-                currentPage.safePush(Qt.resolvedUrl(itemData.page), true)
+                // navigationBar.lastPages.push(currentPage)  // 记录当前页面
+                // navigationBar.currentPage = itemData.page
+                stackView.safePush(Qt.resolvedUrl(itemData.page), true)
             }
-            if (subItem ) {
+            if (subItem && !navigationBar.collapsed) {
                 collapsed = !collapsed
             }
         }
@@ -164,8 +167,8 @@ Item {
             id: subItemsRepeater
             model: itemData.subItems
             delegate: NavigationSubItem {
+                id: subItems
                 itemData: modelData
-                parentIndex: itemIndex
                 currentPage: navigationItems.currentPage
             }
         }

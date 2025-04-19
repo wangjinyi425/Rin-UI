@@ -4,7 +4,6 @@ Base 1.0 Base.qml
 Shadow 1.0 Shadow.qml
 FocusIndicator 1.0 FocusIndicator.qml
 
-
 IconWidget 1.0 IconWidget.qml
 
 ContextMenu 1.0 ContextMenu.qml
@@ -42,6 +41,8 @@ NavigationBar 1.0 Navigation/NavigationBar.qml
 NavigationItem 1.0 Navigation/NavigationItem.qml
 NavigationSubItem 1.0 Navigation/NavigationSubItem.qml
 
+# ListAndCollections
+Frame 1.0 ListAndCollections/Frame.qml
 
 Indicator 1.0 Indicator.qml
 

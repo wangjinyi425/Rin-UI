@@ -9,7 +9,9 @@ Item {
     required property Item control
     property real radius: Theme.currentTheme.appearance.buttonRadius
 
-    visible: control.activeFocus  && (control.focusReason === Qt.TabFocusReason || control.focusReason === Qt.BacktabFocusReason)
+    visible: control.activeFocus &&
+         (control.focusReason === Qt.TabFocusReason ||
+          control.focusReason === Qt.BacktabFocusReason)
 
     Rectangle {
         anchors.fill: parent

@@ -25,6 +25,10 @@ InfoBar 1.0 components/StatusAndInfo/InfoBar.qml
 ProgressBar 1.0 components/StatusAndInfo/ProgressBar.qml
 Tooltip 1.0 components/StatusAndInfo/Tooltip.qml
 
+# ListAndCollections
+Clip 1.0 components/ListAndCollections/Clip.qml
+Frame 1.0 components/ListAndCollections/Frame.qml
+SettingCard 1.0 components/ListAndCollections/SettingCard.qml
 
 # Menus & Toolbars
 Menu 1.0 components/MenusAndToolbars/Menu.qml
@@ -44,8 +48,6 @@ IconWidget 1.0 components/IconWidget.qml
 
 
 ContextMenu 1.0 components/ContextMenu.qml
-Frame 1.0 components/Frame.qml
-SettingCard 1.0 components/SettingCard.qml
 
 FluentWindow 1.0 windows/FluentWindow.qml
 FluentWindowBase 1.0 windows/FluentWindowBase.qml
