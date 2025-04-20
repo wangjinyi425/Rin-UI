@@ -10,9 +10,10 @@ FluentPage {
     // title: "test"
     horizontalPadding: 0
     wrapperWidth: width - 42*2
+    padding: 0
 
     // Banner / 横幅 //
-    contentHeader: Item {
+    header: Item {
         width: parent.width
         height: 200
 
@@ -33,7 +34,7 @@ FluentPage {
                     // 渐变效果
                     gradient: Gradient {
                         GradientStop { position: 0.25; color: "white" }  // 不透明
-                        GradientStop { position: 0.9; color: "transparent" }  // 完全透明
+                        GradientStop { position: 1; color: "transparent" }  // 完全透明
                     }
                 }
             }

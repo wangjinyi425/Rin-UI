@@ -8,7 +8,8 @@ Menu {
     id: root
 
     property bool hasIcons: false  // 标记是否有图标
-    implicitWidth: Math.max(contentItem.childrenRect.width, 120)
+    implicitWidth: Math.max(contentItem.implicitWidth, 120)
+    implicitHeight: contentItem.implicitHeight
     x: (parent.width - root.width) / 2
     // y: parent.height + 5
 
@@ -74,4 +75,31 @@ Menu {
     }
 
     delegate: MenuItem { }
+
+    contentItem: Flickable {
+        id: flickable
+        clip: true
+        anchors.fill: parent
+        // contentWidth: width
+        // contentHeight: column.implicitHeight
+        implicitWidth: column.implicitWidth
+        implicitHeight: column.implicitHeight
+        // interactive: column.implicitHeight > height
+
+        Column {
+            id: column
+            topPadding: 5
+            bottomPadding: 5
+            Repeater {
+                model: root.contentModel  // 默认的 Menu 内容
+                delegate: root.delegate
+            }
+        }
+
+        ScrollBar.vertical: ScrollBar {
+            id: scrollBar
+            policy: ScrollBar.AsNeeded
+            visible: false  // 初始隐藏，在 enter 动画中显现
+        }
+    }
 }
