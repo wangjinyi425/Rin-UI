@@ -83,7 +83,7 @@ QtObject {
             type: "collections",
             desc: qsTr("A control that presents a collection of items in a vertical list."),
             page: Qt.resolvedUrl("../pages/controls/ListView.qml"),
-            new: true,
+            added: true,
         },
         {
             icon: Qt.resolvedUrl("controls/MenuFlyout.png"),
