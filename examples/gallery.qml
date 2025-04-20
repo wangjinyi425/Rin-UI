@@ -40,6 +40,12 @@ FluentWindow {
             subItems: generateSubItems("basicInput")
         },
         {
+            title: "Collections",
+            page: Qt.resolvedUrl("pages/Collections.qml"),
+            icon: "ic_fluent_checkbox_checked_20_regular",
+            subItems: generateSubItems("collections")
+        },
+        {
             title: "Dialogs & Flyouts",
             page: Qt.resolvedUrl("pages/DialogsAndFlyouts.qml"),
             icon: "ic_fluent_chat_20_regular",

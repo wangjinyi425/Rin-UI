@@ -78,11 +78,20 @@ QtObject {
             page: Qt.resolvedUrl("../pages/controls/InfoBar.qml"),
         },
         {
+            icon: Qt.resolvedUrl("controls/ListView.png"),
+            title: qsTr("ListView"),
+            type: "collections",
+            desc: qsTr("A control that presents a collection of items in a vertical list."),
+            page: Qt.resolvedUrl("../pages/controls/ListView.qml"),
+            new: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/MenuFlyout.png"),
             title: qsTr("Menu"),
             type: "menus&toolbars",
             desc: qsTr("Shows a contextual list of simple commands or options."),
             page: Qt.resolvedUrl("../pages/controls/Menu.qml"),
+            updated: true,
         },
         {
             icon: Qt.resolvedUrl("controls/MenuBar.png"),
