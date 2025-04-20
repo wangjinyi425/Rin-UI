@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls.Basic 2.15
+import QtQuick.Layouts 2.15
 import "../../themes"
 import "../../components"
 
@@ -7,11 +8,10 @@ import "../../components"
 MenuItem {
     id: root
     implicitWidth: {
-        const rowWidth = row.implicitWidth + row.x;
         const leftMargin = 16;
         const arrowWidth = arrow.visible ? arrow.width + 16 : 0;
         const rightMargin = 16;
-        return leftMargin + rowWidth + arrowWidth + rightMargin;
+        return leftMargin + contentItem.implicitWidth + arrowWidth + rightMargin;
     }
     implicitHeight: Math.max(implicitContentHeight + topPadding + bottomPadding,
                              34)
@@ -47,36 +47,36 @@ MenuItem {
     }
 
     // 内容 / Content //
-    contentItem: Item {
-        implicitWidth: row.implicitWidth
-        Row {
-            id: row
-            spacing: 8
-            anchors.verticalCenter: parent.verticalCenter
-            // anchors.left: parent.left
-            x: 16 + (checkable ? indicator.width + 8 : 0)
-            IconWidget {
-                id: iconWidget
-                y: 1
-                size: icon || source ? text.font.pixelSize * 1.25 : 0  // 图标大小 / Icon Size
-                icon: root.icon.name
-                source: root.icon.source
-            }
-            Text {
-                id: text
-                typography: Typography.Body
-                text: root.text
-                wrapMode: Text.NoWrap
-            }
-            Text {
-                id: shortcutText
-                typography: Typography.Caption
-                text: root.action ? root.action.shortcut : ""
-                wrapMode: Text.NoWrap
-                color: Theme.currentTheme.colors.textSecondaryColor
-                anchors.verticalCenter: parent.verticalCenter
-                visible: text
-            }
+    contentItem: RowLayout {
+        id: row
+        spacing: 16
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: (iconWidget.size ? 16 : 0) + (checkable ? indicator.width + 16 : 0)
+        anchors.margins: 16
+
+        IconWidget {
+            id: iconWidget
+            size: icon || source ? menuText.font.pixelSize * 1.25 : 0  // 图标大小 / Icon Size
+            icon: root.icon.name
+            source: root.icon.source
+        }
+        Text {
+            id: menuText
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+            typography: Typography.Body
+            text: root.text
+            wrapMode: Text.NoWrap
+        }
+        Text {
+            id: shortcutText
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            typography: Typography.Caption
+            text: root.action ? root.action.shortcut : ""
+            color: Theme.currentTheme.colors.textSecondaryColor
+            visible: text
         }
     }
 

@@ -119,9 +119,9 @@ ControlPage {
                             text: qsTr("Desktop (shortcut)")
                         }
                         Menu {
-                            title: qsTr("Compressed file")
+                            title: qsTr("Compredddddddssed file")
                             MenuItem {
-                                text: qsTr("Compress and email")
+                                text: qsTr("Compress andddddddddddddddddddd email")
                             }
                             MenuItem {
                                 text: qsTr("Compress to .7z")
@@ -202,7 +202,7 @@ ControlPage {
                     Action {
                         // icon.name: "ic_fluent_copy_20_regular"
                         text: qsTr("Copy")
-                        shortcut: "Ctrl+C"
+                        shortcut: "Ctrl+Cdddddddddddddd"
                     }
                     Action {
                         // icon.name: "ic_fluent_delete_20_regular"
