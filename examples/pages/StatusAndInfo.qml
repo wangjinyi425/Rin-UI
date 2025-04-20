@@ -274,7 +274,7 @@ FluentPage {
             Button {
                 text: qsTr("Button with a simple Tooltip")
 
-                Tooltip {
+                ToolTip {
                     parent: parent
                     delay: 500
                     visible: parent.hovered

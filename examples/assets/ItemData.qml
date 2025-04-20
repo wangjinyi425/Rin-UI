@@ -78,19 +78,19 @@ QtObject {
             page: Qt.resolvedUrl("../pages/controls/InfoBar.qml"),
         },
         {
+            icon: Qt.resolvedUrl("controls/MenuFlyout.png"),
+            title: qsTr("Menu"),
+            type: "menus&toolbars",
+            desc: qsTr("Shows a contextual list of simple commands or options."),
+            page: Qt.resolvedUrl("../pages/controls/Menu.qml"),
+        },
+        {
             icon: Qt.resolvedUrl("controls/MenuBar.png"),
             title: qsTr("MenuBar"),
             type: "menus&toolbars",
             desc: qsTr("A classic menu, allowing the display of MenuBarItem containing Menu."),
             page: Qt.resolvedUrl("../pages/controls/MenuBar.qml"),
             added: true,
-        },
-        {
-            icon: Qt.resolvedUrl("controls/MenuFlyout.png"),
-            title: qsTr("Menu"),
-            type: "menus&toolbars",
-            desc: qsTr("Shows a contextual list of simple commands or options."),
-            page: Qt.resolvedUrl("../pages/controls/Menu.qml"),
         },
         {
             icon: Qt.resolvedUrl("controls/NavigationView.png"),
