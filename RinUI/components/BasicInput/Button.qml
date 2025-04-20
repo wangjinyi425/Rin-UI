@@ -11,6 +11,7 @@ Button {
     property color backgroundColor: flat ? Theme.currentTheme.colors.subtleSecondaryColor :
         highlighted ? primaryColor : Theme.currentTheme.colors.controlColor
     // default property alias icon.source: icon.source
+    property alias size: text.font.pixelSize
     property bool hoverable: true  // 是否可悬停
     property bool accessibliityIndicator: true  // 是否显示辅助提示
 
@@ -64,10 +65,11 @@ Button {
         opacity: flat && !hovered || !hoverable ? 0 : 1
     }
 
-    implicitWidth: Math.max(iconWidget.width + text.width + 26, 32)
+    implicitWidth: Math.max(iconWidget.width + text.width + 26, 40)
     implicitHeight: Math.max(text.height + 12, 32)
 
     contentItem: Item {
+        clip: true
         anchors.fill: parent
 
         Row {

@@ -6,7 +6,8 @@ import "../../components"
 
 Button {
     id: root
-    property string openUrl: root.openUrl
+    property url openUrl: root.openUrl
+    property alias url: root.openUrl
     flat: true
     highlighted: true
     // underline: !root.hovered

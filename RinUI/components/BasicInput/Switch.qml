@@ -64,7 +64,7 @@ Switch {
         Rectangle { width: 40; height: 20; color: "transparent" }  // 占位符
 
         Text {
-            text: (root.text === '') ? root.checked ? checkedText : uncheckedText : text
+            text: (root.text === '') ? root.checked ? checkedText : uncheckedText : root.text
         }
     }
 

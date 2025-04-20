@@ -10,11 +10,14 @@ ComboBox {
 
     // 属性 / Properties
     property real controlRadius: Theme.currentTheme.appearance.buttonRadius
+    property string placeholderText: ""
     property alias maxHeight: menu.maxHeight
     property string headerText: ""
 
     implicitWidth: contentItem.implicitWidth + 77
-    implicitHeight: contentItem.implicitHeight + 12
+    // implicitHeight: contentItem.implicitHeight + 12
+
+    padding: 0
 
     // accessibility
     FocusIndicator {
@@ -66,24 +69,40 @@ ComboBox {
     }
 
     // 指示器 / Indicator //
-    indicator: IconWidget {
+    indicator: ToolButton {
+        flat: true
+        width: 32
+        height: 24
         anchors.right: parent.right
-        anchors.rightMargin: 11  // 右边距
+        anchors.margins: 4
         anchors.verticalCenter: parent.verticalCenter
-        icon: "ic_fluent_chevron_down_20_regular"
-        size: 16
+        icon.name: "ic_fluent_chevron_down_20_regular"
+        size: 14
         color: Theme.currentTheme.colors.textSecondaryColor
+        hoverable: editable
+
+        onClicked: menu.open()
     }
 
     // Text //
-    contentItem: Text {
+    // contentItem: Text {
+    //     id: text
+    //     typography: Typography.Body
+    //     anchors.left: parent.left
+    //     anchors.leftMargin: 11  // 左边距为 11
+    //     verticalAlignment: Text.AlignVCenter
+    //     height: parent.height
+    //     text: root.displayText ? root.displayText : root.placeholderText
+    //     color: root.displayText ? Theme.currentTheme.colors.textColor : Theme.currentTheme.colors.textSecondaryColor
+    // }
+
+    contentItem: TextField {
         id: text
-        typography: Typography.Body
-        anchors.left: parent.left
-        anchors.leftMargin: 11  // 左边距为 11
-        verticalAlignment: Text.AlignVCenter
-        height: parent.height
+        anchors.fill: parent
         text: root.displayText
+        editable: root.editable
+        frameless: true
+        placeholderText: root.placeholderText
     }
 
     // 弹出菜单 / Menu //

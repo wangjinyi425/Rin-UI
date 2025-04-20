@@ -6,7 +6,7 @@ import "../components"
 import "../assets"
 
 FluentPage {
-    title: "Basic Input"
+    title: qsTr("Basic Input")
     wrapperWidth: parent.width - 42*2
 
     Grid {

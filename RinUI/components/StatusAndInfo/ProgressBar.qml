@@ -12,7 +12,7 @@ ProgressBar {
         : Theme.currentTheme.colors.controlBorderStrongColor
     property color primaryColor: Theme.currentTheme.colors.primaryColor
     property int radius: 99
-    property int state: States.Running
+    property int state: ProgressBar.States.Running
     enum States {
         Running,
         Paused,

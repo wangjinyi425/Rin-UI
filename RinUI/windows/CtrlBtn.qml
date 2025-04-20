@@ -12,7 +12,7 @@ Base {
     property alias icon: icon.icon
 
     // tooltip
-    Tooltip {
+    ToolTip {
         parent: parent
         delay: 500
         visible: mouseArea.containsMouse

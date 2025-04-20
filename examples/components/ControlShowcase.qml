@@ -14,6 +14,7 @@ Frame {
     rightPadding: 0
     topPadding: 0
     bottomPadding: 0
+    spacing: 4
 
     RowLayout {
         anchors.fill: parent
@@ -23,8 +24,8 @@ Frame {
             id: controlContainer
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.margins: 10
-            spacing: 4
+            Layout.margins: 20
+            spacing: frame.spacing
         }
 
         Rectangle {
@@ -39,7 +40,7 @@ Frame {
             Column {
                 id: showcaseContainer
                 anchors.fill: parent
-                anchors.margins: 10
+                anchors.margins: 16
                 spacing: 4
             }
         }

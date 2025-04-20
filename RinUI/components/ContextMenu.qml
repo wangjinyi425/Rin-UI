@@ -12,7 +12,7 @@ Popup {
 
     property alias model: listView.model
     property alias currentIndex: listView.currentIndex
-    property int maxHeight: 166  // 最大高度
+    property int maxHeight: 300  // 最大高度
     property string textRole: ""
     property bool keyboardNavigation: false
 

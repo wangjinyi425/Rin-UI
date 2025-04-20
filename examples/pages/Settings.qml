@@ -6,13 +6,13 @@ import RinUI
 FluentPage {
     title: "Settings"
 
-    Text {
-        typography: Typography.BodyStrong
-        text: "Appearances"
-    }
     Column {
         Layout.fillWidth: true
         spacing: 3
+        Text {
+            typography: Typography.BodyStrong
+            text: "Appearances"
+        }
 
         SettingCard {
             width: parent.width
@@ -47,13 +47,14 @@ FluentPage {
         }
     }
 
-    Text {
-        typography: Typography.BodyStrong
-        text: "About"
-    }
+
     Column {
         Layout.fillWidth: true
         spacing: 3
+        Text {
+            typography: Typography.BodyStrong
+            text: "About"
+        }
 
         SettingCard {
             width: parent.width

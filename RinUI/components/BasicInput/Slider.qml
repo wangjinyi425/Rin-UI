@@ -13,7 +13,8 @@ Slider {
     property int ticksPadding: 4  // 刻度线间距
     property real trackHeight: 4
     property bool showTooltip: true
-    property bool tickmarksEnabled: false
+    property bool tickmarks: false
+    property real tickFrequency: 0  // 刻度线频率
     property color primaryColor: Theme.currentTheme.colors.primaryColor
 
     // accessibility
@@ -74,11 +75,15 @@ Slider {
 
         // 刻度线 / Repeater //
          Repeater {
-             model: (to - from) / stepSize + 1
+             model: (to - from) / (tickFrequency !== 0 ? tickFrequency : stepSize)
 
              delegate: Column {
-                x: root.orientation === Qt.Horizontal ? index * parent.width / (to - from) * stepSize - width / 2 : ticksPadding + trackHeight
-                y: root.orientation === Qt.Vertical ? index * parent.height / (to - from) * stepSize - height / 2 : ticksPadding + trackHeight
+                x: root.orientation === Qt.Horizontal ?
+                    index * parent.width / (to - from) * (tickFrequency !== 0 ? tickFrequency : stepSize) - width / 2
+                    : ticksPadding + trackHeight
+                y: root.orientation === Qt.Vertical ?
+                    index * parent.height / (to - from) * (tickFrequency !== 0 ? tickFrequency : stepSize) - height / 2
+                    : ticksPadding + trackHeight
                 spacing: 2
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -86,7 +91,7 @@ Slider {
                     height: root.orientation === Qt.Horizontal ? 4 : 1
                     color: Theme.currentTheme.colors.controlStrongColor
 
-                    visible: root.tickmarksEnabled && index !== 0 && index !== ((to - from) / stepSize)
+                    visible: root.tickmarks && index !== 0 && index !== ((to - from) / stepSize)
                 }
              }
         }
@@ -109,7 +114,7 @@ Slider {
            : (parent.height - height) / 2  // 横向
 
 
-        Tooltip {
+        ToolTip {
             text: root.value.toString()
             visible: root.showTooltip ? (handle.hovered || root.pressed)  : false
             delay: 50

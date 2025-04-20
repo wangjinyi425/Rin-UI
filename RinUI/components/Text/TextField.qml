@@ -7,18 +7,23 @@ TextField {
     id: root
 
     property real borderFactor: Theme.currentTheme.appearance.borderFactor
+    property bool frameless: false
+    property bool editable: true
     property color primaryColor: Theme.currentTheme.colors.primaryColor
+
     selectByMouse: true
+    enabled: editable
 
     // 背景 / Background //
     background: Rectangle {
         id: background
         anchors.fill: parent
         radius: Theme.currentTheme.appearance.buttonRadius
-        color: Theme.currentTheme.colors.controlColor
+        color: frameless ? "transparent" : Theme.currentTheme.colors.controlColor
         clip: true
         border.width: Theme.currentTheme.appearance.borderWidth
-        border.color: Theme.currentTheme.colors.controlBorderColor
+        border.color: frameless ? root.activeFocus ? Theme.currentTheme.colors.controlBorderColor : "transparent" :
+            Theme.currentTheme.colors.controlBorderColor
 
         layer.enabled: true
         layer.smooth: true
@@ -38,7 +43,7 @@ TextField {
             anchors.bottom: parent.bottom
             radius: 999
             height: root.activeFocus ? Theme.currentTheme.appearance.borderWidth * 2 : Theme.currentTheme.appearance.borderWidth
-            color: root.activeFocus ? primaryColor : Theme.currentTheme.colors.textControlBorderColor
+            color: root.activeFocus ? primaryColor : frameless ? "transparent" : Theme.currentTheme.colors.textControlBorderColor
 
             Behavior on color { ColorAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
             Behavior on height { NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
@@ -65,7 +70,7 @@ TextField {
             when: !enabled
             PropertyChanges {  // 禁用时禁止改变属性
                 target: root;
-                opacity: 0.4
+                opacity: !editable ? 1 : 0.4
             }
         },
         State {

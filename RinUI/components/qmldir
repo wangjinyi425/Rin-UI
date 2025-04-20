@@ -24,16 +24,18 @@ RadioButton 1.0 BasicInput/RadioButton.qml
 # Status & Info
 InfoBar 1.0 StatusAndInfo/InfoBar.qml
 ProgressBar 1.0 StatusAndInfo/ProgressBar.qml
-Tooltip 1.0 StatusAndInfo/Tooltip.qml
+ToolTip 1.0 StatusAndInfo/ToolTip.qml
 
 # Text
 TextField 1.0 Text/TextField.qml
+TextInput 1.0 Text/TextInput.qml
 Text 1.0 Text/Text.qml
 
 # Menus & Toolbars
 Menu 1.0 MenusAndToolbars/Menu.qml
 MenuItem 1.0 MenusAndToolbars/MenuItem.qml
 MenuSeparator 1.0 MenusAndToolbars/MenuSeparator.qml
+ToolSeparator 1.0 MenusAndToolbars/ToolSeparator.qml
 MenuBar 1.0 MenusAndToolbars/MenuBar.qml
 
 # Navigation

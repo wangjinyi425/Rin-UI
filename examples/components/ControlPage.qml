@@ -6,6 +6,10 @@ import RinUI
 FluentPage {
     id: fluentPage
 
+    property url docsUrl: "https://ui.rinlit.cn/"
+
+    contentSpacing: 32
+
     header: Item {
         id: container
         height: headerRow.height + 44
@@ -18,8 +22,6 @@ FluentPage {
             anchors.bottom: parent.bottom
 
             Text {
-                // anchors.left: parent.left
-                // anchors.bottom: parent.bottom
                 height: parent.height
                 Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
                 typography: Typography.Title
@@ -32,6 +34,14 @@ FluentPage {
                 Button {
                     icon.name: "ic_fluent_document_20_regular"
                     text: qsTr("Documentation")
+                    onClicked: docsMenu.open()
+                    Menu {
+                        id: docsMenu
+                        MenuItem {
+                            text: fluentPage.title + " - " + qsTr("Rin UI Documentation")
+                            onClicked: Qt.openUrlExternally(docsUrl)
+                        }
+                    }
                 }
                 Button {
                     icon.name: "ic_fluent_code_20_regular"
@@ -44,10 +54,33 @@ FluentPage {
 
                 spacing: 4
                 ToolButton {
-                    icon.name: "ic_fluent_person_feedback_20_regular"
+                    icon.name: "ic_fluent_brightness_high_20_filled"
+                    ToolTip {
+                        delay: 500
+                        text: qsTr("Toggle theme")
+                        visible: parent.hovered
+                    }
+                    onClicked: {
+                        console.log(Theme.currentTheme.isDark)
+                        if (Theme.currentTheme.isDark) {
+                            Theme.setTheme("Light")
+                        } else {
+                            Theme.setTheme("Dark")
+                        }
+                    }
                 }
+
+                ToolSeparator { }
+
                 ToolButton {
-                    icon.name: "ic_fluent_dark_theme_20_regular"
+                    icon.name: "ic_fluent_person_feedback_20_regular"
+                    onClicked: Qt.openUrlExternally("https://github.com/RinLit-233-shiroko/Rin-UI/issues/new/choose")
+
+                    ToolTip {
+                        delay: 500
+                        text: qsTr("Send feedback")
+                        visible: parent.hovered
+                    }
                 }
             }
         }

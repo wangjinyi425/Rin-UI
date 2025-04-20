@@ -18,12 +18,13 @@ Slider 1.0 components/BasicInput/Slider.qml
 # Text
 Text 1.0 components/Text/Text.qml
 TextField 1.0 components/Text/TextField.qml
+TextInput 1.0 components/Text/TextInput.qml
 
 
 # Status & Info
 InfoBar 1.0 components/StatusAndInfo/InfoBar.qml
 ProgressBar 1.0 components/StatusAndInfo/ProgressBar.qml
-Tooltip 1.0 components/StatusAndInfo/Tooltip.qml
+ToolTip 1.0 components/StatusAndInfo/ToolTip.qml
 
 # ListAndCollections
 Clip 1.0 components/ListAndCollections/Clip.qml
@@ -34,6 +35,7 @@ SettingCard 1.0 components/ListAndCollections/SettingCard.qml
 Menu 1.0 components/MenusAndToolbars/Menu.qml
 MenuItem 1.0 components/MenusAndToolbars/MenuItem.qml
 MenuSeparator 1.0 components/MenusAndToolbars/MenuSeparator.qml
+ToolSeparator 1.0 components/MenusAndToolbars/ToolSeparator.qml
 MenuBar 1.0 components/MenusAndToolbars/MenuBar.qml
 
 # Navigation

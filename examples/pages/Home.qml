@@ -66,7 +66,7 @@ FluentPage {
         spacing: 8
         Text {
             typography: Typography.Subtitle
-            text: "Recently added samples"
+            text: qsTr("Recently added samples")
         }
 
         Grid {
@@ -87,7 +87,7 @@ FluentPage {
         spacing: 8
         Text {
             typography: Typography.Subtitle
-            text: "Recently updated samples"
+            text: qsTr("Recently updated samples")
         }
 
         Grid {

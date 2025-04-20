@@ -86,9 +86,10 @@ Item {
             onClicked: stackView.safePop()
             width: 40
             height: 40
+            size: 16
             enabled: lastPages.length > 1
 
-            Tooltip {
+            ToolTip {
                 parent: parent
                 delay: 500
                 visible: parent.hovered
@@ -128,7 +129,7 @@ Item {
             collapsed = !collapsed
         }
 
-        Tooltip {
+        ToolTip {
             parent: parent
             delay: 500
             visible: parent.hovered && !parent.pressed

@@ -85,7 +85,7 @@ Item {
         }
 
         // 提示
-        Tooltip {
+        ToolTip {
             visible: navigationBar.collapsed && itemBtn.hovered
             delay: 500
             text: itemData.title

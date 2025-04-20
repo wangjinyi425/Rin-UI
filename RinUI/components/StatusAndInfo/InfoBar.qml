@@ -158,7 +158,7 @@ Frame {
                     //     infoBar.visible = false
                     // }
                 }
-                Tooltip {
+                ToolTip {
                     text: qsTr("Close")
                     parent: parent
                     visible: parent.hovered

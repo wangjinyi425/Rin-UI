@@ -140,7 +140,7 @@ FluentWindowBase {
                 initialItem: Item {}
 
                 function safePop() {
-                    console.log("Popping Page; Depth:", stackView.depth, navigationBar.lastPages)
+                    console.log("Popping Page; Depth:", stackView.depth)
                     if (navigationBar.lastPages.length > 1) {
                         navigationBar.currentPage = navigationBar.lastPages.pop()  // Retrieve and remove the last page
                         navigationBar.lastPages = navigationBar.lastPages  // refresh

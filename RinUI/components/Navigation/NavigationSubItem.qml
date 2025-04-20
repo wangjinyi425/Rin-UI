@@ -78,12 +78,6 @@ ItemDelegate {
             }
         }
 
-        Tooltip {
-            visible: navigationBar.collapsed && root.hovered
-            delay: 500
-            text: itemData.title
-        }
-
         Indicator {
             id: indicator
             y: root.height / 2 - indicator.height / 2 -2

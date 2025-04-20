@@ -4,6 +4,7 @@ import "../themes"
 
 QtObject {
     property string name: "Light"
+    property bool isDark: false
 
     // Colors //
     property QtObject colors: QtObject {
