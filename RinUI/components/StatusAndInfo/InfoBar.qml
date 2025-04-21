@@ -145,6 +145,7 @@ Frame {
             ToolButton {
                 Layout.alignment: Qt.AlignTop
                 id: closeButton
+                flat: true
                 icon.name: "ic_fluent_dismiss_20_regular"
                 size: 18
                 Layout.preferredWidth: 38
