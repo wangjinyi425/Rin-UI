@@ -1,8 +1,10 @@
 module RinUI
 
 singleton Theme 1.0 themes/theme.qml
+singleton Utils 1.0 themes/utils.qml
 
 Shadow 1.0 components/Shadow.qml
+FocusIndicator 1.0 components/FocusIndicator.qml
 
 # Basic Input
 Button 1.0 components/BasicInput/Button.qml
@@ -45,7 +47,7 @@ NavigationItem 1.0 components/Navigation/NavigationItem.qml
 
 
 ScrollViewer 1.0 components/ScrollViewer.qml
-RinScrollBar 1.0 components/RinScrollBar.qml
+ScrollBar 1.0 components/ScrollBar.qml
 
 IconWidget 1.0 components/IconWidget.qml
 

@@ -1,7 +1,8 @@
 import platform
 import sys
 
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import Slot, QObject
+from PySide6.QtGui import QIcon, QGuiApplication
 from PySide6.QtWidgets import QApplication
 from datetime import datetime
 
@@ -13,6 +14,17 @@ class Gallery(RinUIWindow):
     def __init__(self):
         super().__init__("gallery.qml")
         self.setProperty("title", f"RinUI Gallery {datetime.now().year}")  # 前后端交互示例
+
+        self.backend = Backend()
+        self.engine.rootContext().setContextProperty("Backend", self.backend)
+
+
+class Backend(QObject):
+    @Slot(str)
+    def copyToClipboard(self, text):
+        clipboard = QGuiApplication.clipboard()
+        clipboard.setText(text)
+        print(f"Copied: {text}")
 
 
 if __name__ == '__main__':

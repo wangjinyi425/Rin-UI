@@ -10,7 +10,9 @@ Frame {
     property bool hoverable: true  // 悬浮特效
     property bool hover: false
     property color color: Theme.currentTheme.colors.cardColor
+    property alias radius: background.radius
     property color borderColor: Theme.currentTheme.colors.cardBorderColor
+    property int borderWidth: Theme.currentTheme.appearance.borderWidth
 
     clip: true
     // leftPadding: 0
@@ -23,7 +25,7 @@ Frame {
         anchors.fill: parent
         radius: Theme.currentTheme.appearance.smallRadius
         color: root.color
-        border.width: Theme.currentTheme.appearance.borderWidth
+        border.width: borderWidth
         border.color: borderColor
         opacity: root.hover? 0.7 : 1
         visible: !root.frameless

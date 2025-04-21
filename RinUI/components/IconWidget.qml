@@ -2,7 +2,7 @@ import QtQuick 2.15
 import "../components"
 import "../themes"
 import "../utils"
-import "../assets/fonts/FluentSystemIcons-Index.js" as Icons
+// import "../assets/fonts/FluentSystemIcons-Index.js" as Icons
 
 
 Item {
@@ -35,7 +35,7 @@ Item {
         id: text
         anchors.centerIn: parent
         // text: isFontIcon ? icon : ""  // 仅当 `icon` 是单字符时显示
-        text: isUnicode ? icon : String.fromCharCode(Icons.FluentIcons[icon])  // 显示 FluentSystemIcons 字体图标
+        text: isUnicode ? icon : String.fromCharCode(Utils.fontIconIndex[icon])  // 显示 FluentSystemIcons 字体图标
         font.family: Utils.iconFontFamily
         font.pixelSize: size
     }
