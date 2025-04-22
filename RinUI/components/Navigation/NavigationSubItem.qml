@@ -111,9 +111,7 @@ ItemDelegate {
     onClicked: {
         if (itemData.page && currentPage && !root.highlighted && !collapsed) {
             // 记录上一次的索引
-            // navigationBar.lastPages.push(currentPage)  // 记录当前页面
-            // navigationBar.currentPage = itemData.page
-            currentPage.safePush(Qt.resolvedUrl(itemData.page))
+            navigationView.safePush(itemData.page)
         }
     }
 }

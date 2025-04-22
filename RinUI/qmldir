@@ -42,8 +42,8 @@ ToolSeparator 1.0 components/MenusAndToolbars/ToolSeparator.qml
 MenuBar 1.0 components/MenusAndToolbars/MenuBar.qml
 
 # Navigation
+NavigationView 1.0 components/Navigation/NavigationView.qml
 NavigationBar 1.0 components/Navigation/NavigationBar.qml
-NavigationItem 1.0 components/Navigation/NavigationItem.qml
 
 
 ScrollViewer 1.0 components/ScrollViewer.qml

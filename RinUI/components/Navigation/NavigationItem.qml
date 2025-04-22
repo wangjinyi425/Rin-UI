@@ -138,9 +138,7 @@ Item {
         onClicked: {
             if (itemData.page && currentPage && !navigationItems.highlighted) {
                 // 记录上一次的索引
-                // navigationBar.lastPages.push(currentPage)  // 记录当前页面
-                // navigationBar.currentPage = itemData.page
-                stackView.safePush(Qt.resolvedUrl(itemData.page), true)
+                navigationView.safePush(itemData.page, true)
             }
             if (subItem && !navigationBar.collapsed) {
                 collapsed = !collapsed

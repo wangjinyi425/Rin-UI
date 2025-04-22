@@ -27,7 +27,7 @@ Item {
     property string currentPage: ""  // 当前页面的URL
     property var lastPages: []  // 历史页面的URL栈
 
-    function isNotOverMinimumWidth() {
+    function isNotOverMinimumWidth() {  // 判断窗口是否小于最小宽度
         return windowWidth < minimumExpandWidth;
     }
 
@@ -83,7 +83,7 @@ Item {
             flat: true
             anchors.verticalCenter: parent.verticalCenter
             icon.name: "ic_fluent_arrow_left_20_regular"
-            onClicked: stackView.safePop()
+            onClicked: navigationView.safePop()
             width: 40
             height: 40
             size: 16
@@ -101,7 +101,6 @@ Item {
         IconWidget {
             id: iconLabel
             size: 16
-            icon: "\uf12a"
             anchors.verticalCenter: parent.verticalCenter
         }
 

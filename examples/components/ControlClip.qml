@@ -41,6 +41,6 @@ Clip {
     }
 
     onClicked: {
-        stackView.safePush(modelData.page)
+        navigationView.safePush(modelData.page)
     }
 }

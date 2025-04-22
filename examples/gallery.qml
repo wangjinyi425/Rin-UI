@@ -29,7 +29,7 @@ FluentWindow {
         },
         {
             title: "Design guidance",
-            icon: "ic_fluent_binder_triangle_20_regular",  // 找了半天没找到和WinUIGallery一样的图标(?)
+            icon: "ic_fluent_design_ideas_20_regular",  // 找了半天没找到和WinUIGallery一样的图标(?)
             subItems: [
                 {
                     title: "Iconography",
@@ -69,6 +69,12 @@ FluentWindow {
             page: Qt.resolvedUrl("pages/MenusAndToolbars.qml"),
             icon: "ic_fluent_save_20_regular",
             subItems: generateSubItems("menus&toolbars")
+        },
+        {
+            title: "Navigation",
+            page: Qt.resolvedUrl("pages/Navigation.qml"),
+            icon: "ic_fluent_save_20_regular",
+            subItems: generateSubItems("navigation")
         },
         {
             title: "Status & Info",
