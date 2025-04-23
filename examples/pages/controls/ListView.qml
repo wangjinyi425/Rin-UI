@@ -115,7 +115,7 @@ ControlPage {
                     }
 
                     model: [
-                        { name: qsTr("Aikiyo Fuuka"), school: qsTr("Hyakkiyako") },  // 风香
+                        { name: qsTr("Aikiyo Fuuka"), school: qsTr("Gehenna") },  // 风香
                         { name: qsTr("Hayase Yuuka"), school: qsTr("Millennium") },  // 邮箱
                         { name: qsTr("Hanaoka Yuzu"), school: qsTr("Millennium") },  // 柚子
                         { name: qsTr("Kuromi Serika"), school: qsTr("Abydos") },  // 芹香
