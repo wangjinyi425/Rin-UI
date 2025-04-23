@@ -115,7 +115,7 @@ ControlPage {
                     }
 
                     model: [
-                        { name: qsTr("Aikiyo Fuuka"), school: qsTr("Gehenna") },  // 风香
+                        { name: qsTr("Aikiyo Fuuka"), school: qsTr("Hyakkiyako") },  // 风香
                         { name: qsTr("Hayase Yuuka"), school: qsTr("Millennium") },  // 邮箱
                         { name: qsTr("Hanaoka Yuzu"), school: qsTr("Millennium") },  // 柚子
                         { name: qsTr("Kuromi Serika"), school: qsTr("Abydos") },  // 芹香
@@ -127,7 +127,7 @@ ControlPage {
                         { name: qsTr("Shiromi Iori"), school: qsTr("Gehenna") },  // 伊织
                         { name: qsTr("Shishidou Nonomi"), school: qsTr("Abydos") },   // 野宫
                         { name: qsTr("Sunaookami Shiroko"), school: qsTr("Abydos") }, // 白子😋
-                        { name: qsTr("Tendou Aris"), school: qsTr("Gehenna") },   // Aris
+                        { name: qsTr("Tendou Aris"), school: qsTr("Millennium") },   // Aris
                         { name: qsTr("Ushio Noa"), school: qsTr("Millennium") },  // 诺亚
                         { name: qsTr("Yutori Natsu"), school: qsTr("Trinity") }  // 夏
                     ]
