@@ -46,6 +46,8 @@ NavigationSubItem 1.0 Navigation/NavigationSubItem.qml
 
 # ListAndCollections
 Frame 1.0 ListAndCollections/Frame.qml
+ListView 1.0 ListAndCollections/ListView.qml
+ListViewDelegate 1.0 ListAndCollections/ListViewDelegate.qml
 
 Indicator 1.0 Indicator.qml
 

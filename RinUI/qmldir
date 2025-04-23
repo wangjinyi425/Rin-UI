@@ -33,6 +33,7 @@ Clip 1.0 components/ListAndCollections/Clip.qml
 Frame 1.0 components/ListAndCollections/Frame.qml
 SettingCard 1.0 components/ListAndCollections/SettingCard.qml
 ListView 1.0 components/ListAndCollections/ListView.qml
+ListViewDelegate 1.0 components/ListAndCollections/ListViewDelegate.qml
 
 # Menus & Toolbars
 Menu 1.0 components/MenusAndToolbars/Menu.qml
