@@ -95,15 +95,15 @@ Item {
             id: indicator
             y: (itemBtn.height + 3) / 2 - indicator.height / 2 - 2
             currentItemHeight: itemBtn.height + 3
-            opacity: highlighted ? 1 : 0
+            visible: highlighted ? 1 : 0
             width: 3
 
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: Utils.animationSpeed
-                    easing.type: Easing.InQuint
-                }
-            }
+            // Behavior on opacity {
+            //     NumberAnimation {
+            //         duration: Utils.animationSpeed
+            //         easing.type: Easing.InQuint
+            //     }
+            // }
         }
 
         // 展开按钮

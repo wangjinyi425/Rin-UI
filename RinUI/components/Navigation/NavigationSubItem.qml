@@ -82,22 +82,8 @@ ItemDelegate {
             id: indicator
             y: root.height / 2 - indicator.height / 2 -2
             currentItemHeight: root.height
-            opacity: highlighted ? 1 : 0
+            visible: highlighted ? 1 : 0
             width: 3
-
-            Behavior on y {
-                NumberAnimation {
-                    duration: Utils.animationSpeedMiddle / 1.2
-                    easing.type: Easing.InOutQuint
-                }
-            }
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: Utils.animationSpeed
-                    easing.type: Easing.InQuint
-                }
-            }
         }
 
         Behavior on color {
