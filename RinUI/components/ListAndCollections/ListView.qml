@@ -35,6 +35,53 @@ ListView {
     //     NumberAnimation { property: "y"; duration: 200 }
     // }
 
+    displaced: Transition {
+        NumberAnimation {
+            property: "y"
+            duration: Utils.animationSpeedMiddle
+            easing.type: Easing.OutQuint
+        }
+    }
+
+    add: Transition {
+        ParallelAnimation{
+            NumberAnimation {
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: Utils.animationSpeed
+                easing.type: Easing.OutQuint
+            }
+            NumberAnimation {
+                properties: "scale"
+                from: 0.9
+                to: 1
+                duration: Utils.animationSpeed
+                easing.type: Easing.OutQuint
+            }
+        }
+    }
+
+    // 删除动画
+    remove: Transition {
+        ParallelAnimation{
+            NumberAnimation {
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: Utils.animationSpeed
+                easing.type: Easing.OutQuint
+            }
+            NumberAnimation {
+                properties: "scale"
+                from: 1
+                to: 0.9
+                duration: Utils.animationSpeed
+                easing.type: Easing.OutQuint
+            }
+        }
+    }
+
     delegate: ListViewDelegate {
         middleArea: [
             Text {

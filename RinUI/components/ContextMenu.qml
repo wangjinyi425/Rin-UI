@@ -117,9 +117,11 @@ Popup {
         border.color: Theme.currentTheme.colors.controlBorderColor
 
         // 阴影 / Shadow //
-        Shadow {
+        layer.enabled: true
+        layer.effect: Shadow {
             id: shadow
             style: "flyout"
+            source: background
         }
     }
 
@@ -138,14 +140,14 @@ Popup {
                 duration: 70
                 easing.type: Easing.InOutQuart
             }
-            NumberAnimation {
-                target: shadow
-                property: "opacity"
-                from: 0
-                to: 1
-                duration: 600
-                easing.type: Easing.InOutCubic
-            }
+            // NumberAnimation {
+            //     target: shadow
+            //     property: "opacity"
+            //     from: 0
+            //     to: 1
+            //     duration: 600
+            //     easing.type: Easing.InOutCubic
+            // }
             NumberAnimation {
                 target: scrollBar
                 property: "opacity"

@@ -65,8 +65,10 @@ Item {
             }
         }
 
-        Shadow {
+        layer.enabled: true
+        layer.effect: Shadow {
             style: "flyout"
+            source: background
         }
     }
 

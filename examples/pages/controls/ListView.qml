@@ -4,6 +4,7 @@ import QtQuick.Layouts 2.15
 import RinUI
 import "../../components"
 
+
 ControlPage {
     id: page
     title: "ListView"
@@ -16,6 +17,25 @@ ControlPage {
         )
     }
 
+    ListModel {
+        id: studentsModel
+        ListElement { name: qsTr("Aikiyo Fuuka") }  // 风香
+        ListElement { name: qsTr("Hayase Yuuka") }  // 邮箱
+        ListElement { name: qsTr("Hanaoka Yuzu") }  // 柚子
+        ListElement { name: qsTr("Kuromi Serika") }  // 芹香
+        ListElement { name: qsTr("Kurosaki Koyuki") }  // 小雪
+        ListElement { name: qsTr("Kuda Izuna") }  // 泉奈
+        ListElement { name: qsTr("Okusora Ayane") }  // 绫音
+        ListElement { name: qsTr("Saiba Midori") }  // 绿
+        ListElement { name: qsTr("Saiba Momoi") }  // 桃
+        ListElement { name: qsTr("Shiromi Iori") }  // 伊织
+        ListElement { name: qsTr("Shishidou Nonomi") }  // 野宫
+        ListElement { name: qsTr("Sunaookami Shiroko") }  // 白子😋
+        ListElement { name: qsTr("Tendou Aris") }  // aris
+        ListElement { name: qsTr("Ushio Noa") }  // 诺亚
+        ListElement { name: qsTr("Yutori Natsu") }  // 夏
+    }
+
     Column {
         Layout.fillWidth: true
         spacing: 4
@@ -24,12 +44,13 @@ ControlPage {
             typography: Typography.BodyStrong
                 text: "Basic ListView with Simple DataTemplate"
         }
-        Frame {
+        ControlShowcase {
             width: parent.width
             Column {
+                width: parent.width
                 spacing: 4
                 Text {
-                    width: parent.parent.width
+                    width: parent.width
                     text: "This is a basic ListView that has the full source code below (coming soon). \n" +
                         "Other samples on this page display only the additional markup needed customize " +
                         "the ListView like this one."
@@ -39,26 +60,45 @@ ControlPage {
                     id: listView
                     width: 350
                     height: 400
+                    textRole: "name"
 
-                    model: [
-                        qsTr("Aikiyo Fuuka"),  // 风香
-                        qsTr("Hayase Yuuka"),  // 邮箱
-                        qsTr("Hanaoka Yuzu"),  // 柚子
-                        qsTr("Kuromi Serika"),  // 芹香
-                        qsTr("Kurosaki Koyuki"),  // 小雪
-                        qsTr("Kuda Izuna"),  // 泉奈
-                        qsTr("Okusora Ayane"),  // 绫音
-                        qsTr("Saiba Midori"),  // 绿
-                        qsTr("Saiba Momoi"),  // 桃
-                        qsTr("Shiromi Iori"),  // 伊织
-                        qsTr("Shishidou Nonomi"),  // 野宫
-                        qsTr("Sunaookami Shiroko"),  // 白子😋
-                        qsTr("Tendou Aris"),  // aris
-                        qsTr("Ushio Noa"),  // 诺亚
-                        qsTr("Yutori Natsu")  // 夏
-                    ]
+                    model: studentsModel
                 }
             }
+
+            showcase: [
+                Text {
+                    text: qsTr("Name: ")
+                },
+                TextField {
+                    id: nameField
+                    width: parent.width
+                    placeholderText: qsTr("Enter name")
+                },
+                Button {
+                    text: qsTr("Add")
+                    onClicked: {
+                        if (nameField.text.length === 0) {
+                            floatLayer.createInfoBar({
+                                severity: Severity.Error,
+                                title: qsTr("Error"),
+                                text: qsTr("Please enter a name")
+                            })
+                        } else {
+                            studentsModel.insert(0, { name: nameField.text })
+                        }
+                    }
+                },
+                Item {
+                    height: 16
+                },
+                Button {
+                    text: qsTr("Remove")
+                    onClicked: {
+                        studentsModel.remove(listView.currentIndex, 1)
+                    }
+                }
+            ]
         }
     }
 
@@ -85,7 +125,6 @@ ControlPage {
                     id: listViewWithCustom
                     width: 350
                     height: 400
-                    textRole: "name"
 
                     // 自定义拓展区
                     delegate: ListViewDelegate {
@@ -127,7 +166,7 @@ ControlPage {
                         { name: qsTr("Shiromi Iori"), school: qsTr("Gehenna") },  // 伊织
                         { name: qsTr("Shishidou Nonomi"), school: qsTr("Abydos") },   // 野宫
                         { name: qsTr("Sunaookami Shiroko"), school: qsTr("Abydos") }, // 白子😋
-                        { name: qsTr("Tendou Aris"), school: qsTr("Millennium") },   // Aris
+                        { name: qsTr("Tendou Aris"), school: qsTr("Millennium") },  // Aris
                         { name: qsTr("Ushio Noa"), school: qsTr("Millennium") },  // 诺亚
                         { name: qsTr("Yutori Natsu"), school: qsTr("Trinity") }  // 夏
                     ]

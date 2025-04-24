@@ -21,6 +21,11 @@ ToolButton 1.0 BasicInput/ToolButton.qml
 Switch 1.0 BasicInput/Switch.qml
 RadioButton 1.0 BasicInput/RadioButton.qml
 
+# Dialogs & Flyouts
+Dialog 1.0 DialogsAndFlyouts/Dialog.qml
+DialogButtonBox 1.0 DialogsAndFlyouts/DialogButtonBox.qml
+Flyout 1.0 DialogsAndFlyouts/Flyout.qml
+
 # Status & Info
 InfoBar 1.0 StatusAndInfo/InfoBar.qml
 ProgressBar 1.0 StatusAndInfo/ProgressBar.qml
@@ -46,8 +51,9 @@ NavigationSubItem 1.0 Navigation/NavigationSubItem.qml
 
 # ListAndCollections
 Frame 1.0 ListAndCollections/Frame.qml
-ListView 1.0 ListAndCollections/ListView.qml
+# ListView 1.0 ListAndCollections/ListView.qml
 ListViewDelegate 1.0 ListAndCollections/ListViewDelegate.qml
+TableViewDelegate 1.0 ListAndCollections/TableViewDelegate.qml
 
 Indicator 1.0 Indicator.qml
 

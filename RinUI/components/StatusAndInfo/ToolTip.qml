@@ -57,7 +57,12 @@ ToolTip {
         radius: controlRadius
         color: backgroundColor
         border.color: borderColor
-        Shadow {style: "tooltip"}
+
+        layer.enabled: true
+        layer.effect: Shadow {
+            style: "tooltip"
+            source: background
+        }
     }
 
     // 动画 / Animation //

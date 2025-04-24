@@ -7,6 +7,8 @@ QtObject {
     enum Type {
         Top,
         Bottom,
+        Left,
+        Right,
         TopLeft,
         TopRight,
         BottomLeft,

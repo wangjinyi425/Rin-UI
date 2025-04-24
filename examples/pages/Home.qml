@@ -63,6 +63,7 @@ FluentPage {
 
     // Content / 内容 //
     Column {
+        Layout.fillWidth: true
         spacing: 8
         Text {
             typography: Typography.Subtitle
@@ -70,7 +71,7 @@ FluentPage {
         }
 
         Grid {
-            Layout.fillWidth: true
+            width: parent.width
             columns: Math.floor(width / (360 + 6)) // 自动算列数
             rowSpacing: 12
             columnSpacing: 12
@@ -84,6 +85,7 @@ FluentPage {
     }
 
     Column {
+        Layout.fillWidth: true
         spacing: 8
         Text {
             typography: Typography.Subtitle
@@ -91,7 +93,7 @@ FluentPage {
         }
 
         Grid {
-            Layout.fillWidth: true
+            width: parent.width
             columns: Math.floor(width / (360 + 6)) // 自动算列数
             rowSpacing: 12
             columnSpacing: 12

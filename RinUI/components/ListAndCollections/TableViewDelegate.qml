@@ -7,9 +7,9 @@ import "../../components"
 
 ItemDelegate {
     id: delegate
-    width: ListView.view ? ListView.view.width : 200
+    width: TableView.view ? TableView.view.width : 200
     height: contents.implicitHeight + 20  // 自适应
-    highlighted: ListView.isCurrentItem  // 当前项高亮
+    highlighted: false
     focusPolicy: Qt.StrongFocus
 
     // accessibility
@@ -20,9 +20,8 @@ ItemDelegate {
     property alias leftArea: leftArea.data
     property alias middleArea: middleArea.data
     property alias rightArea: rightArea.data
-    property alias contents: contents.data
 
-    RowLayout {
+    contentItem: RowLayout {
         id: contents
         anchors.fill: parent
         anchors.leftMargin: 5 + 11
@@ -32,6 +31,13 @@ ItemDelegate {
 
         Row {
             id: leftArea
+            // CheckBox {
+            //     id: checkBox
+            //     implicitWidth: height * 1
+            //     Layout.fillHeight: true
+            //     checked: false
+            //     visible: tableCell.column === 0
+            // }
         }
 
         ColumnLayout {
@@ -50,8 +56,8 @@ ItemDelegate {
     background: Rectangle {
         id: itemBg
         anchors.fill: parent
-        anchors.leftMargin: 5
-        anchors.rightMargin: 5
+        // anchors.leftMargin: 5
+        // anchors.rightMargin: 5
         anchors.topMargin: 3
         radius: Theme.currentTheme.appearance.buttonRadius
         color: pressed
@@ -78,6 +84,6 @@ ItemDelegate {
     }
 
     onClicked: {
-        ListView.view.currentIndex = index
+        // TableView.selected = row
     }
 }

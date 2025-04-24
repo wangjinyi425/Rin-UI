@@ -68,9 +68,11 @@ Menu {
         color: Theme.currentTheme.colors.backgroundAcrylicColor
         border.color: Theme.currentTheme.colors.flyoutBorderColor
 
-        Shadow {
+        layer.enabled: true
+        layer.effect: Shadow {
             id: shadow
             style: "flyout"
+            source: background
         }
     }
 

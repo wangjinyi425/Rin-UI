@@ -16,6 +16,10 @@ RadioButton 1.0 components/BasicInput/RadioButton.qml
 CheckBox 1.0 components/BasicInput/CheckBox.qml
 Slider 1.0 components/BasicInput/Slider.qml
 
+# Dialogs & Flyouts
+Dialog 1.0 components/DialogsAndFlyouts/Dialog.qml
+Flyout 1.0 components/DialogsAndFlyouts/Flyout.qml
+
 
 # Text
 Text 1.0 components/Text/Text.qml
@@ -34,6 +38,8 @@ Frame 1.0 components/ListAndCollections/Frame.qml
 SettingCard 1.0 components/ListAndCollections/SettingCard.qml
 ListView 1.0 components/ListAndCollections/ListView.qml
 ListViewDelegate 1.0 components/ListAndCollections/ListViewDelegate.qml
+TableView 1.0 components/ListAndCollections/TableView.qml
+TableViewDelegate 1.0 components/ListAndCollections/TableViewDelegate.qml
 
 # Menus & Toolbars
 Menu 1.0 components/MenusAndToolbars/Menu.qml
@@ -57,7 +63,6 @@ ContextMenu 1.0 components/ContextMenu.qml
 
 FluentWindow 1.0 windows/FluentWindow.qml
 FluentWindowBase 1.0 windows/FluentWindowBase.qml
-Dialog 1.0 windows/Dialog.qml
 CtrlBtn 1.0 windows/CtrlBtn.qml
 FluentPage 1.0 windows/FluentPage.qml
 

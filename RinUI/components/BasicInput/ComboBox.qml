@@ -73,6 +73,7 @@ ComboBox {
         flat: true
         width: 32
         height: 24
+        focusPolicy: editable ? Qt.StrongFocus : Qt.NoFocus
         anchors.right: parent.right
         anchors.margins: 4
         anchors.verticalCenter: parent.verticalCenter

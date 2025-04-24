@@ -1,9 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
-import "../themes"
-import "../components"
-import "../windows"
+import "../../themes"
+import "../../components"
 
 
 Dialog {
@@ -50,9 +49,11 @@ Dialog {
                 duration: Utils.backdropEnabled ? 0 : 150
             }
         }
-        Shadow {
-            opacity: parent.opacity
+
+        layer.enabled: true
+        layer.effect: Shadow {
             style: "dialog"
+            source: background
         }
     }
 

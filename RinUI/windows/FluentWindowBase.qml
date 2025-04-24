@@ -90,7 +90,7 @@ ApplicationWindow {
         z: -1
         clip: true
 
-        Shadow {}
+        // Shadow {}
 
         Behavior on color {
             ColorAnimation {
