@@ -65,7 +65,7 @@ FluentPage {
 
             content: Text {
                 color: Theme.currentTheme.colors.textSecondaryColor
-                text: "0.0.7"
+                text: "0.0.8"
             }
         }
     }
