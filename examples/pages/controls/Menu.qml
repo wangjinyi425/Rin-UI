@@ -119,9 +119,9 @@ ControlPage {
                             text: qsTr("Desktop (shortcut)")
                         }
                         Menu {
-                            title: qsTr("Compredddddddssed file")
+                            title: qsTr("Compressed file")
                             MenuItem {
-                                text: qsTr("Compress andddddddddddddddddddd email")
+                                text: qsTr("Compress and email")
                             }
                             MenuItem {
                                 text: qsTr("Compress to .7z")
@@ -195,19 +195,78 @@ ControlPage {
                 Menu {
                     id: menuWithIconsAndShortcuts
                     Action {
-                        // icon.name: "ic_fluent_share_20_regular"
+                        icon.name: "ic_fluent_share_20_regular"
                         text: qsTr("Share")
                         shortcut: "Ctrl+S"
                     }
                     Action {
-                        // icon.name: "ic_fluent_copy_20_regular"
+                        icon.name: "ic_fluent_copy_20_regular"
                         text: qsTr("Copy")
-                        shortcut: "Ctrl+Cdddddddddddddd"
+                        shortcut: "Ctrl+C"
                     }
                     Action {
-                        // icon.name: "ic_fluent_delete_20_regular"
+                        icon.name: "ic_fluent_delete_20_regular"
                         text: qsTr("Delete")
                         shortcut: "Delete"
+                    }
+                    MenuSeparator {}
+                    MenuItem {
+                        text: qsTr("Rename")
+                    }
+                    MenuItem {
+                        text: qsTr("Select")
+                    }
+                }
+            }
+        }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+
+        Text {
+            typography: Typography.BodyStrong
+                text: "A Menu with radio menus and MenuItemGroup"
+        }
+        Frame {
+            width: parent.width
+            Button {
+                text: qsTr("Options")
+                anchors.verticalCenter: parent.verticalCenter
+                onClicked: menuWithRadio.open()
+
+                Menu {
+                    id: menuWithRadio
+                    MenuItemGroup {
+                        id: orientationGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Landscape")
+                        group: orientationGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Portrait")
+                        checked: true
+                        group: orientationGroup
+                    }
+
+                    MenuSeparator {}
+                    MenuItemGroup {
+                        id: iconSizeGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Small icons")
+                        group: iconSizeGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Medium icons")
+                        group: iconSizeGroup
+                        checked: true
+                    }
+                    MenuItem {
+                        text: qsTr("Large icons")
+                        group: iconSizeGroup
                     }
                 }
             }

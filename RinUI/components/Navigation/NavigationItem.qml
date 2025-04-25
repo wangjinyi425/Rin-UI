@@ -97,13 +97,6 @@ Item {
             currentItemHeight: itemBtn.height + 3
             visible: highlighted ? 1 : 0
             width: 3
-
-            // Behavior on opacity {
-            //     NumberAnimation {
-            //         duration: Utils.animationSpeed
-            //         easing.type: Easing.InQuint
-            //     }
-            // }
         }
 
         // 展开按钮

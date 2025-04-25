@@ -4,158 +4,227 @@ import QtQuick.Layouts 2.15
 import RinUI
 import "../../components"
 
-FluentPage {
+ControlPage {
     id: page
-    title: "Menus & Toolbars"
+    title: "MenuBar"
+
+    Text {
+        Layout.fillWidth: true
+        typography: Typography.Body
+        text: qsTr(
+            "The MenuBar simplifies the creation of basic application by providing a set of menus at the top of the app or window. "
+        )
+    }
 
 
     Column {
         Layout.fillWidth: true
         spacing: 4
-
-        Text {
-            typography: Typography.Subtitle
-            text: qsTr("Menu")
-        }
-        Text {
-            width: parent.width
-            typography: Typography.Body
-            text: qsTr(
-                "A Menu displays lightweight UI that is light dismissed by clicking or tapping off of it." +
-                 "Use it to let the user choose from a contextual list of simple commands or options."
-            )
-        }
-
         Text {
             typography: Typography.BodyStrong
-                text: "A Menu with MenuItems and MenuSeparator."
+                text: "A simple MenuBar"
         }
+
         Frame {
             width: parent.width
-            Button {
-                text: qsTr("Show Menu")
-                onClicked: menu.open()
+            MenuBar {
                 Menu {
-                    id: menu
+                    title: qsTr("File")
                     MenuItem {
-                        // icon.name: "ic_fluent_clipboard_brush_20_regular"
-                        text: "New..."
-                    }
-                    MenuItem {
-                        text: "Open..."
+                        text: qsTr("New")
                     }
                     MenuItem {
-                        text: "Save"
+                        text: qsTr("Open")
                     }
-                    Action {
-                        text: "Save As..."
-                        shortcut: "Ctrl+Shift+S"
-                        onTriggered: console.log("Save As...")
+                    MenuItem {
+                        text: qsTr("Save")
                     }
-                    MenuSeparator { }
-                    Menu {
-                        title: "More ..."
-                        MenuItem {
-                            text: "Exit"
-                        }
+                    MenuItem {
+                        text: qsTr("Exit")
                     }
                 }
-            }
-        }
-        Text {
-            typography: Typography.BodyStrong
-                text: "A Menu with checkable MenuItems."
-        }
-        Frame {
-            width: parent.width
-            Button {
-                flat: true
-                icon.name: "ic_fluent_filter_add_20_filled"
-                text: qsTr("Filter")
-                onClicked: menu_checkable.open()
                 Menu {
-                    id: menu_checkable
+                    title: qsTr("Edit")
                     MenuItem {
-                        // icon.name: "ic_fluent_clipboard_brush_20_regular"
-                        text: "By Name"
-                        checkable: true
-                        checked: true
+                        text: qsTr("Undo")
                     }
                     MenuItem {
-                        text: "By Date"
-                        checkable: true
+                        text: qsTr("Cut")
                     }
                     MenuItem {
-                        text: "By Type"
-                        checkable: true
+                        text: qsTr("Copy")
+                    }
+                    MenuItem {
+                        text: qsTr("Paste")
+                    }
+                }
+                Menu {
+                    title: qsTr("Help")
+                    MenuItem {
+                        text: qsTr("About")
                     }
                 }
             }
         }
     }
-  //   MouseArea {
-  //     anchors.fill: parent
-  //     acceptedButtons: Qt.LeftButton | Qt.RightButton
-  //     onClicked: {
-  //         if (mouse.button === Qt.RightButton)
-  //             contextMenu.popup()
-  //     }
-  //     onPressAndHold: {
-  //         if (mouse.source === Qt.MouseEventNotSynthesized)
-  //             contextMenu.popup()
-  //     }
-  //
-  //     Menu {
-  //         id: contextMenu
-  //         MenuItem { text: "Cut" }
-  //         MenuItem { text: "Copy" }
-  //         MenuItem { text: "Paste" }
-  //     }
-  // }
 
     Column {
         Layout.fillWidth: true
         spacing: 4
-
-        Text {
-            typography: Typography.Subtitle
-            text: qsTr("Menu")
-        }
-        Text {
-            width: parent.width
-            typography: Typography.Body
-            text: qsTr(
-                "A Menu displays lightweight UI that is light dismissed by clicking or tapping off of it." +
-                 "Use it to let the user choose from a contextual list of simple commands or options."
-            )
-        }
-
         Text {
             typography: Typography.BodyStrong
-                text: "A Menu with MenuItems and MenuSeparator."
+                text: qsTr("MenuBar with keyboard accelerators.")
         }
+
         Frame {
             width: parent.width
             MenuBar {
-                id: menuBar
                 Menu {
-                    title: "File"
-                    MenuItem {
-                        // icon.name: "ic_fluent_clipboard_brush_20_regular"
-                        text: "New..."
+                    title: qsTr("File")
+                    Action {
+                        text: qsTr("New")
+                        shortcut: "Ctrl+N"
                     }
-                    MenuItem {
-                        text: "Open..."
+                    Action {
+                        text: qsTr("Open")
+                        shortcut: "Ctrl+O"
                     }
-                    MenuItem {
-                        text: "Save"
+                    Action {
+                        text: qsTr("Save")
+                        shortcut: "Ctrl+S"
+                    }
+                    Action {
+                        text: qsTr("Exit")
+                        shortcut: "Ctrl+E"
                     }
                 }
                 Menu {
-                    title: "Edit"
+                    title: qsTr("Edit")
+                    Action {
+                        text: qsTr("Undo")
+                        shortcut: "Ctrl+Z"
+                    }
+                    Action {
+                        text: qsTr("Cut")
+                        shortcut: "Ctrl+X"
+                    }
+                    Action {
+                        text: qsTr("Copy")
+                        shortcut: "Ctrl+C"
+                    }
+                    Action {
+                        text: qsTr("Paste")
+                        shortcut: "Ctrl+V"
+                    }
                 }
                 Menu {
-                    title: "View"
+                    title: qsTr("Help")
+                    Action {
+                        text: qsTr("About")
+                        shortcut: "Ctrl+I"
+                    }
+                }
+            }
+        }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+        Text {
+            typography: Typography.BodyStrong
+                text: qsTr("MenuBar with submenus, separators, and checkable items")
+        }
+
+        Frame {
+            width: parent.width
+            MenuBar {
+                Menu {
+                    title: qsTr("File")
+                    Menu {
+                        title: qsTr("New")
+                        MenuItem {
+                            text: qsTr("Plain Text Document")
+                        }
+                        MenuItem {
+                            text: qsTr("Rich Text Document")
+                        }
+                        MenuItem {
+                            text: qsTr("Other Formats")
+                        }
+                    }
+                    MenuItem {
+                        text: qsTr("Open")
+                    }
+                    MenuItem {
+                        text: qsTr("Save")
+                    }
+                    MenuSeparator {}
+                    MenuItem {
+                        text: qsTr("Exit")
+                    }
+                }
+                Menu {
+                    title: qsTr("Edit")
+                    MenuItem {
+                        text: qsTr("Undo")
+
+                    }
+                    MenuItem {
+                        text: qsTr("Cut")
+                    }
+                    MenuItem {
+                        text: qsTr("Copy")
+                    }
+                    MenuItem {
+                        text: qsTr("Paste")
+                    }
+                }
+                Menu {
+                    id: view
+                    title: qsTr("View")
+                    MenuItem {
+                        text: qsTr("Output")
+                    }
+                    MenuSeparator {}
+
+                    // 自定义menuitem组 / custom menuitem group like ButtonGroup //
+                    MenuItemGroup {
+                        id: orientationGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Landscape")
+                        group: orientationGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Portrait")
+                        checked: true
+                        group: orientationGroup
+                    }
+
+                    MenuSeparator {}
+                    MenuItemGroup {
+                        id: iconSizeGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Small icons")
+                        group: iconSizeGroup
+                    }
+                    MenuItem {
+                        text: qsTr("Medium icons")
+                        group: iconSizeGroup
+                        checked: true
+                    }
+                    MenuItem {
+                        text: qsTr("Large icons")
+                        group: iconSizeGroup
+                    }
+                }
+                Menu {
+                    title: qsTr("Help")
+                    MenuItem {
+                        text: qsTr("About")
+                    }
                 }
             }
         }

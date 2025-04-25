@@ -9,12 +9,32 @@ MenuItem {
     id: root
     implicitWidth: {
         const leftMargin = 16;
-        const arrowWidth = arrow.visible ? arrow.width + 16 : 0;
+        const arrowWidth = arrow.visible ? arrow.width + 16 : root.checked ? indicator.width + 16 : 0;
         const rightMargin = 16;
         return leftMargin + contentItem.implicitWidth + arrowWidth + rightMargin;
     }
     implicitHeight: Math.max(implicitContentHeight + topPadding + bottomPadding,
                              34)
+
+    property MenuItemGroup group  // 组
+
+    checkable: group
+    checked: group ? group.checkedButton === root : false
+
+    onGroupChanged: {
+        if (group)
+            group.register(root)
+    }
+
+    Component.onDestruction: {
+        if (group)
+            group.unregister(root)
+    }
+
+    onTriggered: {
+        if (group)
+            group.updateCheck(root)
+    }
 
     property var parentMenu: undefined
 
@@ -41,8 +61,10 @@ MenuItem {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.margins: 18
-        icon: "ic_fluent_checkmark_20_filled"
-        size: 16
+        icon: group ? group.exclusive ? "ic_fluent_circle_20_filled" : "ic_fluent_checkmark_20_filled"
+            : "ic_fluent_checkmark_20_filled"
+        width: 16
+        size: group ? group.exclusive ? 7 : 16 : 16
         visible: root.checked
     }
 

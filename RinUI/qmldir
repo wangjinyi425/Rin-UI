@@ -44,6 +44,7 @@ TableViewDelegate 1.0 components/ListAndCollections/TableViewDelegate.qml
 # Menus & Toolbars
 Menu 1.0 components/MenusAndToolbars/Menu.qml
 MenuItem 1.0 components/MenusAndToolbars/MenuItem.qml
+MenuItemGroup 1.0 components/MenusAndToolbars/MenuItemGroup.qml
 MenuSeparator 1.0 components/MenusAndToolbars/MenuSeparator.qml
 ToolSeparator 1.0 components/MenusAndToolbars/ToolSeparator.qml
 MenuBar 1.0 components/MenusAndToolbars/MenuBar.qml

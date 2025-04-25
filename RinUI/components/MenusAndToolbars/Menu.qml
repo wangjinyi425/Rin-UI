@@ -8,9 +8,9 @@ Menu {
     id: root
 
     property bool hasIcons: false  // 标记是否有图标
-    implicitWidth: Math.max(contentItem.implicitWidth, 120)
+    implicitWidth: Math.max(contentItem.implicitWidth, 80)
     implicitHeight: contentItem.implicitHeight
-    x: (parent.width - root.width) / 2
+    // x: (parent.width - root.width) / 2
     // y: parent.height + 5
 
     enter: Transition {
@@ -62,7 +62,7 @@ Menu {
     bottomPadding: 5
 
     background: Rectangle {
-        implicitWidth: 120
+        implicitWidth: 80
         implicitHeight: 36
         radius: Theme.currentTheme.appearance.windowRadius
         color: Theme.currentTheme.colors.backgroundAcrylicColor
