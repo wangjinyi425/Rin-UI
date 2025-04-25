@@ -116,8 +116,8 @@ Item {
         IconWidget {
             id: iconLabel
             size: 16
-            // icon: "\uf12a"
             anchors.verticalCenter: parent.verticalCenter
+            visible: icon || source
         }
 
         //标题
