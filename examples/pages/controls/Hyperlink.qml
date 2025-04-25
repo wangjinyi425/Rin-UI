@@ -55,7 +55,7 @@ ControlPage {
             Hyperlink {
                 // anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Back to gallery home page")
-                onClicked: { window.safePush(Qt.resolvedUrl("../Home.qml")) }
+                onClicked: { navigationView.safePush(Qt.resolvedUrl("../Home.qml")) }
             }
         }
     }
