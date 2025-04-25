@@ -1,11 +1,10 @@
 import ctypes
-import os
 import platform
 import time
 
 from PySide6.QtCore import QObject, Signal, Slot, QThread
 
-from .config import DEFAULT_CONFIG, ConfigCenter, PATH, is_win10, is_windows, is_win11
+from .config import DEFAULT_CONFIG, ConfigCenter, PATH, is_win10, is_windows, is_win11, BackdropEffect
 import sys
 import darkdetect
 
@@ -146,10 +145,10 @@ class ThemeManager(QObject):
             self._update_window_theme()
 
     @Slot(str)
-    def apply_backdrop_effect(self, effect_type):
+    def apply_backdrop_effect(self, effect_type: BackdropEffect):
         """
         应用背景效果
-        :param effect_type: str, 背景效果类型（acrylic, mica, tabbed, none）
+        :param effect_type: BackdropEffect, 背景效果类型（Acrylic, Mica, Tabbed, None_）
         """
         self._update_window_theme()
         if not is_windows() or not self.windows:

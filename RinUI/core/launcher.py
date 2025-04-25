@@ -5,6 +5,7 @@ from PySide6.QtCore import QCoreApplication
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
 from PySide6.QtQml import QQmlApplicationEngine
 from .theme import ThemeManager
+from .config import BackdropEffect, is_windows, Theme
 
 
 def resource_path(relative_path):
@@ -36,7 +37,7 @@ class RinUIWindow:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self, qml_path: str = "test.qml"):
+    def __init__(self, qml_path: str):
         """
         创建基于 RinUI 的 QML 应用程序。
         :param qml_path: str, QML 文件路径
@@ -91,9 +92,17 @@ class RinUIWindow:
         """应用 Windows DWM 效果"""
         self.theme_manager.set_window(self.root_window)
         if sys.platform == "win32":
-            # enable_native_window_behavior(self.root_window)
             self.theme_manager.apply_backdrop_effect(self.theme_manager.get_backdrop_effect())
             self.theme_manager.apply_window_effects()
+
+    # func名称遵循 Qt 命名规范
+    def setBackdropEffect(self, effect: BackdropEffect):
+        if not is_windows() and effect != BackdropEffect.None_:
+            raise OSError("Only can set backdrop effect on Windows platform.")
+        self.theme_manager.apply_backdrop_effect(effect.value)
+
+    def setTheme(self, theme: Theme):
+        self.theme_manager.toggle_theme(theme.value)
 
     def __getattr__(self, name):
         """获取 QML 窗口属性"""

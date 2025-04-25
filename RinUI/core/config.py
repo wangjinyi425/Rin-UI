@@ -1,6 +1,7 @@
 import os
 import json
 import platform
+from enum import Enum
 
 
 def is_win11():
@@ -31,6 +32,19 @@ DEFAULT_CONFIG = {
     "theme_color": "#605ed2",
     "backdrop_effect": "mica" if is_win11() else "acrylic" if is_win10() else "none",
 }
+
+
+class Theme(Enum):
+    Auto = "Auto"
+    Dark = "Dark"
+    Light = "Light"
+
+
+class BackdropEffect(Enum):
+    None_ = "none"
+    Acrylic = "acrylic"
+    Mica = "mica"
+    Tabbed = "tabbed"
 
 
 class ConfigCenter:
