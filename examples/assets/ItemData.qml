@@ -139,6 +139,14 @@ QtObject {
             page: Qt.resolvedUrl("../pages/controls/Slider.qml"),
         },
         {
+            icon: Qt.resolvedUrl("controls/NumberBox.png"),
+            title: qsTr("SpinBox"),
+            type: "text",
+            desc: qsTr("A text control used for numeric input and evaluation of algebraic equations."),
+            page: Qt.resolvedUrl("../pages/controls/SpinBox.qml"),
+            added: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/ToggleSwitch.png"),
             title: qsTr("Switch"),
             type: "basicInput",

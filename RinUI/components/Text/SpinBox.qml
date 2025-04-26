@@ -2,27 +2,37 @@ import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls.Basic 2.15
 import "../../themes"
+import "../../components"
 
-TextField {
+
+SpinBox {
     id: root
+    editable: true
 
-    property bool frameless: false
-    property bool editable: true
     property color primaryColor: Theme.currentTheme.colors.primaryColor
 
-    selectByMouse: true
-    enabled: editable
+    contentItem: TextInput {
+        selectByMouse: true
+        text: root.textFromValue(root.value, root.locale)
+        horizontalAlignment: Qt.AlignLeft
+        verticalAlignment: Qt.AlignVCenter
+
+        readOnly: !root.editable
+        validator: root.validator
+        inputMethodHints: Qt.ImhFormattedNumbersOnly
+    }
+
+    width: Math.max(implicitWidth + upBtn.width + downBtn.width + 8, 124)
 
     // 背景 / Background //
     background: Rectangle {
         id: background
         anchors.fill: parent
         radius: Theme.currentTheme.appearance.buttonRadius
-        color: frameless ? "transparent" : Theme.currentTheme.colors.controlColor
+        color: Theme.currentTheme.colors.controlColor
         clip: true
         border.width: Theme.currentTheme.appearance.borderWidth
-        border.color: frameless ? root.activeFocus ? Theme.currentTheme.colors.controlBorderColor : "transparent" :
-            Theme.currentTheme.colors.controlBorderColor
+        border.color: root.activeFocus ? Theme.currentTheme.colors.controlBorderColor : "transparent"
 
         layer.enabled: true
         layer.smooth: true
@@ -42,27 +52,57 @@ TextField {
             anchors.bottom: parent.bottom
             radius: 999
             height: root.activeFocus ? Theme.currentTheme.appearance.borderWidth * 2 : Theme.currentTheme.appearance.borderWidth
-            color: root.activeFocus ? primaryColor : frameless ? "transparent" : Theme.currentTheme.colors.textControlBorderColor
+            color: root.activeFocus ? primaryColor : Theme.currentTheme.colors.textControlBorderColor
 
             Behavior on color { ColorAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
             Behavior on height { NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
         }
     }
 
-    Behavior on opacity { NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
+    up.indicator: ToolButton {
+        id: upBtn
+        flat: true
+        z: 9
+        focusPolicy: editable ? Qt.StrongFocus : Qt.NoFocus
+        implicitWidth: 32
+        implicitHeight: 24
+        anchors.top: parent.top
+        anchors.right: downBtn.left
+        anchors.bottom: parent.bottom
+        anchors.margins: 4
+        anchors.bottomMargin: 6
+        icon.name: "ic_fluent_chevron_up_20_regular"
+        size: 16
+        color: Theme.currentTheme.colors.textSecondaryColor
+        hoverable: editable
+        onClicked: increase()
+    }
 
-
-    // 字体 / Font //
-    font.pixelSize: Theme.currentTheme.typography.bodySize
-
-    selectionColor: Theme.currentTheme.colors.primaryColor
-    color: Theme.currentTheme.colors.textColor
-    placeholderTextColor: Theme.currentTheme.colors.textSecondaryColor
+    down.indicator: ToolButton {
+        id: downBtn
+        z: 9
+        flat: true
+        focusPolicy: editable ? Qt.StrongFocus : Qt.NoFocus
+        implicitWidth: 32
+        implicitHeight: 24
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 4
+        anchors.bottomMargin: 6
+        icon.name: "ic_fluent_chevron_down_20_regular"
+        size: 16
+        color: Theme.currentTheme.colors.textSecondaryColor
+        hoverable: editable
+        onClicked: decrease()
+    }
 
     leftPadding: 12
     rightPadding: 12
     topPadding: 5
     bottomPadding: 7
+
+    Behavior on opacity { NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
 
     // 状态变化
     states: [

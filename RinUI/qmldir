@@ -24,6 +24,7 @@ Flyout 1.0 components/DialogsAndFlyouts/Flyout.qml
 # Text
 Text 1.0 components/Text/Text.qml
 TextField 1.0 components/Text/TextField.qml
+SpinBox 1.0 components/Text/SpinBox.qml
 TextInput 1.0 components/Text/TextInput.qml
 
 
