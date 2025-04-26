@@ -145,10 +145,10 @@ class ThemeManager(QObject):
             self._update_window_theme()
 
     @Slot(str)
-    def apply_backdrop_effect(self, effect_type: BackdropEffect):
+    def apply_backdrop_effect(self, effect_type: str):
         """
         应用背景效果
-        :param effect_type: BackdropEffect, 背景效果类型（Acrylic, Mica, Tabbed, None_）
+        :param effect_type: str, 背景效果类型（acrylic, mica, tabbed, none）
         """
         self._update_window_theme()
         if not is_windows() or not self.windows:

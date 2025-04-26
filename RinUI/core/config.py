@@ -5,15 +5,15 @@ from enum import Enum
 
 
 def is_win11():
-    if platform.system() == 'Windows':
-        if platform.release() == '10' and int(platform.version().split('.')[2]) >= 22000:
+    if is_windows():
+        if platform.release() >= '10' and int(platform.version().split('.')[2]) >= 22000:
             return True
     return False
 
 
 def is_win10():
-    if platform.system() == 'Windows':
-        if platform.release() == '10' and int(platform.version().split('.')[2]) >= 19045:
+    if is_windows():
+        if platform.release() >= '10' and int(platform.version().split('.')[2]) >= 19045:
             return True
     return False
 

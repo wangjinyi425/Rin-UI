@@ -50,6 +50,7 @@ class RinUIWindow:
         self.engine = QQmlApplicationEngine()
         self.theme_manager = ThemeManager()
         self.qml_path = resource_path(qml_path)
+        self.autoSetWindowsEffect = True
 
         self._setup_application()
         self.print_startup_info()
@@ -86,22 +87,35 @@ class RinUIWindow:
 
         self.root_window = self.engine.rootObjects()[0]
 
-        self._apply_windows_effects()
+        self.theme_manager.set_window(self.root_window)
+        self._apply_windows_effects() if self.autoSetWindowsEffect else None
 
     def _apply_windows_effects(self):
-        """应用 Windows DWM 效果"""
-        self.theme_manager.set_window(self.root_window)
+        """
+        Apply Windows effects to the window.
+        :return:
+        """
         if sys.platform == "win32":
             self.theme_manager.apply_backdrop_effect(self.theme_manager.get_backdrop_effect())
             self.theme_manager.apply_window_effects()
 
     # func名称遵循 Qt 命名规范
     def setBackdropEffect(self, effect: BackdropEffect):
+        """
+        Sets the backdrop effect for the window. (Only available on Windows)
+        :param effect: BackdropEffect, type of backdrop effect（Acrylic, Mica, Tabbed, None_）
+        :return:
+        """
         if not is_windows() and effect != BackdropEffect.None_:
             raise OSError("Only can set backdrop effect on Windows platform.")
         self.theme_manager.apply_backdrop_effect(effect.value)
 
     def setTheme(self, theme: Theme):
+        """
+        Sets the theme for the window.
+        :param theme: Theme, type of theme（Auto, Dark, Light）
+        :return:
+        """
         self.theme_manager.toggle_theme(theme.value)
 
     def __getattr__(self, name):

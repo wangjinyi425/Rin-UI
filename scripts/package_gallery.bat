@@ -1,5 +1,5 @@
 cd ..
-pyinstaller --onefile --icon=examples/assets/gallery.ico ^
+.venv\Scripts\pyinstaller.exe  --icon=examples/assets/gallery.ico ^
 --noconsole ^
 --add-data="RinUI;RinUI" ^
 --add-data="examples;./" ^
