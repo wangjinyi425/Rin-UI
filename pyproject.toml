@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "RinUI"
-version = "0.0.8.1"
+version = "0.0.8.3"
 authors = [
     { name = "RinLit", email = "lintu233_qwq@icloud.com" }
 ]
@@ -33,8 +33,12 @@ RinUI = [
     "components/**/*",
     "themes/**/*",
     "windows/**/*",
-    "utils/**/*"
+    "utils/**/*",
+    "hooks/**/*",
 ]
 
 [tool.setuptools.data-files]
 "" = ["README.md", "LICENSE"]
+
+[project.entry-points."pyinstaller40"]
+hook-dirs = "RinUI.hooks:get_hook_dirs"

@@ -49,7 +49,7 @@ class RinUIWindow:
 
         self.engine = QQmlApplicationEngine()
         self.theme_manager = ThemeManager()
-        self.qml_path = resource_path(qml_path)
+        self.qml_path = qml_path
         self.autoSetWindowsEffect = True
 
         self._setup_application()
