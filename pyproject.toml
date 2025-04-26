@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "RinUI"
-version = "0.0.8.3"
+version = "0.0.8.5"
 authors = [
     { name = "RinLit", email = "lintu233_qwq@icloud.com" }
 ]
