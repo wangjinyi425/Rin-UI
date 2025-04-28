@@ -59,6 +59,12 @@ FluentWindow {
             subItems: generateSubItems("collections")
         },
         {
+            title: "Date & Time",
+            page: Qt.resolvedUrl("pages/DateAndTime.qml"),
+            icon: "ic_fluent_calendar_clock_20_regular",
+            subItems: generateSubItems("date&time")
+        },
+        {
             title: "Dialogs & Flyouts",
             page: Qt.resolvedUrl("pages/DialogsAndFlyouts.qml"),
             icon: "ic_fluent_chat_20_regular",

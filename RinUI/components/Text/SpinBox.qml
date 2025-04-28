@@ -32,7 +32,7 @@ SpinBox {
         color: Theme.currentTheme.colors.controlColor
         clip: true
         border.width: Theme.currentTheme.appearance.borderWidth
-        border.color: root.activeFocus ? Theme.currentTheme.colors.controlBorderColor : "transparent"
+        border.color: Theme.currentTheme.colors.controlBorderColor
 
         layer.enabled: true
         layer.smooth: true

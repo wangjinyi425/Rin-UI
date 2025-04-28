@@ -172,6 +172,14 @@ QtObject {
             page: Qt.resolvedUrl("../pages/controls/TextField.qml"),
         },
         {
+            icon: Qt.resolvedUrl("controls/TimePicker.png"),
+            title: qsTr("TimePicker"),
+            type: "date&time",
+            desc: qsTr("A configurable control that lets a user pick a time value."),
+            page: Qt.resolvedUrl("../pages/controls/TimePicker.qml"),
+            added: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/TitleBar.png"),
             title: qsTr("TitleBar"),
             type: "windowing",

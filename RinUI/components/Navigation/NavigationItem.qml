@@ -129,12 +129,16 @@ Item {
         }
 
         onClicked: {
+            if (subItem) {
+                if (!navigationBar.collapsed) {
+                    collapsed = !collapsed
+                } else {
+                    subMenu.open()
+                }
+            }
             if (itemData.page && currentPage && !navigationItems.highlighted) {
                 // 记录上一次的索引
                 navigationView.safePush(itemData.page, true)
-            }
-            if (subItem && !navigationBar.collapsed) {
-                collapsed = !collapsed
             }
         }
     }
@@ -142,6 +146,23 @@ Item {
     // 动画 / Animation //
     Behavior on height { NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint } }
 
+    // 折叠菜单
+    Menu {
+        id: subMenu
+        position: Position.Right
+        Repeater {
+            id: subMenuRepeater
+            model: itemData.subItems
+            delegate: MenuItem {
+                text: modelData.title
+                onClicked: {
+                    if (modelData.page && navigationItems.currentPage) {
+                        navigationView.safePush(modelData.page)
+                    }
+                }
+            }
+        }
+    }
 
     // 递归处理子项
     Column {

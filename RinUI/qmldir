@@ -16,6 +16,9 @@ RadioButton 1.0 components/BasicInput/RadioButton.qml
 CheckBox 1.0 components/BasicInput/CheckBox.qml
 Slider 1.0 components/BasicInput/Slider.qml
 
+# Date & Time
+TimePicker 1.0 components/DateAndTime/TimePicker.qml
+
 # Dialogs & Flyouts
 Dialog 1.0 components/DialogsAndFlyouts/Dialog.qml
 Flyout 1.0 components/DialogsAndFlyouts/Flyout.qml

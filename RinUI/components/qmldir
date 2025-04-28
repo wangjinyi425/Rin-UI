@@ -21,6 +21,10 @@ ToolButton 1.0 BasicInput/ToolButton.qml
 Switch 1.0 BasicInput/Switch.qml
 RadioButton 1.0 BasicInput/RadioButton.qml
 
+# Date & Time
+PickerView 1.0 DateAndTime/PickerView.qml
+# TimePicker 1.0 DateAndTime/TimePicker.qml
+
 # Dialogs & Flyouts
 Dialog 1.0 DialogsAndFlyouts/Dialog.qml
 DialogButtonBox 1.0 DialogsAndFlyouts/DialogButtonBox.qml

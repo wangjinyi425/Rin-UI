@@ -7,7 +7,36 @@ import "../../components"
 Menu {
     id: root
 
-    property bool hasIcons: false  // 标记是否有图标
+    property int position: Position.Bottom  // 位置
+
+    property real posX: {
+        switch (position) {
+            case Position.Top:
+            case Position.Bottom:
+                return (parent.width - root.width) / 2
+            case Position.Left:
+                return - root.width - 5
+            case Position.Right:
+                return parent.width + 5
+            default:
+                return (parent.width - root.width) / 2
+        }
+    }
+
+    property real posY: {
+        switch (position) {
+            case Position.Top:
+                return -root.height - 5
+            case Position.Bottom:
+                return parent.height + 5
+            case Position.Left:
+            case Position.Right:
+                return (parent.height - root.height) / 2
+            default:
+                return -root.height + 5  // 默认顶部
+        }
+    }
+
     implicitWidth: Math.max(contentItem.implicitWidth, 80)
     implicitHeight: contentItem.implicitHeight
     // x: (parent.width - root.width) / 2
@@ -26,16 +55,29 @@ Menu {
             NumberAnimation {
                 target: root
                 property: "height"
-                from: 0
+                from: (position === Position.Top || position === Position.Bottom ? 0 : root.implicitHeight)
                 to: root.implicitHeight
                 duration: Utils.animationSpeed
+                easing.type: Easing.OutQuart
+            }
+            NumberAnimation {
+                target: root
+                property: "x"
+                from: posX + (position === Position.Left ? 5 : position === Position.Right ? -5 : 0)
+                to: posX
+                duration: Utils.animationSpeedMiddle
                 easing.type: Easing.OutQuint
+                onRunningChanged: {
+                    scrollBar.visible = true;
+                }
             }
             NumberAnimation {
                 target: root
                 property: "y"
-                from: 0
-                to: root.parent.height + 5
+                from: posY + (position === Position.Top || position === Position.Bottom
+                    ? (position === Position.Top ? implicitHeight / 2 : position === Position.Bottom ? -implicitHeight / 2 : implicitHeight / 2)
+                    : 0)
+                to: posY
                 duration: Utils.animationSpeedMiddle
                 easing.type: Easing.OutQuint
                 onRunningChanged: {
