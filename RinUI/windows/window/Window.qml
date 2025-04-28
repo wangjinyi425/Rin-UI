@@ -6,9 +6,11 @@ import "../../themes"
 
 Window {
     id: baseWindow
-    flags: Qt.FramelessWindowHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint
+    flags: frameless ? Qt.FramelessWindowHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint
+        : Qt.Window
 
-    color: "transparent"
+    color: frameless ? "transparent" : Theme.currentTheme.colors.backgroundColor
+    property bool frameless: false
     property int titleBarHeight: Theme.currentTheme.appearance.dialogTitleBarHeight
 
     // 布局
@@ -23,6 +25,7 @@ Window {
         Item {
             Layout.preferredHeight: titleBar.height
             Layout.fillWidth: true
+            visible: frameless
         }
 
         // 主体内容区域
@@ -41,6 +44,7 @@ Window {
         title: baseWindow.title
         Layout.fillWidth: true
         height: baseWindow.titleBarHeight
+        visible: frameless
     }
 
     Rectangle {
@@ -50,6 +54,7 @@ Window {
         border.color: Theme.currentTheme.colors.windowBorderColor
         z: -1
         clip: true
+        visible: frameless
 
         // Shadow {}
 
@@ -60,12 +65,21 @@ Window {
         }
     }
 
+    Behavior on color {
+        ColorAnimation {
+            duration: Utils.appearanceSpeed
+        }
+    }
+
     //改变鼠标形状
     MouseArea {
         anchors.fill: parent
         hoverEnabled: baseWindow.visibility !== Window.Maximized
         z: -1
         cursorShape: {
+            if (!frameless) {
+                return
+            }
             const p = Qt.point(mouseX, mouseY)
             const b = Utils.windowDragArea
             if (p.x < b && p.y < b) return Qt.SizeFDiagCursor
@@ -80,6 +94,7 @@ Window {
 
     DragHandler {
         id: resizeHandler
+        enabled: false
         grabPermissions: TapHandler.TakeOverForbidden
         target: null
         onActiveChanged: if (active && baseWindow.visibility !== Window.Maximized) {

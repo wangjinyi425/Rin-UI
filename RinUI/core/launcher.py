@@ -30,12 +30,12 @@ class TestWindow(QWidget):
 
 
 class RinUIWindow:
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):  # 单例模式管理
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
+    # _instance = None
+    #
+    # def __new__(cls, *args, **kwargs):  # 单例模式管理
+    #     if cls._instance is None:
+    #         cls._instance = super().__new__(cls)
+    #     return cls._instance
 
     def __init__(self, qml_path: str):
         """

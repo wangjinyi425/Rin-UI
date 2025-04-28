@@ -17,16 +17,17 @@ ApplicationWindow {
 
     flags: frameless ? Qt.FramelessWindowHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint | Qt.WindowCloseButtonHint :
         Qt.Window
-    color: "transparent"
+    color: frameless ? "transparent" : Theme.currentTheme.colors.backgroundColor
 
     // 自定义属性
     property var icon: "../assets/img/default_app_icon.png"  // 图标
     property alias titleEnabled: titleBar.titleEnabled
-    property int titleBarHeight: Theme.currentTheme.appearance.windowTitleBarHeight
+    property int titleBarHeight: Theme.currentTheme.appearance.dialogTitleBarHeight
     property bool frameless: true  // 是否无边框
 
 
     // 直接添加子项
+    property alias framelessMenuBar: menuBarArea.children  // 无边框模式时菜单栏
     default property alias content: contentArea.children
     property alias floatLayer: floatLayer
 
@@ -58,7 +59,13 @@ ApplicationWindow {
 
         // 顶部边距
         Item {
-            Layout.preferredHeight: titleBar.height
+            Layout.preferredHeight: frameless ? titleBar.height : 0
+            Layout.fillWidth: true
+        }
+
+        // menubar
+        Item {
+            id: menuBarArea
             Layout.fillWidth: true
         }
 
@@ -86,13 +93,14 @@ ApplicationWindow {
     background: Rectangle {
         id: background
         anchors.fill: parent
-        color: Utils.backdropEnabled && frameless ? "transparent" : Theme.currentTheme.colors.backgroundColor
+        color: Utils.backdropEnabled ? "transparent" : Theme.currentTheme.colors.backgroundColor
         border.color: Theme.currentTheme.colors.windowBorderColor
         layer.enabled: true  // 启用透明渲染
         border.width: 1
         radius: Theme.currentTheme.appearance.windowRadius
         z: -1
         clip: true
+        visible: frameless
 
         // Shadow {}
 
@@ -103,6 +111,12 @@ ApplicationWindow {
         }
     }
 
+    Behavior on color {
+        ColorAnimation {
+            duration: Utils.appearanceSpeed
+        }
+    }
+
 
     //改变鼠标形状
     MouseArea {
@@ -110,6 +124,9 @@ ApplicationWindow {
         hoverEnabled: baseWindow.visibility !== Window.Maximized
         z: -1
         cursorShape: {
+            if (!baseWindow.frameless) {
+                return
+            }
             const p = Qt.point(mouseX, mouseY)
             const b = Utils.windowDragArea
             if (p.x < b && p.y < b) return Qt.SizeFDiagCursor

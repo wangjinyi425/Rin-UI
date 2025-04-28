@@ -5,6 +5,7 @@ import "../../themes"
 
 MenuBar {
     id: menuBar
+    padding: 4
 
     delegate: MenuBarItem {
         id: menuBarItem

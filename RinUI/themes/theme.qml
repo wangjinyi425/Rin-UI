@@ -61,6 +61,22 @@ Item {
         return ThemeManager.get_theme_name()
     }
 
+    // 本来打算写多主题支持的（）
+
+    function toggleMode() {
+        if (!isThemeMgrInitialized()) {
+            console.error("ThemeManager is not defined.")
+            return -1
+        }
+        var mode = ThemeManager.get_theme()
+        if (!currentTheme.isDark) {
+            mode = "Dark"
+        } else {
+            mode = "Light"
+        }
+        setTheme(mode)
+    }
+
     // 切换主题
     function setTheme(mode) {
         if (!isThemeMgrInitialized()) {

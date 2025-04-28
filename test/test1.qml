@@ -4,11 +4,50 @@ import QtQuick.Window
 import RinUI
 
 
-Window {
+ApplicationWindow {
     width: 640
     height: 480
     visible: true
     title: qsTr("Hello World")
+
+    menuBar: MenuBar {
+        Menu {
+            title: qsTr("File")
+            MenuItem {
+                text: qsTr("New")
+            }
+            MenuItem {
+                text: qsTr("Open")
+            }
+            MenuItem {
+                text: qsTr("Save")
+            }
+            MenuSeparator {}
+            MenuItem {
+                text: qsTr("Exit")
+                onClicked: Qt.quit()
+            }
+        }
+        Menu {
+            title: qsTr("Edit")
+            MenuItem {
+                text: qsTr("Undo")
+            }
+            MenuItem {
+                text: qsTr("Redo")
+            }
+            MenuSeparator {}
+            MenuItem {
+                text: qsTr("Cut")
+            }
+            MenuItem {
+                text: qsTr("Copy")
+            }
+            MenuItem {
+                text: qsTr("Paste")
+            }
+        }
+    }
 
     Row {
         anchors.bottom: parent.bottom
@@ -26,6 +65,9 @@ Window {
                 title: qsTr("Dialog")
                 Text {
                     text: qsTr("This is a dialog.")
+                }
+                onAccepted: {
+                    Theme.toggleMode()
                 }
                 standardButtons: Dialog.Ok | Dialog.Cancel
             }
