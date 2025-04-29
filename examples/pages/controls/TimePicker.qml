@@ -23,18 +23,43 @@ ControlPage {
 
         Text {
             typography: Typography.BodyStrong
-            text: qsTr("A simple SpinBox.")
+            text: qsTr("A simple TimePicker.")
         }
         ControlShowcase {
             width: parent.width
-            TimePicker {}
+            TimePicker {
+                enabled: !pickerSwitch.checked
+            }
 
             showcase: [
                 CheckBox {
-                    id: spinSwitch
-                    text: qsTr("Disable SpinBox")
+                    id: pickerSwitch
+                    text: qsTr("Disable TimePicker")
                 }
             ]
+        }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+
+        Text {
+            typography: Typography.BodyStrong
+            text: qsTr("A TimePicker using a 24-hour clock.")
+        }
+        Frame {
+            width: parent.width
+            padding: 18
+
+            Column {
+                Text {
+                    text: qsTr("24 hour clock")
+                }
+                TimePicker {
+                    use24Hour: true
+                }
+            }
         }
     }
 }

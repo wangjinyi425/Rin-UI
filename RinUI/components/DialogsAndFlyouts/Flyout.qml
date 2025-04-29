@@ -8,38 +8,11 @@ import "../../components"
 Popup {
     id: flyout
     property string text: "Flyout"
-    property int position: 0  // 位置
     property alias buttonBox: buttonLayout.data  // 按钮列表
     property string image: ""  // 图片
     property real maximumWidth: 350  // 最大宽度
 
-    property real posX: {
-        switch (position) {
-            case Position.Top:
-            case Position.Bottom:
-                return (parent.width - flyout.width) / 2
-            case Position.Left:
-                return - flyout.width - 5
-            case Position.Right:
-                return parent.width + 5
-            default:
-                return (parent.width - flyout.width) / 2
-        }
-    }
-
-    property real posY: {
-        switch (position) {
-            case Position.Top:
-                return -flyout.height - 5
-            case Position.Bottom:
-                return parent.height + 5
-            case Position.Left:
-            case Position.Right:
-                return (parent.height - flyout.height) / 2
-            default:
-                return -flyout.height + 5  // 默认顶部
-        }
-    }
+    position: Position.Top
 
     padding: 16
 
@@ -103,29 +76,29 @@ Popup {
         }
     }
 
-    background: Rectangle {
-        id: background
-        anchors.fill: parent
-        anchors.horizontalCenter: parent.horizontalCenter
-        y: -6
-
-        radius: Theme.currentTheme.appearance.windowRadius
-        color: Theme.currentTheme.colors.backgroundAcrylicColor
-        border.color: Theme.currentTheme.colors.flyoutBorderColor
-
-        Behavior on color {
-            ColorAnimation {
-                duration: Utils.appearanceSpeed
-                easing.type: Easing.OutQuart
-            }
-        }
-
-        layer.enabled: true
-        layer.effect: Shadow {
-            style: "flyout"
-            source: background
-        }
-    }
+    // background: Rectangle {
+    //     id: background
+    //     anchors.fill: parent
+    //     anchors.horizontalCenter: parent.horizontalCenter
+    //     y: -6
+    //
+    //     radius: Theme.currentTheme.appearance.windowRadius
+    //     color: Theme.currentTheme.colors.backgroundAcrylicColor
+    //     border.color: Theme.currentTheme.colors.flyoutBorderColor
+    //
+    //     Behavior on color {
+    //         ColorAnimation {
+    //             duration: Utils.appearanceSpeed
+    //             easing.type: Easing.OutQuart
+    //         }
+    //     }
+    //
+    //     layer.enabled: true
+    //     layer.effect: Shadow {
+    //         style: "flyout"
+    //         source: background
+    //     }
+    // }
 
     // 动画 / Animation //
     enter: Transition {

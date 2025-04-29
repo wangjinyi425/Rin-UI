@@ -14,6 +14,7 @@ FluentWindowBase {
     minimumWidth: 400
     minimumHeight: 300
     titleEnabled: false
+    titleBarHeight: Theme.currentTheme.appearance.windowTitleBarHeight
 
     property alias navigationItems: navigationView.navigationItems  // 导航栏item
     property alias defaultPage: navigationView.defaultPage  // 默认索引项

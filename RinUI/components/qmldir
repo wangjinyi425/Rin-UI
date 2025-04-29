@@ -29,6 +29,7 @@ PickerView 1.0 DateAndTime/PickerView.qml
 Dialog 1.0 DialogsAndFlyouts/Dialog.qml
 DialogButtonBox 1.0 DialogsAndFlyouts/DialogButtonBox.qml
 Flyout 1.0 DialogsAndFlyouts/Flyout.qml
+Popup 1.0 DialogsAndFlyouts/Popup.qml
 
 # Status & Info
 InfoBar 1.0 StatusAndInfo/InfoBar.qml

@@ -18,6 +18,7 @@ Slider 1.0 components/BasicInput/Slider.qml
 
 # Date & Time
 TimePicker 1.0 components/DateAndTime/TimePicker.qml
+PickerView 1.0 components/DateAndTime/PickerView.qml
 
 # Dialogs & Flyouts
 Dialog 1.0 components/DialogsAndFlyouts/Dialog.qml

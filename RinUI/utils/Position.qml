@@ -13,6 +13,7 @@ QtObject {
         TopRight,
         BottomLeft,
         BottomRight,
+        Center,
         None
     }
 }
