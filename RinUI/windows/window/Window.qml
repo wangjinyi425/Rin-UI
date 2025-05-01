@@ -11,6 +11,7 @@ Window {
 
     color: frameless ? "transparent" : Theme.currentTheme.colors.backgroundColor
     property bool frameless: false
+    default property alias content: baseWindow.data
     property int titleBarHeight: Theme.currentTheme.appearance.dialogTitleBarHeight
 
     // 布局

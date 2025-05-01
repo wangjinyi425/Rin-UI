@@ -6,6 +6,8 @@ import "../../components"
 
 ControlPage {
     title: qsTr("TimePicker")
+    badgeText: qsTr("Extra")
+    badgeSeverity: Severity.Success
 
     // intro
     Text {

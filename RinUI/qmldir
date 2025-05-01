@@ -33,6 +33,7 @@ TextInput 1.0 components/Text/TextInput.qml
 
 
 # Status & Info
+InfoBadge 1.0 components/StatusAndInfo/InfoBadge.qml
 InfoBar 1.0 components/StatusAndInfo/InfoBar.qml
 ProgressBar 1.0 components/StatusAndInfo/ProgressBar.qml
 ToolTip 1.0 components/StatusAndInfo/ToolTip.qml

@@ -7,6 +7,8 @@ FluentPage {
     id: fluentPage
 
     property url docsUrl: "https://ui.rinlit.cn/"
+    property string badgeText: ""
+    property var badgeSeverity: Severity.Info
 
     contentSpacing: 32
 
@@ -21,12 +23,21 @@ FluentPage {
             anchors.bottomMargin: 12
             anchors.bottom: parent.bottom
 
-            Text {
-                height: parent.height
-                Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
-                typography: Typography.Title
-                text: fluentPage.title
-                visible: fluentPage.title !== ""  // 标题
+            RowLayout {
+                spacing: 16
+                Text {
+                    height: parent.height
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignBottom
+                    typography: Typography.Title
+                    text: fluentPage.title
+                    visible: fluentPage.title !== ""  // 标题
+                }
+                InfoBadge {
+                    severity: badgeSeverity
+                    solid: false
+                    text: badgeText
+                    visible: badgeText !== ""  // 徽章
+                }
             }
 
             // 拓展区域 //

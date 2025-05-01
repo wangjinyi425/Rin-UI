@@ -7,6 +7,8 @@ import "../../components"
 ControlPage {
     title: qsTr("NavigationView")
     wrapperWidth: 1920
+    badgeText: qsTr("Extra")
+    badgeSeverity: Severity.Success
 
     // intro
     Text {

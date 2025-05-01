@@ -79,6 +79,14 @@ QtObject {
             page: Qt.resolvedUrl("../pages/controls/IconWidget.qml"),
         },
         {
+            icon: Qt.resolvedUrl("controls/InfoBadge.png"),
+            title: qsTr("InfoBadge"),
+            type: "status&info",
+            desc: qsTr("An non-intrusive UI to display notificatons or bring focus to an area"),
+            page: Qt.resolvedUrl("../pages/controls/InfoBadge.qml"),
+            added: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/InfoBar.png"),
             title: qsTr("InfoBar"),
             type: "status&info",

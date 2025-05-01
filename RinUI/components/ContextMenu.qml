@@ -77,7 +77,7 @@ Popup {
 
                 // 选择指示器
                 Indicator {
-                    currentItemHeight: listView.currentItem.height
+                    currentItemHeight: itemBg.height
                     visible: highlighted
                 }
 

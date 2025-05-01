@@ -6,6 +6,8 @@ import "../../components"
 
 ControlPage {
     title: qsTr("Hyperlink")
+    badgeText: qsTr("Extra")
+    badgeSeverity: Severity.Success
 
     // intro
     Text {
