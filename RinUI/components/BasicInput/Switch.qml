@@ -40,9 +40,9 @@ Switch {
     // 指示器 / Indicator //
     indicator: Rectangle {
         id: indicator
-        width: pressed && enabled ? root.height - 3:
-            hovered  && enabled ? root.height - 3 * 2 : root.height - 4 * 2
-        height: (hovered || pressed) && enabled ? root.height - 3 * 2 : root.height - 4 * 2
+        width: pressed && enabled ? background.height - 3:
+            hovered  && enabled ? background.height - 3 * 2 : background.height - 4 * 2
+        height: (hovered || pressed) && enabled ? background.height - 3 * 2 : background.height - 4 * 2
 
         anchors.verticalCenter: background.verticalCenter
         radius: height / 2
