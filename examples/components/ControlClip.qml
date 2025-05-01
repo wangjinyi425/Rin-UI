@@ -7,6 +7,17 @@ Clip {
     width: 360
     height: 88
 
+    InfoBadge {
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.margins: 12
+        width: 8
+        height: 8
+        text: "·"
+        visible: (modelData.added !== undefined && modelData.added)
+            || (modelData.updated !== undefined && modelData.updated)
+    }
+
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: 22

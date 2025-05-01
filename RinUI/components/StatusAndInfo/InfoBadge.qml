@@ -40,7 +40,7 @@ Rectangle {
         }
     }
 
-    width: dot ? 4 : Math.max(contents.width + 6 + 2, 16) + !solid * 2
+    width: dot ? 4 : Math.max(contents.width + 6, 16) + !solid * 2
     height: dot ? 4 : 16 + !solid * 2
     radius: height / 2
 
