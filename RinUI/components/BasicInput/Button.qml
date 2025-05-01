@@ -15,6 +15,9 @@ Button {
     property bool hoverable: true  // 是否可悬停
     property bool accessibliityIndicator: true  // 是否显示辅助提示
 
+    readonly property color hoverColor: !highlighted && !flat
+        ? Theme.currentTheme.colors.controlSecondaryColor : backgroundColor
+
     // accessibility
     FocusIndicator {
         control: parent
@@ -28,7 +31,7 @@ Button {
     background: Rectangle {
         id: background
         anchors.fill: parent
-        color: backgroundColor
+        color: hovered ? hoverColor : backgroundColor
         radius: Theme.currentTheme.appearance.buttonRadius
 
         border.width: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
@@ -127,7 +130,6 @@ Button {
             PropertyChanges {
                 target: root;
                 opacity: !highlighted && !flat ? 1 : 0.875
-                backgroundColor: !highlighted && !flat? Theme.currentTheme.colors.controlSecondaryColor : backgroundColor
             }
         }
     ]

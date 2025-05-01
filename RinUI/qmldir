@@ -8,6 +8,7 @@ FocusIndicator 1.0 components/FocusIndicator.qml
 
 # Basic Input
 Button 1.0 components/BasicInput/Button.qml
+ToggleButton 1.0 components/BasicInput/ToggleButton.qml
 ToolButton 1.0 components/BasicInput/ToolButton.qml
 ComboBox 1.0 components/BasicInput/ComboBox.qml
 Switch 1.0 components/BasicInput/Switch.qml

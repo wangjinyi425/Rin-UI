@@ -155,6 +155,14 @@ QtObject {
             added: true,
         },
         {
+            icon: Qt.resolvedUrl("controls/ToggleButton.png"),
+            title: qsTr("ToggleButton"),
+            type: "basicInput",
+            desc: qsTr("A button that can toggled between 2 states like a CheckBox."),
+            page: Qt.resolvedUrl("../pages/controls/ToggleButton.qml"),
+            added: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/ToggleSwitch.png"),
             title: qsTr("Switch"),
             type: "basicInput",
