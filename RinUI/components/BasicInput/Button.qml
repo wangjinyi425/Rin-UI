@@ -14,6 +14,7 @@ Button {
     property alias size: text.font.pixelSize
     property bool hoverable: true  // 是否可悬停
     property bool accessibliityIndicator: true  // 是否显示辅助提示
+    property string suffixIconName: ""  // 后缀图标
 
     readonly property color hoverColor: !highlighted && !flat
         ? Theme.currentTheme.colors.controlSecondaryColor : backgroundColor
@@ -68,7 +69,7 @@ Button {
         opacity: flat && !hovered || !hoverable ? 0 : 1
     }
 
-    implicitWidth: Math.max(iconWidget.width + text.width + 26, 40)
+    implicitWidth: Math.max(row.implicitWidth + 26, 40)
     implicitHeight: Math.max(text.height + 12, 32)
 
     contentItem: Item {
@@ -76,6 +77,7 @@ Button {
         anchors.fill: parent
 
         Row {
+            id: row
             spacing: 8
             anchors.centerIn: parent
             IconWidget {
@@ -83,7 +85,8 @@ Button {
                 size: icon || source ? text.font.pixelSize * 1.25 : 0  // 图标大小 / Icon Size
                 icon: root.icon.name
                 source: root.icon.source
-                y: 1
+                height: parent.height
+                y: 0.25
                 color: icon.color ? icon.color : highlighted ? flat ?
                     enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
                     Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
@@ -94,6 +97,15 @@ Button {
                 text: root.text
                 color: highlighted ? flat ? Theme.currentTheme.colors.textAccentColor :
                     Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
+            }
+            // 后缀图标
+            IconWidget {
+                id: suffixIcon
+                size: 12
+                height: parent.height
+                icon: root.suffixIconName
+                color: Theme.currentTheme.colors.textSecondaryColor
+                visible: root.suffixIconName !== ""
             }
         }
     }

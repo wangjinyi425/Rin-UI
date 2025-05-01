@@ -57,6 +57,14 @@ QtObject {
             page: Qt.resolvedUrl("../pages/controls/Dialog.qml"),
         },
         {
+            icon: Qt.resolvedUrl("controls/DropDownButton.png"),
+            title: qsTr("DropDownButton"),
+            type: "basicInput",
+            desc: qsTr("A button that display a flyout of choices when clicked."),
+            page: Qt.resolvedUrl("../pages/controls/DropDownButton.qml"),
+            added: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/Flyout.png"),
             title: qsTr("Flyout"),
             type: "dialogs&flyouts",
