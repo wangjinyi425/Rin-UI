@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls.Basic 2.15
 import QtQuick.Layouts 2.15
+import Qt5Compat.GraphicalEffects
 import "../../themes"
 import "../../components"
 
@@ -10,6 +11,7 @@ Button {
     property color backgroundColor: flat ? Theme.currentTheme.colors.subtleSecondaryColor :
         highlighted ? primaryColor : Theme.currentTheme.colors.controlColor
     // default property alias icon.source: icon.source
+    property bool hoverable: true  // 是否可悬停
 
     // accessibility
     FocusIndicator {
@@ -21,36 +23,43 @@ Button {
     bottomPadding: 7
 
     background: Rectangle {
-        id: border
+        id: background
         anchors.fill: parent
+        color: backgroundColor
         radius: Theme.currentTheme.appearance.buttonRadius
-        layer.enabled: true  // 单独渲染
-        gradient: Gradient {
-            GradientStop {
-                position: 0.91;
-                color: background.color.lighter(
-                    enabled ? highlighted ? flat ? "transparent" :
-                        Theme.currentTheme.appearance.borderOnAccentFactor :
-                        Theme.currentTheme.appearance.borderFactor :
-                        Theme.currentTheme.appearance.borderFactor
-                )
-            }
-            GradientStop {
-                position: 1;
-                color: flat ? "transparent" : background.color.darker(1.4)
+
+        border.width: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
+        border.color: flat ? "transparent" :
+            enabled ? highlighted ? primaryColor : Theme.currentTheme.colors.controlBorderColor :
+            highlighted ? Theme.currentTheme.colors.disabledColor : Theme.currentTheme.colors.controlBorderColor
+
+        // 裁切
+        layer.enabled: true
+        layer.smooth: true
+        layer.effect: OpacityMask {
+            maskSource: Rectangle {
+                width: background.width
+                height: background.height
+                radius: background.radius
             }
         }
 
+        // 底部border
         Rectangle {
-            id: background
-            anchors.fill: parent
-            anchors.margins: Theme.currentTheme.appearance.borderWidth  // 边框宽度 / Border Width
-            color: backgroundColor
-            radius: border.radius
-            Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type: Easing.OutQuart } }
+            id: indicator
+            width: parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            height: Theme.currentTheme.appearance.borderWidth
+
+            color: flat ? "transparent" :
+                enabled ? highlighted ? Theme.currentTheme.colors.controlAccentBottomBorderColor
+                        : Theme.currentTheme.colors.controlBottomBorderColor
+                    : "transparent"
         }
 
-        opacity: flat && !hovered ? 0 : 1
+        Behavior on color { ColorAnimation { duration: Utils.appearanceSpeed; easing.type: Easing.OutQuart } }
+        opacity: flat && !hovered || !hoverable ? 0 : 1
     }
 
     implicitWidth: Math.max(iconWidget.width + text.width + 24, 88)
@@ -67,7 +76,8 @@ Button {
                 size: icon || source ? text.font.pixelSize * 1.25 : 0  // 图标大小 / Icon Size
                 icon: root.icon.name
                 source: root.icon.source
-                color: highlighted ? flat ?
+                y: 1
+                color: icon.color ? icon.color : highlighted ? flat ?
                     enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
                     Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
             }
@@ -94,10 +104,6 @@ Button {
                 backgroundColor: highlighted ? Theme.currentTheme.colors.disabledColor : Theme.currentTheme.colors.controlColor
             }
             PropertyChanges {
-                target: border
-                visible: !flat
-            }
-            PropertyChanges {
                 target: text
                 color: flat ? Theme.currentTheme.colors.disabledColor : text.color
             }
@@ -107,15 +113,17 @@ Button {
             when: pressed
             PropertyChanges {
                 target: root;
-                opacity: 0.65
+                opacity: !highlighted && !flat ? 0.7 : 0.65
+                backgroundColor:  !highlighted && !flat ? Theme.currentTheme.colors.controlTertiaryColor : backgroundColor
             }
         },
         State {
             name: "hovered"
-            when: hovered
+            when: hovered && hoverable
             PropertyChanges {
                 target: root;
-                opacity: 0.875
+                opacity: !highlighted && !flat ? 1 : 0.875
+                backgroundColor: !highlighted && !flat? Theme.currentTheme.colors.controlSecondaryColor : backgroundColor
             }
         }
     ]

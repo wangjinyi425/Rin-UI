@@ -17,10 +17,11 @@ FluentWindowBase {
 
     // 外观 / Appearance //
     property bool appLayerEnabled: true  // 应用层背景
+    property alias navExpandWidth: navigationBar.expandWidth  // 导航栏宽度
+    property alias navMinimumExpandWidth: navigationBar.minimumExpandWidth  // 导航栏保持展开时窗口的最小宽度
 
-
-    property alias navItems: navigationBar.navModel
-    property alias navCurrentIndex: navigationBar.currentIndex
+    property alias navigationItems: navigationBar.navigationItems  // 导航栏item
+    property int navCurrentIndex: 0  // 默认索引项
     property int lastIndex: 0  // 上个页面索引
     property var pageCache: ({})
 
@@ -33,10 +34,18 @@ FluentWindowBase {
         id: rowLayout
         anchors.fill: parent
 
+        Connections {
+            target: window
+            function onWidthChanged() {
+                navigationBar.collapsed = window.width < window.navMinimumExpandWidth
+            }
+        }
+
         NavigationBar {
             id: navigationBar
             windowTitle: window.title
             windowIcon: window.icon
+            windowWidth: window.width
             stackView: stackView
             z: 999
             Layout.fillHeight: true
@@ -141,56 +150,56 @@ FluentWindowBase {
                         console.log("Can't pop: only root page left")
                     }
                 }
+
+                // 页面确认
+                function safePush(page, reload) {
+                    // 重复检测
+                    if (String(stackView.currentItem.objectName) === String(page) && !reload) {
+                        console.log("Page already loaded:", page)
+                        return
+                    }
+
+                    let component = Qt.createComponent(page)  // 页面转控件
+
+                    if (component.status === Component.Ready) {
+                         console.log("Depth:", stackView.depth)
+                        stackView.push(page, {objectName: page})
+
+
+                    } else if (component.status === Component.Error) {
+                        console.error("Failed to load:", page, component.errorString())
+                        stackView.push("ErrorPage.qml", {
+                            errorMessage: component.errorString(),  // 传参
+                            page: page,
+                            objectName: page
+                        })
+                    }
+                }
             }
 
                 // 导航切换逻辑
-                Connections {
-                    target: navigationBar
-                    function onCurrentIndexChanged() {
-                        let index = navigationBar.currentIndex
-                        let page = navItems.get(index).page
-                        console.log("Pushing Page:", page, "Index:", index)
-                        if (stackView.depth === 0 || stackView.currentItem.objectName !== page) {
-                            checkPage(page)
-                        }
-                    }
-                }
+                // Connections {
+                //     target: navigationBar
+                //     function onCurrentIndexChanged() {
+                //         let index = navigationBar.currentIndex
+                //         let page = navigationItems[index].page
+                //         console.log("Pushing Page:", page, "Index:", index)
+                //         if (stackView.depth === 0 || stackView.currentItem.objectName !== page) {
+                //             checkPage(page)
+                //         }
+                //     }
+                // }
 
 
-
-                Connections {
-                    target: navItems
-                    function onCountChanged() {
-                        if (navItems.count > 0 && navigationBar.currentIndex === -1) {
-                            navigationBar.currentIndex = 0;
-                        }
+                Component.onCompleted: {
+                    if (navigationItems.length > 0 && navigationBar.currentIndex === -1) {
+                        navigationBar.currentIndex = navCurrentIndex
+                        safePush(navigationItems[0].page, false)  // 推送页面
                     }
                 }
             }
         }
-
-    // 页面确认
-    function checkPage(page, reload) {
-        // 重复检测
-        if (String(stackView.currentItem.objectName) === String(page) && !reload) {
-            console.log("Page already loaded:", page)
-            return
-        }
-
-        let component = Qt.createComponent(page)  // 页面转控件
-
-        if (component.status === Component.Ready) {
-             console.log("Depth:", stackView.depth)
-            stackView.push(page, {objectName: page})
-
-
-        } else if (component.status === Component.Error) {
-            console.error("Failed to load:", page, component.errorString())
-            stackView.push("ErrorPage.qml", {
-                errorMessage: component.errorString(),  // 传参
-                page: page,
-                objectName: page
-            })
-        }
+    function safePush(page, reload) {
+        stackView.safePush(page, reload)
     }
 }

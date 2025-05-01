@@ -13,7 +13,8 @@ Button {
         height: parent.height
         size: 14
         icon: toolBtn.icon.name ? toolBtn.icon.name : toolBtn.text
-        color: highlighted ? flat ? Theme.currentTheme.colors.textAccentColor :
+        color: icon.color ? icon.color : highlighted ? flat ?
+            enabled ? Theme.currentTheme.colors.textAccentColor : Theme.currentTheme.colors.textColor :
             Theme.currentTheme.colors.textOnAccentColor : Theme.currentTheme.colors.textColor
     }
 }

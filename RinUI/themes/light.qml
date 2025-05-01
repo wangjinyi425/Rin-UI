@@ -9,19 +9,24 @@ QtObject {
     property QtObject colors: QtObject {
         // Controls
         property color controlColor: Qt.alpha("#ffffff", 0.7)
-        property color controlSecondaryColor: Qt.alpha("#000000", 0.0241)
-        property color controlTertiaryColor: Qt.alpha("#000000", 0.0578)
-        property color controlQuaternaryColor: Qt.alpha("#000000", 0.0924)
+        property color controlSecondaryColor: Qt.alpha("#F9F9F9", 0.5)
+        property color controlTertiaryColor: Qt.alpha("#F9F9F9", 0.3)
+        property color controlQuaternaryColor: Qt.alpha("#F3F3F3", 0.76)
         property color controlStrongColor: Qt.alpha("#000000", 0.4458)
         property color controlInputActiveColor: "#ffffff"
 
         property color controlBorderColor: Qt.alpha("#000000", 0.06)
+        property color controlBottomBorderColor: Qt.alpha("#000000", 0.16)
+        property color controlAccentBottomBorderColor: Qt.alpha("#000000", 0.4)
         property color controlBorderStrongColor: Qt.alpha("#000000", 0.6063)
         property color controlBorderAccentColor: Qt.alpha("#000000", 0.3)
         property color textControlBorderColor: Qt.alpha("#000000", 0.45)
         property color textControlBorderFocusedColor: Utils.primaryColor
+        property color flyoutBorderColor: Qt.alpha("#000000", 0.0578)
 
         property color controlSolidColor: "#ffffff"
+        property color dividerBorderColor: Qt.alpha("#000000", 0.0803)
+        // Accessibility
         property color focusBorderOuter: Qt.alpha("#000000", 0.8956)
         property color focusBorderInner: "#ffffff"
 
@@ -109,7 +114,7 @@ QtObject {
         },
         "flyout": {
             "color": Qt.alpha("#000000", 0.14),
-            "blur": 16,
+            "blur": 24,
             "offsetY": 8
         },
     }

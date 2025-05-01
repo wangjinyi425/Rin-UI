@@ -42,7 +42,7 @@ FluentPage {
         // buttonType: "primary"
         onClicked: {
             // 重新加载 Home 页
-            checkPage(errorPage.page, true)
+            safePush(errorPage.page, true)
         }
     }
 }
