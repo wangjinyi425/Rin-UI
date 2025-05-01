@@ -1,0 +1,64 @@
+name: Build and Release
+
+on:
+  repository_dispatch:
+    types: [manual_trigger]  # 手动触发事件类型
+
+jobs:
+  build:
+    runs-on: windows-latest  # 使用 Windows 环境
+    environment:
+      name: release
+
+    steps:
+      - name: 接收版本号参数
+        id: get_vars
+        run: |
+          echo "VERSION=${{ github.event.client_payload.version }}" | tee -a $GITHUB_ENV
+
+      - name: 检出代码
+        uses: actions/checkout@v3  # 拉取仓库代码 [[3]]
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  # 指定 Python 版本
+
+      - name: 创建虚拟环境并安装依赖
+        run: |
+          python -m venv .venv
+          .venv\Scripts\pip.exe install pyinstaller
+          .venv\Scripts\pip.exe install -r requirements.txt  # 安装项目依赖 [[7]]
+
+      - name: 打包应用（使用绝对路径）
+        run: |
+          cd ..
+          $examplesPath = Join-Path $env:GITHUB_WORKSPACE "examples"  # 动态拼接路径 [[8]]
+          .venv\Scripts\pyinstaller.exe --icon="${examplesPath}/assets/gallery.ico" `
+            --noconsole `
+            --add-data="RinUI;RinUI" `
+            --add-data="${examplesPath};./" `
+            --add-data="${examplesPath}/gallery.qml;./" `
+            --paths=. `
+            "${examplesPath}/gallery.py"  # 指定入口文件路径 [[1]]
+
+      - name: 创建 Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.VERSION }}  # 版本号由手动触发时传入 [[6]]
+          release_name: Release v${{ env.VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: 上传 EXE 文件到 Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ../dist/gallery.exe  # 打包输出路径
+          asset_name: gallery.exe
+          asset_content_type: application/octet-stream
