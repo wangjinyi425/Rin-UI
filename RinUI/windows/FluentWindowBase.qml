@@ -7,7 +7,7 @@ import "../components"
 
 ApplicationWindow {
     id: baseWindow
-    visible: true
+    // visible: true
     title: qsTr("Fluent Window Base")
     width: 800
     height: 600
