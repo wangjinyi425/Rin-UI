@@ -57,23 +57,6 @@ Page {
         ScrollBar.vertical: ScrollBar {}
         contentHeight: container.height + 18 + headerContainer.height
 
-        layer.enabled: true
-        layer.effect: OpacityMask{
-            maskSource: Rectangle{
-                width: fluentPage.width
-                height: fluentPage.height
-                radius: fluentPage.radius
-
-                Rectangle {
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    width: parent.width - Theme.currentTheme.appearance.windowRadius
-                    height: Theme.currentTheme.appearance.windowRadius
-                }
-            }
-        }
-
-
         Row {
             id: headerContainer
             width: fluentPage.width
@@ -86,11 +69,22 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             width: Math.min(fluentPage.width - fluentPage.horizontalPadding * 2, fluentPage.wrapperWidth)  // 24 + 24 的边距
             spacing: 14
+        }
+    }
 
-            // anchors.left: parent.left
-            // anchors.right: parent.right
-            // anchors.leftMargin: 24
-            // anchors.rightMargin: 24
+    layer.enabled: true
+    layer.effect: OpacityMask{
+        maskSource: Rectangle{
+            width: fluentPage.width
+            height: fluentPage.height
+            radius: fluentPage.radius
+
+            Rectangle {
+                anchors.right: parent.right
+                anchors.top: parent.top
+                width: parent.width - Theme.currentTheme.appearance.windowRadius
+                height: Theme.currentTheme.appearance.windowRadius
+            }
         }
     }
 

@@ -7,13 +7,15 @@ Rectangle {
     id: indicator
 
     property int currentItemHeight: 38
+    property var orientation: Qt.Vertical
 
-    implicitWidth: 3
-    implicitHeight: currentItemHeight - 23
+    implicitWidth: orientation === Qt.Horizontal? 16 : 3
+    implicitHeight: orientation === Qt.Horizontal? 3 : currentItemHeight - 23
     radius: 10
     color: Theme.currentTheme.colors.primaryColor
 
-    y: (parent.height - height) / 2
+    y: orientation === Qt.Horizontal? parent.height - height : (parent.height - height) / 2
+    x: orientation === Qt.Horizontal? (parent.width - width) / 2 : 0
 
     onVisibleChanged: {
         if (visible) {
@@ -32,13 +34,25 @@ Rectangle {
             duration: Utils.animationSpeed
             easing.type: Easing.OutQuad
         }
-
+        ScriptAction {
+            script: {
+                if (indicator.orientation === Qt.Horizontal) {
+                    enterAnimationHorizontal.start()
+                } else {
+                    enterAnimationVertical.start()
+                }
+            }
+        }
+    }
+    // 垂直方向动画group // Vertical Animation
+    ParallelAnimation {
+        id: enterAnimationVertical
         PropertyAnimation {
             target: indicator
             property: "height"
             from: 0
             to: indicator.implicitHeight
-            duration: Utils.animationSpeed
+            duration: Utils.animationSpeedMiddle
             easing.type: Easing.OutQuint
         }
 
@@ -47,7 +61,29 @@ Rectangle {
             property: "y"
             from: parent.height / 2
             to: (parent.height - indicator.implicitHeight) / 2
-            duration: Utils.animationSpeed
+            duration: Utils.animationSpeedMiddle
+            easing.type: Easing.OutQuint
+        }
+    }
+
+    // 垂直方向动画group // Vertical Animation
+    ParallelAnimation {
+        id: enterAnimationHorizontal
+        PropertyAnimation {
+            target: indicator
+            property: "width"
+            from: 0
+            to: indicator.implicitWidth
+            duration: Utils.animationSpeedMiddle
+            easing.type: Easing.OutQuint
+        }
+
+        PropertyAnimation {
+            target: indicator
+            property: "x"
+            from: parent.width / 2
+            to: (parent.width - indicator.implicitWidth) / 2
+            duration: Utils.animationSpeedMiddle
             easing.type: Easing.OutQuint
         }
     }

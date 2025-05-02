@@ -147,6 +147,16 @@ QtObject {
             page: Qt.resolvedUrl("../pages/controls/RadioButton.qml"),
         },
         {
+            icon: Qt.resolvedUrl("controls/Pivot.png"),
+            title: qsTr("SelectorBar"),
+            type: "navigation",
+            desc: qsTr(
+                "Presents information from a small set of  different sources. The user can pick one of them."
+            ),
+            page: Qt.resolvedUrl("../pages/controls/SelectorBar.qml"),
+            added: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/Slider.png"),
             title: qsTr("Slider"),
             type: "basicInput",

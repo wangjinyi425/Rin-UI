@@ -28,7 +28,6 @@ ControlPage {
             width: parent.width
             height: 100
             Button {
-                // anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Standard QML Button")
                 enabled: !buttonSwitch.checked
             }
