@@ -42,21 +42,28 @@ FluentPage {
 
             // 拓展区域 //
             RowLayout {
-                Button {
+                DropDownButton {
                     icon.name: "ic_fluent_document_20_regular"
                     text: qsTr("Documentation")
-                    onClicked: docsMenu.open()
-                    Menu {
-                        id: docsMenu
-                        MenuItem {
-                            text: fluentPage.title + " - " + qsTr("Rin UI Documentation")
-                            onClicked: Qt.openUrlExternally(docsUrl)
-                        }
+                    MenuItem {
+                        text: fluentPage.title + " - " + qsTr("Rin UI Documentation")
+                        onClicked: Qt.openUrlExternally(docsUrl)
+                    }
+
+                    ToolTip {
+                        delay: 500
+                        text: qsTr("Documentation")
+                        visible: parent.hovered
                     }
                 }
                 Button {
                     icon.name: "ic_fluent_code_20_regular"
                     text: qsTr("Source")
+                    ToolTip {
+                        delay: 500
+                        text: qsTr("Source code of this sample page")
+                        visible: parent.hovered
+                    }
                 }
 
                 Item {
