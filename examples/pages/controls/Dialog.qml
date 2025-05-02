@@ -43,7 +43,7 @@ ControlPage {
             severity: Severity.Info
             title: qsTr("Attention")
             text: qsTr("You can customize the title, text, and severity to popup a custom InfoBar.")
-            closeable: false
+            closable: false
         }
         RowLayout {
             Layout.fillWidth: true

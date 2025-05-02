@@ -65,7 +65,7 @@ FluentPage {
     InfoBar {
         Layout.fillWidth: true
         severity: Severity.Info
-        closeable: false
+        closable: false
         title: qsTr("Notice")
         text: qsTr(
             "Rin UI Gallery is <b>refactoring</b> its pages to make the gallery more compatible with WinUI Gallery. " +

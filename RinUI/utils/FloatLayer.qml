@@ -73,14 +73,14 @@ Item {
     // Functions / 方法 //
     function createInfoBar( options = {} ){
         try{
-            const { title, text, severity, timeout, position, closeable } = options;
+            const { title, text, severity, timeout, position, closable } = options;
             var infoContainer = infoBarComponent.createObject(determinePosition(position), {
                 title: title || "",
                 text: text || "",
                 severity: severity ?? Severity.Info,
                 position: position || Position.Top,
                 timeout: timeout ?? 1500,
-                closeable: closeable ?? true
+                closable: closable ?? true
             });
 
             // return infoContainer;

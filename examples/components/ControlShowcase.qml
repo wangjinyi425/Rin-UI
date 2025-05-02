@@ -32,6 +32,7 @@ Frame {
             id: right
             width: 200
             Layout.fillHeight: true
+            implicitHeight: showcaseContainer.implicitHeight + 2 * 16
             radius: Theme.currentTheme.appearance.smallRadius
             color: Theme.currentTheme.colors.backgroundAcrylicColor
             border.width: Theme.currentTheme.appearance.borderWidth

@@ -100,6 +100,7 @@ QtObject {
             type: "status&info",
             desc: qsTr("An inline message to display app-wide status change information."),
             page: Qt.resolvedUrl("../pages/controls/InfoBar.qml"),
+            updated: true,
         },
         {
             icon: Qt.resolvedUrl("controls/ListView.png"),
@@ -115,7 +116,6 @@ QtObject {
             type: "menus&toolbars",
             desc: qsTr("Shows a contextual list of simple commands or options."),
             page: Qt.resolvedUrl("../pages/controls/Menu.qml"),
-            updated: true,
         },
         {
             icon: Qt.resolvedUrl("controls/MenuBar.png"),
@@ -123,7 +123,6 @@ QtObject {
             type: "menus&toolbars",
             desc: qsTr("A classic menu, allowing the display of MenuBarItem containing Menu."),
             page: Qt.resolvedUrl("../pages/controls/MenuBar.qml"),
-            added: true,
         },
         {
             icon: Qt.resolvedUrl("controls/NavigationView.png"),

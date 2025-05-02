@@ -2,65 +2,54 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 2.15
 import RinUI
-import "../components"
+import "../../components"
 
-FluentPage {
-    id: page
-    title: "Status & Info"
+ControlPage {
+    title: qsTr("InfoBar")
+    badgeText: qsTr("Extra")
+    badgeSeverity: Severity.Success
+
+    // intro
+    Text {
+        Layout.fillWidth: true
+        text: qsTr(
+            "Use an InfoBar control when a user should be informed of, acknowledge, " +
+            "or take action on a changed application state. "+
+            "By default the notification will remain in the content area until closed by the user but will not " +
+            "necessarily break user flow."
+        )
+    }
 
     Column {
         Layout.fillWidth: true
         spacing: 4
 
         Text {
-            typography: Typography.Subtitle
-            text: qsTr("InfoBar")
-        }
-        Text {
-            width: parent.width
-            typography: Typography.Body
-            text: qsTr("Use an InfoBar control when a user should be informed of, acknowledge, " +
-             "or take action on a changed application state.")
+            typography: Typography.BodyStrong
+                text: "A closable InfoBar with options to change its Severity"
         }
 
         ControlShowcase {
             width: parent.width
-            height: 300
             padding: 48
 
             InfoBar {
                 id: infoBar
                 width: parent.width
                 severity: infoBarSeverityComboBox.model.get(infoBarSeverityComboBox.currentIndex).state
-                title: qsTr("InfoBar")
-                text: qsTr("This is an InfoBar.")
+                title: qsTr("Title")
+                text: qsTr("Essential app message for your users to be informed of, acknowledge, or take action on.")
                 visible: infoBarSwitch.checked
             }
 
-            InfoBar {
-                id: infoBarMultiLine
-                width: parent.width
-                severity: infoBarSeverityComboBox.model.get(infoBarSeverityComboBox.currentIndex).state
-                title: qsTr("World Setting")
-                text: qsTr("Kivotos — a mysterious and vast land where girls with strange halos above their heads live.")
-                closable: false
-
-                customContent: Hyperlink {
-                    text: qsTr("What is Blue Archive?")
-                    openUrl: "https://bluearchive.nexon.com/"
-                }
-            }
-
             showcase: [
-                Text {
-                    text: "Is Open"
-                },
-                Switch {
+                CheckBox {
                     id: infoBarSwitch
                     checked: infoBar.visible
                     onCheckedChanged: {
                         infoBar.visible = infoBarSwitch.checked
                     }
+                    text: qsTr("Is Open")
                 },
                 Text {
                     text: qsTr("Severity")
@@ -78,6 +67,128 @@ FluentPage {
                 }
             ]
         }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+
+        Text {
+            typography: Typography.BodyStrong
+                text: "A closeable InfoBar with a long or short text message and various buttons"
+        }
+
+        ControlShowcase {
+            width: parent.width
+            padding: 48
+
+            InfoBar {
+                id: infoBar2
+                width: parent.width
+                title: qsTr("World Setting")
+                text: infoBarTextLengthComboBox.model.get(infoBarTextLengthComboBox.currentIndex).content
+                visible: infoBarSwitch2.checked
+
+                customContent: [
+                    Button {
+                        text: qsTr("Action")
+                        visible: infoBarButtonComboBox.currentIndex === 1
+                    },
+                    Hyperlink {
+                        text: qsTr("What is Blue Archive?")
+                        openUrl: "https://bluearchive.nexon.com/"
+                        visible: infoBarButtonComboBox.currentIndex === 2
+                    }
+                ]
+            }
+
+            showcase: [
+                CheckBox {
+                    id: infoBarSwitch2
+                    checked: infoBar2.visible
+                    onCheckedChanged: {
+                        infoBar2.visible = infoBarSwitch2.checked
+                    }
+                    text: qsTr("Is Open")
+                },
+                Text {
+                    text: qsTr("Message Length")
+                },
+                ComboBox {
+                    id: infoBarTextLengthComboBox
+                    textRole: "text"
+                    model: ListModel {
+                        ListElement {
+                            text: "Short"; content: qsTr("A story of friendship, youth, and love is about to unfold.")
+                        }
+                        ListElement {
+                            text: "Long";
+                            content: qsTr(
+                                "Kivotos — a mysterious and vast land where girls with strange halos above their heads live. However, the peaceful life under the management of the Prime Student Council is shattered when the president suddenly disappears without a trace."
+                            )
+                        }
+                    }
+                },
+                Text {
+                    text: qsTr("Action Button")
+                },
+                ComboBox {
+                    id: infoBarButtonComboBox
+                    model: ["None", "Button", "Hyperlink"]
+                }
+            ]
+        }
+    }
+
+    Column {
+        Layout.fillWidth: true
+        spacing: 4
+
+        Text {
+            typography: Typography.BodyStrong
+                text: "A closable InfoBar with options to display the close button and icon"
+        }
+
+        ControlShowcase {
+            width: parent.width
+            padding: 48
+
+            InfoBar {
+                id: infoBar3
+                width: parent.width
+                title: qsTr("Title")
+                text: qsTr("Essential app message for your users to be informed of, acknowledge, or take action on.")
+                closable: infoBarColsable.checked
+                iconVisible: infoBarIcon.checked
+                visible: infoBarSwitch3.checked
+            }
+
+            showcase: [
+                CheckBox {
+                    id: infoBarSwitch3
+                    checked: infoBar3.visible
+                    onCheckedChanged: {
+                        infoBar3.visible = infoBarSwitch3.checked
+                    }
+                    text: qsTr("Is Open")
+                },
+                CheckBox {
+                    id: infoBarIcon
+                    text: qsTr("Is Icon Visible")
+                    checked: true
+                },
+                CheckBox {
+                    id: infoBarColsable
+                    text: qsTr("Is Closable")
+                    checked: true
+                }
+            ]
+        }
+    }
+
+
+    Column {
+        Layout.fillWidth: true
 
         Text {
             typography: Typography.BodyStrong
@@ -165,9 +276,8 @@ FluentPage {
                                         }
                                     },
                                     IconWidget {
-                                        // Layout.fillWidth: true
                                         size: 64
-                                        source: Qt.resolvedUrl("../assets/BA_Pic_Shiroko-chibi.png")
+                                        source: Qt.resolvedUrl("../../assets/BA_Pic_Shiroko-chibi.png")
                                     }
                                 ]
                             }
@@ -178,107 +288,6 @@ FluentPage {
                             floatLayer.createCustom(customInfoBar)
                         }
                     }
-                }
-            }
-        }
-    }
-
-    Column {
-        Layout.fillWidth: true
-        spacing: 4
-
-        Text {
-            typography: Typography.Subtitle
-            text: qsTr("ProgressBar")
-        }
-        Text {
-            width: parent.width
-            typography: Typography.Body
-            text: qsTr("The ProgressBar has two different visual representations:\n" +
-                "Indeterminate - shows that a task is ongoing, but doesn't block user interaction.\n" +
-                "Determinate - shows how much progress has been made on a known amount of work.")
-        }
-
-        ControlShowcase {
-            width: parent.width
-
-            Column {
-                padding: 36
-                spacing: 4
-
-                Text {
-                    text: qsTr("Determinate")
-                }
-                ProgressBar {
-                    from: 0
-                    to: 100
-                    value: progressSlider.value
-                    state: stateComboBox.model.get(stateComboBox.currentIndex).state
-                }
-
-                Text {
-                    text: qsTr("Indeterminate")
-                }
-                ProgressBar {
-                    indeterminate: true
-                    state: stateComboBox.model.get(stateComboBox.currentIndex).state
-                }
-            }
-
-            showcase: [
-                Text {
-                    text: qsTr("Progress")
-                },
-                Slider {
-                    id: progressSlider
-                    from: 0
-                    to: 100
-                    stepSize: 1
-                    value: 50
-                },
-                Text {
-                    text: qsTr("State")
-                },
-                ComboBox {
-                    id: stateComboBox
-                    model: ListModel {
-                        ListElement { text: "Running"; state: ProgressBar.States.Running }
-                        ListElement { text: "Paused"; state: ProgressBar.States.Paused }
-                        ListElement { text: "Error"; state: ProgressBar.States.Error }
-                    }
-                    textRole: "text"
-                    currentIndex: 0
-                }
-            ]
-        }
-    }
-
-    // Tooltip //
-    Column {
-        Layout.fillWidth: true
-        spacing: 4
-
-        Text {
-            typography: Typography.Subtitle
-            text: qsTr("Tooltip")
-        }
-        Text {
-            width: parent.width
-            typography: Typography.Body
-            text: qsTr("A Tooltip shows more information about a UI element.")
-        }
-
-        Frame {
-            width: parent.width
-
-            Button {
-                text: qsTr("Button with a simple Tooltip")
-
-                ToolTip {
-                    parent: parent
-                    delay: 500
-                    visible: parent.hovered
-                    text: "This is a tooltip"
                 }
             }
         }

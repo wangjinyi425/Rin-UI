@@ -13,7 +13,8 @@ Frame {
     property int timeout: -1
     property int position: 0
     property bool isDynamic: false  // 动态创建
-    property bool closeable: true  // 显示关闭按钮
+    property bool closable: true  // 显示关闭按钮
+    property bool iconVisible: true  // 显示图标
     property real startPosX: {
         switch (position) {
             case Position.TopLeft:
@@ -99,6 +100,7 @@ Frame {
                     default: return Theme.currentTheme.colors.systemNeutralColor;
                 }
             }
+            visible: iconVisible
         }
 
         Flow {
@@ -150,7 +152,7 @@ Frame {
                 size: 18
                 Layout.preferredWidth: 38
                 Layout.preferredHeight: 38
-                visible: closeable
+                visible: closable
                 onClicked: {
                     exitAnimation.start()
                     // if (infoBar.isDynamic) {
