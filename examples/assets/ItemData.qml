@@ -65,6 +65,14 @@ QtObject {
             added: true,
         },
         {
+            icon: Qt.resolvedUrl("controls/Expander.png"),
+            title: qsTr("Expander"),
+            type: "layout",
+            desc: qsTr("A container with a header that can be expanded to show a body with more content."),
+            page: Qt.resolvedUrl("../pages/controls/Expander.qml"),
+            added: true,
+        },
+        {
             icon: Qt.resolvedUrl("controls/Flyout.png"),
             title: qsTr("Flyout"),
             type: "dialogs&flyouts",

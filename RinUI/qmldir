@@ -26,6 +26,9 @@ PickerView 1.0 components/DateAndTime/PickerView.qml
 Dialog 1.0 components/DialogsAndFlyouts/Dialog.qml
 Flyout 1.0 components/DialogsAndFlyouts/Flyout.qml
 
+# Layout
+Expander 1.0 components/Layout/Expander.qml
+
 
 # Text
 Text 1.0 components/Text/Text.qml

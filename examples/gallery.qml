@@ -84,6 +84,12 @@ FluentWindow {
             subItems: generateSubItems("dialogs&flyouts")
         },
         {
+            title: "Layout",
+            page: Qt.resolvedUrl("pages/Layout.qml"),
+            icon: "ic_fluent_content_view_20_regular",
+            subItems: generateSubItems("layout")
+        },
+        {
             title: "Menus & Toolbars",
             page: Qt.resolvedUrl("pages/MenusAndToolbars.qml"),
             icon: "ic_fluent_save_20_regular",
