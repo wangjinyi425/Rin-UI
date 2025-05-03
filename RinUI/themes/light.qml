@@ -33,7 +33,7 @@ QtObject {
 
         // Card
         property color cardColor: Qt.alpha("#ffffff", 0.7)
-        property color cardSecondaryColor: Qt.alpha("#ffffff", 0.5)
+        property color cardSecondaryColor: Qt.alpha("#F6F6F6", 0.5)
         property color cardTertiaryColor: Qt.alpha("#ffffff", 1)
         property color cardBorderColor: Qt.alpha("#000000", 0.0578)
 
@@ -122,7 +122,7 @@ QtObject {
 
     // Typography //
     property QtObject typography: QtObject {
-        property string fontFamily: "Segoe UI"
+        // property string fontFamily: "Segoe UI"
         // property string fontIcon: "FluentSystemIcons-Resizeable.ttf"  // 字体图标路径 / font icon (put it in the "assets/fonts" folder)
         // Font Sizes
         property int displaySize: 68

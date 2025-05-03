@@ -122,7 +122,7 @@ QtObject {
 
     // Typography //
     property QtObject typography: QtObject {
-        property string fontFamily: "Segoe UI"
+        // property string fontFamily: "Segoe UI"
         // property string fontIcon: "FluentSystemIcons-Resizeable.ttf"  // 字体图标路径 / font icon (put it in the "assets/fonts" folder)
         // Font Sizes
         property int displaySize: 68
