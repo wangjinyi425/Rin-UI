@@ -32,9 +32,26 @@ ACCENT_STATES = {
 ACCENT_SUPPORT = {
     "acrylic": is_win10(),
     "mica": is_win11(),
-    "tabbed": is_windows(),
+    "tabbed": is_win10(),
     "none": True
 }
+
+
+class ACCENT_POLICY(ctypes.Structure):
+    _fields_ = [
+        ("AccentState", ctypes.c_int),
+        ("AccentFlags", ctypes.c_int),
+        ("GradientColor", ctypes.c_int),
+        ("AnimationId", ctypes.c_int),
+    ]
+
+
+class WINDOWCOMPOSITIONATTRIBDATA(ctypes.Structure):
+    _fields_ = [
+        ("Attrib", ctypes.c_int),
+        ("pvData", ctypes.c_void_p),
+        ("cbData", ctypes.c_size_t),
+    ]
 
 
 class ThemeListener(QThread):
@@ -69,6 +86,7 @@ class ThemeManager(QObject):
     DWMWA_NCRENDERING_POLICY = 2
     DWMNCRENDERINGPOLICY_ENABLED = 2
     DWMWA_SYSTEMBACKDROP_TYPE = 38
+    WCA_ACCENT_POLICY = 19
 
     # 圆角
     DWMWCP_DEFAULT = 0
@@ -162,16 +180,46 @@ class ThemeManager(QObject):
             return -1  # 效果不支持
 
         for hwnd in self.windows:
-            ctypes.windll.dwmapi.DwmSetWindowAttribute(
-                hwnd,
-                self.DWMWA_SYSTEMBACKDROP_TYPE,
-                ctypes.byref(ctypes.c_int(accent_state)),
-                ctypes.sizeof(ctypes.c_int)
-            )
+            if is_win11():
+                ctypes.windll.dwmapi.DwmSetWindowAttribute(
+                    hwnd,
+                    self.DWMWA_SYSTEMBACKDROP_TYPE,
+                    ctypes.byref(ctypes.c_int(accent_state)),
+                    ctypes.sizeof(ctypes.c_int)
+                )
+            elif (
+                is_win10()
+                and effect_type == BackdropEffect.Acrylic.value
+                or effect_type == BackdropEffect.Tabbed.value
+            ):
+                self._apply_win10_effect(effect_type, hwnd)
 
         self.config["backdrop_effect"] = effect_type
-        print(f"Applied \"{effect_type.strip().capitalize()}\" effect")
+        print(
+            f"Applied \"{effect_type.strip().capitalize()}\" effect with "
+            f"{platform.system() + '11' if is_win11() else '10'}"
+        )
         return 0  # 成功
+
+    def _apply_win10_effect(self, effect_type, hwnd):
+        """
+        应用 Windows 10 背景效果
+        :param effect_type: str, 背景效果类型（acrylic, tabbed(actually blur)
+        """
+        accent = ACCENT_POLICY()
+        accent.AccentState = ACCENT_STATES[effect_type]
+        accent.AccentFlags = 2
+        accent.GradientColor = 0x99000000
+        data = WINDOWCOMPOSITIONATTRIBDATA()
+        data.Attrib = self.WCA_ACCENT_POLICY
+        data.pvData = ctypes.cast(ctypes.pointer(accent), ctypes.c_void_p)
+        data.cbData = ctypes.sizeof(accent)
+
+        try:
+            set_window_composition = ctypes.windll.user32.SetWindowCompositionAttribute
+            set_window_composition(hwnd, ctypes.byref(data))
+        except Exception as e:
+            print(f"Failed to apply acrylic on Win10: {e}")
 
     def apply_window_effects(self):  # 启用圆角阴影
         if sys.platform != "win32" or not self.windows:
