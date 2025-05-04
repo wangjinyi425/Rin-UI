@@ -41,16 +41,22 @@ With simple configuration, you can quickly develop elegant UI interfaces in the 
 You can install RinUI via pip: (coming soon, but now you can install via test-pypi)
 ```bash
 pip install RinUI  # if RinUI in pypi
-
-# ↓ Test PyPI
-pip install PySide6 darkdetect  
-# There is no Release for these two packages in TestPypi. When RinUI is released to PyPi, this step can be omitted.
-pip install -i https://test.pypi.org/simple/ RinUI --no-deps
 ```
 
 Import RinUI in your QML file:
 ```qmllang
 import RinUI
+```
+Then you can run the QML file in your project.
+```python
+import sys
+from RinUI import *
+from PySide6.QtWidgets import QApplication
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    your_app = RinUIWindow("/path/to/your/file.qml")
+    sys.exit(app.exec_())
 ```
 
 You also can view the demo in the source code, like this:
