@@ -29,6 +29,10 @@ DEFAULT_CONFIG = {
     "theme": {
         "current_theme": "Auto",
     },
+    "win10_feat": {
+        "backdrop_light": 0xA6FFFFFF,
+        "backdrop_dark": 0xA6000000,
+    },
     "theme_color": "#605ed2",
     "backdrop_effect": "mica" if is_win11() else "acrylic" if is_win10() else "none",
 }

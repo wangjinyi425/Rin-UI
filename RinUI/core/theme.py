@@ -187,11 +187,7 @@ class ThemeManager(QObject):
                     ctypes.byref(ctypes.c_int(accent_state)),
                     ctypes.sizeof(ctypes.c_int)
                 )
-            elif (
-                is_win10()
-                and effect_type == BackdropEffect.Acrylic.value
-                or effect_type == BackdropEffect.Tabbed.value
-            ):
+            elif is_win10() and effect_type == BackdropEffect.Acrylic.value:
                 self._apply_win10_effect(effect_type, hwnd)
 
         self.config["backdrop_effect"] = effect_type
@@ -206,10 +202,12 @@ class ThemeManager(QObject):
         应用 Windows 10 背景效果
         :param effect_type: str, 背景效果类型（acrylic, tabbed(actually blur)
         """
+        backdrop_color = self.config["win10_feat"]["backdrop_dark" if self.is_dark_theme() else "backdrop_light"]
+
         accent = ACCENT_POLICY()
         accent.AccentState = ACCENT_STATES[effect_type]
         accent.AccentFlags = 2
-        accent.GradientColor = 0x99000000
+        accent.GradientColor = backdrop_color
         data = WINDOWCOMPOSITIONATTRIBDATA()
         data.Attrib = self.WCA_ACCENT_POLICY
         data.pvData = ctypes.cast(ctypes.pointer(accent), ctypes.c_void_p)
@@ -252,13 +250,23 @@ class ThemeManager(QObject):
             return
         actual_theme = self._actual_theme()
         for hwnd in self.windows:
-            ctypes.windll.dwmapi.DwmSetWindowAttribute(
-                hwnd,
-                self.DWMWA_USE_IMMERSIVE_DARK_MODE,
-                ctypes.byref(ctypes.c_int(self.theme_dict[actual_theme])),
-                ctypes.sizeof(ctypes.c_int)
-            )
+            if is_win11():
+                ctypes.windll.dwmapi.DwmSetWindowAttribute(
+                    hwnd,
+                    self.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                    ctypes.byref(ctypes.c_int(self.theme_dict[actual_theme])),
+                    ctypes.sizeof(ctypes.c_int)
+                )
+            elif is_win10() and self.config["backdrop_effect"] == BackdropEffect.Acrylic.value:
+                self._apply_win10_effect(self.config["backdrop_effect"], hwnd)
+            else:
+                print(f"Cannot apply backdrop on {platform.system()}")
+
         print(f"Window theme updated to {actual_theme}")
+
+    def is_dark_theme(self):
+        """是否为暗黑主题"""
+        return self._actual_theme() == "Dark"
 
     def _actual_theme(self):
         """实际应用的主题"""
