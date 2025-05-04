@@ -13,7 +13,7 @@ def is_win11():
 
 def is_win10():
     if is_windows():
-        if platform.release() >= '10' and int(platform.version().split('.')[2]) >= 19045:
+        if platform.release() >= '10' and int(platform.version().split('.')[2]) >= 19000:
             return True
     return False
 
