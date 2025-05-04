@@ -4,7 +4,6 @@ import QtQuick.Layouts 2.15
 import RinUI
 
 
-// 自定义控件演示 / Custom control demonstration //
 Frame {
     id: frame
     default property alias content: rightContent.data
@@ -40,6 +39,7 @@ Frame {
                 Layout.fillWidth: true
                 spacing: 0
                 Text {
+                    id: titleLabel
                     width: parent.width
                     typography: Typography.Body
                     text: title
@@ -49,6 +49,7 @@ Frame {
                 }
 
                 Text {
+                    id: discriptionLabel
                     width: parent.width
                     typography: Typography.Caption
                     text: description
@@ -59,11 +60,10 @@ Frame {
                     visible: description.length > 0
                 }
             }
+            visible: !(!titleLabel.visible && !discriptionLabel.visible)
         }
         RowLayout {
             id: rightContent
-            // Layout.fillWidth: true
-            Item { Layout.fillWidth: true }
             Layout.alignment: Qt.AlignRight
             spacing: 16
         }

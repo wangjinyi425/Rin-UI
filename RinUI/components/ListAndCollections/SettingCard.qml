@@ -39,6 +39,7 @@ Frame {
                 Layout.fillWidth: true
                 spacing: 0
                 Text {
+                    id: titleLabel
                     Layout.fillWidth: true
                     typography: Typography.Body
                     text: title
@@ -48,6 +49,7 @@ Frame {
                 }
 
                 Text {
+                    id: discriptionLabel
                     Layout.fillWidth: true
                     typography: Typography.Caption
                     text: description
@@ -58,6 +60,7 @@ Frame {
                     visible: description.length > 0
                 }
             }
+            visible: !(!titleLabel.visible && !discriptionLabel.visible)
         }
         RowLayout {
             id: rightContent
