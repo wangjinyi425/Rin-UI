@@ -72,6 +72,7 @@ Now you can learn more about RinUI components and themes in [the online document
 - [PySide6 & Qt Quick](https://www.qt.io/)
 - [Fluent Design System](https://fluent2.microsoft.design/)
 - [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons/)
+- [WinUI 3 Gallery](https://github.com/microsoft/WinUI-Gallery)
 
 ### Contributors
 Contributions are welcome! Please read the [contribution guidelines](./CONTRIBUTING.md) before submitting a pull request.
