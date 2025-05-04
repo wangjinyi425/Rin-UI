@@ -9,10 +9,12 @@ import "../../components"
 // expander
 Item {
     id: root
+    property bool enabled: true
     property bool expanded: false
     property alias headerHeight: header.height
     property alias contentHeight: content.height
     property alias contentPadding: content.padding
+    property alias contentSpacing: contentLayout.spacing
     enum ExpandDirection { Up, Down }
     property var expandDirection: Expander.Down
     readonly property bool directionUp: root.expandDirection === Expander.Up
@@ -29,12 +31,27 @@ Item {
     )
     implicitHeight: headerHeight + (content.height - 2) * expanded
 
+    // 拦截交互
+    MouseArea {
+        z: 999
+        anchors.fill: parent
+        enabled: !root.enabled
+        hoverEnabled: false
+        preventStealing: true
+        onClicked: {}  // 防止穿透
+    }
+
     // 主体
     Clip {
         id: header
+        enabled: root.enabled
         y: directionUp ? content.height * expanded : 0
         width: parent.width
-        height: 48
+        height: Math.max(
+            headerCustom.implicitHeight + 5 * 2,
+            headerLayout.implicitHeight + 5 * 2,
+            48
+        )
         radius: 0
 
         RowLayout {
@@ -88,10 +105,11 @@ Item {
     Item {
         id: contentContainer
         width: parent.width
-        height: content.height
+        height: directionUp
+            ? expanded ? content.height : 0
+            : content.height
         clip: true
         y: directionUp ? 0 : header.height
-        opacity: expanded ? 1 : 0
         z: -1  // 置底
 
         Frame {
@@ -102,6 +120,7 @@ Item {
                 ? directionUp ? 2 : - 2
                 : directionUp ? height : - height
             radius: 0
+            opacity: root.enabled ? 1 : 0.65
 
             color: Theme.currentTheme.colors.cardSecondaryColor
             // 内容区域 - 布局
@@ -113,9 +132,13 @@ Item {
             Behavior on y {
                 NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint }
             }
+
+            Behavior on opacity {
+                NumberAnimation { duration: Utils.appearanceSpeed; easing.type: Easing.OutQuint }
+            }
         }
 
-        Behavior on opacity {
+        Behavior on height {
             NumberAnimation { duration: Utils.animationSpeed; easing.type: Easing.OutQuint }
         }
     }

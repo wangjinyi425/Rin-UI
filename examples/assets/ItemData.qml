@@ -78,7 +78,6 @@ QtObject {
             type: "dialogs&flyouts",
             desc: qsTr("Shows contextual information and enables user interaction."),
             page: Qt.resolvedUrl("../pages/controls/Flyout.qml"),
-            added: true,
         },
         {
             icon: Qt.resolvedUrl("controls/HyperlinkButton.png"),
@@ -162,6 +161,14 @@ QtObject {
                 "Presents information from a small set of  different sources. The user can pick one of them."
             ),
             page: Qt.resolvedUrl("../pages/controls/SelectorBar.qml"),
+            added: true,
+        },
+        {
+            icon: Qt.resolvedUrl("controls/Expander.png"),
+            title: qsTr("SettingExpander"),
+            type: "layout",
+            desc: qsTr("A container with a header that can be expanded to show a body with more content."),
+            page: Qt.resolvedUrl("../pages/controls/SettingExpander.qml"),
             added: true,
         },
         {

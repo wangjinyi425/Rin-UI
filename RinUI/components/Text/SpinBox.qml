@@ -22,7 +22,7 @@ SpinBox {
         inputMethodHints: Qt.ImhFormattedNumbersOnly
     }
 
-    width: Math.max(implicitWidth + upBtn.width + downBtn.width + 8, 124)
+    implicitWidth: Math.max(implicitWidth + upBtn.width + downBtn.width + 8, 124)
 
     // 背景 / Background //
     background: Rectangle {

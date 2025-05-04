@@ -28,6 +28,8 @@ Flyout 1.0 components/DialogsAndFlyouts/Flyout.qml
 
 # Layout
 Expander 1.0 components/Layout/Expander.qml
+SettingExpander 1.0 components/Layout/SettingExpander.qml
+SettingItem 1.0 components/Layout/SettingItem.qml
 
 
 # Text

@@ -119,7 +119,7 @@ Button {
             when: !enabled
             PropertyChanges {
                 target: root
-                opacity: 0.4
+                opacity: 0.65
                 backgroundColor: highlighted ? Theme.currentTheme.colors.disabledColor : Theme.currentTheme.colors.controlColor
             }
             PropertyChanges {

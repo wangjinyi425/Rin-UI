@@ -6,10 +6,10 @@ from RinUI import RinUIWindow, BackdropEffect
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window2 = RinUIWindow("test2.qml")
+    # window2 = RinUIWindow("test2.qml")
     window = RinUIWindow("test1.qml")
     window.setBackdropEffect(BackdropEffect.Mica)
 
-    print(window, window2)
+    # print(window, window2)
 
     sys.exit(app.exec())

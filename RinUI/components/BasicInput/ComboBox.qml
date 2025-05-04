@@ -14,7 +14,7 @@ ComboBox {
     property alias maxHeight: menu.maxHeight
     property string headerText: ""
 
-    implicitWidth: contentItem.implicitWidth + 77
+    implicitWidth: Math.max(contentItem.implicitWidth + 50, 60)
     // implicitHeight: contentItem.implicitHeight + 12
 
     padding: 0

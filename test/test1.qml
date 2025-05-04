@@ -1,79 +1,109 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Window
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 import RinUI
 
 
 ApplicationWindow {
-    width: 640
-    height: 480
     visible: true
-    title: qsTr("Hello World")
+    width: 800
+    height: 600
+    title: "Demo Settings Panel"
 
-    menuBar: MenuBar {
-        Menu {
-            title: qsTr("File")
-            MenuItem {
-                text: qsTr("New")
-            }
-            MenuItem {
-                text: qsTr("Open")
-            }
-            MenuItem {
-                text: qsTr("Save")
-            }
-            MenuSeparator {}
-            MenuItem {
-                text: qsTr("Exit")
-                onClicked: Qt.quit()
-            }
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 24
+        spacing: 24
+
+        Text {
+            text: "应用设置"
+            font.pixelSize: 28
+            font.bold: true
         }
-        Menu {
-            title: qsTr("Edit")
-            MenuItem {
-                text: qsTr("Undo")
-            }
-            MenuItem {
-                text: qsTr("Redo")
-            }
-            MenuSeparator {}
-            MenuItem {
-                text: qsTr("Cut")
-            }
-            MenuItem {
-                text: qsTr("Copy")
-            }
-            MenuItem {
-                text: qsTr("Paste")
-            }
-        }
-    }
 
-    Row {
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.margins: 16
-        spacing: 4
-        Button {
-            highlighted: true
-            text: qsTr("Click me!")
-            onClicked: dialog.open()
+        // 第一组：基本控件
+        GroupBox {
+            title: "常规"
+            Layout.fillWidth: true
 
-            Dialog {
-                id: dialog
-                modal: true
-                title: qsTr("Dialog")
-                Text {
-                    text: qsTr("This is a dialog.")
+            ColumnLayout {
+                spacing: 12
+                width: parent.width
+
+                RowLayout {
+                    spacing: 12
+                    Text { text: "用户名：" }
+                    TextField {
+                        Layout.fillWidth: true
+                        placeholderText: "请输入用户名"
+                    }
                 }
-                onAccepted: {
-                    Theme.toggleMode()
+
+                RowLayout {
+                    spacing: 12
+                    Text { text: "启用功能：" }
+                    Switch { checked: true }
                 }
-                standardButtons: Dialog.Ok | Dialog.Cancel
+
+                RowLayout {
+                    spacing: 12
+                    Text { text: "音量：" }
+                    Slider {
+                        from: 0
+                        to: 100
+                        value: 70
+                        Layout.fillWidth: true
+                    }
+                }
             }
         }
-        Button {
-            text: qsTr("Button")
+
+        // 第二组：高级选项
+        GroupBox {
+            title: "高级设置"
+            Layout.fillWidth: true
+
+            ColumnLayout {
+                spacing: 12
+                width: parent.width
+
+                RowLayout {
+                    spacing: 12
+                    Text { text: "颜色主题：" }
+                    ComboBox {
+                        Layout.fillWidth: true
+                        model: ["浅色", "深色", "系统默认"]
+                    }
+                }
+
+                RowLayout {
+                    spacing: 12
+                    Text { text: "最大线程数：" }
+                    SpinBox {
+                        from: 1
+                        to: 64
+                        value: 8
+                    }
+                }
+
+                CheckBox {
+                    text: "启用实验性特性"
+                    checked: false
+                }
+            }
+        }
+
+        // 第三组：操作按钮
+        RowLayout {
+            spacing: 12
+            Layout.alignment: Qt.AlignRight
+            Button {
+                text: "取消"
+            }
+            Button {
+                text: "保存"
+                highlighted: true
+            }
         }
     }
 }

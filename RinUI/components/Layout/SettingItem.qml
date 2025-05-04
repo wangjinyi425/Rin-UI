@@ -10,16 +10,21 @@ Frame {
     default property alias content: rightContent.data
     // property alias showcase: showcaseContainer.data
     property string title
-    property alias icon: icon.icon
-    property alias source: icon.source
-    property alias iconSize: icon.size
     property string description
 
-    leftPadding: 15
+    leftPadding: 15 + 35
     rightPadding: 15
     topPadding: 13
     bottomPadding: 13
     // implicitHeight: 62
+    Layout.fillWidth: true
+
+    background: Rectangle {
+        anchors.bottom: parent.bottom
+        width: parent.width
+        height: 1
+        color: Theme.currentTheme.colors.dividerBorderColor
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -31,15 +36,11 @@ Frame {
             Layout.fillHeight: true
             spacing: 16
 
-            IconWidget {
-                id: icon
-                size: 20
-            }
-            ColumnLayout {
+            Column {
                 Layout.fillWidth: true
                 spacing: 0
                 Text {
-                    Layout.fillWidth: true
+                    width: parent.width
                     typography: Typography.Body
                     text: title
                     maximumLineCount: 2  // 限制最多两行
@@ -48,7 +49,7 @@ Frame {
                 }
 
                 Text {
-                    Layout.fillWidth: true
+                    width: parent.width
                     typography: Typography.Caption
                     text: description
                     color: Theme.currentTheme.colors.textSecondaryColor
@@ -61,8 +62,8 @@ Frame {
         }
         RowLayout {
             id: rightContent
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            // Layout.fillWidth: true
+            Item { Layout.fillWidth: true }
             Layout.alignment: Qt.AlignRight
             spacing: 16
         }

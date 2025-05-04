@@ -8,7 +8,7 @@ Switch {
     id: root
 
     // width: 40
-    height: 20
+    implicitHeight: 20
 
     property color backgroundColor: Theme.currentTheme.colors.controlSecondaryColor
     property color primaryColor: Theme.currentTheme.colors.primaryColor
