@@ -1,8 +1,10 @@
 name: Build Gallery by PyInstaller
 
 on:
+  pull_request:
+    branches: [master]
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -36,12 +38,8 @@ jobs:
             --contents-directory='.' `
             examples/gallery.py
 
-      - name: 📦 Zip the dist folder
-        run: |
-          powershell Compress-Archive -Path dist/gallery -DestinationPath gallery-build.zip
-
       - name: 📤 Upload artifact
         uses: actions/upload-artifact@v4.4.2
         with:
           name: gallery-win-build
-          path: gallery-build.zip
+          path: dist/gallery
