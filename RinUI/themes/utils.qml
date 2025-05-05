@@ -5,7 +5,7 @@ import "../themes"
 import "../utils"
 
 QtObject {
-    property string fontFamily: "Segoe UI" // 默认字体
+    property string fontFamily: Qt.application.font.family // 默认字体
     property string iconFontFamily: FontIconLoader.name
     property string fontIconSource: Qt.resolvedUrl("../assets/fonts/FluentSystemIcons-Resizable.ttf")  // 字体图标路径
     property var fontIconIndex: Icons.FluentIcons // 字体图标索引
