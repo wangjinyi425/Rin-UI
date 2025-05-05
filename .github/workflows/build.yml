@@ -28,11 +28,12 @@ jobs:
         run: |
           .venv\Scripts\pyinstaller.exe --noconsole --icon=examples/assets/gallery.ico `
             --add-data="RinUI;RinUI" `
-            --add-data="examples/assets;examples/assets" `
-            --add-data="examples/components;examples/components" `
-            --add-data="examples/pages;examples/pages" `
-            --add-data="examples/gallery.qml;examples/gallery.qml" `
+            --add-data="examples/assets;assets" `
+            --add-data="examples/components;components" `
+            --add-data="examples/pages;pages" `
+            --add-data="examples/gallery.qml;." `
             --paths=. `
+            --contents_directory='.' `
             examples/gallery.py
 
       - name: 📦 Zip the dist folder
