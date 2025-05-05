@@ -42,7 +42,21 @@ RowLayout {
     Item {
         Layout.fillWidth: true
         Layout.fillHeight: true
-        // clip: true
+
+        // 导航栏展开自动收起
+        MouseArea {
+            id: collapseCatcher
+            anchors.fill: parent
+            z: 1
+            hoverEnabled: true
+            acceptedButtons: Qt.AllButtons
+
+            visible: !navigationBar.collapsed && navigationBar.isNotOverMinimumWidth()
+
+            onClicked: {
+                navigationBar.collapsed = true
+            }
+        }
 
         Rectangle {
             id: appLayer
