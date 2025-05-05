@@ -1,0 +1,43 @@
+name: Build Gallery by PyInstaller
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m venv .venv
+          .venv\Scripts\pip install --upgrade pip
+          .venv\Scripts\pip install -r requirements.txt
+          .venv\Scripts\pip install pyinstaller
+
+      - name: 🔨 Build with PyInstaller
+        run: |
+          .venv\Scripts\pyinstaller.exe --noconsole --icon=examples/assets/gallery.ico `
+            --add-data="RinUI;RinUI" `
+            --add-data="examples/assets;examples/assets" `
+            --add-data="examples/components;examples/components" `
+            --add-data="examples/pages;examples/pages" `
+            --add-data="examples/gallery.qml;examples/gallery.qml" `
+            --paths=. `
+            examples/gallery.py
+
+      - name: 📤 Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: gallery-exe
+          path: dist/gallery.exe
