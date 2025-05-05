@@ -40,7 +40,7 @@ With simple configuration, you can quickly develop elegant UI interfaces in the 
 
 You can install RinUI via pip: (coming soon, but now you can install via test-pypi)
 ```bash
-pip install RinUI  # if RinUI in pypi
+pip install RinUI
 ```
 
 Import RinUI in your QML file:
