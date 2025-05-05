@@ -33,7 +33,7 @@ jobs:
             --add-data="examples/pages;pages" `
             --add-data="examples/gallery.qml;." `
             --paths=. `
-            --contents_directory='.' `
+            --contents-directory='.' `
             examples/gallery.py
 
       - name: 📦 Zip the dist folder
