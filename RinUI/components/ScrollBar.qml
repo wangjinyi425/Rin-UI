@@ -25,6 +25,47 @@ ScrollBar {
     horizontalPadding : horizontal ? 15 : 3
     enabled: size < 1.0
 
+    // 控制按钮 / Control Button //
+    ToolButton {
+        background: Item {}  // 无背景
+
+        width: 15
+        height: 15
+        size: 8
+        color: Theme.currentTheme.colors.textSecondaryColor
+        icon.name: vertical ? "ic_fluent_triangle_up_20_filled" : "ic_fluent_triangle_left_20_filled"
+        anchors {
+            top: vertical ? parent.top : undefined
+            left: horizontal ? parent.left : undefined
+            horizontalCenter: vertical ? parent.horizontalCenter : undefined
+            verticalCenter: horizontal ? parent.verticalCenter : undefined
+        }
+        onClicked: scrollBar.decrease()
+
+        visible: scrollBar.size < 1.0
+        opacity: background.opacity
+    }
+
+    ToolButton {
+        background: Item {}  // 无背景
+
+        width: 15
+        height: 15
+        size: 8
+        color: Theme.currentTheme.colors.textSecondaryColor
+        icon.name: vertical ? "ic_fluent_triangle_down_20_filled" : "ic_fluent_triangle_right_20_filled"
+        anchors {
+            bottom: vertical ? parent.bottom : undefined
+            right: horizontal ? parent.right : undefined
+            horizontalCenter: vertical ? parent.horizontalCenter : undefined
+            verticalCenter: horizontal ? parent.verticalCenter : undefined
+        }
+        onClicked: scrollBar.increase()
+
+        visible: scrollBar.size < 1.0
+        opacity: background.opacity
+    }
+
 
     // 内容 / Content //
     contentItem: Item {
