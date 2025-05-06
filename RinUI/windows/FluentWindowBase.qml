@@ -151,7 +151,9 @@ ApplicationWindow {
             if (p.x >= width - b) e |= Qt.RightEdge
             if (p.y < b) e |= Qt.TopEdge
             if (p.y >= height - b) e |= Qt.BottomEdge
-            baseWindow.startSystemResize(e)
+            if (e !== 0) {
+                baseWindow.startSystemResize(e)
+            }
         }
     }
 }
