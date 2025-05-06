@@ -8,6 +8,7 @@ QtObject {
     property string fontFamily: Qt.application.font.family // 默认字体
     property string iconFontFamily: FontIconLoader.name
     property string fontIconSource: Qt.resolvedUrl("../assets/fonts/FluentSystemIcons-Resizable.ttf")  // 字体图标路径
+    property string fontIconIndexSource: Qt.resolvedUrl("../assets/fonts/FluentSystemIcons-Index.js")  // 字体图标索引路径
     property var fontIconIndex: Icons.FluentIcons // 字体图标索引
 
     property color primaryColor: "#605ed2" // 默认主题色
@@ -23,6 +24,6 @@ QtObject {
     property int progressBarAnimationSpeed: 1550 // 进度条动画速度 (ms)
 
     function loadFontIconIndex() {
-        Qt.include("assets/fonts/FluentSystemIcons-Index.js");
+        Qt.include(fontIconIndexSource);
     }
 }
