@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "RinUI"
-version = "0.0.9"
+version = "0.0.9.1"
 authors = [
     { name = "RinLit", email = "lintu233_qwq@icloud.com" }
 ]
@@ -14,7 +14,7 @@ requires-python = ">=3.8"
 dependencies = [
     "PySide6~=6.6.3.1",
     "darkdetect~=0.8.0",
-    'pywin32==227; sys_platform == "win32"'
+    "pywin32>=306 ; sys_platform == 'win32'"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
