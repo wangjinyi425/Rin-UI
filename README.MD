@@ -38,7 +38,7 @@ With simple configuration, you can quickly develop elegant UI interfaces in the 
 
 ## 🪄 Usage
 
-You can install RinUI via pip: (coming soon, but now you can install via test-pypi)
+You can install RinUI via pip:
 ```bash
 pip install RinUI
 ```
