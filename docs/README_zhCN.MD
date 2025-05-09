@@ -38,9 +38,9 @@ RinUI 是一个类 Fluent Design 的 Qt Quick (QML) UI 库，RinUI 将提供高�
 
 ## 🪄 使用方法
 
-你可以通过 pip 安装 RinUI：(即将推出，现在你可以通过 test-pypi 安装)
+你可以通过 pip 安装 RinUI：
 ```bash
-pip install RinUI  # 如果 RinUI 在 pypi
+pip install RinUI
 
 # ↓ Test PyPI
 pip install PySide6 darkdetect  # 在 TestPypi 中这两个包没有 Release，当 RinUI 发布到 PyPi 时，即可省略此步骤。
